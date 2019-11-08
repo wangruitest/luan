@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SysOperateRole">
+
+<typeAlias alias="SysOperateRole" type="com.funo.system.model.SysOperateRole" />
+<resultMap id="SysOperateRoleResult" class="SysOperateRole">
+  <result property="unid" column="UNID" />
+  <result property="operateUnid" column="OPERATE_UNID" />
+  <result property="roleUnid" column="ROLE_UNID" />
+</resultMap>
+
+<typeAlias alias="SysRole" type="com.funo.system.model.SysRole" />
+<resultMap id="SysRoleResult" class="SysRole">
+  <result property="unid" column="UNID" />
+  <result property="name" column="NAME" />
+  <result property="sysUnid" column="SYS_UNID" />
+  <result property="status" column="STATUS" />
+  <result property="remark" column="REMARK" />
+  <result property="orgUnid" column="ORG_UNID" />
+  <result property="homepage" column="HOMEPAGE" />
+  <result property="sysMenus" column="{roleId=UNID}" select="SysRoleMenu.selectRoleMenus" />
+  <result property="sysOperators" column="{roleId=UNID}" select="SysOperateRole.selectOperators" />
+</resultMap>
+<resultMap id="SysRoleResultOnly" class="SysRole">
+  <result property="unid" column="UNID" />
+  <result property="name" column="NAME" />
+  <result property="sysUnid" column="SYS_UNID" />
+  <result property="status" column="STATUS" />
+  <result property="remark" column="REMARK" />
+  <result property="orgUnid" column="ORG_UNID" />
+  <result property="homepage" column="HOMEPAGE" />
+</resultMap>
+
+<typeAlias alias="SysOperator" type="com.funo.system.model.SysOperator" />
+<resultMap id="SysOperatorResult" class="SysOperator">
+  <result property="unid" column="UNID" />
+  <result property="name" column="NAME" />
+  <result property="loginName" column="LOGIN_NAME" />
+  <result property="password" column="PASSWORD" />
+  <result property="oldPassword" column="PASSWORD" />
+  <result property="status" column="STATUS" />
+  <result property="remark" column="REMARK" />
+  <result property="orgUnid" column="ORG_UNID" />
+  <result property="sex" column="SEX" />
+  <result property="mobileRole" column="MOBILE_ROLE" />
+  <result property="idNumber" column="ID_NUMBER" />
+  <result property="mobileNumber" column="MOBILE_NUMBER" />
+  <result property="telephoneNumber" column="TELEPHONE_NUMBER" />
+  <result property="fax" column="FAX" />
+  <result property="mail" column="MAIL" />
+  <result property="sysUnid" column="SYS_UNID" />
+  <result property="eccode" column="ECCODE" />
+  <result property="operatorType" column="OPERATOR_TYPE" />
+  <result property="parentUnid" column="PARENT_UNID" />
+  <result property="org" column="{orgId=ORG_UNID}" select="SysOrganization.selectOrganization" />
+  <result property="childOrgs" column="{orgId=ORG_UNID}" select="SysOrganization.selectOrganizationList" />
+  <result property="roles" column="{rOperateId=UNID}" select="SysOperateRole.selectRoles" />
+  <result property="menus" column="{mOperateId=UNID}" select="SysRoleMenu.selectOperatorMenus" />
+</resultMap>
+<resultMap id="SysOperatorResultOnly" class="SysOperator">
+  <result property="unid" column="UNID" />
+  <result property="name" column="NAME" />
+  <result property="loginName" column="LOGIN_NAME" />
+  <result property="password" column="PASSWORD" />
+  <result property="oldPassword" column="PASSWORD" />
+  <result property="status" column="STATUS" />
+  <result property="remark" column="REMARK" />
+  <result property="orgUnid" column="ORG_UNID" />
+  <result property="sex" column="SEX" />
+  <result property="idNumber" column="ID_NUMBER" />
+  <result property="mobileNumber" column="MOBILE_NUMBER" />
+  <result property="telephoneNumber" column="TELEPHONE_NUMBER" />
+  <result property="fax" column="FAX" />
+  <result property="mail" column="MAIL" />
+  <result property="sysUnid" column="SYS_UNID" />
+  <result property="operatorType" column="OPERATOR_TYPE" />
+  <result property="eccode" column="ECCODE" />
+</resultMap>
+
+
+<statement id="SysOperateRole.selectOperators" resultMap="SysOperatorResultOnly"> 
+<![CDATA[  
+ SELECT t.* from SYS_OPERATOR t where t.unid in(select sor.OPERATE_UNID from SYS_OPERATE_ROLE sor where sor.ROLE_UNID=#roleId#) 
+]]>
+</statement>  
+
+<statement id="SysOperateRole.selectRoles" resultMap="SysRoleResultOnly"> 
+<![CDATA[
+select t.* from sys_role t where t.unid in(select sor.role_unid from sys_operate_role sor where sor.operate_unid=#rOperateId#) and t.STATUS=0 
+]]>
+</statement>
+
+
+
+<insert id="SysOperateRole.create">
+<![CDATA[
+insert into SYS_OPERATE_ROLE(UNID,OPERATE_UNID,ROLE_UNID)values(#unid#,#operateUnid#,#roleUnid#)
+]]>
+</insert>
+
+<update id="SysOperateRole.update">
+<![CDATA[
+update SYS_OPERATE_ROLE set 
+UNID=#unid# 
+]]>
+			<isNotNull  property="operateUnid"  >
+	, OPERATE_UNID=#operateUnid#
+	</isNotNull> 
+			<isNotNull  property="roleUnid"  >
+	, ROLE_UNID=#roleUnid#
+	</isNotNull> 
+	<![CDATA[
+ where UNID=#unid# 
+]]>  
+</update>
+
+<select id="SysOperateRole.getById" resultMap="SysOperateRoleResult">
+<![CDATA[
+select t.* 
+	from SYS_OPERATE_ROLE t  
+where UNID=#unid#
+]]>
+</select>
+
+<sql id="SysOperateRole.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="unid"  >
+		t.UNID=#unid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateUnid"  >
+		t.OPERATE_UNID=#operateUnid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="roleUnid"  >
+		t.ROLE_UNID=#roleUnid#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="SysOperateRole.queryByArgs" resultMap="SysOperateRoleResult">
+<![CDATA[
+select t.* 
+	from SYS_OPERATE_ROLE t 
+	where 1=1 
+]]>
+<include refid="SysOperateRole.whereClause" />
+</select>
+
+<delete id="SysOperateRole.delete">
+<![CDATA[
+delete from SYS_OPERATE_ROLE t 
+	where 1=1 
+]]>
+<include refid="SysOperateRole.whereClause" />
+</delete>
+
+</sqlMap>

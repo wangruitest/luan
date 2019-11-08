@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="sysOperatorDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.system.dao.ISysOperatorDao" />
+		<property name="target">
+			<bean parent="abstractSysDaoTarget">
+				<constructor-arg value="com.funo.system.model.SysOperator" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="sysOperatorAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.system.adapt.impl.SysOperatorAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="sysOperatorMgmt" parent="sysTranProxy">
+		<property name="target">
+			<bean class="com.funo.system.mgmt.impl.SysOperatorMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="SysOperatorAction" class="com.funo.system.action.SysOperatorAction">
+		<property name="sysOperatorMgmt" ref="sysOperatorMgmt"></property>
+		<dwr:remote javascript="SysOperatorAction" />
+	</bean>
+</beans>

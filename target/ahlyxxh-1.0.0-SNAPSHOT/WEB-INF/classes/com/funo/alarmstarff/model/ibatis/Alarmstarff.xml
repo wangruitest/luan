@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Alarmstarff">
+
+<typeAlias alias="Alarmstarff" type="com.funo.alarmstarff.model.Alarmstarff" />
+
+<resultMap id="AlarmstarffResult" class="Alarmstarff">
+  <result property="name" column="NAME" />
+  <result property="phoneNum" column="PHONE_NUM" />
+  <result property="remark" column="REMARK" />
+  <result property="systemAlarmtype" column="SYSTEM_ALARMTYPE" />
+  <result property="businessAlarmtype" column="BUSINESS_ALARMTYPE" />
+  <result property="smstestAlarmtype" column="SMSTEST_ALARMTYPE" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="id" column="ID" />
+</resultMap>
+
+<insert id="Alarmstarff.create">
+<![CDATA[
+insert into ALARMSTARFF(NAME,PHONE_NUM,REMARK,SYSTEM_ALARMTYPE,BUSINESS_ALARMTYPE,SMSTEST_ALARMTYPE,UPDATETIME,ID)values(#name#,#phoneNum#,#remark#,#systemAlarmtype#,#businessAlarmtype#,#smstestAlarmtype#,#updatetime#,SEQ_ALARMSTARFF.Nextval)
+]]>
+</insert>
+
+<update id="Alarmstarff.update">
+<![CDATA[
+update ALARMSTARFF set 
+ID=#id# 
+]]>
+		<isNotNull  property="name"  >
+	, NAME=#name#
+	</isNotNull> 
+			<isNotNull  property="phoneNum"  >
+	, PHONE_NUM=#phoneNum#
+	</isNotNull> 
+			<isNotNull  property="remark"  >
+	, REMARK=#remark#
+	</isNotNull> 
+			<isNotNull  property="systemAlarmtype"  >
+	, SYSTEM_ALARMTYPE=#systemAlarmtype#
+	</isNotNull> 
+			<isNotNull  property="businessAlarmtype"  >
+	, BUSINESS_ALARMTYPE=#businessAlarmtype#
+	</isNotNull> 
+			<isNotNull  property="smstestAlarmtype"  >
+	, SMSTEST_ALARMTYPE=#smstestAlarmtype#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+		<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="Alarmstarff.delete">
+<![CDATA[
+delete from ALARMSTARFF 
+where ID=#id#
+]]>
+</delete>
+
+<select id="Alarmstarff.getById" resultMap="AlarmstarffResult">
+<![CDATA[
+select t.* 
+	from ALARMSTARFF t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="Alarmstarff.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="name"  >
+		t.NAME like '%'||#name#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="phoneNum"  >
+		t.PHONE_NUM like '%'||#phoneNum#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="remark"  >
+		t.REMARK=#remark#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="systemAlarmtype"  >
+		t.SYSTEM_ALARMTYPE=#systemAlarmtype#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businessAlarmtype"  >
+		t.BUSINESS_ALARMTYPE=#businessAlarmtype#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smstestAlarmtype"  >
+		t.SMSTEST_ALARMTYPE=#smstestAlarmtype#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Alarmstarff.queryByArgs" resultMap="AlarmstarffResult">
+<![CDATA[
+select t.* 
+	from ALARMSTARFF t 
+	where 1=1 
+]]>
+<include refid="Alarmstarff.whereClause" />
+</select>
+<select id="Alarmstarff.queryByPhoneNumExistence" resultMap="AlarmstarffResult">
+<![CDATA[
+select t.*
+	from ALARMSTARFF t 
+	where 1=1 and t.PHONE_NUM=#phoneNum#
+]]>
+</select>
+<select id="Alarmstarff.queryByPhoneNum" resultMap="AlarmstarffResult">
+<![CDATA[
+select t.*
+	from ALARMSTARFF t 
+	where 1=1 and t.PHONE_NUM=#phoneNum# and id <>#id#
+]]>
+</select>
+
+
+</sqlMap>

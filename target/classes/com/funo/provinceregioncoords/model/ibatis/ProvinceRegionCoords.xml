@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProvinceRegionCoords">
+
+<typeAlias alias="ProvinceRegionCoords" type="com.funo.provinceregioncoords.model.ProvinceRegionCoords" />
+
+<resultMap id="ProvinceRegionCoordsResult" class="ProvinceRegionCoords">
+  <result property="id" column="ID" />
+  <result property="regionId" column="REGION_ID" />
+  <result property="coordsIndex" column="COORDS_INDEX" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+</resultMap>
+
+<resultMap id="RegionCfgTagResult" class="ProvinceRegionCoords">
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+</resultMap>
+
+<resultMap id="RegionCfgResult" class="ProvinceRegionCoords">
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+</resultMap>
+
+<insert id="ProvinceRegionCoords.create">
+<![CDATA[
+insert into REGION_COORDS(ID,REGION_ID,COORDS_INDEX,LAT,LNG)values(seq_region_coords.nextval,#regionId#,#coordsIndex#,#lat#,#lng#)
+]]>
+</insert>
+
+<update id="ProvinceRegionCoords.update">
+<![CDATA[
+update REGION_COORDS set 
+ID=#id# 
+]]>
+			<isNotNull  property="regionId"  >
+	, REGION_ID=#regionId#
+	</isNotNull> 
+			<isNotNull  property="coordsIndex"  >
+	, COORDS_INDEX=#coordsIndex#
+	</isNotNull> 
+			<isNotNull  property="lat"  >
+	, LAT=#lat#
+	</isNotNull> 
+			<isNotNull  property="lng"  >
+	, LNG=#lng#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="ProvinceRegionCoords.delete">
+<![CDATA[
+delete from REGION_COORDS 
+where REGION_ID=#regionId#
+]]>
+</delete>
+
+
+<sql id="ProvinceRegionCoords.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionId"  >
+		t.REGION_ID=#regionId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="coordsIndex"  >
+		t.COORDS_INDEX=#coordsIndex#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lat"  >
+		t.LAT=#lat#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lng"  >
+		t.LNG=#lng#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="ProvinceRegionCoords.queryByArgs" resultMap="ProvinceRegionCoordsResult">
+<![CDATA[
+select t.* 
+	from REGION_COORDS t 
+	where 1=1 
+]]>
+<include refid="ProvinceRegionCoords.whereClause" />
+</select>
+
+<select id="ProvinceRegionCoords.queryByRegionIdCityCode" resultMap="RegionCfgTagResult">
+<![CDATA[
+ select t.id, t.region_name from REGION_CFG t where 1=1  
+ ]]>
+	<isNotNull property="cityCode"  >
+		and t.city_code = #cityCode#
+	</isNotNull>
+	<![CDATA[
+]]>
+</select>
+
+<select id="ProvinceRegionCoords.getById" resultMap="RegionCfgResult">
+<![CDATA[
+select t.id,
+       t.region_name,
+       t.notes,
+       t.updateuser,
+       t.updatetime,
+       t.typeid,
+       t.isvalid,
+       t.lat,
+       t.lng,
+       t.aradius,
+       t.expedite_value,
+       t.jam_value,
+       t.imgurl,
+       t.min_staytime,
+       (SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID = T.TYPEID) TYPENAME
+  from REGION_CFG t
+ where ID = #id#
+]]>
+</select>
+
+<update id="ProvinceRegionCoords.updateByRegionLnglat">
+update REGION_CFG set LAT=#lat#,LNG=#lng# where ID=#id#
+</update>
+
+<select id="ProvinceRegionCoords.queryByRegionCfgByCityCode" resultMap="RegionCfgResult">
+<![CDATA[
+select t.id,
+       t.region_name,
+       t.notes,
+       t.updateuser,
+       t.updatetime,
+       t.typeid,
+       t.isvalid,
+       t.lat,
+       t.lng,
+       t.aradius,
+       t.expedite_value,
+       t.jam_value,
+       t.imgurl,
+       t.min_staytime,
+       (SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID = T.TYPEID and city_code=#cityCode#) TYPENAME
+  from REGION_CFG t
+ where t.city_code = #cityCode#
+]]>
+</select>
+
+</sqlMap>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TouristRoaming">
+
+<typeAlias alias="TouristRoaming" type="com.funo.touristroaming.model.TouristRoaming" />
+
+<typeAlias alias="ShitaiRoaming" type="com.funo.touristroaming.model.ShitaiRoaming" />
+
+<resultMap id="TouristRoamingResult" class="TouristRoaming">
+  <result property="areaName" column="areaName" />
+  <result property="areaCount" column="areaCount" />
+</resultMap>
+
+<resultMap id="TouristRoamingResult2" class="TouristRoaming">
+  <result property="countyName" column="countyName" />
+  <result property="countyCount" column="countyCount" />
+</resultMap>
+
+<resultMap id="ShitaiRoamingResult" class="ShitaiRoaming">
+  <result property="provinceName" column="provincename" />
+  <result property="passengerCount" column="passengerCount" />
+  <result property="touristsCount" column="touristsCount" />
+  <result property="overnightCount" column="overnightCount" />
+</resultMap>
+
+<select id="TouristRoaming.queryByArgs" resultMap="TouristRoamingResult">
+<![CDATA[
+select (select name from SYS_ORGANIZATION where code = t.city_code) areaName,
+       trunc(sum(t.distinct_count)/min((select value from common  where name = 'CHINA_MOBILE_PERCENT')),0) as  areaCount
+  from TOURIST_ROAMING t
+ where t.area_code in  (-101,-102,-103,-104)
+   and trunc(t.stat_month, 'month') = to_date(#statMonth#, 'yyyy-MM-ss')
+ group by t.city_code
+]]>
+</select>
+
+<select id="TouristRoaming.queryByAllCounty" resultMap="TouristRoamingResult2">
+<![CDATA[
+select (select areas from areas where areaid = t.roamingcounty) countyName,
+       trunc(sum(t.distinct_count)/min((select value from common  where name = 'CHINA_MOBILE_PERCENT')),0) as  countyCount
+  from TOURIST_ROAMING t
+ where t.area_code in  (-101,-102,-103,-104)
+   and trunc(t.stat_month, 'month') = to_date(#statMonth#, 'yyyy-MM-ss') and t.roamingcounty=#countyCode#
+ group by t.roamingcounty
+]]>
+</select>
+<select id="TouristRoaming.queryByAllCitys" resultMap="TouristRoamingResult">
+<![CDATA[
+select  min(t.province) as areaName,
+ trunc(sum(t.distinct_count)/min((select value from common  where name = 'CHINA_MOBILE_PERCENT')),0) as areaCount
+  from TOURIST_ROAMING_ENTER_SUM t
+ where trunc(t.stat_month, 'month') = to_date(#statMonth#, 'yyyy-MM-ss')
+]]>
+</select>
+
+
+<select id="TouristRoaming.queryByShitai" resultMap="ShitaiRoamingResult">
+ <isEqual property="touristtype" compareValue="0">
+select t1.name as provincename,sum(t.distinct_count) as passengerCount, sum(t.citycount) as touristsCount,
+ sum(r.distinct_count) as overnightCount
+ from TOURIST_ROAMING t ,areas a,SYS_ORGANIZATION t1,TOURIST_ROAMING_OVERNIGHT r
+ where t.roamingcounty ='341722'
+ and  t.area_code =t1.code
+  and to_char(t.stat_month,'yyyy-mm') =#statmonth#
+  and t.roamingcounty=a.areaid
+  and r.roamingcounty ='341722'
+  and  r.area_code =t1.code
+  and  to_char(r.stat_month,'yyyy-mm') =#statmonth#
+  and r.roamingcounty=a.areaid
+  group by a.areaid,a.areas,t1.name,t1.code
+  union all 
+  select  provincename,passengerCount,touristsCount,overnightCount
+  from (select p.short_name  as provincename,sum(t.distinct_count) as passengerCount,sum(t.citycount) as touristsCount,
+p.provinceid from TOURIST_ROAMING t ,areas a ,provinces p
+  where t.visitorprovince !=340000
+  and t.roamingcounty ='341722'
+  and to_char(t.stat_month,'yyyy-mm') =#statmonth#
+  and t.visitorprovince=p.provinceid
+  and t.roamingcounty=a.areaid
+  group by a.areaid,a.areas,p.provinceid,p.short_name ) b,
+  (select sum(t.distinct_count) as overnightCount,p.provinceid
+  from TOURIST_ROAMING_OVERNIGHT t, areas a, provinces p
+ where t.visitorprovince !=340000
+   and t.roamingcounty =341722
+   and to_char(t.stat_month, 'yyyy-mm') = #statmonth#
+   and t.visitorprovince = p.provinceid
+   and t.roamingcounty = a.areaid
+ group by a.areaid, a.areas, p.provinceid, p.short_name) m
+ where b.provinceid=m.provinceid
+  </isEqual>
+   <isEqual property="touristtype" compareValue="1">
+   select t1.name as provincename,sum(t.distinct_count) as passengerCount, sum(t.citycount) as touristsCount,
+ sum(r.distinct_count) as overnightCount
+ from TOURIST_ROAMING t ,areas a,SYS_ORGANIZATION t1,TOURIST_ROAMING_OVERNIGHT r
+ where t.roamingcounty ='341722'
+ and  t.area_code =t1.code
+  and to_char(t.stat_month,'yyyy-mm') =#statmonth#
+  and t.roamingcounty=a.areaid
+  and r.roamingcounty ='341722'
+  and  r.area_code =t1.code
+  and  to_char(r.stat_month,'yyyy-mm') =#statmonth#
+  and r.roamingcounty=a.areaid
+  group by a.areaid,a.areas,t1.name,t1.code
+   </isEqual>
+    <isEqual property="touristtype" compareValue="2">
+    select  provincename,passengerCount,touristsCount,overnightCount
+  from (select p.short_name  as provincename,sum(t.distinct_count) as passengerCount,sum(t.citycount) as touristsCount,
+p.provinceid from TOURIST_ROAMING t ,areas a ,provinces p
+  where t.visitorprovince !=340000
+  and t.roamingcounty ='341722'
+  and to_char(t.stat_month,'yyyy-mm') =#statmonth#
+  and t.visitorprovince=p.provinceid
+  and t.roamingcounty=a.areaid
+  group by a.areaid,a.areas,p.provinceid,p.short_name ) b,
+  (select sum(t.distinct_count) as overnightCount,p.provinceid
+  from TOURIST_ROAMING_OVERNIGHT t, areas a, provinces p
+ where t.visitorprovince !=340000
+   and t.roamingcounty =341722
+   and to_char(t.stat_month, 'yyyy-mm') = #statmonth#
+   and t.visitorprovince = p.provinceid
+   and t.roamingcounty = a.areaid
+ group by a.areaid, a.areas, p.provinceid, p.short_name) m
+ where b.provinceid=m.provinceid
+    </isEqual>
+</select>
+</sqlMap>

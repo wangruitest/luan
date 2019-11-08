@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="NoticeCfg">
+
+<typeAlias alias="NoticeCfg" type="com.funo.noticecfg.model.NoticeCfg" />
+<typeAlias alias="PageCount" type="com.funo.noticecfg.model.PageCount" />
+
+<resultMap id="NoticeCfgResult" class="NoticeCfg">
+  <result property="id" column="ID" />
+  <result property="newsTitle" column="NEWS_TITLE" />
+  <result property="newsTime" column="NEWS_TIME" />
+  <result property="newsContent" column="NEWS_CONTENT" />
+  <result property="edituser" column="EDITUSER" />
+  <result property="userid" column="USERID" />
+  <result property="updatetime" column="UPDATETIME" />
+</resultMap>
+
+<resultMap id="PageCountResult" class="PageCount">
+  <result property="count" column="count" />
+</resultMap>
+
+<insert id="NoticeCfg.create">
+<![CDATA[
+insert into NOTICE_CFG(ID,NEWS_TITLE,NEWS_TIME,NEWS_CONTENT,EDITUSER,USERID,UPDATETIME)values(SEQ_NOTICE_CFG.Nextval,#newsTitle#,#newsTime#,#newsContent#,#edituser#,#userid#,#updatetime#)
+]]>
+</insert>
+
+<update id="NoticeCfg.update">
+<![CDATA[
+update NOTICE_CFG set 
+ID=#id# 
+]]>
+			<isNotNull  property="newsTitle"  >
+	, NEWS_TITLE=#newsTitle#
+	</isNotNull> 
+			<isNotNull  property="newsTime"  >
+	, NEWS_TIME=#newsTime#
+	</isNotNull> 
+			<isNotNull  property="newsContent"  >
+	, NEWS_CONTENT=#newsContent#
+	</isNotNull> 
+			<isNotNull  property="edituser"  >
+	, EDITUSER=#edituser#
+	</isNotNull> 
+			<isNotNull  property="userid"  >
+	, USERID=#userid#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="NoticeCfg.delete">
+<![CDATA[
+delete from NOTICE_CFG 
+where ID=#id#
+]]>
+</delete>
+
+<select id="NoticeCfg.getById" resultMap="NoticeCfgResult">
+<![CDATA[
+select t.* 
+	from NOTICE_CFG t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="NoticeCfg.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="newsTitle"  >
+		t.NEWS_TITLE  like '%'||#newsTitle#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="newsTime"  >
+		t.NEWS_TIME=#newsTime#
+	</isNotEmpty>
+	
+	<isNotEmpty prepend="and" property="dateStr"  >
+		to_char(t.NEWS_TIME,'YYYY-MM-DD')=#dateStr#
+	</isNotEmpty>
+	
+	<isNotEmpty prepend="and" property="newsContent"  >
+		t.NEWS_CONTENT  like '%'||#newsContent#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="edituser"  >
+		t.EDITUSER=#edituser#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="userid"  >
+		t.USERID=#userid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="NoticeCfg.queryByArgs" resultMap="NoticeCfgResult">
+<![CDATA[
+select t.* 
+	from NOTICE_CFG t 
+	where 1=1 
+]]>
+<include refid="NoticeCfg.whereClause" />
+</select>
+
+<select id="NoticeCfg.queryByAPP" resultMap="NoticeCfgResult">
+<![CDATA[
+SELECT * FROM ( SELECT A.*, ROWNUM RN FROM 
+(select t.* 
+	from NOTICE_CFG t 
+	where 1=1 	
+		]]>
+	<isNotNull property="newsTitle"  >
+		and t.NEWS_TITLE  like '%'||#newsTitle#||'%'
+	</isNotNull>
+	<isNotNull property="dateStr"  >
+		and to_char(t.NEWS_TIME,'YYYY-MM-DD')=#dateStr#
+	</isNotNull>
+	<![CDATA[
+) A WHERE ROWNUM <= #pageSize# ) WHERE RN >= #page#
+
+]]>
+
+</select>
+
+
+<select id="NoticeCfg.queryByCount" resultMap="PageCountResult">
+<![CDATA[
+
+select count(1) as count
+	from NOTICE_CFG t 
+	where 1=1 	
+		]]>
+	<isNotNull property="newsTitle"  >
+		and t.NEWS_TITLE  like '%'||#newsTitle#||'%'
+	</isNotNull>
+	<isNotNull property="dateStr"  >
+		and to_char(t.NEWS_TIME,'YYYY-MM-DD')=#dateStr#
+	</isNotNull>
+
+</select>
+
+</sqlMap>

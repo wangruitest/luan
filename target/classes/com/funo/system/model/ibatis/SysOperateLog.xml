@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SysOperateLog">
+
+<typeAlias alias="SysOperateLog" type="com.funo.sysoperatelog.model.SysOperateLog" />
+
+<resultMap id="SysOperateLogResult" class="SysOperateLog">
+  <result property="unid" column="UNID" />
+  <result property="operateTarget" column="OPERATE_TARGET" />
+  <result property="operateTargetValue" column="OPERATE_TARGET_VALUE" />
+  <result property="operateAction" column="OPERATE_ACTION" />
+  <result property="operateContent" column="OPERATE_CONTENT" />
+  <result property="operateTime" column="OPERATE_TIME" />
+  <result property="operateUser" column="OPERATE_USER" />
+  <result property="operateName" column="OPERATE_NAME" />
+  <result property="operateLoginName" column="OPERATE_LOGIN_NAME" />
+  <result property="operateResult" column="OPERATE_RESULT" />
+  <result property="operateErrorInfo" column="OPERATE_ERROR_INFO" />
+  <result property="operateCityCode" column="OPERATE_CITY_CODE" />
+  <result property="operateCityName" column="OPERATE_CITY_NAME" />
+</resultMap>
+
+<insert id="SysOperateLog.create">
+<![CDATA[
+insert into SYS_OPERATE_LOG(UNID,OPERATE_TARGET,OPERATE_ACTION,OPERATE_CONTENT,OPERATE_TIME,OPERATE_USER,OPERATE_NAME,OPERATE_LOGIN_NAME,OPERATE_RESULT,OPERATE_ERROR_INFO,OPERATE_CITY_CODE)values(#unid#,#operateTarget#,#operateAction#,#operateContent#,#operateTime#,#operateUser#,#operateName#,#operateLoginName#,#operateResult#,#operateErrorInfo#,#operateCityCode#)
+]]>
+</insert>
+
+<update id="SysOperateLog.update">
+<![CDATA[
+update SYS_OPERATE_LOG set 
+ID=#id# 
+]]>
+		<isNotNull  property="unid"  >
+	, UNID=#unid#
+	</isNotNull> 
+			<isNotNull  property="operateTarget"  >
+	, OPERATE_TARGET=#operateTarget#
+	</isNotNull> 
+			<isNotNull  property="operateAction"  >
+	, OPERATE_ACTION=#operateAction#
+	</isNotNull> 
+			<isNotNull  property="operateContent"  >
+	, OPERATE_CONTENT=#operateContent#
+	</isNotNull> 
+			<isNotNull  property="operateTime"  >
+	, OPERATE_TIME=#operateTime#
+	</isNotNull> 
+			<isNotNull  property="operateUser"  >
+	, OPERATE_USER=#operateUser#
+	</isNotNull> 
+			<isNotNull  property="operateName"  >
+	, OPERATE_NAME=#operateName#
+	</isNotNull> 
+			<isNotNull  property="operateLoginName"  >
+	, OPERATE_LOGIN_NAME=#operateLoginName#
+	</isNotNull> 
+			<isNotNull  property="operateResult"  >
+	, OPERATE_RESULT=#operateResult#
+	</isNotNull> 
+			<isNotNull  property="operateErrorInfo"  >
+	, OPERATE_ERROR_INFO=#operateErrorInfo#
+	</isNotNull> 
+			<isNotNull  property="operateCityCode"  >
+	, OPERATE_CITY_CODE=#operateCityCode#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="SysOperateLog.delete">
+<![CDATA[
+delete from SYS_OPERATE_LOG 
+where ID=#id#
+]]>
+</delete>
+
+<select id="SysOperateLog.getById" resultMap="SysOperateLogResult">
+<![CDATA[
+select t.* 
+	from SYS_OPERATE_LOG t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="SysOperateLog.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="unid"  >
+		t.UNID=#unid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateTarget"  >
+		t.OPERATE_TARGET=#operateTarget#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateAction"  >
+		t.OPERATE_ACTION like '%'||#operateAction#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateContent"  >
+		t.OPERATE_CONTENT=#operateContent#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="startTime"  >
+		t.OPERATE_TIME &gt;=to_timestamp(#startTime#, 'syyyy-mm-dd hh24:mi:ss.ff')
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="endTime"  >
+		t.OPERATE_TIME &lt;=to_timestamp(#endTime#, 'syyyy-mm-dd hh24:mi:ss.ff')
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateUser"  >
+		t.OPERATE_USER=#operateUser#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateName"  >
+		t.OPERATE_NAME=#operateName#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateLoginName"  >
+		t.OPERATE_LOGIN_NAME like '%'||#operateLoginName#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateResult"  >
+		t.OPERATE_RESULT=#operateResult#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateErrorInfo"  >
+		t.OPERATE_ERROR_INFO=#operateErrorInfo#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operateCityCode"  >
+		t.OPERATE_CITY_CODE=#operateCityCode#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="SysOperateLog.queryByArgs" resultMap="SysOperateLogResult">
+<![CDATA[
+select t.* 
+	from SYS_OPERATE_LOG t 
+	where 1=1 
+]]>
+<include refid="SysOperateLog.whereClause" />
+</select>
+
+
+<select id="SysOperateLog.pageCountByArgs" resultMap="SysOperateLogResult">
+	<![CDATA[
+		SELECT * FROM (SELECT ROWS_.*, ROWNUM ROWNUM_ FROM (
+		select t.*,(select name from sys_organization where code=t.OPERATE_CITY_CODE) OPERATE_CITY_NAME,(select value from sys_operate_log_dict where OPERATE_TARGET=t.OPERATE_TARGET) OPERATE_TARGET_VALUE from SYS_OPERATE_LOG t where 1=1 
+	]]>
+<include refid="SysOperateLog.whereClause" />
+	<![CDATA[
+		) ROWS_ WHERE ROWNUM <= #endRowNum# ) WHERE ROWNUM_ >= #startRowNum#
+	]]>
+</select>
+<select id="SysOperateLog.pageCountByArgs.count" resultClass="java.lang.Long">
+	<![CDATA[
+		select count(0) from SYS_OPERATE_LOG t where 1=1
+	]]>
+<include refid="SysOperateLog.whereClause" />
+</select>
+
+
+</sqlMap>

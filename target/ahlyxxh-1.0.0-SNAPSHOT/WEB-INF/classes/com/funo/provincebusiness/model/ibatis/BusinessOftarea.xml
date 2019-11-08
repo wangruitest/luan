@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BusinessOftarea">
+
+<typeAlias alias="BusinessOftarea" type="com.funo.provincebusiness.model.BusinessOftarea" />
+
+<resultMap id="BusinessOftareaResult" class="BusinessOftarea">
+  <result property="id" column="ID" />
+  <result property="businessid" column="BUSINESSID" />
+  <result property="oftenUsedAreaId" column="OFTEN_USED_AREA_ID" />
+  <result property="oftenUsedAreaName" column="OFTEN_USED_AREA_NAME" />
+  <result property="areaCode" column="AREA_CODE" />
+  <result property="remark" column="REMARK" />
+</resultMap>
+
+<statement id="BusinessOftarea.selectOftareaList" resultMap="BusinessOftareaResult">
+select t.*,
+(select t1.OFTEN_USED_AREA_NAME from OFTEN_USED_AREA_CFG t1 where t1.OFTEN_USED_AREA_ID=t.OFTEN_USED_AREA_ID) OFTEN_USED_AREA_NAME,
+(select t1.AREA_CODE from OFTEN_USED_AREA_CFG t1 where t1.OFTEN_USED_AREA_ID=t.OFTEN_USED_AREA_ID) AREA_CODE,
+(select t1.REMARK from OFTEN_USED_AREA_CFG t1 where t1.OFTEN_USED_AREA_ID=t.OFTEN_USED_AREA_ID) REMARK   
+from BUSINESS_OFTAREA t where t.BUSINESSID= #businessid# 
+</statement>
+
+<insert id="BusinessOftarea.create">
+<![CDATA[
+insert into BUSINESS_OFTAREA(ID,BUSINESSID,OFTEN_USED_AREA_ID)values(SEQ_BUSINESS_OFTAREA.Nextval,#businessid#,#oftenUsedAreaId#)
+]]>
+</insert>
+
+<update id="BusinessOftarea.update">
+<![CDATA[
+update BUSINESS_OFTAREA set 
+ID=#id#
+]]>
+			<isNotNull  property="businessid"  >
+	, BUSINESSID=#businessid#
+	</isNotNull> 
+			<isNotNull  property="oftenUsedAreaId"  >
+	, OFTEN_USED_AREA_ID=#oftenUsedAreaId#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id#
+]]>  
+</update>
+
+<delete id="BusinessOftarea.delete">
+<![CDATA[
+delete from BUSINESS_OFTAREA 
+where BUSINESSID=#businessid#
+]]>
+</delete>
+
+<select id="BusinessOftarea.getById" resultMap="BusinessOftareaResult">
+<![CDATA[
+select t.* 
+	from BUSINESS_OFTAREA t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="BusinessOftarea.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businessid"  >
+		t.BUSINESSID=#businessid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="oftenUsedAreaId"  >
+		t.OFTEN_USED_AREA_ID=#oftenUsedAreaId#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="BusinessOftarea.queryByArgs" resultMap="BusinessOftareaResult">
+<![CDATA[
+select t.* 
+	from BUSINESS_OFTAREA t 
+	where 1=1 
+]]>
+<include refid="BusinessOftarea.whereClause" />
+</select>
+
+</sqlMap>

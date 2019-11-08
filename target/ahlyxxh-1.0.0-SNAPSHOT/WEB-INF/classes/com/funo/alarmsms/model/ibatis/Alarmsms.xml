@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Alarmsms">
+
+<typeAlias alias="Alarmsms" type="com.funo.alarmsms.model.Alarmsms" />
+
+<resultMap id="AlarmsmsResult" class="Alarmsms">
+  <result property="id" column="ID" />
+  <result property="phoneNum" column="PHONE_NUM" />
+  <result property="areaCode" column="AREA_CODE" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="smstype" column="SMSTYPE" />
+  <result property="smscontent" column="SMSCONTENT" />
+  <result property="firstsmsdate" column="FIRSTSMSDATE" />
+  <result property="lastsmsdate" column="LASTSMSDATE" />
+  <result property="smscount" column="SMSCOUNT" />
+  <result property="smsresultcode" column="SMSRESULTCODE" />
+  <result property="remark" column="REMARK" />
+  <result property="masid" column="MASID" />
+  <result property="smid" column="SMID" />
+  <result property="type" column="TYPE" />
+</resultMap>
+
+<insert id="Alarmsms.create">
+<![CDATA[
+insert into ALARMSMS(ID,PHONE_NUM,AREA_CODE,UPDATETIME,SMSTYPE,SMSCONTENT,FIRSTSMSDATE,LASTSMSDATE,SMSCOUNT,SMSRESULTCODE,REMARK,MASID,SMID,TYPE)values(SEQ_ALARMSMS.Nextval,#phoneNum#,#areaCode#,#updatetime#,#smstype#,#smscontent#,#firstsmsdate#,#lastsmsdate#,#smscount#,#smsresultcode#,#remark#,#masid#,#smid#,#type#)
+]]>
+</insert>
+
+<update id="Alarmsms.update">
+<![CDATA[
+update ALARMSMS set smsresultcode=-1
+where smsresultcode=2
+]]>
+	<isNotNull  property="idIn">
+	and  id in ($idIn$)
+	</isNotNull> 
+</update>
+
+<delete id="Alarmsms.delete">
+<![CDATA[
+delete from ALARMSMS 
+where ID=#id#
+]]>
+</delete>
+
+<select id="Alarmsms.getById" resultMap="AlarmsmsResult">
+<![CDATA[
+select t.* 
+	from ALARMSMS t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="Alarmsms.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="phoneNum"  >
+		t.PHONE_NUM like '%'||#phoneNum#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="areaCode"  >
+		t.AREA_CODE=#areaCode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smstype"  >
+		t.SMSTYPE=#smstype#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smscontent"  >
+		t.SMSCONTENT like '%'||#smscontent#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="firstsmsdate"  >
+		t.FIRSTSMSDATE=#firstsmsdate#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lastsmsdate"  >
+		t.LASTSMSDATE=#lastsmsdate#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smscount"  >
+		t.SMSCOUNT=#smscount#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smsresultcode"  >
+		t.SMSRESULTCODE=#smsresultcode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="remark"  >
+		t.REMARK=#remark#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="masid"  >
+		t.MASID=#masid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smid"  >
+		t.SMID=#smid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="type"  >
+		t.TYPE=#type#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Alarmsms.queryByArgs" resultMap="AlarmsmsResult">
+<![CDATA[
+select t.* 
+	from ALARMSMS t 
+	where 1=1 
+]]>
+<include refid="Alarmsms.whereClause" />
+</select>
+
+</sqlMap>

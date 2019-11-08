@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionInfo">
+
+<typeAlias alias="RegionInfo" type="com.funo.regioninfo.model.RegionInfo" />
+
+<resultMap id="RegionInfoResult" class="RegionInfo">
+  <result property="id" column="ID" />
+  <result property="regionId" column="REGION_ID" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="longitude" column="LONGITUDE" />
+  <result property="latitude" column="LATITUDE" />
+  <result property="address" column="ADDRESS" />
+  <result property="level" column="ALEVEL" />
+  <result property="introduction" column="INTRODUCTION" />
+  <result property="phone" column="PHONE" />
+  <result property="openingTime" column="OPENING_TIME" />
+  <result property="bestTime" column="BEST_TIME" />
+  <result property="editTime" column="EDIT_TIME" />
+</resultMap>
+
+<resultMap id="ReginsMap" class="java.util.HashMap">
+       <result property="Regions" column="Regions"/>
+    <result property="ALEVEL" column="ALEVEL"/>
+    </resultMap>
+
+<insert id="RegionInfo.create">
+<![CDATA[
+insert into REGION_INFO(ID,REGION_ID,CITY_CODE,REGION_NAME,LONGITUDE,LATITUDE,ADDRESS,ALEVEL,INTRODUCTION,PHONE,OPENING_TIME,BEST_TIME,EDIT_TIME)values(#id#,#regionId#,#cityCode#,#regionName#,#longitude#,#latitude#,#address#,#level#,#introduction#,#phone#,#openingTime#,#bestTime#,#editTime#)
+]]>
+</insert>
+
+<update id="RegionInfo.update">
+<![CDATA[
+update REGION_INFO set 
+ID=#id# 
+]]>
+			<isNotNull  property="regionId"  >
+	, REGION_ID=#regionId#
+	</isNotNull> 
+			<isNotNull  property="cityCode"  >
+	, CITY_CODE=#cityCode#
+	</isNotNull> 
+			<isNotNull  property="regionName"  >
+	, REGION_NAME=#regionName#
+	</isNotNull> 
+			<isNotNull  property="longitude"  >
+	, LONGITUDE=#longitude#
+	</isNotNull> 
+			<isNotNull  property="latitude"  >
+	, LATITUDE=#latitude#
+	</isNotNull> 
+			<isNotNull  property="address"  >
+	, ADDRESS=#address#
+	</isNotNull> 
+			<isNotNull  property="level"  >
+	, ALEVEL=#level#
+	</isNotNull> 
+			<isNotNull  property="introduction"  >
+	, INTRODUCTION=#introduction#
+	</isNotNull> 
+			<isNotNull  property="phone"  >
+	, PHONE=#phone#
+	</isNotNull> 
+			<isNotNull  property="openingTime"  >
+	, OPENING_TIME=#openingTime#
+	</isNotNull> 
+			<isNotNull  property="bestTime"  >
+	, BEST_TIME=#bestTime#
+	</isNotNull> 
+			<isNotNull  property="editTime"  >
+	, EDIT_TIME=#editTime#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="RegionInfo.delete">
+<![CDATA[
+delete from REGION_INFO 
+where ID=#id#
+]]>
+</delete>
+
+<select id="RegionInfo.getById" resultMap="RegionInfoResult">
+<![CDATA[
+select t.* 
+	from REGION_INFO t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="RegionInfo.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionId"  >
+		t.REGION_ID=#regionId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="cityCode"  >
+		t.CITY_CODE=#cityCode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionName"  >
+		t.REGION_NAME=#regionName#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="longitude"  >
+		t.LONGITUDE=#longitude#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="latitude"  >
+		t.LATITUDE=#latitude#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="address"  >
+		t.ADDRESS=#address#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="level"  >
+		t.ALEVEL=#level#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="introduction"  >
+		t.INTRODUCTION=#introduction#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="phone"  >
+		t.PHONE=#phone#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="openingTime"  >
+		t.OPENING_TIME=#openingTime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="bestTime"  >
+		t.BEST_TIME=#bestTime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="editTime"  >
+		t.EDIT_TIME=#editTime#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionInfo.queryByArgs" resultMap="RegionInfoResult">
+<![CDATA[
+select t.* 
+	from REGION_INFO t 
+	where 1=1 
+]]>
+<include refid="RegionInfo.whereClause" />
+</select>
+
+<select id="RegionInfo.queryByAlevel" resultMap="ReginsMap">
+<![CDATA[
+select nvl(l.Regions,0) as Regions, n.rq as ALEVEL from 
+(SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 6) n left join
+(select count(*) as Regions,nvl(t.ALEVEL,0) as ALEVEL from REGION_CFG T where 1=1 
+]]>
+<isNotEmpty  property="cityCode"  >
+		and t.CITY_CODE=#cityCode#
+	</isNotEmpty>  
+<![CDATA[
+group by nvl(t.ALEVEL,0) ) l
+on n.rq=l.alevel order by n.rq 
+]]>
+</select>
+
+</sqlMap>

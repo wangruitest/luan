@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionRealtimeSum">
+
+<typeAlias alias="RegionRealtimeSum" type="com.funo.regionrealtimesum.model.RegionRealtimeSum" />
+<typeAlias alias="RRSum" type="com.funo.regionrealtimesum.model.RRSum" />
+<typeAlias alias="ForeignCities" type="com.funo.regionrealtimesum.model.ForeignCities" />
+
+<resultMap id="ForeignCitiesResult" class="ForeignCities">
+  <result property="sumtourists" column="SUMTOURISTS" />
+  <result property="city" column="CITY" />
+  <result property="regionName" column="REGIONNAME" />
+  <result property="time" column="TIME" />
+</resultMap>
+<resultMap id="RegionRealtimeSumResult" class="RegionRealtimeSum">
+  <result property="id" column="ID" />
+  <result property="regionId" column="REGION_ID" />
+  <result property="stayTourists" column="STAY_TOURISTS" />
+  <result property="inTourists" column="IN_TOURISTS" />
+  <result property="outTourists" column="OUT_TOURISTS" />
+  <result property="statHour" column="STAT_HOUR" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+  <result property="type" column="TYPE" />
+  <result property="regionname" column="REGIONNAME" />
+  <result property="searchdate" column="SEARCHDATE" />
+  <result property="rqtime" column="RQTIME" />
+  <result property="localstourists" column="LOCALSTOURISTS" />
+  <result property="instourists" column="INSTOURISTS" />
+  <result property="outstourists" column="OUTSTOURISTS" />
+  <result property="stourists" column="STOURISTS" />
+</resultMap>
+<resultMap id="RegionRealtimeSumWebResult" class="RegionRealtimeSum">
+  <result property="regionname" column="REGIONNAME" />
+  <result property="searchdate" column="SEARCHDATE" />
+  <result property="rqtime" column="RQTIME" />
+  <result property="localstourists" column="LOCALSTOURISTS" />
+  <result property="instourists" column="INSTOURISTS" />
+  <result property="outstourists" column="OUTSTOURISTS" />
+  <result property="stourists" column="STOURISTS" />
+</resultMap>
+	<resultMap id="RegionCityRealtimeSumWebResult" class="RegionRealtimeSum">
+		<result property="regionname" column="REGIONNAME" />
+		<result property="searchdate" column="SEARCHDATE" />
+		<result property="rqtime" column="RQTIME" />
+		<result property="localstourists" column="LOCALSTOURISTS" />
+		<result property="instourists" column="INSTOURISTS" />
+		<result property="outstourists" column="OUTSTOURISTS" />
+		<result property="outcountrytourists" column="OUTCOUNTRYSTOURISTS" />
+	</resultMap>
+	<resultMap id="RegionsRealtimeSumWebResult" class="RegionRealtimeSum">
+		<result property="searchdate" column="SEARCHDATE" />
+		<result property="rqtime" column="RQTIME" />
+		
+		<result property="instourists" column="INSTOURISTS" />
+		
+	</resultMap>
+<resultMap id="RegionAllDayResult" class="RegionRealtimeSum">
+		<result property="regionname" column="REGIONNAME" />
+		<!--  <result property="cityCode" column="CITYCODE" />-->
+		<!-- 本省所有游客 -->
+		<result property="instourists" column="INSTOURISTS" />
+		<!-- 外省游客 -->
+		<result property="outstourists" column="OUTSTOURISTS" />
+		<!-- 国外游客 -->
+		<result property="outcountrytourists" column="OUTCOUNTRYSTOURISTS" />
+		<!-- 本省外地游客 -->
+		<result property="inTourists" column="INOUTTOURISTS" />
+	</resultMap>
+	<resultMap id="RegionFromRealtimeSumWebResult" class="RegionRealtimeSum">
+		<result property="regionname" column="REGIONNAME" />
+		<result property="cityCode" column="CITYCODE" />
+		<!-- 本省所有游客 -->
+		<result property="instourists" column="INSTOURISTS" />
+		<!-- 外省游客 -->
+		<result property="outstourists" column="OUTSTOURISTS" />
+		<!-- 国外游客 -->
+		<result property="outcountrytourists" column="OUTCOUNTRYSTOURISTS" />
+	</resultMap>
+
+<resultMap id="RRSumResult" class="RRSum">
+  <result property="regionId" column="REGION_ID" />
+  <result property="touristSum" column="TOURIST_SUM" />
+</resultMap>
+	<resultMap id="AllRSumResult" class="RRSum">
+		<result property="touristSum" column="TOURIST_SUM" />
+	</resultMap>
+
+<resultMap id="RRSumVoResult" class="RegionRealtimeSum">
+  <result property="regionId" column="REGION_ID" />
+  <result property="touristsum" column="TOURIST_SUM" />
+  <result property="regionname" column="REGION_NAME" />
+  <result property="expeditevalue" column="EXPEDITE_VALUE" />
+  <result property="jamvalue" column="JAM_VALUE" />
+</resultMap>
+
+<select id="RegionRealtimeSum.queryByAllCitys" resultMap="RegionRealtimeSumWebResult">
+<![CDATA[
+ SELECT '所有景区' REGIONNAME,
+                         to_char(to_date(#begindate#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         decode(m.IN_STAY_TOURISTS, '', 0, trunc(m.IN_STAY_TOURISTS/
+	]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                          LOCALSTOURISTS,
+                         decode(m.IN_STAY_TOURISTS, '', 0, trunc(m.IN_STAY_TOURISTS/
+                        	]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                         INSTOURISTS,
+                         decode(o.OUT_STAY_TOURISTS, '', 0, trunc(o.OUT_STAY_TOURISTS/
+                         ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                          OUTSTOURISTS,
+                         decode((IN_STAY_TOURISTS+OUT_STAY_TOURISTS),'',0,trunc((IN_STAY_TOURISTS+OUT_STAY_TOURISTS)/
+                         ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                          STOURISTS
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE (t.type = '1' or t.type = '2') 
+                                    AND to_char(t.stat_hour, 'YYYY-MM-DD') =#begindate#
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE  t.type = '3' 
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) o ON n.rq = o.timenode
+                ORDER BY n.rq 
+]]>
+	</select>
+
+	<!-- 根据地市获取地市的各时间点的接待总数 -->
+	<select id="RegionRealtimeSum.queryByCityCodeForDaPing"
+		resultMap="RegionCityRealtimeSumWebResult">
+<![CDATA[
+SELECT (select city from PREFIX_CFG where  area_code = #cityCode# ) REGIONNAME,
+                         to_char(to_date(#begindate#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         decode(k.LOCAL_TOURISTS, '', 0, trunc(k.LOCAL_TOURISTS/
+    ]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          LOCALSTOURISTS,
+                         decode((m.IN_STAY_TOURISTS), '', 0, trunc((m.IN_STAY_TOURISTS)/
+   	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+						 INSTOURISTS,
+                         decode(o.OUT_STAY_TOURISTS, '', 0, trunc(o.OUT_STAY_TOURISTS/
+                          	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          OUTSTOURISTS,
+                         decode(OUT_COUNTRY_TOURISTS,'',0,trunc(OUT_COUNTRY_TOURISTS/
+                                                   	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          OUTCOUNTRYSTOURISTS
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE t.type = 2
+                                    AND t.city_code = #cityCode#
+                                    AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.type = 3 and (t.flag is null or t.flag= 0)
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) o ON n.rq = o.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) LOCAL_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.type = 1
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) k ON n.rq = k.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_COUNTRY_TOURISTS, to_char(t.stat_hour, 'HH24') timenode 
+									  FROM REGION_REALTIME_SUM t  WHERE   t.flag>0   AND t.city_code = #cityCode#
+									  AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+									  GROUP BY (to_char(t.stat_hour, 'HH24'))) p  ON n.rq = p.timenode
+                ORDER BY n.rq
+]]>
+	</select>
+	
+	
+		<!-- 根据景区IDS获取各时间点的实时数 -->
+	<select id="RegionRealtimeSum.queryByRegionsForLine"
+		resultMap="RegionsRealtimeSumWebResult">
+<![CDATA[
+SELECT 
+                         to_char(to_date(#date#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         decode((m.IN_STAY_TOURISTS), '', 0, trunc((m.IN_STAY_TOURISTS)/
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+						 INSTOURISTS
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE t.type = 2
+                                    AND t.region_id in ($regionIdIn$)
+                                    AND to_char(t.stat_hour,'YYYY/MM/dd')>=(select max(to_char(stat_hour,'YYYY/MM/dd')) from Region_Realtime_Sum)
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                ORDER BY n.rq
+]]>
+	</select>
+	
+	
+	<!-- 获取省的实时数据 -->
+	<select id="RegionRealtimeSum.queryByProvinceForDaPing"
+		resultMap="RegionCityRealtimeSumWebResult">
+<![CDATA[
+SELECT (select provinces from PREFIX_CFG where  area_code= '340100' ) REGIONNAME,
+                         to_char(to_date(#begindate#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         decode(k.LOCAL_TOURISTS, '', 0, trunc(k.LOCAL_TOURISTS/
+    ]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          LOCALSTOURISTS,
+                         decode((m.IN_STAY_TOURISTS), '', 0, trunc((m.IN_STAY_TOURISTS)/
+   	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+						 INSTOURISTS,
+                         decode(o.OUT_STAY_TOURISTS, '', 0, trunc(o.OUT_STAY_TOURISTS/
+                          	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          OUTSTOURISTS,
+                         decode(OUT_COUNTRY_TOURISTS,'',0,trunc(OUT_COUNTRY_TOURISTS/
+                                                   	]]>
+		<isNotNull property="holiday">
+			(select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+		</isNotNull>
+		<isNotNull property="unHoliday">
+			(select value from common where name='CHINA_MOBILE_PERCENT')))
+		</isNotNull> 
+						<![CDATA[
+                          OUTCOUNTRYSTOURISTS
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE t.type = '2'
+                                    AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.type = '3' and (t.flag is null or t.flag='0')
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) o ON n.rq = o.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) LOCAL_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.type = '1'
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) k ON n.rq = k.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_COUNTRY_TOURISTS, to_char(t.stat_hour, 'HH24') timenode 
+									  FROM REGION_REALTIME_SUM t  WHERE  t.flag in ('1','2','3','4')  
+									  AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+									  GROUP BY (to_char(t.stat_hour, 'HH24'))) p  ON n.rq = p.timenode
+                ORDER BY n.rq
+]]>
+	</select>
+
+	<select id="RegionRealtimeSum.queryByCityidRegionid" resultMap="RegionRealtimeSumWebResult">
+	<isNotNull  property="regionId"  >
+	   SELECT (select region_name from region_cfg where id = #regionId# and city_code= #cityCode# ) REGIONNAME,
+	</isNotNull>
+	    <isNull  property="regionId"  >
+	       SELECT '全部' REGIONNAME,
+	    </isNull>
+    <![CDATA[
+                         to_char(to_date(#begindate#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         sum(decode(k.LOCAL_TOURISTS, '', 0, trunc(k.LOCAL_TOURISTS/
+    ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY'))))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT'))))  LOCALSTOURISTS,
+	</isNotNull> 
+    <![CDATA[
+                         
+                         sum(decode(m.IN_STAY_TOURISTS, '', 0, trunc(m.IN_STAY_TOURISTS/
+   	]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY'))))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))) INSTOURISTS,
+	</isNotNull> 
+	<![CDATA[
+                         sum(decode(o.OUT_STAY_TOURISTS, '', 0, trunc(o.OUT_STAY_TOURISTS/
+    ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY'))))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))) OUTSTOURISTS,
+	</isNotNull> 
+	<![CDATA[
+                         sum(decode((IN_STAY_TOURISTS+OUT_STAY_TOURISTS+LOCAL_TOURISTS),'',0,trunc((IN_STAY_TOURISTS+OUT_STAY_TOURISTS+LOCAL_TOURISTS)/
+   ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY'))))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT'))))  STOURISTS
+	</isNotNull> 
+	<![CDATA[
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE 1=1]]>
+                               <isNotNull  property="regionId"  >
+                                    and t.region_id = #regionId#
+                               </isNotNull>
+                                    and ( t.type = '2' or t.type = '1')
+                                    AND t.city_code = #cityCode#
+                                    AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) OUT_STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE 1=1 
+                               <isNotNull  property="regionId"  >
+                                   and t.region_id = #regionId#
+                               </isNotNull>
+                                      and t.type = '3'
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) o ON n.rq = o.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) LOCAL_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE 1=1
+                               <isNotNull  property="regionId"  >
+                                    and t.region_id = #regionId#
+                               </isNotNull>
+                                      and t.type = '1'
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) k ON n.rq = k.timenode
+                group by rq
+                ORDER BY n.rq
+</select>
+
+<select id="RegionRealtimeSum.queryByCityidRegionidForMap" resultMap="RegionRealtimeSumWebResult">
+<![CDATA[
+SELECT (select region_name from region_cfg where id = #regionId# and city_code= #cityCode# ) REGIONNAME,
+                         to_char(to_date(#begindate#,'YYYY-MM-DD'),'YYYY-MM-DD') SEARCHDATE,
+                         n.rq as RQTIME,
+                         decode(k.STAY_TOURISTS, '', 0, trunc(k.STAY_TOURISTS/
+    ]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                          STOURISTS,
+                         decode(m.IN_STAY_TOURISTS, '', 0, trunc(m.IN_STAY_TOURISTS/
+   	]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+						 INSTOURISTS,
+                         decode(o.OUT_STAY_TOURISTS, '', 0, trunc(o.OUT_STAY_TOURISTS/
+                          	]]>
+	<isNotNull  property="holiday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT_HOLIDAY')))
+	</isNotNull> 
+	<isNotNull  property="unHoliday"  >
+	 (select value from common where name='CHINA_MOBILE_PERCENT')))
+	</isNotNull> 
+						<![CDATA[
+                          OUTSTOURISTS
+                  FROM (SELECT LEVEL - 1 AS rq FROM dual CONNECT BY LEVEL <= 24) n
+                  LEFT JOIN (SELECT SUM(t.IN_TOURISTS) IN_STAY_TOURISTS,
+                                    to_char(t.stat_hour, 'HH24') timenode
+                               FROM REGION_REALTIME_SUM t
+                              WHERE t.region_id = #regionId#
+                                    AND t.city_code = #cityCode#
+                                    AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                    GROUP BY (to_char(t.stat_hour, 'HH24'))) m  ON n.rq = m.timenode
+                  LEFT JOIN (SELECT SUM(t.OUT_TOURISTS) OUT_STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.region_id = #regionId# 
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) o ON n.rq = o.timenode
+                  LEFT JOIN (SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS,
+                                to_char(t.stat_hour, 'HH24') timenode
+                                FROM REGION_REALTIME_SUM t
+                                WHERE t.region_id = #regionId# 
+                                      AND t.city_code = #cityCode#
+                                      AND to_char(t.stat_hour, 'YYYY-MM-DD') = #begindate#
+                                      GROUP BY (to_char(t.stat_hour, 'HH24'))) k ON n.rq = k.timenode
+                ORDER BY n.rq
+]]>
+</select>
+
+<select id="RegionRealtimeSum.queryByCity" resultMap="RRSumResult">
+<![CDATA[
+select t.region_id, sum(t.stay_tourists) tourist_Sum
+  from region_realtime_sum t
+ where t.city_code = #cityCode#
+   and t.stat_hour = trunc(sysdate, 'hh')
+ group by t.region_id
+]]>
+</select>
+
+
+
+<select id="RegionRealtimeSum.queryByRealtimeList" resultMap="RRSumVoResult">
+<![CDATA[
+	select m.region_id REGION_ID , m.tourist_Sum TOURIST_SUM,
+	 m.region_name REGION_NAME, r.expedite_value EXPEDITE_VALUE, r.jam_value JAM_VALUE 
+	from
+	(
+		SELECT 
+		s.region_id , 
+		sum(s.stay_tourists) tourist_Sum, 
+		t.region_name  
+		FROM region_realtime_sum s, region_cfg t
+		where t.id = s.region_id 
+		and t.city_code = s.city_code 
+		group by s.region_id , t.region_name
+	) m , region_cfg r
+	where m.region_name = r.region_name 
+	order by m.region_id
+]]>
+	</select>
+	
+<!-- 得到来皖的来源地，实时 -->
+<select id="RegionRealtimeSum.queryByFromList" resultMap="RegionFromRealtimeSumWebResult">
+<![CDATA[
+select pro.short_name as REGIONNAME,
+decode(a.inpro, '', 0, trunc(a.inpro/(select value from common where name='CHINA_MOBILE_PERCENT')))INSTOURISTS,
+d.CITYCODE,
+decode(b.outpro, '', 0, trunc(b.outpro/(select value from common where name='CHINA_MOBILE_PERCENT')))OUTSTOURISTS,
+decode(c.outcou, '', 0, trunc(c.outcou/(select value from common where name='CHINA_MOBILE_PERCENT')))OUTCOUNTRYSTOURISTS  
+from provinces pro left join 
+(
+select sum(t.stay_tourists) as inpro,t.visitor_province,'ben' as ben from REGION_REALTIME_SUM t
+where t.stat_hour = (select max(STAT_HOUR) from REGION_REALTIME_SUM) and t.flag=0 and t.type<3
+group by t.visitor_province
+) a on pro.provinceid=a.visitor_province
+left join
+(
+select sum(t.stay_tourists) as outpro,t.visitor_province,'waisheng' as pro from REGION_REALTIME_SUM t
+where t.stat_hour = (select max(STAT_HOUR) from REGION_REALTIME_SUM)  and t.type=3 and flag=0
+group by t.visitor_province
+) b on pro.provinceid=b.visitor_province
+left join
+(
+select sum(t.stay_tourists) as outcou ,'guowai' as pro from REGION_REALTIME_SUM t
+where t.stat_hour = (select max(STAT_HOUR) from REGION_REALTIME_SUM) and (t.flag>0 or t.flag is null)
+) c on 1=1
+left join (
+select provinceid,provinces as CITYCODE from area_cfg where area_code=#cityCode#
+)d on pro.provinceid=d. provinceid
+]]>
+	</select>
+
+<!--备份的语句 -->
+
+<select id="RegionRealtimeSum.queryByAllDay2" resultMap="RegionAllDayResult">
+<![CDATA[
+select 'regionname' AS regionname,
+decode(a.inpro, '', 0, trunc(a.inpro/(select value from common where name='CHINA_MOBILE_PERCENT')))INSTOURISTS,
+d.CITYCODE,
+decode(b.outpro, '', 0, trunc(b.outpro/(select value from common where name='CHINA_MOBILE_PERCENT')))OUTSTOURISTS,
+decode(e.inoutpro, '', 0, trunc(e.inoutpro/(select value from common where name='CHINA_MOBILE_PERCENT'))) INOUTTOURISTS,
+decode(c.outcou, '', 0, trunc(c.outcou/(select value from common where name='CHINA_MOBILE_PERCENT')))OUTCOUNTRYSTOURISTS  
+from 
+(
+select sum(t.in_tourists) as inpro from REGION_REALTIME_SUM t
+where t.stat_hour <= (select max(STAT_HOUR) from REGION_REALTIME_SUM) 
+and to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#begindate# and t.flag=0 and t.type<=3
+and t.city_code=#cityCode#
+) a
+left join 
+(
+select sum(t.in_tourists) as inoutpro from REGION_REALTIME_SUM t
+where t.stat_hour <= (select max(STAT_HOUR) from REGION_REALTIME_SUM) 
+and to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#begindate# and t.flag=0 and t.type=2
+and t.city_code=#cityCode#
+) e on 1=1
+left join
+(
+select sum(t.in_tourists) as outpro from REGION_REALTIME_SUM t
+where t.stat_hour <= (select max(STAT_HOUR) from REGION_REALTIME_SUM)  
+and to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#begindate#  and  t.type=3 and t.flag=0 
+and t.city_code=#cityCode#
+) b on 1=1
+left join
+(
+select sum(t.in_tourists) as outcou  from REGION_REALTIME_SUM t
+where t.stat_hour <= (select max(STAT_HOUR) from REGION_REALTIME_SUM) 
+and to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#begindate# and t.type=3 and (t.flag>0 or t.flag is null)
+and t.city_code=#cityCode#
+) c on 1=1
+left join (
+select provinceid,provinces as CITYCODE from area_cfg where area_code=#cityCode#
+)d on 1=1
+]]>
+	</select>
+
+<!-- 得到来皖的来源地，接待统计（改为最新的） -->
+<select id="RegionRealtimeSum.queryByAllDay" resultMap="RegionAllDayResult">
+<![CDATA[
+ select 
+    'regionname' AS regionname,
+   sum(t.in_tourists) as INSTOURISTS,
+   sum(case when t.type=1 then t.in_tourists else 0 end ) as INOUTTOURISTS,
+   sum(case when t.type=2 then t.in_tourists else 0 end) as OUTSTOURISTS,
+    sum(case when t.type=3 then t.in_tourists else 0 end) as OUTCOUNTRYSTOURISTS
+   from  REGION_REALTIME_SUM t
+   left join (
+select provinceid,provinces as CITYCODE from area_cfg where area_code=#cityCode#
+)d on 1=1
+   where  t.stat_hour >= to_date(#begindate#,'yyyy-MM-dd HH24:MI:SS') 
+   and t.stat_hour <= (select max(STAT_HOUR) from REGION_REALTIME_SUM) 
+   and t.city_code=#cityCode#
+]]>
+	</select>
+
+<!-- 统计景区编码范围内的景区接待统计 -->
+<select id="RegionRealtimeSum.queryByRegionsForDayData" resultMap="AllRSumResult">
+<![CDATA[
+select nvl( sum(t.in_tourists),0) as TOURIST_SUM 
+from Region_Realtime_Sum t where t.region_id in ($regionIdIn$)
+and t.stat_hour>=(select to_date(to_char(max(stat_hour),'yyyy/MM/dd'),'yyyy/MM/dd') 
+ from Region_Realtime_Sum) 
+]]>
+	</select>
+	
+<select id="RegionRealtimeSum.queryByForeignCities" resultMap="ForeignCitiesResult">
+<isNotEmpty prepend="" property="regionId">
+ <![CDATA[
+	 select nvl(b.sumtourists,0)as sumtourists,
+		 c.city,
+		 nvl(b.region_name,#regionName#) as regionName,
+		 #endTime# as time 
+	 from prefix_cfg c left join(
+	    select a.visitor_city,sum(a.tourists) as sumtourists,a.region_name from(
+	    select * from REGION_SUMMARY_BYDAY t，region_cfg rc
+	    where t.region_id = #regionId#
+	    and rc.id = t.region_id
+	]]>
+	    <isEqual property="searchType" compareValue="y">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy')
+	    and t.stat_day <= to_date(#endTime#,'yyyy')
+	    ]]>
+	    </isEqual>
+	    <isEqual property="searchType" compareValue="m">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy-MM')
+	    and t.stat_day <= to_date(#endTime#,'yyyy-MM')
+	    ]]>
+	    </isEqual>
+	    <isEqual property="searchType" compareValue="d">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy-MM-dd')
+	    and t.stat_day <= to_date(#endTime#,'yyyy-MM-dd')
+	    ]]>
+	    </isEqual>
+	    )a group by a.visitor_city,a.region_name)b
+	 on c.area_code = b.visitor_city
+	 where c.provinces_code = #provinces_code#
+	 order by b.sumtourists desc nulls last
+</isNotEmpty>
+<isEmpty prepend="" property="regionId">
+	<![CDATA[
+	 select sum(nvl(b.sumtourists,0))as sumtourists,
+		 c.city,
+		 '全部' as regionName,
+		 #endTime# as time 
+	 from prefix_cfg c left join(
+	    select a.visitor_city,sum(a.tourists) as sumtourists,a.region_name from(
+	    select * from REGION_SUMMARY_BYDAY t，region_cfg rc
+	    where rc.id = t.region_id
+	]]>
+	    <isEqual property="searchType" compareValue="y">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy')
+	    and t.stat_day <= to_date(#endTime#,'yyyy')
+	    ]]>
+	    </isEqual>
+	    <isEqual property="searchType" compareValue="m">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy-MM')
+	    and t.stat_day <= to_date(#endTime#,'yyyy-MM')
+	    ]]>
+	    </isEqual>
+	    <isEqual property="searchType" compareValue="d">
+	    <![CDATA[
+	    and t.stat_day >= to_date(#beginTime#,'yyyy-MM-dd')
+	    and t.stat_day <= to_date(#endTime#,'yyyy-MM-dd')
+	    ]]>
+	    </isEqual>
+	    )a group by a.visitor_city,a.region_name)b
+	 on c.area_code = b.visitor_city
+	 where c.provinces_code = #provinces_code#
+	 GROUP BY c.city
+</isEmpty>
+</select>
+</sqlMap>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SysLoginLog">
+
+<typeAlias alias="SysLoginLog" type="com.funo.sysloginlog.model.SysLoginLog" />
+
+<resultMap id="SysLoginLogResult" class="SysLoginLog">
+  <result property="unid" column="UNID" />
+  <result property="userUnid" column="USER_UNID" />
+  <result property="loginName" column="LOGIN_NAME" />
+  <result property="name" column="NAME" />
+  <result property="operatorType" column="OPERATOR_TYPE" />
+  <result property="ipAddress" column="IP_ADDRESS" />
+  <result property="browserInfo" column="BROWSER_INFO" />
+  <result property="loginTime" column="LOGIN_TIME" />
+  <result property="loginType" column="LOGIN_TYPE" />
+  <result property="loginText" column="LOGIN_TEXT" />
+  <result property="failText" column="FAIL_TEXT" />
+  <result property="sucOrFail" column="SUC_OR_FAIL" />
+</resultMap>
+
+<insert id="SysLoginLog.create">
+<![CDATA[
+insert into SYS_LOGIN_LOG(UNID,USER_UNID,LOGIN_NAME,NAME,OPERATOR_TYPE,IP_ADDRESS,BROWSER_INFO,LOGIN_TIME,LOGIN_TYPE,LOGIN_TEXT,FAIL_TEXT,SUC_OR_FAIL)values(#unid#,#userUnid#,#loginName#,#name#,#operatorType#,#ipAddress#,#browserInfo#,to_timestamp(#loginTime#, 'syyyy-mm-dd hh24:mi:ss.ff'),#loginType#,#loginText#,#failText#,#sucOrFail#)
+]]>
+</insert>
+
+<update id="SysLoginLog.update">
+<![CDATA[
+update SYS_LOGIN_LOG set 
+UNID=#unid# 
+]]>
+			<isNotNull  property="userUnid"  >
+	, USER_UNID=#userUnid#
+	</isNotNull> 
+			<isNotNull  property="loginName"  >
+	, LOGIN_NAME=#loginName#
+	</isNotNull> 
+			<isNotNull  property="name"  >
+	, NAME=#name#
+	</isNotNull> 
+			<isNotNull  property="operatorType"  >
+	, OPERATOR_TYPE=#operatorType#
+	</isNotNull> 
+			<isNotNull  property="ipAddress"  >
+	, IP_ADDRESS=#ipAddress#
+	</isNotNull> 
+			<isNotNull  property="browserInfo"  >
+	, BROWSER_INFO=#browserInfo#
+	</isNotNull> 
+			<isNotNull  property="loginTime"  >
+	, LOGIN_TIME=#loginTime#
+	</isNotNull> 
+			<isNotNull  property="loginType"  >
+	, LOGIN_TYPE=#loginType#
+	</isNotNull> 
+			<isNotNull  property="loginText"  >
+	, LOGIN_TEXT=#loginText#
+	</isNotNull> 
+			<isNotNull  property="failText"  >
+	, FAIL_TEXT=#failText#
+	</isNotNull> 
+			<isNotNull  property="sucOrFail"  >
+	, SUC_OR_FAIL=#sucOrFail#
+	</isNotNull> 
+	<![CDATA[
+ where UNID=#unid# 
+]]>  
+</update>
+
+<delete id="SysLoginLog.delete">
+<![CDATA[
+delete from SYS_LOGIN_LOG 
+where UNID=#unid#
+]]>
+</delete>
+
+<select id="SysLoginLog.getById" resultMap="SysLoginLogResult">
+<![CDATA[
+select t.* 
+	from SYS_LOGIN_LOG t  
+where UNID=#unid#
+]]>
+</select>
+
+<sql id="SysLoginLog.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="unid"  >
+		t.UNID=#unid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="userUnid"  >
+		t.USER_UNID=#userUnid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="loginName"  >
+		t.LOGIN_NAME like '%'||#loginName#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="name"  >
+		t.NAME like '%'||#name#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="operatorType"  >
+		t.OPERATOR_TYPE=#operatorType#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="ipAddress"  >
+		t.IP_ADDRESS=#ipAddress#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="browserInfo"  >
+		t.BROWSER_INFO=#browserInfo#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="loginType"  >
+		t.LOGIN_TYPE=#loginType#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="loginText"  >
+		t.LOGIN_TEXT=#loginText#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="failText"  >
+		t.FAIL_TEXT=#failText#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="sucOrFail"  >
+		t.SUC_OR_FAIL=#sucOrFail#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="starttime"  >
+		t.LOGIN_TIME &gt;=to_timestamp(#starttime#, 'syyyy-mm-dd hh24:mi:ss.ff')
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="endtime"  >
+		t.LOGIN_TIME &lt;=to_timestamp(#endtime#, 'syyyy-mm-dd hh24:mi:ss.ff')
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="SysLoginLog.queryByArgs" resultMap="SysLoginLogResult">
+<![CDATA[
+select t.* 
+	from SYS_LOGIN_LOG t 
+	where 1=1 
+]]>
+<include refid="SysLoginLog.whereClause" />
+</select>
+
+</sqlMap>

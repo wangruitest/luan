@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Common">
+
+<typeAlias alias="Common" type="com.funo.basecommon.model.Common" />
+
+<resultMap id="CommonResult" class="Common">
+  <result property="id" column="ID" />
+  <result property="parentId" column="PARENT_ID" />
+  <result property="name" column="NAME" />
+  <result property="value" column="VALUE" />
+  <result property="type" column="TYPE" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="remark" column="REMARK" />
+</resultMap>
+
+<update id="Common.updateBySql">
+<![CDATA[
+update COMMON set 
+UPDATETIME=sysdate , VALUE=#value#
+ where type='OVERALL' and NAME=#name#
+]]>  
+</update>
+
+<update id="Common.updateBy618Set">
+<![CDATA[
+update COMMON set 
+UPDATETIME=sysdate , VALUE=#value#
+ where type='FZ618' and NAME=#name#
+]]>  
+</update>
+
+<update id="Common.update">
+<![CDATA[
+update COMMON  set 
+ ID=#id# 
+]]>
+	<isNotNull property="parentId"  >
+		,PARENT_ID=#parentId#
+	</isNotNull>
+	<isNotNull property="name"  >
+		,NAME=#name#
+	</isNotNull>
+	<isNotNull property="value"  >
+		,VALUE=#value#
+	</isNotNull>
+	<isNotNull property="type"  >
+		,TYPE=#type#
+	</isNotNull>
+	<isNotNull property="isvalid"  >
+		,ISVALID=#isvalid#
+	</isNotNull>
+	<isNotNull property="updatetime"  >
+		,UPDATETIME=#updatetime#
+	</isNotNull>
+	<isNotNull property="remark"  >
+		,REMARK=#remark#
+	</isNotNull>
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<sql id="Common.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="parentId"  >
+		t.PARENT_ID=#parentId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="name"  >
+		t.NAME=#name#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="value"  >
+		t.VALUE=#value#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="type"  >
+		t.TYPE=#type#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="isvalid"  >
+		t.ISVALID=#isvalid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="remark"  >
+		t.REMARK=#remark#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Common.queryByArgs" resultMap="CommonResult">
+<![CDATA[
+select t.* from common t 
+	where 1=1 
+]]>
+<include refid="Common.whereClause" />
+<![CDATA[
+ order by value 
+]]>
+</select>
+</sqlMap>

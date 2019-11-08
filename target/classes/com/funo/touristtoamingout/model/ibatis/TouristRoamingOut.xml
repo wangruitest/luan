@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TouristRoamingOut">
+
+<typeAlias alias="TouristRoamingOut" type="com.funo.touristtoamingout.model.TouristRoamingOut" />
+<typeAlias alias="TouristRoamingOut2" type="com.funo.touristtoamingout.model.TouristRoamingOut2" />
+<typeAlias alias="Areas" type="com.funo.region.model.Areas" />
+<resultMap id="TouristRoamingOutResult" class="TouristRoamingOut">
+  <result property="provinces" column="PROVINCES" />
+  <result property="sumroam" column="SUMROAM" />
+  <result property="hfroam" column="HFROAM" />
+  <result property="whroam" column="WHROAM" />
+  <result property="bbroam" column="BBROAM" />
+  <result property="hnroam" column="HNROAM" />
+  <result property="masroam" column="MASROAM" />
+  <result property="hbroam" column="HBROAM" />
+  <result property="tlroam" column="TLROAM" />
+  <result property="aqroam" column="AQROAM" />
+  <result property="hsroam" column="HSROAM" />
+  <result property="chuzroam" column="CHUZROAM" />
+  <result property="fyroam" column="FYROAM" />
+  <result property="szroam" column="SZROAM" />
+  <result property="laroam" column="LAROAM" />
+  <result property="hzroam" column="HZROAM" />
+  <result property="chizroam" column="CHIZROAM" />
+  <result property="xcroam" column="XCROAM" />
+</resultMap>
+<resultMap id="TouristRoamingOutResult2" class="TouristRoamingOut2">
+  <result property="provinces" column="short_name" />
+  <result property="provinceid" column="provinceid" />
+  <result property="sumroam" column="SUMROAM" />
+  <result property="destination" column="areaid" />
+  <result property="destinationName" column="areas" />
+</resultMap>
+
+
+<resultMap id="AreasListResult" class="Areas">
+  <result property="id" column="ID" />
+  <result property="areaid" column="AREAID" />
+  <result property="areas" column="AREAS" />
+  <result property="cityid" column="CITYID" />
+  <result property="cities" column="CITIES" />
+</resultMap>
+<select id="TouristRoamingOut.queryByProvincesMonth" resultMap="TouristRoamingOutResult">
+<![CDATA[
+select s.provinces    as provinces,
+       s.touristcount as SUMROAM,
+       g.HFROAM,
+       g.WHROAM,
+       g.BBROAM,
+       g.HNROAM,
+       g.MASROAM,
+       g.HBROAM,
+       g.TLROAM,
+       g.AQROAM,
+       g.HSROAM,
+       g.CHUZROAM,
+       g.FYROAM,
+       g.SZROAM,
+       g.LAROAM,
+       g.HZROAM,
+       g.CHIZROAM,
+       g.XCROAM
+  from (SELECT m.provinces,
+               trunc(sum(distinct_count) /
+                     (select value
+                        from common
+                       where name = 'CHINA_MOBILE_PERCENT'),
+                     0) touristcount
+          FROM TOURIST_ROAMING tp,
+               (SELECT distinct pc.area_code, pc.area_name, pc.provinces
+                  FROM area_cfg pc
+                 WHERE pc.provinces != '安徽' and pc.provinceid in ($searchProvince$)) m
+         WHERE tp.area_code in m.area_code
+           AND tp.area_code != -1
+           AND TO_CHAR(stat_month, 'YYYY-MM') IN
+               (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#statmonth#, 'YYYY-MM'),
+                                          (LEVEL - 1)),
+                               'YYYY-MM') AS RQ
+                  FROM DUAL
+                CONNECT BY LEVEL <= 1)
+         GROUP BY TO_CHAR(stat_month, 'YYYY-MM'), m.provinces) s
+  left join (select a.provinces,
+                    sum(case
+                          when a.city_code = '340100' then
+                           dc
+                          else
+                           0
+                        end) as HFROAM,
+                    sum(case
+                          when a.city_code = '340200' then
+                           dc
+                          else
+                           0
+                        end) as WHROAM,
+                    sum(case
+                          when a.city_code = '340300' then
+                           dc
+                          else
+                           0
+                        end) as BBROAM,
+                    sum(case
+                          when a.city_code = '340400' then
+                           dc
+                          else
+                           0
+                        end) as HNROAM,
+                    sum(case
+                          when a.city_code = '340500' then
+                           dc
+                          else
+                           0
+                        end) as MASROAM,
+                    sum(case
+                          when a.city_code = '340600' then
+                           dc
+                          else
+                           0
+                        end) as HBROAM,
+                    sum(case
+                          when a.city_code = '340700' then
+                           dc
+                          else
+                           0
+                        end) as TLROAM,
+                    sum(case
+                          when a.city_code = '340800' then
+                           dc
+                          else
+                           0
+                        end) as AQROAM,
+                    sum(case
+                          when a.city_code = '341000' then
+                           dc
+                          else
+                           0
+                        end) as HSROAM,
+                    sum(case
+                          when a.city_code = '341100' then
+                           dc
+                          else
+                           0
+                        end) as CHUZROAM,
+                    sum(case
+                          when a.city_code = '341200' then
+                           dc
+                          else
+                           0
+                        end) as FYROAM,
+                    sum(case
+                          when a.city_code = '341300' then
+                           dc
+                          else
+                           0
+                        end) as SZROAM,
+                    sum(case
+                          when a.city_code = '341500' then
+                           dc
+                          else
+                           0
+                        end) as LAROAM,
+                    sum(case
+                          when a.city_code = '341600' then
+                           dc
+                          else
+                           0
+                        end) as HZROAM,
+                    sum(case
+                          when a.city_code = '341700' then
+                           dc
+                          else
+                           0
+                        end) as CHIZROAM,
+                    sum(case
+                          when a.city_code = '341800' then
+                           dc
+                          else
+                           0
+                        end) as XCROAM
+               from (select n.provinces,
+                            t.area_code,
+                            t.city_code,
+                            trunc(sum(t.distinct_count) /
+                                  (select value
+                                     from common
+                                    where name = 'CHINA_MOBILE_PERCENT'),
+                                  0) as dc
+                       from TOURIST_ROAMING t,
+                            (SELECT distinct p.area_code,
+                                             p.area_name,
+                                             p.provinces
+                               FROM area_cfg p
+                              WHERE p.area_name != '安徽' and p.provinceid in ($searchProvince$)) n
+                      where TO_CHAR(stat_month, 'YYYY-MM') IN
+                            (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#statmonth#,
+                                                               'YYYY-MM'),
+                                                       (LEVEL - 1)),
+                                            'YYYY-MM') AS RQ
+                               FROM DUAL
+                             CONNECT BY LEVEL <= 1)
+                        AND t.area_code != -1
+                        and t.area_code in n.area_code
+                      group by TO_CHAR(stat_month, 'YYYY-MM'),
+                               t.city_code,
+                               t.area_code,
+                               n.provinces) a
+              group by a.provinces) g
+    on s.provinces = g.provinces
+
+]]>
+</select>
+
+<select id="TouristRoamingOut.queryByProvincesMonth2" resultMap="TouristRoamingOutResult2">
+	select sum(distinct_count) as sumroam,'sumroam' areaid ,'全部' areas， p.provinceid,p.short_name from TOURIST_ROAMING t,provinces p
+	where  t.visitorprovince in ($searchProvince$) 
+	<isEqual property="type" compareValue="2">
+		and t.roamingcounty in ($searchDestination$)
+	</isEqual>
+	and to_char(t.stat_month,'yyyy-mm') = #statmonth#
+	and t.visitorprovince=p.provinceid
+	group by p.provinceid,p.short_name
+	union all
+	select sum(t.distinct_count) as sumroam,a.areaid,a.areas,p.provinceid,p.short_name
+	from TOURIST_ROAMING t ,areas a ,provinces p
+	where t.visitorprovince in ($searchProvince$)
+	and t.roamingcounty in($searchDestination$)
+	and to_char(t.stat_month,'yyyy-mm') = #statmonth#
+	and t.visitorprovince=p.provinceid
+	and t.roamingcounty=a.areaid
+	group by a.areaid,a.areas,p.provinceid,p.short_name
+</select>
+
+
+<select id="TouristRoamingOut.queryByCityid" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where CITYID=#cityid#
+]]>
+</select>
+
+<select id="TouristRoamingOut.queryByCounty" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where AREAID=#countyid# 
+order by t.areaid
+]]>
+</select>
+</sqlMap>

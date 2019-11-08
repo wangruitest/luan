@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="SysMenu">
+
+<typeAlias alias="SysMenu" type="com.funo.system.model.SysMenu" />
+
+<resultMap id="SysMenuResult" class="SysMenu">
+  <result property="unid" column="UNID" />
+  <result property="menuid" column="MENUID" />
+  <result property="name" column="NAME" />
+  <result property="displayName" column="DISPLAY_NAME" />
+  <result property="url" column="URL" />
+  <result property="menuIcon" column="MENU_ICON" />
+  <result property="desktopIcon" column="DESKTOP_ICON" />
+  <result property="sortNum" column="SORT_NUM" />
+  <result property="status" column="STATUS" />
+  <result property="punid" column="PUNID" />
+  <result property="dsTypes" column="DS_TYPES" />
+</resultMap>
+
+<insert id="SysMenu.create">
+<![CDATA[
+insert into SYS_MENU(UNID,MENUID,NAME,URL,MENU_ICON,DESKTOP_ICON,SORT_NUM,STATUS,PUNID,DS_TYPES,DISPLAY_NAME)values(#unid#,#menuid#,#name#,#url#,#menuIcon#,#desktopIcon#,#sortNum#,#status#,#punid#,#dsTypes#,#displayName#)
+]]>
+</insert>
+
+<update id="SysMenu.update">
+<![CDATA[
+update SYS_MENU set 
+UNID=#unid# 
+]]>
+			<isNotNull  property="menuid"  >
+	, MENUID=#menuid#
+	</isNotNull> 
+			<isNotNull  property="name"  >
+	, NAME=#name#
+	</isNotNull> 
+			<isNotNull  property="displayName"  >
+	, DISPLAY_NAME=#displayName#
+	</isNotNull> 
+			<isNotNull  property="url"  >
+	, URL=#url#
+	</isNotNull> 
+			<isNotNull  property="menuIcon"  >
+	, MENU_ICON=#menuIcon#
+	</isNotNull> 
+			<isNotNull  property="desktopIcon"  >
+	, DESKTOP_ICON=#desktopIcon#
+	</isNotNull> 
+			<isNotNull  property="sortNum"  >
+	, SORT_NUM=#sortNum#
+	</isNotNull> 
+			<isNotNull  property="status"  >
+	, STATUS=#status#
+	</isNotNull> 
+			<isNotNull  property="punid"  >
+	, PUNID=#punid#
+	</isNotNull> 
+			<isNotNull  property="dsTypes"  >
+	, DS_TYPES=#dsTypes#
+	</isNotNull> 
+	<![CDATA[
+ where UNID=#unid# 
+]]>  
+</update>
+
+<delete id="SysMenu.delete">
+<![CDATA[
+delete from SYS_MENU 
+where UNID=#unid#
+]]>
+</delete>
+
+<select id="SysMenu.getById" resultMap="SysMenuResult">
+<![CDATA[
+select t.* 
+	from SYS_MENU t  
+where UNID=#unid#
+]]>
+</select>
+
+<sql id="SysMenu.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="unid"  >
+		t.UNID=#unid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="menuid"  >
+		t.MENUID like '%'||#menuid#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="name"  >
+		(t.NAME like '%'||#name#||'%'  or t.DISPLAY_NAME like '%'||#name#||'%')
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="displayName"  >
+		t.DISPLAY_NAME like '%'||#displayName#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="url"  >
+		t.URL like '%'||#url#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="menuIcon"  >
+		t.MENU_ICON=#menuIcon#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="desktopIcon"  >
+		t.DESKTOP_ICON=#desktopIcon#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="sortNum"  >
+		t.SORT_NUM=#sortNum#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="status"  >
+		t.STATUS=#status#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="punid"  >
+		t.PUNID=#punid#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="SysMenu.queryByArgs" resultMap="SysMenuResult">
+<![CDATA[
+select t.* 
+	from SYS_MENU t 
+	where 1=1 
+]]>
+<include refid="SysMenu.whereClause" />
+<![CDATA[
+	order by t.SORT_NUM
+]]>
+</select>
+<select id="SysMenu.queryByCurUser" resultMap="SysMenuResult">
+<![CDATA[
+select t.* from sys_menu t
+ where t.unid in(
+ select s_rm.menu_unid from sys_operate_role s_or,sys_role_menu s_rm
+  where s_or.role_unid=s_rm.role_unid and s_or.operate_unid=#unid#
+  ) and t.STATUS=0 
+]]>
+<![CDATA[
+	order by t.SORT_NUM
+]]>
+</select>
+
+</sqlMap>

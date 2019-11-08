@@ -1,0 +1,41 @@
+@charset "utf-8";
+.paginations a, .paginations span {
+	margin-right: 3px;
+    display: block;
+	float:left;
+	position:relative;
+	width:20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+}
+.paginations a {
+	margin-right: 3px;
+	background:url(../../img/map/pages.png) no-repeat 0 -40px;
+    text-decoration: none;
+	color: #fff;
+}
+.paginations span.current {
+	background:url(../../img/map/pages.png) no-repeat 0 -60px;
+	color:#fff;
+}
+
+.paginations .prev{	
+	background:url(../../img/map/pages.png) no-repeat 0 0;
+}
+.paginations .next{
+	background:url(../../img/map/pages.png) no-repeat 0 -20px;
+}
+.paginations .current.prev{
+	background:url(../../img/map/pages.png) no-repeat 0 0;
+}
+.paginations .current.next{
+	background:url(../../img/map/pages.png) no-repeat 0 -20px;
+}
+
+.pagination ul{
+	margin-top:10px;
+}
+

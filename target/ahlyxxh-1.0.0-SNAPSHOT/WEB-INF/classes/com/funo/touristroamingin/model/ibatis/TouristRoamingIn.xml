@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TouristRoamingIn">
+
+<typeAlias alias="TouristRoamingIn" type="com.funo.touristroamingin.model.TouristRoamingIn" />
+<typeAlias alias="TouristRoamingIn2" type="com.funo.touristroamingin.model.TouristRomaingIn2" />
+<typeAlias alias="Areas" type="com.funo.region.model.Areas" />
+<resultMap id="TouristRoamingInResult" class="TouristRoamingIn">
+  <result property="areaname" column="AREANAME" />
+  <result property="sumroam" column="SUMROAM" />
+  <result property="hfroam" column="HFROAM" />
+  <result property="whroam" column="WHROAM" />
+  <result property="bbroam" column="BBROAM" />
+  <result property="hnroam" column="HNROAM" />
+  <result property="masroam" column="MASROAM" />
+  <result property="hbroam" column="HBROAM" />
+  <result property="tlroam" column="TLROAM" />
+  <result property="aqroam" column="AQROAM" />
+  <result property="hsroam" column="HSROAM" />
+  <result property="chuzroam" column="CHUZROAM" />
+  <result property="fyroam" column="FYROAM" />
+  <result property="szroam" column="SZROAM" />
+  <result property="laroam" column="LAROAM" />
+  <result property="hzroam" column="HZROAM" />
+  <result property="chizroam" column="CHIZROAM" />
+  <result property="xcroam" column="XCROAM" />
+</resultMap>
+
+ <resultMap id="TouristRoamingInResult2" class="TouristRoamingIn2">
+  <result property="city" column="cityname" />
+  <result property="cityid" column="cityid" />
+  <result property="sumroam" column="SUMROAM" />
+  <result property="destination" column="areaid" />
+  <result property="destinationName" column="areas" />
+</resultMap> 
+
+<resultMap id="AreasListResult" class="Areas">
+  <result property="id" column="ID" />
+  <result property="areaid" column="AREAID" />
+  <result property="areas" column="AREAS" />
+  <result property="cityid" column="CITYID" />
+  <result property="cities" column="CITIES" />
+</resultMap>
+
+<select id="TouristRoamingIn.queryByArgs" resultMap="TouristRoamingInResult">
+<![CDATA[
+select  (select name from SYS_ORGANIZATION where code=t.area_code )AREANAME ,
+          trunc(sum(distinct_count)/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  sumroam,
+                  trunc(sum(decode(city_code,'340100',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HFROAM,      
+                  trunc(sum(decode(city_code,'340200',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  WHROAM,      
+                  trunc(sum(decode(city_code,'340300',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  BBROAM,
+                  trunc(sum(decode(city_code,'340400',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HNROAM,
+                  trunc(sum(decode(city_code,'340500',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  MASROAM,
+                  trunc(sum(decode(city_code,'340600',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HBROAM,
+                  trunc(sum(decode(city_code,'340700',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  TLROAM,
+                  trunc(sum(decode(city_code,'340800',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  AQROAM,
+                  trunc(sum(decode(city_code,'341000',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HSROAM,
+                  trunc(sum(decode(city_code,'341100',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  CHUZROAM,
+                  trunc(sum(decode(city_code,'341200',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  FYROAM,
+                  trunc(sum(decode(city_code,'341300',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  SZROAM,
+                  trunc(sum(decode(city_code,'341500',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  LAROAM,
+                  trunc(sum(decode(city_code,'341600',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HZROAM,
+                  trunc(sum(decode(city_code,'341700',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  CHIZROAM,
+                  trunc(sum(decode(city_code,'341800',distinct_count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  XCROAM  
+    from TOURIST_ROAMING t where t.area_code in(select t1.code from SYS_ORGANIZATION t1 where 1=1 
+    ]]>
+	<isNotNull property="searchstr"  >
+		and t1.code in ($searchstr$) 
+	</isNotNull>
+	<![CDATA[
+    
+    ) and trunc(t.stat_month,'month') =  to_date(#statMonth#,'yyyy-MM-ss')
+    group by area_code order by area_code
+]]>
+</select>
+
+
+
+<select id="TouristRoamingIn.queryByProvincesMonth" resultMap="TouristRoamingInResult2">
+
+select sum(t.distinct_count) as sumroam,  'sumroam' areaid, '全部'  areas,t1.name as cityname,t1.code as cityid
+  from TOURIST_ROAMING t ,SYS_ORGANIZATION t1
+ where  to_char(t.stat_month,'yyyy-mm') =#statmonth#
+ and t.visitorcity in ($searchCity$)
+ <isEqual property="type" compareValue="2">
+		and t.roamingcounty in ($searchDestination$)
+	</isEqual>
+ and  t.area_code=t1.code
+ and t.visitorprovince='340000'
+group by t.visitorcity,t1.name,t1.code
+  union all
+select sum(t.distinct_count) as sumroam,a.areaid,a.areas,t1.name as cityname,t1.code as cityid
+  from TOURIST_ROAMING t ,areas a,SYS_ORGANIZATION t1
+ where t.roamingcounty in ($searchDestination$)
+ and  t.area_code =t1.code
+  and to_char(t.stat_month,'yyyy-mm') =#statmonth#
+  and t.visitorcity in ($searchCity$)
+  and t.roamingcounty=a.areaid
+  group by a.areaid,a.areas,t1.name,t1.code
+
+</select>
+
+
+<select id="TouristRoamingIn.queryByCityid" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where CITYID=#cityid#
+]]>
+</select>
+
+<select id="TouristRoamingIn.queryByCounty" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where AREAID=#countyid# 
+order by t.areaid
+]]>
+</select>
+
+</sqlMap>

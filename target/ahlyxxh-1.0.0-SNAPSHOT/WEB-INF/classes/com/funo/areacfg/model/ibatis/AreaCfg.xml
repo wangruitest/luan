@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="AreaCfg">
+
+<typeAlias alias="AreaCfg" type="com.funo.areacfg.model.AreaCfg" />
+
+<resultMap id="AreaCfgResult" class="AreaCfg">
+  <result property="id" column="ID" />
+  <result property="areaCode" column="AREA_CODE" />
+  <result property="areaName" column="AREA_NAME" />
+  <result property="provinces" column="PROVINCES" />
+  <result property="remark" column="REMARK" />
+</resultMap>
+
+<insert id="AreaCfg.create">
+<![CDATA[
+insert into AREA_CFG(ID,AREA_CODE,AREA_NAME,PROVINCES,REMARK)values(SEQ_AREA_CFG.Nextval,#areaCode#,#areaName#,#provinces#,#remark#)
+]]>
+</insert>
+
+<update id="AreaCfg.update">
+<![CDATA[
+update AREA_CFG set 
+ID=#id# 
+]]>
+		<isNotNull  property="id"  >
+	, ID=#id#
+	</isNotNull> 
+			<isNotNull  property="areaCode"  >
+	, AREA_CODE=#areaCode#
+	</isNotNull> 
+			<isNotNull  property="areaName"  >
+	, AREA_NAME=#areaName#
+	</isNotNull> 
+			<isNotNull  property="provinces"  >
+	, PROVINCES=#provinces#
+	</isNotNull> 
+			<isNotNull  property="remark"  >
+	, REMARK=#remark#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="AreaCfg.delete">
+<![CDATA[
+delete from AREA_CFG 
+where ID=#id#
+]]>
+</delete>
+
+<select id="AreaCfg.getById" resultMap="AreaCfgResult">
+<![CDATA[
+select t.* 
+	from AREA_CFG t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="AreaCfg.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="areaCode"  >
+		t.AREA_CODE=#areaCode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="areaName"  >
+		t.AREA_NAME=#areaName#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="provinces"  >
+		t.PROVINCES=#provinces#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="remark"  >
+		t.REMARK=#remark#
+	</isNotEmpty>
+	<![CDATA[
+		and (t.ID is null 
+	]]>
+	<isNotEmpty prepend="or" property="otherProvince"  >
+		t.PROVINCES &lt;&gt; '福建'
+	</isNotEmpty>
+	<isNotEmpty prepend="or" property="thisProvinceNotThisCity"  >
+		(t.PROVINCES = '福建' and t.AREA_CODE &lt;&gt; #curCityCode#)
+	</isNotEmpty>
+	<isNotEmpty prepend="or" property="thisCity"  >
+		t.AREA_CODE = #curCityCode#
+	</isNotEmpty>
+	<![CDATA[
+		)
+	]]>
+</dynamic>
+</sql>
+<select id="AreaCfg.queryByArgs" resultMap="AreaCfgResult">
+<![CDATA[
+select t.* 
+	from AREA_CFG t 
+	where 1=1 
+]]>
+<include refid="AreaCfg.whereClause" />
+</select>
+
+</sqlMap>

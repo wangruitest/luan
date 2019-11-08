@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionAlarmPhone">
+
+<typeAlias alias="RegionAlarmPhone" type="com.funo.alarmPhone.model.RegionAlarmPhone" />
+	<typeAlias alias="AlarmPhoneRegion" type="com.funo.alarmPhone.model.Region" />
+<resultMap id="RegionAlarmPhoneResult" class="RegionAlarmPhone">
+	<result property="id" column="ID" />
+  <result property="phone" column="PHONE" />
+  <result property="name" column="NAME" />
+  <result property="editTime" column="EDIT_TIME" />
+</resultMap>
+
+	<resultMap id="RegionResult" class="AlarmPhoneRegion">
+		<result property="unid" column="REGION_ID"/>
+		<result property="name" column="REGION_NAME"/>
+	</resultMap>
+<insert id="RegionAlarmPhone.create">
+<![CDATA[
+insert into REGION_ALARM_PHONE(ID,REGION_ID,PHONE,NAME,EDIT_TIME)values(seq_region_alarm_phone.nextval,#regionId#,#phone#,#name#,#editTime#)
+]]>
+</insert>
+
+<update id="RegionAlarmPhone.update">
+<![CDATA[
+update REGION_ALARM_PHONE set
+	PHONE=#phone#, name=#name#
+where PHONE=#oldPhone# and name=#oldName#
+]]>
+</update>
+
+<delete id="RegionAlarmPhone.delete">
+<![CDATA[
+delete from REGION_ALARM_PHONE t
+where 1=1
+]]>
+<isNotEmpty prepend="and" property="phone"  >
+	t.phone=#phone#
+</isNotEmpty>
+<isNotEmpty prepend="and" property="name"  >
+	t.name=#name#
+</isNotEmpty>
+<isNotEmpty prepend="and" property="regionId"  >
+	t.region_id=#regionId#
+</isNotEmpty>
+
+</delete>
+
+<select id="RegionAlarmPhone.getById" resultMap="RegionAlarmPhoneResult">
+<![CDATA[
+select t.* 
+	from REGION_ALARM_PHONE t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="RegionAlarmPhone.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionId"  >
+		t.REGION_ID=#regionId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="phone"  >
+		t.PHONE like '%'||#phone#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="name"  >
+		t.NAME like '%'||#name#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="editTime"  >
+		t.EDIT_TIME=#editTime#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionAlarmPhone.queryByArgs" resultMap="RegionAlarmPhoneResult">
+<![CDATA[
+select t.phone,t.name,max(t.edit_time) EDIT_TIME,max(t.id) id
+	from REGION_ALARM_PHONE t ,REGION_CFG r
+	where 1=1 AND r.id=t.region_id
+
+]]>
+<include refid="RegionAlarmPhone.whereClause" />
+<![CDATA[
+	GROUP BY t.phone,t.name
+]]>
+</select>
+
+	<select id="RegionAlarmPhone.queryByRegions" resultMap="RegionResult" parameterClass="RegionAlarmPhone">
+		<![CDATA[
+			SELECT t.REGION_ID,r.REGION_NAME
+			from REGION_ALARM_PHONE t ,REGION_CFG r
+			where 1=1 AND r.id=t.region_id
+				AND t.phone=#phone# and t.name=#name#
+		]]>
+	</select>
+
+	<select id="RegionAlarmPhone.queryByUser" resultMap="RegionAlarmPhoneResult">
+		<![CDATA[
+			select t.phone,t.name,t.edit_time,t.id
+				from REGION_ALARM_PHONE t ,REGION_CFG r
+				where 1=1 AND r.id=t.region_id
+					  AND t.phone=#phone# 
+			]]>
+	</select>
+</sqlMap>

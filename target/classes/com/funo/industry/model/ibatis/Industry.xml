@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Industry">
+
+<typeAlias alias="Industry" type="com.funo.industry.model.Industry" />
+
+<resultMap id="IndustryResult" class="Industry">
+  <result property="industryid" column="INDUSTRYID" />
+  <result property="typename" column="TYPENAME" />
+</resultMap>
+
+<insert id="Industry.create">
+<![CDATA[
+insert into INDUSTRY(INDUSTRYID,TYPENAME)values(SEQ_INDUSTRY.Nextval,#typename#)
+]]>
+</insert>
+
+<update id="Industry.update">
+<![CDATA[
+update INDUSTRY set 
+INDUSTRYID=#industryid# 
+]]>
+			<isNotNull  property="typename"  >
+	, TYPENAME=#typename#
+	</isNotNull> 
+	<![CDATA[
+ where INDUSTRYID=#industryid# 
+]]>  
+</update>
+
+<delete id="Industry.delete">
+<![CDATA[
+delete from INDUSTRY 
+where INDUSTRYID=#industryid#
+]]>
+</delete>
+
+<select id="Industry.getById" resultMap="IndustryResult">
+<![CDATA[
+select t.* 
+	from INDUSTRY t  
+where INDUSTRYID=#industryid#
+]]>
+</select>
+
+<sql id="Industry.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="industryid"  >
+		t.INDUSTRYID=#industryid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="typename"  >
+		t.TYPENAME like '%'||#typename#||'%' 
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Industry.queryByArgs" resultMap="IndustryResult">
+<![CDATA[
+select t.* 
+	from INDUSTRY t 
+	where 1=1 
+]]>
+<include refid="Industry.whereClause" />
+</select>
+<select id="Industry.queryByInsertIsExist" resultMap="IndustryResult">
+<![CDATA[
+select t.* from INDUSTRY t where t.TYPENAME = #typename# 
+]]>
+</select>
+<select id="Industry.queryByUpdateIsExist" resultMap="IndustryResult">
+<![CDATA[
+select t.* from INDUSTRY t where t.TYPENAME = #typename# and  INDUSTRYID <> #industryid#
+]]>
+</select>
+</sqlMap>
