@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="industryDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.industry.dao.IIndustryDao" />
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg value="com.funo.industry.model.Industry" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="industryAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.industry.adapt.impl.IndustryAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="industryMgmt" parent="tranProxy">
+		<property name="target">
+			<bean class="com.funo.industry.mgmt.impl.IndustryMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="IndustryAction" class="com.funo.industry.action.IndustryAction">
+		<property name="industryMgmt" ref="industryMgmt"></property>
+		<property name="businessMgmt" ref="businessMgmt"></property>
+		<dwr:remote javascript="IndustryAction" />
+	</bean>
+</beans>

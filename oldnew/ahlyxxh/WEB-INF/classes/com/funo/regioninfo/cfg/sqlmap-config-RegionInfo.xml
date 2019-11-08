@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<cfg>	
+	
+	<!-- 将下列配置添加到sqlmap-config.xml中 -->
+	
+	<!-- 景区基本信息（省平台二期手机客户端） start-->
+	<sqlMap resource="com/funo/regioninfo/model/ibatis/RegionInfo.xml" />
+	<!-- 景区基本信息（省平台二期手机客户端） end-->
+</cfg>

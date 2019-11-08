@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TouristRoamingOvernightIn">
+
+<typeAlias alias="TouristRoamingOvernightIn" type="com.funo.touristroamingovernightin.model.TouristRoamingOvernightIn" />
+
+<resultMap id="TouristRoamingOvernightInResult" class="TouristRoamingOvernightIn">
+  <result property="id" column="ID" />
+  <result property="count" column="COUNT" />
+  <result property="distinctCount" column="DISTINCT_COUNT" />
+  <result property="areaCode" column="AREA_CODE" />
+  <result property="statMonth" column="STAT_MONTH" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+</resultMap>
+
+<typeAlias alias="TouristRoamingOvernight" type="com.funo.touristroamingovernightin.model.TouristRoamingOvernight" />
+
+<resultMap id="TouristRoamingOvernightResult" class="TouristRoamingOvernight">
+  <result property="areaname" column="AREANAME" />
+  <result property="sumroam" column="SUMROAM" />
+  <result property="hfroam" column="HFROAM" />
+  <result property="whroam" column="WHROAM" />
+  <result property="bbroam" column="BBROAM" />
+  <result property="hnroam" column="HNROAM" />
+  <result property="masroam" column="MASROAM" />
+  <result property="hbroam" column="HBROAM" />
+  <result property="tlroam" column="TLROAM" />
+  <result property="aqroam" column="AQROAM" />
+  <result property="hsroam" column="HSROAM" />
+  <result property="chuzroam" column="CHUZROAM" />
+  <result property="fyroam" column="FYROAM" />
+  <result property="szroam" column="SZROAM" />
+  <result property="laroam" column="LAROAM" />
+  <result property="hzroam" column="HZROAM" />
+  <result property="chizroam" column="CHIZROAM" />
+  <result property="xcroam" column="XCROAM" />
+</resultMap>
+
+<select id="TouristRoamingOvernightIn.queryByArgs" resultMap="TouristRoamingOvernightResult">
+<![CDATA[    
+select  (select name from SYS_ORGANIZATION where code=t.area_code )AREANAME ,
+           trunc(sum(count)/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as sumroam,
+                  trunc(sum(decode(city_code,'340100',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HFROAM,      
+                  trunc(sum(decode(city_code,'340200',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  WHROAM,      
+                  trunc(sum(decode(city_code,'340300',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  BBROAM,
+                  trunc(sum(decode(city_code,'340400',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HNROAM,
+                  trunc(sum(decode(city_code,'340500',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  MASROAM,
+                  trunc(sum(decode(city_code,'340600',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HBROAM,
+                  trunc(sum(decode(city_code,'340700',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  TLROAM,
+                  trunc(sum(decode(city_code,'340800',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  AQROAM,
+                  trunc(sum(decode(city_code,'341000',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HSROAM,
+                  trunc(sum(decode(city_code,'341100',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  CHUZROAM,
+                  trunc(sum(decode(city_code,'341200',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  FYROAM,
+                  trunc(sum(decode(city_code,'341300',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  SZROAM,
+                  trunc(sum(decode(city_code,'341500',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  LAROAM,
+                  trunc(sum(decode(city_code,'341600',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  HZROAM,
+                  trunc(sum(decode(city_code,'341700',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  CHIZROAM,
+                  trunc(sum(decode(city_code,'341800',count,null))/(select value from common where name='CHINA_MOBILE_PERCENT'),0) as  XCROAM  
+    from TOURIST_ROAMING_OVERNIGHT t where t.area_code in(select t1.code from SYS_ORGANIZATION t1 where 1=1 	and t1.code in ($searchstr$) )
+     and trunc(t.stat_month, 'month') = to_date(#statMonth#,'yyyy-MM-ss') 
+     and updatetime is not null 
+    group by area_code order by area_code
+]]>
+</select>
+
+</sqlMap>

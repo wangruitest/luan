@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ProvinceReceiveTourist">
+
+<typeAlias alias="ProvinceReceiveTourist" type="com.funo.provincereceivetourist.model.ProvinceReceiveTourist" />
+
+<resultMap id="ProvinceReceiveTouristResult" class="ProvinceReceiveTourist">
+  <result property="id" column="ID" />
+  <result property="jwykrs" column="JWYKRS" />
+  <result property="wsykrs" column="WSYKRS" />
+  <result property="snmyrs" column="SNMYRS" />
+  <result property="ykzs" column="YKZS" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="cityid" column="CITYID" />
+</resultMap>
+
+<resultMap id="MonthTouristResult" class="ProvinceReceiveTourist">
+  <result property="ykzs" column="YKZS" />
+  <result property="statDay" column="STATDAY" />
+</resultMap>
+
+<resultMap id="CityMonthTouristResult" class="ProvinceReceiveTourist">
+  <result property="jwykrs" column="JWYKRS" />
+  <result property="wsykrs" column="WSYKRS" />
+  <result property="snmyrs" column="SNMYRS" />
+  <result property="ykzs" column="YKZS" />
+</resultMap>
+
+<resultMap id="RegionYearTouristResult" class="ProvinceReceiveTourist">
+  <result property="regionname" column="REGIONNAME" />
+  <result property="ykzs" column="YKZS" />
+</resultMap>
+
+<resultMap id="ProvinceDayReceiveTouristResult" class="ProvinceReceiveTourist">
+  <result property="jwykrs" column="JWYKRS" />
+  <result property="wsykrs" column="WSYKRS" />
+  <result property="snmyrs" column="SNMYRS" />
+  <result property="ykzs" column="YKZS" />
+</resultMap>
+
+<resultMap id="ProvinceDayJKJQResult" class="ProvinceReceiveTourist">
+  <result property="jkjq" column="JKJQ" />
+</resultMap>
+<resultMap id="CityReceiverByYearReqult" class="ProvinceReceiveTourist">
+  <result property="ykzs" column="YKZS" />
+  <result property="statMonth" column="STAT_MONTH" />
+</resultMap>
+
+
+<!-- 统计年度接待市游客总量 -->
+<select id="ProvinceReceiveTourist.selectByCityYearRegionReceiver" resultMap="CityReceiverByYearReqult">
+<![CDATA[
+SELECT   nvl(YKZS,0) as YKZS,       
+         RQ as STAT_MONTH  
+     FROM ( 
+         (
+           select TO_CHAR(ADD_MONTHS(TO_DATE(#statMonth#,'YYYY'),(LEVEL-2)*12),'YYYY') AS RQ        
+                    FROM DUAL CONNECT BY LEVEL <= 2)
+          ) Y  LEFT JOIN (      
+        select sum(r1.distinct_counts) as ykzs,
+       		r1.stat_month as stat_month 
+       		from
+        	 (select  r.DISTINCT_COUNTS ,to_char(r.stat_month,'YYYY') as stat_month 
+        	     from REGION_SUMMARY_BYMONTH r   where r.city_code = #cityid#) r1 
+         		group by r1.stat_month) R   
+         	    ON Y.RQ = r.stat_month   
+         		order by stat_month asc
+]]>
+</select>
+
+<!-- 统计年度省游客接待总量 (安徽省)1111-->
+<select id="ProvinceReceiveTourist.selectByProvinceYearRegionReceiver" resultMap="CityReceiverByYearReqult">
+<![CDATA[
+SELECT   nvl(YKZS,0) as YKZS,       
+         RQ as STAT_MONTH  
+     FROM ( 
+         (
+           select TO_CHAR(ADD_MONTHS(TO_DATE(#statMonth#,'YYYY'),(LEVEL-2)*12),'YYYY') AS RQ        
+                    FROM DUAL CONNECT BY LEVEL <= 2)
+          ) Y  LEFT JOIN (      
+        select sum(r1.distinct_counts) as ykzs,
+       		r1.stat_month as stat_month 
+       		from
+        	 (select  r.DISTINCT_COUNTS ,to_char(r.stat_month,'YYYY') as stat_month 
+        	    from REGION_SUMMARY_BYMONTH r 
+        	    where substr(r.city_code,0,2) = #provinceid#) r1 
+         		group by r1.stat_month) R   
+         	    ON Y.RQ = r.stat_month   
+         		order by stat_month asc
+]]>
+</select><insert id="ProvinceReceiveTourist.create">
+<![CDATA[
+insert into PROVINCE_RECEIVE_TOURIST(ID,JWYKRS,WSYKRS,SNMYRS,YKZS,UPDATETIME,CITYID)values(#id#,#jwykrs#,#wsykrs#,#snmyrs#,#ykzs#,#updatetime#,#cityid#)
+]]>
+</insert>
+
+<update id="ProvinceReceiveTourist.update">
+<![CDATA[
+update PROVINCE_RECEIVE_TOURIST set 
+ID=#id# 
+]]>
+			<isNotNull  property="jwykrs"  >
+	, JWYKRS=#jwykrs#
+	</isNotNull> 
+			<isNotNull  property="wsykrs"  >
+	, WSYKRS=#wsykrs#
+	</isNotNull> 
+			<isNotNull  property="snmyrs"  >
+	, SNMYRS=#snmyrs#
+	</isNotNull> 
+			<isNotNull  property="ykzs"  >
+	, YKZS=#ykzs#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+			<isNotNull  property="cityid"  >
+	, CITYID=#cityid#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="ProvinceReceiveTourist.delete">
+<![CDATA[
+delete from PROVINCE_RECEIVE_TOURIST 
+where ID=#id#
+]]>
+</delete>
+
+<select id="ProvinceReceiveTourist.getById" resultMap="ProvinceReceiveTouristResult">
+<![CDATA[
+select t.* 
+	from PROVINCE_RECEIVE_TOURIST t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="ProvinceReceiveTourist.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="jwykrs"  >
+		t.JWYKRS=#jwykrs#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="wsykrs"  >
+		t.WSYKRS=#wsykrs#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="snmyrs"  >
+		t.SNMYRS=#snmyrs#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="ykzs"  >
+		t.YKZS=#ykzs#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="cityid"  >
+		t.CITYID=#cityid#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="ProvinceReceiveTourist.queryByArgs" resultMap="ProvinceReceiveTouristResult">
+<![CDATA[
+select *
+  from PROVINCE_RECEIVE_TOURIST a
+ where 1=1 
+		and a.cityid=#cityid#
+ order by a.updatetime desc
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByCityMonth" resultMap="CityMonthTouristResult">
+<![CDATA[
+select 
+sum(case when t.visitor_country!='I999' then t.tourists else 0 end) as jwykrs,
+sum(case when t.visitor_province <> 340000 and  t.visitor_country='I999' then t.tourists  else 0 end)  as wsykrs,
+sum(case when t.visitor_province=340000 and  t.visitor_country='I999' then t.tourists else 0 end)  as snmyrs,
+nvl(sum(t.tourists ),0) as ykzs 
+  from REGION_SUMMARY_BYMONTH t
+ where 1=1
+ ]]>
+	<isNotNull property="cityid"  >
+		and t.city_code= #cityid#
+	</isNotNull>
+	<![CDATA[
+   and  to_char(t.stat_month,'yyyy/mm')=#statMonth#
+ order by t.updatetime desc
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByMonthTourist" resultMap="MonthTouristResult">
+<![CDATA[
+select to_char(to_date(d.rq, 'YYYY-MM-DD'), 'DD') as STATDAY,
+       nvl(p.ykzs,0) as ykzs 
+  from (SELECT TO_CHAR(SYSDATE - 14 + (LEVEL - 1), 'YYYY-MM-DD') AS RQ
+          FROM DUAL
+        CONNECT BY LEVEL <= 21) d
+  LEFT JOIN (select t.*
+               from PROVINCE_RECEIVE_TOURIST_SUM t
+              where t.cityid = #cityid#) p
+    ON p.updatetime = TO_DATE(d.rq, 'YYYY-MM-DD')
+ ORDER BY d.rq
+
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByCityYearTourist" resultMap="MonthTouristResult">
+<![CDATA[
+select d.rq as STATDAY, p.ykzs as ykzs
+  from (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#statMonth#, 'YYYY'), (LEVEL - 1) * 12),
+                       'YYYY') AS RQ
+          FROM DUAL
+        CONNECT BY LEVEL <= 2) d
+  LEFT JOIN (select sum(t.ykzs) as ykzs,
+                    TO_CHAR(t.updatetime, 'YYYY') as updatetime
+               from PROVINCE_RECEIVE_TOURIST_SUM t
+              where 1=1 
+               ]]>
+	<isNotNull property="cityid"  >
+		and t.cityid = #cityid#
+	</isNotNull>
+	<![CDATA[ 
+              group by TO_CHAR(t.updatetime, 'YYYY')) p
+    ON p.updatetime = d.rq
+ ORDER BY d.rq
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByCityRegionYearTourist" resultMap="RegionYearTouristResult">
+<![CDATA[
+select min(r.region_name) as regionname, sum(t.distinct_counts) as ykzs
+  from REGION_SUMMARY_BYMONTH t, REGION_CFG r
+ where t.region_id = r.id
+   and t.city_code = r.city_code
+  and to_char(t.stat_month,'yyyy') = #statMonth#
+   ]]>
+	<isNotNull property="cityid"  >
+		and t.city_code = #cityid#
+	</isNotNull>
+	<![CDATA[ 
+ group by t.region_id, t.city_code
+ order by ykzs desc
+]]>
+</select>
+
+
+<select id="ProvinceReceiveTourist.selectTouristZB" resultMap="RegionYearTouristResult">
+<![CDATA[
+select min(r.region_name) as regionname, sum(t.distinct_counts) as ykzs
+  from REGION_SUMMARY_BYMONTH t, REGION_CFG r
+ where t.region_id = r.id
+   and t.city_code = r.city_code
+   and to_char(t.stat_month,'yyyy') = #statMonth#
+   ]]>
+	<isNotNull property="cityid"  >
+		and t.city_code = #cityid#
+	</isNotNull>
+	<![CDATA[ 
+ group by t.region_id, t.city_code
+ order by ykzs desc
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByProvinceDayReceiveTourist" resultMap="ProvinceDayReceiveTouristResult">
+<![CDATA[
+select
+nvl(sum(t1.jwykrs),0) as jwykrs,
+       nvl(sum(t1.wsykrs),0) as wsykrs,
+       nvl(sum(t1.snmyrs),0) as snmyrs,
+       nvl(sum(t1.ykzs),0) as ykzs 
+  from (select ROW_NUMBER() over(partition by t.cityid order by t.updatetime desc) ROWNO,
+               t.jwykrs,
+               t.wsykrs,
+               t.snmyrs,
+               t.ykzs,
+               t.cityid,
+               t.updatetime
+          from PROVINCE_RECEIVE_TOURIST t
+         where 1 = 1 
+         	]]>
+	<isNotNull property="cityid"  >
+		and t.cityid = #cityid# 
+	</isNotNull>
+	<![CDATA[
+           ) t1
+ where t1.ROWNO = 1
+ order by t1.cityid desc
+]]>
+</select>
+<select id="ProvinceReceiveTourist.queryByRealTimeCityCode" resultMap="ProvinceDayReceiveTouristResult">
+<![CDATA[
+select
+nvl(sum(t1.jwykrs),0) as jwykrs,
+       nvl(sum(t1.wsykrs),0) as wsykrs,
+       nvl(sum(t1.snmyrs),0) as snmyrs,
+       nvl(sum(t1.ykzs),0) as ykzs 
+  from (select ROW_NUMBER() over(partition by t.cityid order by t.updatetime desc) ROWNO,
+               t.jwykrs,
+               t.wsykrs,
+               t.snmyrs,
+               t.ykzs,
+               t.cityid,
+               t.updatetime
+          from PROVINCE_RECEIVE_TOURIST t
+         where 1 = 1 
+         	]]>
+	<isNotNull property="cityid"  >
+		and t.cityid = #cityid# 
+	</isNotNull>
+	<![CDATA[
+           ) t1
+ where t1.ROWNO = 1
+ order by t1.cityid desc
+]]>
+</select>
+
+<select id="ProvinceReceiveTourist.queryByCityIdFromCityRegions" resultMap="ProvinceDayJKJQResult">
+<![CDATA[
+select count(t.region_name) as jkjq
+  from REGION_CFG t
+ where 1=1
+         	]]>
+	<isNotNull property="cityid"  >
+		and t.city_code = #cityid# 
+	</isNotNull>
+</select>
+</sqlMap>

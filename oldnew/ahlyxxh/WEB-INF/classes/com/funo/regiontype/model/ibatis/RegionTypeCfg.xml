@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionTypeCfg">
+
+<typeAlias alias="RegionTypeCfg" type="com.funo.regiontype.model.RegionTypeCfg" />
+
+<resultMap id="RegionTypeCfgResult" class="RegionTypeCfg">
+  <result property="id" column="ID" />
+  <result property="typename" column="TYPENAME" />
+  <result property="notes" column="NOTES" />
+</resultMap>
+
+<insert id="RegionTypeCfg.create">
+<![CDATA[
+insert into REGION_TYPE_CFG(ID,TYPENAME,NOTES)values(SEQ_REGION_TYPE_CFG.Nextval,#typename#,#notes#)
+]]>
+</insert>
+
+<update id="RegionTypeCfg.update">
+<![CDATA[
+update REGION_TYPE_CFG set 
+ID=#id# 
+]]>
+			<isNotNull  property="typename"  >
+	, TYPENAME=#typename#
+	</isNotNull> 
+			<isNotNull  property="notes"  >
+	, NOTES=#notes#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="RegionTypeCfg.delete">
+<![CDATA[
+delete from REGION_TYPE_CFG 
+where ID=#id#
+]]>
+</delete>
+
+<select id="RegionTypeCfg.getById" resultMap="RegionTypeCfgResult">
+<![CDATA[
+select t.* 
+	from REGION_TYPE_CFG t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="RegionTypeCfg.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="typename"  >
+		t.TYPENAME like '%'||#typename#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="notes"  >
+		t.NOTES like '%'||#notes#||'%' 
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionTypeCfg.queryByArgs" resultMap="RegionTypeCfgResult">
+<![CDATA[
+select t.* 
+	from REGION_TYPE_CFG t 
+	where 1=1 
+]]>
+<include refid="RegionTypeCfg.whereClause" />
+</select>
+<select id="RegionTypeCfg.queryByIsExist" resultMap="RegionTypeCfgResult">
+<![CDATA[
+select t.* 
+	from REGION_TYPE_CFG t 
+	where 1=1 and t.TYPENAME=#typename# and id <>#id#
+]]>
+</select>
+<select id="RegionTypeCfg.queryByInsertIsExist" resultMap="RegionTypeCfgResult">
+<![CDATA[
+select t.* from REGION_TYPE_CFG t where t.TYPENAME=#typename#
+]]>
+</select>
+</sqlMap>

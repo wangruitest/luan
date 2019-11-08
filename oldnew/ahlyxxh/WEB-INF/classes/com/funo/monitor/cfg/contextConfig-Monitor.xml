@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="monitorDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.monitor.dao.IMonitorDao" />
+		<property name="target">
+			<bean parent="abstractDaoTarget">
+				<constructor-arg value="com.funo.monitor.model.Monitor" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="monitorAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.monitor.adapt.impl.MonitorAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="monitorMgmt" parent="tranProxy">
+		<property name="target">
+			<bean class="com.funo.monitor.mgmt.impl.MonitorMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="MonitorAction" class="com.funo.monitor.action.MonitorAction">
+		<property name="monitorMgmt" ref="monitorMgmt"></property>
+		<dwr:remote javascript="MonitorAction" />
+	</bean>
+</beans>

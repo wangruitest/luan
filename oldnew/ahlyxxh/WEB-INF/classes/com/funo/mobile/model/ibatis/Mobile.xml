@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Mobile">
+
+<typeAlias alias="Mobile" type="com.funo.mobile.model.Mobile" />
+<typeAlias alias="Region" type="com.funo.mobile.model.Region" />
+<typeAlias alias="Software" type="com.funo.mobile.model.Software" />
+<typeAlias alias="ReportOne" type="com.funo.mobile.model.ReportOne" />
+<typeAlias alias="ReportTwo" type="com.funo.mobile.model.ReportTwo" />
+<typeAlias alias="ReportThree" type="com.funo.mobile.model.ReportThree" />
+<typeAlias alias="ReportFour" type="com.funo.mobile.model.ReportThree" />
+<typeAlias alias="MobileAlarm" type="com.funo.mobile.model.MobileAlarm" />
+<typeAlias alias="PageCount" type="com.funo.noticecfg.model.PageCount" />
+
+
+<resultMap id="MobileResult" class="Mobile">
+  <result property="id" column="ID" />
+  <result property="name" column="NAME" />
+</resultMap>
+
+<resultMap id="RegionResult" class="Region">
+  <result property="regionId" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+</resultMap>
+
+<resultMap id="SoftwareResult" class="Software">
+  <result property="id" column="ID" />
+  <result property="currentVersion" column="CURRENT_VERSION" />
+  <result property="url" column="URL" />
+</resultMap>
+
+<resultMap id="ReportOneResult" class="ReportOne">
+  <result property="count" column="touristcount" />
+  <result property="type" column="type" />
+</resultMap>
+
+<resultMap id="ReportTwoResult" class="ReportTwo">
+  <result property="provinces" column="provinces" />
+  <result property="provincesCode" column="provinces_code" />
+  <result property="touristcount" column="touristcount" />
+</resultMap>
+
+<resultMap id="ReportThreeResult" class="ReportThree">
+  <result property="inTourists" column="in_tourists" />
+  <result property="type" column="type" />
+</resultMap>
+
+<resultMap id="ReportFourResult" class="ReportFour">
+<result property="regionId" column="region_id" />
+<result property="regionName" column="region_name" />
+  <result property="inTourists" column="in_tourists" />
+</resultMap>
+
+<resultMap id="MobileAlarmResult" class="MobileAlarm">
+  <result property="id" column="ID" />
+  <result property="scenicCode" column="SCENIC_CODE" />
+  <result property="scenicName" column="SCENIC_NAME" />
+  <result property="warningLevel" column="WARNING_LEVEL" />
+  <result property="warningPhone" column="WARNING_PHONE" />
+  <result property="warinngContent" column="WARINNG_CONTENT" />
+  <result property="warningValue" column="WARNING_VALUE" />
+  <result property="warningTime" column="WARNING_TIME" />
+  <result property="warningName" column="WARNING_NAME" />
+  <result property="outProvinceCount" column="OUT_PROVINCE_COUNT" />
+  <result property="allCount" column="ALL_COUNT" />
+  <result property="inProvinceCount" column="IN_PROVINCE_COUNT" />
+  <result property="editTime" column="EDIT_TIME" />
+</resultMap>
+
+<resultMap id="PageCountResult" class="PageCount">
+  <result property="count" column="count" />
+</resultMap>
+
+<insert id="Mobile.create">
+<![CDATA[
+insert into MOBILE(ID,NAME)values(#id#,#name#)
+]]>
+</insert>
+
+<update id="Mobile.update">
+<![CDATA[
+update MOBILE set 
+ID=#id# 
+]]>
+			<isNotNull  property="name"  >
+	, NAME=#name#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="Mobile.delete">
+<![CDATA[
+delete from MOBILE 
+where ID=#id#
+]]>
+</delete>
+
+<select id="Mobile.getById" resultMap="MobileResult">
+<![CDATA[
+select t.* 
+	from MOBILE t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="Mobile.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="name"  >
+		t.NAME=#name#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Mobile.queryByArgs" resultMap="MobileResult">
+<![CDATA[
+select t.* 
+	from MOBILE t 
+	where 1=1 
+]]>
+<include refid="Mobile.whereClause" />
+</select>
+
+<select id="Mobile.queryByRegions" resultMap="RegionResult">
+<![CDATA[
+select r.id, r.region_name
+  from REGION_CFG r
+ where r.id in
+       (select s.region_cfg_id
+          from business_REGION_CFG s
+         where s.businessid in
+               (select bu.business_id
+                  from USER_BUSINESS_CFG bu
+                 where bu.user_id = #userId#))
+
+]]>
+
+<dynamic>
+	<isNotEmpty prepend="AND" property="cityCode">
+		r.city_code = #cityCode#
+	</isNotEmpty>
+</dynamic>
+</select>
+
+<select id="Mobile.queryBySoftware" resultMap="SoftwareResult">
+<![CDATA[
+select t.* from SOFTWARE t
+]]>
+</select>
+
+<select id="Mobile.queryByReportOneTah" resultMap="ReportOneResult">
+<![CDATA[
+ SELECT * FROM(
+         SELECT
+                trunc(SUM(nvl(tp.tourists,0)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT'))) touristcount,
+               '1' as type
+          FROM REGION_SUMMARY_BYDAY  tp
+         WHERE tp.area_code not in (SELECT distinct pc.area_code FROM prefix_cfg pc WHERE pc.provinces='安徽')
+              
+               	]]>
+	<isNotNull property="regionIds"  >
+		and tp.region_id in ($regionIds$)
+	</isNotNull>
+	<isNotNull property="cityId"  >
+		AND tp.city_code=#cityId#
+	</isNotNull>
+	<![CDATA[
+               
+               AND TO_CHAR(stat_day,'YYYY-MM-DD')IN (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#date#,'YYYY-MM-DD'),(LEVEL-1)),'YYYY-MM-DD') AS RQ FROM DUAL CONNECT BY LEVEL<=1)
+)
+
+Union All
+
+SELECT * FROM(
+         SELECT
+                trunc(SUM(nvl(tp.tourists,0)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT'))) touristcount,
+                '2' as type
+          FROM tourist_phones_byday_sum tp
+         WHERE tp.area_code not in (SELECT distinct pc.area_code FROM prefix_cfg pc WHERE pc.provinces='安徽')   
+               	]]>
+	<isNotNull property="cityId"  >
+		AND tp.city_code=#cityId#
+	</isNotNull>
+	<![CDATA[
+               AND TO_CHAR(stat_day,'YYYY-MM-DD')IN (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#date#,'YYYY-MM-DD'),(LEVEL-1)),'YYYY-MM-DD') AS RQ FROM DUAL CONNECT BY LEVEL<=1)             
+)
+
+Union All
+
+SELECT * FROM(
+         SELECT
+                trunc(SUM(nvl(tp.tourists,0)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT'))) touristcount,
+                '3' as type
+          FROM tourist_phones_byday_sum tp
+         WHERE tp.area_code not in (SELECT distinct pc.area_code FROM prefix_cfg pc WHERE pc.provinces='安徽')
+              	]]>
+	<isNotNull property="cityId"  >
+		AND tp.city_code=#cityId#
+	</isNotNull>
+	<![CDATA[
+               AND TO_CHAR(stat_day,'YYYY-MM-DD')IN (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#year#,'YYYY-MM-DD'),(LEVEL-1)),'YYYY-MM-DD') AS RQ FROM DUAL CONNECT BY LEVEL<=1)
+)
+
+
+]]>
+</select>
+
+
+
+<select id="Mobile.queryByReportTwo" resultMap="ReportTwoResult">
+<![CDATA[
+ select  *
+  FROM (SELECT m.provinces,
+               m.provinces_code,
+                trunc(SUM(nvl(tourists,0)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT'))) touristcount
+          FROM tourist_phones_byday_sum tp,
+               (SELECT distinct pc.area_code, pc.provinces, pc.provinces_code
+                  FROM prefix_cfg pc
+                 WHERE pc.provinces != '安徽') m
+         WHERE tp.area_code = m.area_code
+         ]]>
+	<isNotNull property="cityId"  >
+		AND tp.city_code =#cityId#
+	</isNotNull>
+	<![CDATA[
+           
+           AND TO_CHAR(stat_day, 'YYYY-MM-DD') IN
+               (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#date#, 'YYYY-MM-DD'),
+                                          (LEVEL - 1)),
+                               'YYYY-MM-DD') AS RQ
+                  FROM DUAL
+                CONNECT BY LEVEL <= 1)
+         GROUP BY m.provinces, m.provinces_code
+         order by touristcount desc
+         )
+Union All
+select '境外' as provinces,0 as provinces_code, trunc(SUM(nvl(tourists,0)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT'))) touristcount
+  from TOURIST_PHONES_BYDAY_SUM t
+ where t.area_code =-104
+     and t.stat_day = to_date(#date#,'YYYY-MM-DD')
+     ]]>
+	<isNotNull property="cityId"  >
+		AND t.city_code = #cityId#
+	</isNotNull>
+	<![CDATA[
+   
+
+]]>
+</select>
+
+<select id="Mobile.queryByReportThree" resultMap="ReportThreeResult">
+<![CDATA[
+select trunc(sum(t.in_tourists)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT')) as in_tourists,t.type from REGION_REALTIME_SUM t
+ where t.type is not null and to_char(t.stat_hour,'YYYY-MM-DD')=#date#
+               	]]>
+	<isNotNull property="regionIds"  >
+		and t.region_id in ($regionIds$)
+	</isNotNull>
+	<![CDATA[
+ group by t.type
+
+]]>
+</select>
+
+<select id="Mobile.queryByReportFour" resultMap="ReportFourResult">
+<![CDATA[
+select t.region_id,r.region_name,trunc(sum(t.in_tourists)/(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT')) as in_tourists from REGION_REALTIME_SUM t,region_cfg r
+ where t.type is not null and r.ID=t.region_id and to_char(t.stat_hour,'YYYY-MM-DD')=#date#
+                	]]>
+	<isNotNull property="regionIds"  >
+		and t.region_id in ($regionIds$)
+	</isNotNull>
+	<![CDATA[
+ group by t.region_id,r.region_name
+ order by in_tourists desc
+]]>
+</select>
+
+<select id="Mobile.queryByReportFire" resultMap="ReportOneResult">
+<![CDATA[
+SELECT  trunc(SUM(nvl(s.stay_tourists, 0)) /(SELECT VALUE FROM common WHERE NAME = 'CHINA_MOBILE_PERCENT')) touristcount,s.type
+   FROM region_realtime_sum s, region_cfg t
+ WHERE t.id = s.region_id
+   ]]>
+	<isNotNull property="regionIds"  >
+		and s.region_id in ($regionIds$)
+	</isNotNull>
+	<isNotNull property="cityId"  >
+		AND s.city_code = #cityId#
+	</isNotNull>
+	<![CDATA[
+  AND to_char(s.stat_hour, 'YYYY-MM-dd HH24')=#date#
+group by s.type
+
+]]>
+</select>
+
+<select id="Mobile.queryByAlarm" resultMap="MobileAlarmResult">
+<![CDATA[
+SELECT * FROM ( SELECT A.*, ROWNUM RN FROM 
+(select t.* 
+	from REGION_ALARM_LOG t 
+	where 1=1 	
+		]]>
+	<isNotNull property="scenicCode"  >
+		and t.SCENIC_CODE=#scenicCode#
+	</isNotNull>
+	<isNotNull property="warningLevel"  >
+		and t.WARNING_LEVEL=#warningLevel#
+	</isNotNull>
+	<isNotNull property="regionIds"  >
+		and t.SCENIC_CODE in ($regionIds$)
+	</isNotNull>
+	<![CDATA[
+	and trunc(t.EDIT_TIME) >= to_date(#begTime#,'YYYY-MM-DD')
+	and trunc(t.EDIT_TIME) <= to_date(#endTime#,'YYYY-MM-DD')
+) A WHERE ROWNUM <= #pageSize# ) WHERE RN >= #page#
+
+]]>
+
+</select>
+
+<select id="Mobile.queryByCount" resultMap="PageCountResult">
+<![CDATA[
+
+select count(1) as count
+	from REGION_ALARM_LOG t 
+	where 1=1 	
+		]]>
+	<isNotNull property="scenicCode"  >
+		and t.SCENIC_CODE=#scenicCode#
+	</isNotNull>
+	<isNotNull property="warningLevel"  >
+		and t.WARNING_LEVEL=#warningLevel#
+	</isNotNull>
+	<isNotNull property="regionIds"  >
+		and t.SCENIC_CODE in ($regionIds$)
+	</isNotNull>
+	<![CDATA[
+	and trunc(t.EDIT_TIME) >= to_date(#begTime#,'YYYY-MM-DD')
+	and trunc(t.EDIT_TIME) <= to_date(#endTime#,'YYYY-MM-DD')
+]]>
+</select>
+
+
+</sqlMap>

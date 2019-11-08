@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionRemain">
+
+<typeAlias alias="RegionRemain" type="com.funo.regionremain.model.RegionRemain" />
+
+<resultMap id="RegionRemainResult" class="RegionRemain">
+  <result property="onetotwohCount" column="ONETOTWOH_COUNT" />
+  <result property="twotosixhCount" column="TWOTOSIXH_COUNT" />
+  <result property="sixhtodayCount" column="SIXHTODAY_COUNT" />
+  <result property="daytotwodCount" column="DAYTOTWOD_COUNT" />
+  <result property="moretwodCount" column="MORETWOD_COUNT" />
+  <result property="stattime" column="stattime" />
+</resultMap>
+
+<select id="RegionRemain.queryBySearchYsearch" resultMap="RegionRemainResult">
+<![CDATA[
+SELECT M.RQ as stattime,
+	   DECODE(g.onetotwoh_count, '', 0, trunc(g.onetotwoh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) onetotwoh_count,
+       DECODE(g.twotosixh_count, '', 0, trunc(g.twotosixh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) twotosixh_count,
+       DECODE(g.sixhtoday_count, '', 0, trunc(g.sixhtoday_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) sixhtoday_count,
+       DECODE(g.daytotwod_count, '', 0, trunc(g.daytotwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) daytotwod_count,
+       DECODE(g.moretwod_count, '', 0, trunc(g.moretwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) moretwod_count
+   FROM (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#ybegintime#,'YYYY'),(LEVEL-1)*12),'YYYY') AS RQ 
+   FROM DUAL CONNECT BY LEVEL<=(TO_CHAR($yendtime$ - $ybegintime$ + 1))) M
+               LEFT JOIN(
+            select  sum(decode(linger_type,'1',tourists,0)) onetotwoh_count,
+                    sum(decode(linger_type,'2',tourists,0)) twotosixh_count,
+                    sum(decode(linger_type,'3',tourists,0)) sixhtoday_count,
+                    sum(decode(linger_type,'4',tourists,0)) daytotwod_count,
+                    sum(decode(linger_type,'5',tourists,0)) moretwod_count,
+                   TO_CHAR(stat_day, 'YYYY') yy
+              from REGION_LINGER T 
+             WHERE  $touristtype$
+                    t.city_code = #cityCode#
+               and t.region_id = #regionId#
+               and stat_day BETWEEN
+                   TO_DATE('$ybegintime$-01-01', ' yyyy - MM - dd ') AND
+                   TO_DATE('$yendtime$-12-31', ' yyyy - MM - dd ')
+             group by TO_CHAR(stat_day, 'YYYY')) G
+                ON M.RQ = G.YY
+             ORDER BY M.RQ
+]]>
+</select>
+<select id="RegionRemain.queryBySearchQsearch" resultMap="RegionRemainResult">
+<![CDATA[
+SELECT M.RQ as stattime,
+       DECODE(g.onetotwoh_count, '', 0, trunc(g.onetotwoh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) onetotwoh_count,
+       DECODE(g.twotosixh_count, '', 0, trunc(g.twotosixh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) twotosixh_count,
+       DECODE(g.sixhtoday_count, '', 0, trunc(g.sixhtoday_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) sixhtoday_count,
+       DECODE(g.daytotwod_count, '', 0, trunc(g.daytotwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) daytotwod_count,
+       DECODE(g.moretwod_count, '', 0, trunc(g.moretwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) moretwod_count
+  FROM (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#qbeginmonth#, 'YYYY-MM'),
+                                  (LEVEL - 1) * 3),
+                       'YYYY-Q') AS RQ
+          FROM DUAL
+        CONNECT BY LEVEL <= ($qendtime$ * 4 + $qquarterend$) -
+                   ($qbegintime$ * 4 + $qquarterbegin$) + 1) M
+  LEFT JOIN (select sum(decode(linger_type,'1',tourists,0)) onetotwoh_count,
+                    sum(decode(linger_type,'2',tourists,0)) twotosixh_count,
+                    sum(decode(linger_type,'3',tourists,0)) sixhtoday_count,
+                    sum(decode(linger_type,'4',tourists,0)) daytotwod_count,
+                    sum(decode(linger_type,'5',tourists,0)) moretwod_count,
+                    TO_CHAR(stat_day, 'YYYY-Q') yy
+               from REGION_LINGER T
+              WHERE $touristtype$
+              t.city_code = #cityCode#
+                and t.region_id = #regionId#
+                and TO_CHAR(stat_day, 'YYYY-Q') IN
+                    (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#qbeginmonth#,
+                                                       'YYYY-MM'),
+                                               (LEVEL - 1) * 3),
+                                    'YYYY-Q') AS RQ
+                       FROM DUAL
+                     CONNECT BY LEVEL <=
+                                ($qendtime$ * 4 + $qquarterend$) -
+                   ($qbegintime$ * 4 + $qquarterbegin$) + 1)
+              group by TO_CHAR(stat_day, 'YYYY-Q')) G
+    ON M.RQ = G.YY
+ ORDER BY M.RQ
+]]>
+</select>
+<select id="RegionRemain.queryBySearchMsearch" resultMap="RegionRemainResult">
+<![CDATA[
+SELECT M.RQ as stattime,
+       DECODE(g.onetotwoh_count, '', 0, trunc(g.onetotwoh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) onetotwoh_count,
+       DECODE(g.twotosixh_count, '', 0, trunc(g.twotosixh_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) twotosixh_count,
+       DECODE(g.sixhtoday_count, '', 0, trunc(g.sixhtoday_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) sixhtoday_count,
+       DECODE(g.daytotwod_count, '', 0, trunc(g.daytotwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) daytotwod_count,
+       DECODE(g.moretwod_count, '', 0, trunc(g.moretwod_count/(select value from common where name='CHINA_MOBILE_PERCENT'))) moretwod_count
+  FROM (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#mbegintime#, 'YYYY-MM'), (LEVEL - 1)),
+                       'YYYY-MM') AS RQ
+          FROM DUAL
+        CONNECT BY LEVEL <= ((TO_NUMBER(SUBSTR(#mendtime#, 0, 4)) -
+                   TO_NUMBER(SUBSTR(#mbegintime#, 0, 4))) * 12 +
+                   (TO_NUMBER(SUBSTR(#mendtime#, 6, 2)) -
+                   TO_NUMBER(SUBSTR(#mbegintime#, 6, 2))) + 1)) M
+  LEFT JOIN (select sum(decode(linger_type,'1',tourists,0)) onetotwoh_count,
+                    sum(decode(linger_type,'2',tourists,0)) twotosixh_count,
+                    sum(decode(linger_type,'3',tourists,0)) sixhtoday_count,
+                    sum(decode(linger_type,'4',tourists,0)) daytotwod_count,
+                    sum(decode(linger_type,'5',tourists,0)) moretwod_count,
+                    TO_CHAR(stat_day, 'YYYY-MM') yy
+               from REGION_LINGER T
+              WHERE $touristtype$ 
+              t.city_code = #cityCode#
+                and t.region_id = #regionId#
+                and TO_CHAR(stat_day, 'YYYY-MM') IN
+                    (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#mbegintime#, 'YYYY-MM'),
+                                               (LEVEL - 1)),
+                                    'YYYY-MM') AS RQ
+                       FROM DUAL
+                     CONNECT BY LEVEL <=
+                                ((TO_NUMBER(SUBSTR(#mendtime#, 0, 4)) -
+                                TO_NUMBER(SUBSTR(#mbegintime#, 0, 4))) * 12 +
+                                (TO_NUMBER(SUBSTR(#mendtime#, 6, 2)) -
+                                TO_NUMBER(SUBSTR(#mbegintime#, 6, 2))) + 1))
+              group by TO_CHAR(stat_day, 'YYYY-MM')) G
+    ON M.RQ = G.YY
+ ORDER BY M.RQ
+]]>
+</select>
+</sqlMap>

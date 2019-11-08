@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Monitor">
+
+<typeAlias alias="Monitor" type="com.funo.monitor.model.Monitor" />
+
+<resultMap id="MonitorResult" class="Monitor">
+  <result property="id" column="ID" />
+  <result property="hostip" column="HOSTIP" />
+  <result property="hostname" column="HOSTNAME" />
+  <result property="cpuidle" column="CPUIDLE" />
+  <result property="memtotal" column="MEMTOTAL" />
+  <result property="memfree" column="MEMFREE" />
+  <result property="alldiskinfo" column="ALLDISKINFO" />
+  <result property="maxuseddisk" column="MAXUSEDDISK" />
+  <result property="allioinfo" column="ALLIOINFO" />
+  <result property="maxusedio" column="MAXUSEDIO" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="updatetimeFrom" column="UPDATETIME" />
+  <result property="updatetimeEnd" column="UPDATETIME" />
+  <result property="netkb" column="NETKB" />
+</resultMap>
+
+<insert id="Monitor.create">
+<![CDATA[
+insert into MONITOR(id,HOSTIP,HOSTNAME,CPUIDLE,MEMTOTAL,MEMFREE,ALLDISKINFO,MAXUSEDDISK,ALLIOINFO,MAXUSEDIO,UPDATETIME,NETKB)values(SEQ_MONITOR.Nextval,#hostip#,#hostname#,#cpuidle#,#memtotal#,#memfree#,#alldiskinfo#,#maxuseddisk#,#allioinfo#,#maxusedio#,#updatetime#,#netkb#)
+]]>
+</insert>
+
+<update id="Monitor.update">
+<![CDATA[
+update MONITOR set 
+id=#id# 
+]]>
+			<isNotNull  property="hostip"  >
+	, HOSTIP=#hostip#
+	</isNotNull> 
+			<isNotNull  property="hostname"  >
+	, HOSTNAME=#hostname#
+	</isNotNull> 
+			<isNotNull  property="cpuidle"  >
+	, CPUIDLE=#cpuidle#
+	</isNotNull> 
+			<isNotNull  property="memtotal"  >
+	, MEMTOTAL=#memtotal#
+	</isNotNull> 
+			<isNotNull  property="memfree"  >
+	, MEMFREE=#memfree#
+	</isNotNull> 
+			<isNotNull  property="alldiskinfo"  >
+	, ALLDISKINFO=#alldiskinfo#
+	</isNotNull> 
+			<isNotNull  property="maxuseddisk"  >
+	, MAXUSEDDISK=#maxuseddisk#
+	</isNotNull> 
+			<isNotNull  property="allioinfo"  >
+	, ALLIOINFO=#allioinfo#
+	</isNotNull> 
+			<isNotNull  property="maxusedio"  >
+	, MAXUSEDIO=#maxusedio#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+			<isNotNull  property="netkb"  >
+	, NETKB=#netkb#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="Monitor.delete">
+<![CDATA[
+delete from MONITOR 
+where ID=#id# 
+]]>
+</delete>
+
+<select id="Monitor.getById" resultMap="MonitorResult">
+<![CDATA[
+select t.* 
+	from MONITOR t  
+where ID=#id# 
+]]>
+</select>
+
+<sql id="Monitor.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="hostip"  >
+		t.HOSTIP like '%'||#hostip#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="hostname"  >
+		t.HOSTNAME like '%'||#hostname#||'%' 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="cpuidle"  >
+		t.CPUIDLE=#cpuidle#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="memtotal"  >
+		t.MEMTOTAL=#memtotal#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="memfree"  >
+		t.MEMFREE=#memfree#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="alldiskinfo"  >
+		t.ALLDISKINFO=#alldiskinfo#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="maxuseddisk"  >
+		t.MAXUSEDDISK=#maxuseddisk#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="allioinfo"  >
+		t.ALLIOINFO=#allioinfo#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="maxusedio"  >
+		t.MAXUSEDIO=#maxusedio#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetimeFrom"  >
+		t.UPDATETIME>=#updatetimeFrom#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetimeEnd"  >
+		t.UPDATETIME&lt;=#updatetimeEnd#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="netkb"  >
+		t.NETKB=#netkb#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="Monitor.queryByArgs" resultMap="MonitorResult">
+<![CDATA[
+select t.* 
+	from MONITOR t 
+	where 1=1 
+]]>
+<include refid="Monitor.whereClause" />
+</select>
+<select id="Monitor.pageCountByArgs" resultMap="MonitorResult">
+	<![CDATA[
+		SELECT * FROM (SELECT ROWS_.*, ROWNUM ROWNUM_ FROM (
+		select t.* from Monitor t where 1=1 
+	]]>
+	<include refid="Monitor.whereClause" />
+	<![CDATA[
+		) ROWS_ WHERE ROWNUM <= #endRowNum# ) WHERE ROWNUM_ >= #startRowNum#
+	]]>
+</select>
+<select id="Monitor.pageCountByArgs.count" resultClass="java.lang.Long">
+	<![CDATA[
+		select count(0) from Monitor t where 1=1 
+	]]>
+	<include refid="Monitor.whereClause" />
+</select>
+</sqlMap>

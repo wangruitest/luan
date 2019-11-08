@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<cfg>	
+	
+	<!-- 将下列配置添加到sqlmap-config.xml中 -->
+	
+	<!--  用户商户关系start-->
+	<sqlMap resource="com/funo/weblogo/model/ibatis/WebLogoCfg.xml" />
+	<!--  用户商户关系end-->
+</cfg>
