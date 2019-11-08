@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Jqykjd">
+
+	<typeAlias alias="Jqykjd" type="com.funo.jqykjd.model.Jqykjd" />
+
+	<resultMap id="JqykjdResult" class="Jqykjd">
+		<result property="id" column="ID" />
+		<result property="regionName" column="REGION_NAME" />
+		<result property="expediteValue" column="EXPEDITE_VALUE" />
+		<result property="jamValue" column="JAM_VALUE" />
+		<result property="cityCode" column="CITY_CODE" />
+		<result property="pm" column="PM" />
+		<result property="wd" column="WD" />
+		<result property="gxsj" column="GXSJ" />
+		<result property="pmUrl" column="PM_URL" />
+		<result property="wdUrl" column="WD_URL" />
+		<result property="inNum" column="IN_NUM" />
+	</resultMap>
+
+	<typeAlias alias="Ysjfx" type="com.funo.jqykjd.model.Ysjfx" />
+	<resultMap id="YsjfxResult" class="Ysjfx">
+		<result property="jwyksSum" column="JWYKS_SUM" />
+		<result property="wsyksSum" column="WSYKS_SUM" />
+		<result property="snmyrsSum" column="SNMYRS_SUM" />
+		<result property="ykzsSum" column="YKZS_SUM" />
+			</resultMap>
+<resultMap id="CitiesResult" class="Ysjfx">
+  <result property="jwyksSum" column="JWYKS_SUM" />
+  <result property="wsyksSum" column="WSYKS_SUM" />
+  <result property="snmyrsSum" column="SNMYRS_SUM" />
+  <result property="ykzsSum" column="YKZS_SUM" />
+   <result property="cityId" column="cityId" />
+   <result property="regionSum" column="REGION_SUM" />
+</resultMap>
+
+
+
+
+	<!-- 月度人数统计曲线图 -->
+	<typeAlias alias="Ydtj" type="com.funo.jqykjd.model.Ydtj" />
+	<resultMap id="YdtjResult" class="Ydtj">
+		<result property="sumyrs" column="YKZS" />
+		<result property="days" column="DAYS" />
+
+	</resultMap>
+
+
+	<!-- 月度人数统计饼图 -->
+	<typeAlias alias="YdtjBt" type="com.funo.jqykjd.model.YdtjBt" />
+	<resultMap id="YdtjBtResult" class="YdtjBt">
+		<result property="ykzs" column="YKZS" />
+		<result property="provinceName" column="PROVINCE_NAME" />
+
+	</resultMap>
+
+	<!-- 省日各地市游客总数 -->
+	<typeAlias alias="Srykzs" type="com.funo.jqykjd.model.Srykzs" />
+	<resultMap id="SrykzsResult" class="Srykzs">
+		<result property="ykzs" column="YKZS" />
+		<result property="cityId" column="CITYID" />
+	</resultMap>
+
+	<resultMap id="ykrsTJ" class="Ysjfx">
+		<result property="ykrs" column="ykrs" />
+		<result property="sumType" column="sumtype" />
+	</resultMap>
+
+	<!-- 年度统计 境外人数/省内人数/省外人数占比 -->
+	<select id="Jqykjd.queryByndtj" resultMap="ykrsTJ">
+<![CDATA[
+(select   
+     nvl(sum(r.distinct_counts),0) as ykrs ,
+      'swyk' as sumtype
+        from REGION_SUMMARY_BYMONTH  r 
+   where r.visitor_country = 'I999'
+     and r.visitor_province !='340000' 
+]]>
+		<isNotNull property="cityId">
+			and r.city_code = #cityId#
+		</isNotNull>
+		<isNotNull property="cityFlag">
+			and substr(r.city_code,0,2) = #cityFlag#
+		</isNotNull>
+		<isNotNull property="updateTime">
+			and to_char(r.stat_month,'yyyy') =
+			#updateTime#
+		</isNotNull>     
+<![CDATA[
+    )union all
+    (
+    select   
+      nvl(sum(r.distinct_counts),0) as ykrs ,
+      'snyk' as sumtype
+        from REGION_SUMMARY_BYMONTH  r 
+   where r.visitor_country = 'I999'
+    and r.visitor_province ='340000' 
+]]>
+		<isNotNull property="cityId">
+			and r.city_code = #cityId#
+		</isNotNull>
+		<isNotNull property="cityFlag">
+			and substr(r.city_code,0,2) = #cityFlag#
+		</isNotNull>
+		<isNotNull property="updateTime">
+			and to_char(r.stat_month,'yyyy') =
+			#updateTime#
+		</isNotNull> 
+<![CDATA[
+  )union all(
+      select   
+      nvl(sum(r.distinct_counts),0) as ykrs ,
+      'jwyk' as sumtype
+        from REGION_SUMMARY_BYMONTH  r 
+     where r.visitor_country != 'I999' 
+]]>
+		<isNotNull property="cityId">
+			and r.city_code = #cityId#
+		</isNotNull>
+		<isNotNull property="cityFlag">
+			and substr(r.city_code,0,2) = #cityFlag#
+		</isNotNull>
+		<isNotNull property="updateTime">
+			and to_char(r.stat_month,'yyyy') =
+			#updateTime#
+		</isNotNull>
+
+		)
+	</select>
+
+	<!-- 年度统计同比环比 -->
+	<!-- <select id="Jqykjd.queryByndtj" resultMap="YsjfxResult"> <![CDATA[ 
+		select sum(t.jwykrs)as jwyks_Sum,sum(t.wsykrs) as wsyks_Sum,sum(t.snmyrs) 
+		as snmyrs_Sum,sum(t.ykzs) as ykzs_Sum, to_char(t.updatetime,'yyyy') as update_Time 
+		from PROVINCE_RECEIVE_TOURIST_SUM t where to_char(t.updatetime,'yyyy') in 
+		(to_char(add_months(trunc(sysdate),-12),'yyyy'),to_char(add_months(trunc(sysdate),-24),'yyyy')) 
+		]]> <isNotNull property="cityId" > and t.cityId=#cityId# </isNotNull> <![CDATA[ 
+		group by to_char(t.updatetime,'yyyy') order by to_char(t.updatetime,'yyyy') 
+		desc ]]> </select> -->
+
+	<insert id="Jqykjd.create">
+<![CDATA[
+insert into REGION_CFG(ID,REGION_NAME,NOTES,UPDATEUSER,UPDATETIME,TYPEID,ISVALID,LAT,LNG,ARADIUS,EXPEDITE_VALUE,JAM_VALUE,IMGURL,MIN_STAYTIME,CITY_CODE,SUBMIT_TIME,UNID,PM,WD,GXSJ,PM_URL,WD_URL)values(#id#,#regionName#,#notes#,#updateuser#,#updatetime#,#typeid#,#isvalid#,#lat#,#lng#,#aradius#,#expediteValue#,#jamValue#,#imgurl#,#minStaytime#,#cityCode#,#submitTime#,#unid#,#pm#,#wd#,#gxsj#,#pmUrl#,#wdUrl#)
+]]>
+	</insert>
+
+	<update id="Jqykjd.update">
+<![CDATA[
+update REGION_CFG set 
+ID=#id# 
+]]>
+
+		<isNotNull property="pm">
+			, PM=#pm#
+		</isNotNull>
+		<isNotNull property="wd">
+			, WD=#wd#
+		</isNotNull>
+		<isNotNull property="gxsj">
+			, GXSJ=#gxsj#
+		</isNotNull>
+		<isNotNull property="pmUrl">
+			, PM_URL=#pmUrl#
+		</isNotNull>
+		<isNotNull property="wdUrl">
+			, WD_URL=#wdUrl#
+		</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>
+	</update>
+
+	<delete id="Jqykjd.delete">
+<![CDATA[
+delete from REGION_CFG 
+where ID=#id#
+]]>
+	</delete>
+
+	<select id="Jqykjd.getById" resultMap="JqykjdResult">
+<![CDATA[
+select t.* 
+	from REGION_CFG t  
+where ID=#id#
+]]>
+	</select>
+
+	<sql id="Jqykjd.whereClause">
+		<dynamic>
+			<isNotEmpty prepend="and" property="id">
+				t.ID=#id#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="regionName">
+				t.REGION_NAME=#regionName#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="notes">
+				t.NOTES=#notes#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="updateuser">
+				t.UPDATEUSER=#updateuser#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="updatetime">
+				t.UPDATETIME=#updatetime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="typeid">
+				t.TYPEID=#typeid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isvalid">
+				t.ISVALID=#isvalid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="lat">
+				t.LAT=#lat#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="lng">
+				t.LNG=#lng#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="aradius">
+				t.ARADIUS=#aradius#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="expediteValue">
+				t.EXPEDITE_VALUE=#expediteValue#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="jamValue">
+				t.JAM_VALUE=#jamValue#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="imgurl">
+				t.IMGURL=#imgurl#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="minStaytime">
+				t.MIN_STAYTIME=#minStaytime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="cityCode">
+				t.CITY_CODE=#cityCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="submitTime">
+				t.SUBMIT_TIME=#submitTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="unid">
+				t.UNID=#unid#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="pm">
+				t.PM=#pm#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wd">
+				t.WD=#wd#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="gxsj">
+				t.GXSJ=#gxsj#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="pmUrl">
+				t.PM_URL=#pmUrl#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="wdUrl">
+				t.WD_URL=#wdUrl#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+
+	<select id="Jqykjd.queryByArgs" resultMap="JqykjdResult">
+<![CDATA[
+SELECT * FROM ( SELECT A.*, ROWNUM RN FROM 
+(select c.id,
+       c.region_name,
+       c.wd,
+       c.pm,
+       c.jam_value,
+       c.expedite_value,
+       c.gxsj,
+       c.city_code,
+       c.pm_url,
+       c.wd_url,
+       m.in_num
+  from region_cfg c,
+       (select t.region_id, zyrs as in_num, t.cityid
+          from province_region_dynamic t
+         where not exists
+         (select 1
+                  from province_region_dynamic
+                 where region_id = t.region_id
+                   and UPDATETIME > t.UPDATETIME)
+         ) m
+ where c.id = m.region_id
+   and c.city_code = m.cityid
+	]]>
+		<isNotNull property="cityCode">
+			and c.CITY_CODE=#cityCode#
+		</isNotNull>
+	<![CDATA[
+order by m.in_num desc) A WHERE ROWNUM <= #pageSize# ) WHERE RN >= #page#
+
+]]>
+
+	</select>
+
+
+	<select id="Jqykjd.queryByCount" resultMap="JqykjdResult">
+<![CDATA[
+select c.id,
+       c.region_name,
+       c.wd,
+       c.pm,
+       c.jam_value,
+       c.expedite_value,
+       c.gxsj,
+       c.city_code,
+       c.pm_url,
+       c.wd_url,
+       m.in_num
+  from region_cfg c,
+       (select t.region_id, zyrs as in_num, t.cityid
+          from province_region_dynamic t
+         where not exists
+         (select 1
+                  from province_region_dynamic
+                 where region_id = t.region_id
+                   and UPDATETIME > t.UPDATETIME)
+         ) m
+ where c.id = m.region_id
+ and c.city_code = m.cityid
+]]>
+
+	</select>
+
+
+
+	<!-- 月度统计同比环比 -->
+	<select id="Jqykjd.queryByjdtj" resultMap="YsjfxResult">
+<![CDATA[
+select sum(case when t.visitorprovince is null then t.tourists else 0 end) as jwyks_Sum,
+sum(case when t.visitorprovince <> 340000 and t.visitorprovince>0 then t.tourists  else 0 end)  as wsyks_Sum,
+sum(case when t.visitorprovince=340000 then t.tourists else 0 end)  as snmyrs_Sum,
+nvl(sum(t.tourists ),0)  as ykzs_Sum
+from TOURIST_PHONES_BYMONTH_SUM t 
+where  to_char(t.stat_month,'yyyy-mm') in 
+ (to_char(sysdate,'yyyy-mm'),to_char(add_months(trunc(sysdate),-12),'yyyy-mm'))   
+]]>
+	<isNotNull property="cityId"  >
+		and t.city_code=#cityId#
+	</isNotNull>
+
+	<![CDATA[
+ group by to_char(t.stat_month,'yyyy-mm') 
+ order by to_char(t.stat_month,'yyyy-mm') desc
+
+]]>
+
+	</select>
+
+
+	<!-- 月度统计曲线图 -->
+
+	<select id="Jqykjd.queryByydtj" resultMap="YdtjResult">
+<![CDATA[
+select  sum(t.tourists) as ykzs , substr(to_char(t.stat_day,'yyyy-mm-dd'),9,2) as days  from REGION_SUMMARY_BYDAY  t
+ where
+ to_char(t.stat_day,'yyyy-mm') = to_char(trunc(sysdate),'yyyy-mm')
+ 
+	]]>
+
+	<isNotNull property="cityId"  >
+		and t.city_code=#cityId#
+	</isNotNull>
+
+	<![CDATA[
+group by to_char(t.stat_day,'yyyy-mm-dd')
+order by  to_char(t.stat_day,'yyyy-mm-dd') 
+
+]]>
+
+	</select>
+<select id="Jqykjd.queryByydtjToTourist" resultMap="YdtjResult">
+<![CDATA[
+select  sum(t.tourists) as ykzs , substr(to_char(t.stat_day,'yyyy-mm-dd'),9,2) as days  from TOURIST_PHONES_BYDAY_SUM   t
+ where
+ to_char(t.stat_day,'yyyy-mm') = to_char(trunc(sysdate),'yyyy-mm')
+ 
+	]]>
+	<isNotNull property="cityId"  >
+		and t.city_code=#cityId#
+	</isNotNull>
+	<![CDATA[
+group by to_char(t.stat_day,'yyyy-mm-dd')
+order by  to_char(t.stat_day,'yyyy-mm-dd') 
+
+]]>
+</select>
+
+
+	<!-- 年度游客统计曲线图 -->
+
+	<select id="Jqykjd.queryByNdtjqx" resultMap="YdtjResult">
+<![CDATA[
+select 
+  r.days,
+  nvl(r1.ykzs,0) as ykzs
+ from (
+  select to_char(to_date(LEVEL ,'MM'),'MM') as days from DUAL CONNECT BY LEVEL <= 12 
+ ) r left join (
+select 
+       sum(r.distinct_counts) as ykzs,
+       to_char(r.STAT_MONTH,'MM') as days
+       from REGION_SUMMARY_BYMONTH r where 1=1
+        and to_char(r.STAT_MONTH,'yyyy') =  to_char(sysdate,'yyyy')
+    ]]>
+		<isNotNull property="cityId">
+			and r.CITY_CODE = #cityId#
+		</isNotNull>
+		<isNotNull property="cityFlag">
+			and substr(r.CITY_CODE,0,2) = #cityFlag#
+		</isNotNull>
+		<![CDATA[
+          group by to_char(r.STAT_MONTH,'MM')
+ 			order by to_char(r.STAT_MONTH,'MM')
+			) r1 on r.days = r1.days order by days asc
+	]]>
+	</select>
+
+	<!-- 年度旅客统计曲线图 -->
+
+	<select id="Jqykjd.queryByNdtjLkqx" resultMap="YdtjResult">
+<![CDATA[
+select 
+  r.days,
+  nvl(r1.ykzs,0) as ykzs
+ from (
+  select to_char(to_date(LEVEL ,'MM'),'MM') as days from DUAL CONNECT BY LEVEL <= 12 
+ ) r left join (
+     select sum(t.TOURISTS) as  ykzs,
+       to_char(t.STAT_MONTH,'MM') as days
+         from TOURIST_PHONES_BYMONTH_SUM t
+         where 1=1  
+         and to_char(t.STAT_MONTH,'yyyy') =  to_char(sysdate,'yyyy')  
+     ]]>
+		<isNotNull property="cityId">
+			and t.CITY_CODE = #cityId#
+		</isNotNull>
+		<isNotNull property="cityFlag">
+			and substr(t.CITY_CODE,0,2) = #cityFlag#
+		</isNotNull>
+			<![CDATA[
+            group by to_char(t.STAT_MONTH,'MM')
+			) r1 on r.days = r1.days order by days asc
+		]]>	
+	</select>	
+	
+		<!-- 月度统计饼图 -->
+		<select id="Jqykjd.queryByydtjBt" resultMap="YdtjBtResult">
+<![CDATA[
+
+select a.provinces as province_name,d.ykzs as ykzs  from  ( select  sum(t.tourists) as ykzs,
+case when t.visitorprovince>0 then  t.visitorprovince  when  t.visitorprovince is null then '-1' end as provinceid
+
+    from TOURIST_PHONES_BYMONTH_SUM  t
+    where  to_char(t.stat_month,'yyyy-mm') =to_char(trunc(sysdate),'yyyy-mm')
+    ]]>
+    <isNotNull property="cityId"  >
+		and t.city_code=#cityId#
+	</isNotNull>
+
+	<![CDATA[
+    group by t.visitorprovince)d
+    left  join (select distinct provinceid,provinces  from AREA_CFG) a on a.provinceid=d.provinceid
+    order by   d.ykzs desc
+]]>
+
+		</select>
+		<!-- 年度统计市级饼图 -->
+		<select id="Jqykjd.queryByndtjBt" resultMap="YdtjBtResult">
+<![CDATA[
+    SELECT t2.SHORT_NAME as PROVINCE_NAME, SUM(t.distinct_counts) as YKZS from REGION_SUMMARY_BYMONTH t, PROVINCES t2
+	WHERE to_char(t.stat_month, 'yyyy')= to_char(sysdate,'yyyy')
+	AND t.visitor_province=t2.provinceid
+	AND t.city_code=#cityId#
+	GROUP BY t2.SHORT_NAME
+	ORDER BY SUM(t.distinct_counts) DESC
+]]>
+		</select>
+
+		<!-- 年度统计省级饼图 -->
+		<select id="Jqykjd.queryByndtjBt2" resultMap="YdtjBtResult">
+<![CDATA[
+      select  sum(b1.YKZS) as YKZS ,
+         max(b1.province_name) as PROVINCE_NAME 
+            from (select * from  (select s1.code as citycode  from SYS_ORGANIZATION s1 
+     inner join  SYS_ORGANIZATION s2 on s1.parent_unid = s2.unid and s2.code=#cityId#) b 
+     left join  TOURIST_SOURCE_SUM t on b.citycode = t.cityid and  to_char(t.stat_day,'yyyy') = to_char(add_months(trunc(sysdate),-2),'yyyy')) b1 
+      group by b1.province_id
+             order by ykzs desc 
+]]>
+		</select>
+
+		<!-- 省日游客接待数 -->
+		<select id="Jqykjd.queryBySrykzs" resultMap="SrykzsResult">
+<![CDATA[
+select t.ykzs, t.cityid
+          from PROVINCE_RECEIVE_TOURIST t
+         where not exists
+         (select 1
+                  from PROVINCE_RECEIVE_TOURIST
+                 where cityid = t.cityid
+                   and UPDATETIME > t.UPDATETIME)
+         
+]]>
+
+		</select>
+
+
+		<!-- 省日游客实时数++++++++省日大屏函数 -->
+		<select id="Jqykjd.queryByProDayReal" resultMap="CitiesResult">
+
+<![CDATA[
+
+select p.area_code as cityId,
+decode(inp.inpro, null, 0, trunc(inp.inpro/(select value from common where name='CHINA_MOBILE_PERCENT')))SNMYRS_SUM,
+decode(outp.outpro, null, 0, trunc(outp.outpro/(select value from common where name='CHINA_MOBILE_PERCENT')))WSYKS_SUM,
+decode(outc.outcountry, null, 0, trunc(outc.outcountry/(select value from common where name='CHINA_MOBILE_PERCENT')))JWYKS_SUM,
+decode(nvl(inp.inpro,0)+nvl(outp.outpro,0)+nvl(outc.outcountry,0), null, 0, trunc(nvl(inp.inpro,0)+nvl(outp.outpro,0)+nvl(outc.outcountry,0)/(select value from common where name='CHINA_MOBILE_PERCENT')))YKZS_SUM,
+nvl(rc.Region,0) as REGION_SUM
+from PREFIX_CFG p left join 
+(select nvl(sum(t.STAY_TOURISTS),0) as inpro,t.city_code from REGION_REALTIME_SUM t where t.type<3 and 
+t.stat_hour=(select max(t.stat_hour) from REGION_REALTIME_SUM t) group by t.city_code) inp on p.area_code=inp.city_code
+left join
+(select nvl(sum(t.STAY_TOURISTS),0) as outpro,t.city_code from REGION_REALTIME_SUM t where t.type=3 and t.flag=0 and 
+t.stat_hour=(select max(t.stat_hour) from REGION_REALTIME_SUM t) group by t.city_code) outp on outp.city_code=p.area_code
+left join(
+select nvl(sum(t.STAY_TOURISTS),0) as outcountry,t.city_code from REGION_REALTIME_SUM t where t.type=3 and (t.flag>0  or t.flag is null) and 
+t.stat_hour=(select max(t.stat_hour) from REGION_REALTIME_SUM t) group by t.city_code) outc on outc.city_code=p.area_code
+left join (
+select count(*) as Region, city_code from REGION_CFG group by city_code ) rc on rc.city_code=p.area_code
+where p.provinces_code='340000' order by YKZS_SUM desc
+]]>
+
+<!-- 
+    select nvl( sum(t.stay_tourists),0) as ykzs,p.city,p.area_code as cityid from
+PREFIX_CFG p left join 
+REGION_REALTIME_SUM t on p.area_code=t.city_code  and 
+to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')=#date#
+where p.provinces_code='340000'
+group by p.area_code,p.city  -->
+<!-- select t.ykzs, t.cityid
+          from PROVINCE_RECEIVE_TOURIST t
+         where not exists
+         (select 1
+                  from PROVINCE_RECEIVE_TOURIST
+                 where cityid = t.cityid
+                   and UPDATETIME > t.UPDATETIME) -->
+</select>
+
+<!-- 省日游客接待总数+++++++省日大屏函数 -->
+<select id="Jqykjd.queryByProDayAll" resultMap="CitiesResult">
+<![CDATA[
+
+select p.area_code as cityId,
+decode(inp.inpro, null, 0, trunc(inp.inpro/(select value from common where name='CHINA_MOBILE_PERCENT')))SNMYRS_SUM,
+decode(outp.outpro, null, 0, trunc(outp.outpro/(select value from common where name='CHINA_MOBILE_PERCENT')))WSYKS_SUM,
+decode(outc.outcountry, null, 0, trunc(outc.outcountry/(select value from common where name='CHINA_MOBILE_PERCENT')))JWYKS_SUM,
+decode(nvl(inp.inpro,0)+nvl(outp.outpro,0)+nvl(outc.outcountry,0), null, 0, trunc(nvl(inp.inpro,0)+nvl(outp.outpro,0)+nvl(outc.outcountry,0)/(select value from common where name='CHINA_MOBILE_PERCENT')))YKZS_SUM,
+nvl(rc.Region,0) as REGION_SUM
+from PREFIX_CFG p left join 
+(select sum(t.in_tourists) as inpro,t.city_code from REGION_REALTIME_SUM t where t.type<3 and 
+t.stat_hour<=(select max(t.stat_hour) from REGION_REALTIME_SUM t) and 
+to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#sdate#
+ group by t.city_code) inp on p.area_code=inp.city_code
+left join
+(select sum(t.in_tourists) as outpro,t.city_code from REGION_REALTIME_SUM t where t.type=3 and t.flag=0  and 
+t.stat_hour<=(select max(t.stat_hour) from REGION_REALTIME_SUM t) and 
+to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#sdate# 
+group by t.city_code) outp on outp.city_code=p.area_code
+left join(
+select sum(t.in_tourists) as outcountry,t.city_code from REGION_REALTIME_SUM t where t.type=3 and (t.flag>0or t.flag is null) and 
+t.stat_hour<=(select max(t.stat_hour) from REGION_REALTIME_SUM t) and 
+to_char(t.stat_hour, 'yyyy-MM-dd HH24:MI:SS')>=#sdate#
+group by t.city_code) outc on outc.city_code=p.area_code
+left join (
+select count(*) as Region, city_code from REGION_CFG group by city_code ) rc on rc.city_code=p.area_code
+where p.provinces_code='340000' order by YKZS_SUM desc
+]]>
+
+		</select>
+
+
+		<select id="Jqykjd.queryByWeather" resultMap="JqykjdResult">
+<![CDATA[
+select c.id,
+       c.region_name,
+       c.wd,
+       c.pm,
+       c.jam_value,
+       c.expedite_value,
+       c.gxsj,
+       c.city_code,
+       c.pm_url,
+       c.wd_url,
+       m.in_num
+  from region_cfg c,
+       (select t.region_id, zyrs as in_num, t.cityid
+          from province_region_dynamic t
+         where not exists (select 1
+                  from province_region_dynamic
+                 where region_id = t.region_id
+                   and UPDATETIME > t.UPDATETIME)) m
+ where c.id = m.region_id
+   and c.city_code = m.cityid
+   order by m.in_num
+
+]]>
+</select>
+
+</sqlMap>

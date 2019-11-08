@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionCfg">
+
+<typeAlias alias="RegionCfg" type="com.funo.region.model.RegionCfg" />
+
+<typeAlias alias="Areas" type="com.funo.region.model.Areas" />
+
+<typeAlias alias="Provinces" type="com.funo.region.model.Provinces" />
+
+<resultMap id="ProvincesListResult" class="Provinces">
+  <result property="provinces_code" column="PROVINCES_CODE" />
+  <result property="provinces" column="PROVINCES" />
+</resultMap>
+
+<resultMap id="AreasListResult" class="Areas">
+  <result property="id" column="ID" />
+  <result property="areaid" column="AREAID" />
+  <result property="areas" column="AREAS" />
+  <result property="cityid" column="CITYID" />
+  <result property="cities" column="CITIES" />
+</resultMap>
+
+<resultMap id="RegionCfgResult" class="RegionCfg">
+  <result property="unid" column="UNID" />
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+  <result property="iskey" column="ISKEY" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="cityName" column="CITY_NAME" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+	<result property="aLevel" column="ALEVEL" />
+	<result property="orderNumber" column="ORDERNUMBER" />
+</resultMap>
+<resultMap id="RegionCfgResult1" class="RegionCfg">
+  <result property="unid" column="UNID" />
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+  <result property="iskey" column="ISKEY" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="cityName" column="CITY_NAME" />
+  <result property="countyName" column="COUNTY_NAME" />
+   <result property="countyCode" column="COUNTY_CODE" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+	<result property="aLevel" column="ALEVEL" />
+	<result property="orderNumber" column="ORDERNUMBER" />
+</resultMap>
+
+<resultMap id="RegionCfgListResult" class="RegionCfg">
+  <result property="unid" column="UNID" />
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="cityCode" column="CITY_CODE" />
+   <result property="countyCode" column="COUNTY_CODE" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+  <result property="iskey" column="ISKEY" />
+	<result property="aLevel" column="ALEVEL" />
+	<result property="orderNumber" column="ORDERNUMBER" />
+</resultMap>
+
+<resultMap id="RegionCfgResultOnly" class="RegionCfg">
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+</resultMap>
+
+<resultMap id="RegionCfgSeq" class="RegionCfg">
+  <result property="id" column="ID" />
+</resultMap>
+ 
+
+
+<insert id="RegionCfg.create">
+<![CDATA[
+insert into REGION_CFG(ID,REGION_NAME,NOTES,UPDATEUSER,UPDATETIME,TYPEID,ISVALID,LAT,LNG,ARADIUS,EXPEDITE_VALUE,JAM_VALUE,IMGURL,MIN_STAYTIME,UNID,CITY_CODE,COUNTY_CODE,ALEVEL,ORDERNUMBER,ISKEY)values(#id#,#regionName#,#notes#,#updateuser#,#updatetime#,#typeid#,#isvalid#,#lat#,#lng#,#aradius#,#expediteValue#,#jamValue#,#imgurl#,#minStaytime#,SEQ_RG_CFG.NEXTVAL,#cityCode#,#countyCode#,#aLevel#,#orderNumber#,#iskey#)
+]]>
+</insert>
+
+<update id="RegionCfg.update">
+<![CDATA[
+update REGION_CFG set 
+ID=#id# 
+]]>
+			<isNotNull  property="regionName"  >
+	, REGION_NAME=#regionName#
+	</isNotNull> 
+			<isNotNull  property="notes"  >
+	, NOTES=#notes#
+	</isNotNull> 
+			<isNotNull  property="updateuser"  >
+	, UPDATEUSER=#updateuser#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+			<isNotNull  property="typeid"  >
+	, TYPEID=#typeid#
+	</isNotNull> 
+			<isNotNull  property="isvalid"  >
+	, ISVALID=#isvalid#
+	</isNotNull> 
+			<isNotNull  property="lat"  >
+	, LAT=#lat#
+	</isNotNull> 
+			<isNotNull  property="lng"  >
+	, LNG=#lng#
+	</isNotNull> 
+			<isNotNull  property="aradius"  >
+	, ARADIUS=#aradius#
+	</isNotNull> 
+			<isNotNull  property="expediteValue"  >
+	, EXPEDITE_VALUE=#expediteValue#
+	</isNotNull> 
+			<isNotNull  property="jamValue"  >
+	, JAM_VALUE=#jamValue#
+	</isNotNull> 
+			<isNotNull  property="imgurl"  >
+	, IMGURL=#imgurl#
+	</isNotNull> 
+	<isNotNull  property="cityCode"  >
+	, CITY_CODE=#cityCode#
+	</isNotNull>
+	<isNotNull  property="countyCode"  >
+	, COUNTY_CODE=#countyCode#
+	</isNotNull>
+	<isNotNull  property="aLevel"  >
+	, ALEVEL=#aLevel#
+	</isNotNull>
+	<isNotNull  property="minStaytime"  >
+	, MIN_STAYTIME=#minStaytime#
+	</isNotNull> 
+	<isNotNull  property="orderNumber"  >
+	, ORDERNUMBER=#orderNumber#
+	</isNotNull>
+	<isNotNull  property="iskey"  >
+	, ISKEY=#iskey#
+	</isNotNull>
+	<![CDATA[
+ where unid=#unid# 
+]]>  
+</update>
+
+<delete id="RegionCfg.delete">
+<![CDATA[
+delete from REGION_CFG 
+where ID=#id#
+]]>
+</delete>
+
+<select id="RegionCfg.getById" resultMap="RegionCfgListResult">
+<![CDATA[
+select t.* 
+	from REGION_CFG t  
+where ID=#id# ORDER BY t.ORDERNUMBER ASC
+]]>
+</select>
+
+<select id="RegionCfg.queryByOtherOfProvince" resultMap="ProvincesListResult">
+<![CDATA[
+select * from(
+  select nvl(t.provinces_code,0) as provinces_code,t.provinces from prefix_cfg t 
+  group by t.provinces_code,t.provinces)a
+where a.provinces_code != '0'
+and a.provinces_code != '340000'
+]]>
+</select>
+
+<select id="RegionCfg.queryByCityid" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where CITYID=#cityid#
+]]>
+</select>
+
+<select id="RegionCfg.queryByCounty" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where AREAID=#countyid# 
+order by t.areaid
+]]>
+</select>
+
+<select id="RegionCfg.queryByOperator" resultMap="AreasListResult">
+	select a.* from areas a where  a.cityid=#cityCode#
+	<isNotEqual property="countyCode" compareValue="0">
+		<isNotEmpty property="countyCode">
+			and a.areaid=#countyCode#
+		</isNotEmpty>
+	</isNotEqual> 
+</select>
+
+<select id="RegionCfg.queryBycityName" resultMap="AreasListResult">
+<![CDATA[
+select t.* 
+	from AREAS t  
+where CITIES=#cityName#
+]]>
+</select>
+
+<sql id="RegionCfg.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionName"  >
+		t.REGION_NAME like '%'||#regionName#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="notes"  >
+		t.NOTES=#notes#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updateuser"  >
+		t.UPDATEUSER like '%'||#updateuser#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="typeid"  >
+		t.TYPEID=#typeid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="isvalid"  >
+		t.ISVALID=#isvalid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="iskey"  >
+		t.ISKEY=#iskey#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lat"  >
+		t.LAT=#lat#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lng"  >
+		t.LNG=#lng#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="aradius"  >
+		t.ARADIUS=#aradius#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="expediteValue"  >
+		t.EXPEDITE_VALUE=#expediteValue#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="jamValue"  >
+		t.JAM_VALUE=#jamValue#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="imgurl"  >
+		t.IMGURL=#imgurl#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="minStaytime"  >
+		t.MIN_STAYTIME=#minStaytime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="cityCode"  >
+		t.CITY_CODE=#cityCode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="submitTime"  >
+		t.SUBMIT_TIME=#submitTime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="orderNumber"  >
+		t.ORDERNUMER=#orderNumber#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionCfg.queryByArgs" resultMap="RegionCfgResult1">
+<![CDATA[
+select t.* ,(SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID=T.TYPEID and t.city_code=city_code) TYPENAME,(select name from sys_organization where t.CITY_CODE=code) CITY_NAME
+,(select areas  from AREAS t where areaid=t.county_code )COUNTY_NAME from REGION_CFG t 
+	where 1=1 
+]]>
+<include refid="RegionCfg.whereClause" /> ORDER BY t.ORDERNUMBER ASC
+</select>
+<select id="RegionCfg.queryByUserOfCity" resultMap="RegionCfgResult">
+<![CDATA[
+select t.*,
+       (SELECT TYPENAME
+          FROM REGION_TYPE_CFG
+         WHERE ID = T.TYPEID
+           and CITY_CODE = #cityCode#) TYPENAME,
+       (select name from sys_organization where t.CITY_CODE = code) CITY_NAME
+  from REGION_CFG t
+ where 1 = 1
+   and t.id in (select s.region_cfg_id
+                  from business_REGION_CFG s
+                 where s.businessid in ($businessidStr$) and s.city_id=#cityCode#) 
+]]>
+                 <!--                
+    and t.city_code in (select s.city_id
+                  from business_REGION_CFG s
+                 where s.businessid in ($businessidStr$))
+                 -->
+<include refid="RegionCfg.whereClause" /> ORDER BY t.ORDERNUMBER ASC
+</select>
+
+<!-- 根据cityCodes来获取景区列表 -->
+<select id="RegionCfg.queryByUserOfCities" resultMap="RegionCfgResult">
+<![CDATA[
+select t.*,'景点' as TYPENAME,
+       (select name from sys_organization where t.CITY_CODE = code) CITY_NAME
+  from REGION_CFG t
+ where 1 = 1 ORDER BY t.ORDERNUMBER ASC
+   and t.id in (select s.region_cfg_id
+                  from business_REGION_CFG s
+                 where s.businessid in ($businessidStr$) and s.city_id in (select t.city_id
+  from BUSINESS_REGION_CFG t, SYS_ORGANIZATION o 
+ where t.businessid in ($businessidStr$) 
+   and o.code = t.city_id
+   group by t.city_id 
+   )) ORDER BY t.ORDERNUMBER ASC
+]]>
+                 <!--                
+    and t.city_code in (select s.city_id
+                  from business_REGION_CFG s
+                 where s.businessid in ($businessidStr$))
+                 -->
+</select>
+
+<!-- 根据countyCode来获取景区列表 -->
+<select id="RegionCfg.queryByCountyid" resultMap="RegionCfgListResult">
+<![CDATA[
+ select t.* 
+	from REGION_CFG t 
+	where 1=1 
+	and t.COUNTY_CODE=#countyCode#  ORDER BY t.ORDERNUMBER ASC
+]]>
+</select>
+
+
+<select id="RegionCfg.queryByUserOfCounty" resultMap="RegionCfgResult1">
+select t.*,'景点' as TYPENAME,
+       (select areas from areas where areaid = #countyCode#) COUNTY_NAME,
+       '' as CITY_NAME
+  from REGION_CFG t
+ where 1 = 1 
+   and t.id in (select b.id from business_REGION_CFG a,region_cfg b 
+   			where a.businessid in (#businessidStr#) 
+   			<isNotEqual property="aLevel" compareValue="0">
+   				<isNotEmpty property="aLevel">
+					and  b.alevel=$aLevel$ 
+   				</isNotEmpty>
+			</isNotEqual>
+   			 and b.county_code=#countyCode# and a.region_cfg_id=b.id
+   ) ORDER BY t.ORDERNUMBER ASC
+                 <!--                
+    and t.city_code in (select s.city_id
+                  from business_REGION_CFG s
+                 where s.businessid in ($businessidStr$))
+                 -->
+</select>
+
+
+<select id="RegionCfg.queryBySeq" resultMap="RegionCfgSeq">
+<![CDATA[
+ SELECT SEQ_RG_CFG.NEXTVAL ID FROM DUAL
+]]>
+</select>
+
+
+
+
+
+
+
+<select id="RegionCfg.queryByUnidRegionIdUpdate" resultMap="RegionCfgListResult">
+<![CDATA[
+ select t.* 
+	from REGION_CFG t 
+	where 1=1 
+	and t.ID=#id# and  unid<>#unid#  ORDER BY t.ORDERNUMBER ASC
+]]>
+</select>
+
+<update id="RegionCfg.updateByRegionLnglat">
+update REGION_CFG set LAT=#lat#,LNG=#lng# where ID=#id#
+</update>
+</sqlMap>

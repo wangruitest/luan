@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionCoords">
+
+<typeAlias alias="RegionCoords" type="com.funo.regionCoords.model.RegionCoords" />
+
+<resultMap id="RegionCoordsResult" class="RegionCoords">
+  <result property="id" column="ID" />
+  <result property="regionId" column="REGION_ID" />
+  <result property="coordsIndex" column="COORDS_INDEX" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+</resultMap>
+
+<resultMap id="RegionCoordsResultNoId" class="RegionCoords">
+  <result property="regionId" column="REGION_ID" />
+  <result property="coordsIndex" column="COORDS_INDEX" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+</resultMap>
+
+<insert id="RegionCoords.create">
+	<selectKey resultClass="java.lang.Long" type="pre" keyProperty="id" >   
+        SELECT SEQ_REGION_COORDS.NEXTVAL AS VALUE FROM DUAL   
+    </selectKey>
+<![CDATA[
+insert into REGION_COORDS(ID,REGION_ID,COORDS_INDEX,LAT,LNG)values(#id#,#regionId#,#coordsIndex#,#lat#,#lng#)
+]]>
+</insert>
+
+<update id="RegionCoords.update">
+<![CDATA[
+update REGION_COORDS set 
+ID=#id# 
+]]>
+			<isNotNull  property="regionId"  >
+	, REGION_ID=#regionId#
+	</isNotNull> 
+			<isNotNull  property="coordsIndex"  >
+	, COORDS_INDEX=#coordsIndex#
+	</isNotNull> 
+			<isNotNull  property="lat"  >
+	, LAT=#lat#
+	</isNotNull> 
+			<isNotNull  property="lng"  >
+	, LNG=#lng#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="RegionCoords.delete">
+<![CDATA[
+delete from REGION_COORDS 
+where region_id=#regionId#
+]]>
+</delete>
+
+<select id="RegionCoords.getById" resultMap="RegionCoordsResult">
+<![CDATA[
+select t.* 
+	from REGION_COORDS t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="RegionCoords.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="regionId"  >
+		t.REGION_ID=#regionId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="coordsIndex"  >
+		t.COORDS_INDEX=#coordsIndex#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lat"  >
+		t.LAT=#lat#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lng"  >
+		t.LNG=#lng#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionCoords.queryByArgs" resultMap="RegionCoordsResult">
+<![CDATA[
+select t.* 
+	from REGION_COORDS t 
+	where 1=1 
+]]>
+<include refid="RegionCoords.whereClause" />
+</select>
+
+<select id="RegionCoords.queryByRegionIdsForCoords"  resultMap="RegionCoordsResultNoId">
+<![CDATA[
+select t.region_id,t.coords_index,t.lat,t.lng 
+	from REGION_COORDS t 
+	where 1=1 and t.region_id in ($regionIdIn$)
+]]>
+</select>
+</sqlMap>

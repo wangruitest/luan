@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- the proxool configuration can be embedded within your own application's.
+	Anything outside the "proxool" tag is ignored. -->
+<something-else-entirely>
+	<proxool>
+		<alias>funo</alias>
+		<driver-url>${jdbc.pool.url}</driver-url>
+		<driver-class>${jdbc.pool.driverClassName}</driver-class>
+		<statistics>1m,15m,1d</statistics>
+		<driver-properties>
+			<property name="user" value="${jdbc.pool.username}" />
+			<property name="password" value="${jdbc.pool.password}" />
+		</driver-properties>
+		<minimum-connection-count>2</minimum-connection-count>
+		<maximum-connection-count>10</maximum-connection-count>
+		<house-keeping-test-sql>${jdbc.pool.validation}</house-keeping-test-sql>
+	</proxool>
+</something-else-entirely>

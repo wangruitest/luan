@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="HolidayAreaScenic">
+
+<typeAlias alias="HolidayAreaScenic" type="com.funo.holidayAreaOrScenic.model.HolidayAreaScenic" />
+
+<resultMap id="HolidayAreaScenicResult" class="HolidayAreaScenic">
+  <result property="id" column="ID" />
+  <result property="holidayName" column="HOLIDAY_NAME" />
+  <result property="holidayDate" column="HOLIDAY_DATE" />
+  <result property="visitorProvince" column="VISITOR_PROVINCE" />
+  <result property="visitorCity" column="VISITOR_CITY" />
+  <result property="count" column="COUNT" />
+  <result property="code" column="CODE" />
+  <result property="areaScenic" column="AREA_SCENIC" />
+  <result property="mark" column="MARK" />
+  <result property="mark2" column="MARK2" />
+</resultMap>
+<resultMap id="sharemap" class="java.util.HashMap">  
+     <result property="cityName" column="cityName" javaType="java.lang.String" />  
+     <result property="cityCount" column="cityCount" javaType="java.lang.Object" />  
+</resultMap>  
+
+<insert id="HolidayAreaScenic.create">
+<![CDATA[
+insert into HOLIDAY_AREA_SCENIC(ID,HOLIDAY_NAME,HOLIDAY_DATE,VISITOR_PROVINCE,VISITOR_CITY,COUNT,CODE,AREA_SCENIC,MARK,MARK2)values(SEQ_HOLIDAY_AREA_SCENIC_ID.Nextval,#holidayName#,#holidayDate#,#visitorProvince#,#visitorCity#,#count#,#code#,#areaScenic#,#mark#,#mark2#)
+]]>
+</insert>
+
+<update id="HolidayAreaScenic.update">
+<![CDATA[
+update HOLIDAY_AREA_SCENIC set 
+ID=#id# 
+]]>
+			<isNotNull  property="holidayName"  >
+	, HOLIDAY_NAME=#holidayName#
+	</isNotNull> 
+			<isNotNull  property="holidayDate"  >
+	, HOLIDAY_DATE=#holidayDate#
+	</isNotNull> 
+			<isNotNull  property="visitorProvince"  >
+	, VISITOR_PROVINCE=#visitorProvince#
+	</isNotNull> 
+			<isNotNull  property="visitorCity"  >
+	, VISITOR_CITY=#visitorCity#
+	</isNotNull> 
+			<isNotNull  property="count"  >
+	, COUNT=#count#
+	</isNotNull> 
+			<isNotNull  property="code"  >
+	, CODE=#code#
+	</isNotNull> 
+			<isNotNull  property="areaScenic"  >
+	, AREA_SCENIC=#areaScenic#
+	</isNotNull> 
+			<isNotNull  property="mark"  >
+	, MARK=#mark#
+	</isNotNull> 
+			<isNotNull  property="mark2"  >
+	, MARK2=#mark2#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<delete id="HolidayAreaScenic.delete">
+<![CDATA[
+delete from HOLIDAY_AREA_SCENIC 
+where ID=#id#
+]]>
+</delete>
+
+<select id="HolidayAreaScenic.getById" resultMap="HolidayAreaScenicResult">
+<![CDATA[
+select t.* 
+	from HOLIDAY_AREA_SCENIC t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="HolidayAreaScenic.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="holidayName"  >
+		t.HOLIDAY_NAME=#holidayName#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="holidayDate"  >
+		t.HOLIDAY_DATE=#holidayDate#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="visitorProvince"  >
+		t.VISITOR_PROVINCE=#visitorProvince#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="visitorCity"  >
+		t.VISITOR_CITY=#visitorCity#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="count"  >
+		t.COUNT=#count#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="code"  >
+		t.CODE=#code#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="areaScenic"  >
+		t.AREA_SCENIC=#areaScenic#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="mark"  >
+		t.MARK=#mark#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="mark2"  >
+		t.MARK2=#mark2#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="HolidayAreaScenic.queryByArgs" resultMap="HolidayAreaScenicResult">
+<![CDATA[
+select t.* 
+	from HOLIDAY_AREA_SCENIC t 
+	where 1=1 
+]]>
+<include refid="HolidayAreaScenic.whereClause" />
+</select>
+
+<select id="HolidayAreaScenic.areaRegion" resultMap="sharemap">
+<![CDATA[
+select p.short_name as cityName,sum(h.count) as cityCount from provinces p left join holiday_area_scenic h on
+p.provinceid=h.visitor_province
+where h.code=#code# and h.area_scenic=#area_scenic#
+group by p.short_name 
+]]>
+</select>
+
+</sqlMap>

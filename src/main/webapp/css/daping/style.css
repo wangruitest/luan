@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{ margin:0px; padding:0px;}
+body{ font-family:"微软雅黑"; font-size:12px; background:#f5f5f5; height:100%;}
+a{ color:#000000; text-decoration:none;}
+img{ border:none;}
+ul,li{ list-style:none;}
+h2,h3,h4{ margin:0px; padding:0px; font-size:14px; font-weight:normal;}
+.h_100{ height:100%;}
+.w_25{ width:25%;}
+.space_left{ padding-left:30px;}
+.font_bold{ font-weight:bold;}
+.gray{ color:#616161;font:14px/1.4 "微软雅黑";}
+.layout{position:absolute; height:100%; width:100%;}
+.green{ color:#47c69c;}
+.red{ color:#e94f3e;}
+
+.top{ background:url(../../images/daping/topbg.png) repeat-x; height:69px; text-align:center;}
+.top h2{ font-size:25px; font-family:"宋体"; color:#ffffff; line-height:69px;}
+.top h3{ font-size:25px; font-family:"宋体"; color:#ffffff; margin:5px auto 0px auto;}
+.top h4{ color:#121628;}
+
+
+.title_public{ background:#fbfbfb; height:40px; line-height:40px; padding-left:15px;border-radius:6px 6px 0px 0px;border-bottom:solid 1px #dddbdb;}
+.radius_box{border-radius:6px; background:#ffffff; border:solid 1px #dddbdb;}
+
+.year_div{
+	position:absolute;
+	top:35%;
+	left:75%;
+	font-size:120%;
+	}
+
+.green_title{background:#47c69c; height:40px; line-height:40px;border-radius:6px 6px 0px 0px; color:#ffffff; text-align:center;}
+.red_title{background:#e94f3e; height:40px; line-height:40px; border-radius:6px 6px 0px 0px; color:#ffffff; text-align:center;}
+.yellow_title{background:#f3ce3c; height:40px; line-height:40px; border-radius:6px 6px 0px 0px; color:#ffffff; text-align:center;}
+.blue_title{background:#6da1c8; height:40px; line-height:40px; border-radius:6px 6px 0px 0px; color:#ffffff; text-align:center;}
+.space{ margin:10px;}
+.space2{ margin:5px auto;}
+.space3{ padding-left:22px !important;}
+
+
+.proportion tr{ text-align:left;}
+.proportion th{ text-align:left;}
+.proportion tr td{ padding-bottom:15px; padding-top:15px;}
+.up{ background:url(../../images/daping/up.png) no-repeat left; padding-left:15px; color:#e94f3e;}
+.down{ background:url(../../images/daping/down.png) no-repeat left; padding-left:15px; color:#47c69c;}
+.graybg{ background:#f7f7f7;}
+
+.resource{ margin:10px 15px;font:16px/1.4 "微软雅黑"; }
+.resource p{ margin-bottom:5px;}
+
+.table_02 tr td,.table_02 tr th{ padding:15px 10px;}
+.table_02 tr th{border-bottom:solid 1px #d5d2d2}
+
+.list{ border-top:solid 1px #d5d2d2; padding:3px 20px 15px 20px;}
+.list p{padding-left:15px;}
+.list_icon{ background:url(../../images/daping/arrow.png) no-repeat left; margin-top:8px;}
+.titlebg{ background:url(../../images/daping/titlebg.png) no-repeat left center;}
+
+.map{ position:absolute;}
+/*
+.nanping{ position:absolute; left:230px; top:190px;}
+.ningde{ position:absolute; left:350px; top:150px;}
+.sanming{ position:absolute; left:155px; top:265px;}
+.fuzhou{ position:absolute; left:325px; top:250px;}
+.putian{ position:absolute; left:300px; top:320px;}
+.longyan{ position:absolute; left:60px; top:380px;}
+.quanzhou{ position:absolute; left:250px; top:380px;}
+.zhangzhou{ position:absolute; left:150px; top:445px;}
+.xiamen{ position:absolute; left:230px; top:440px;}*/
+.hfroam{ position:absolute; left:250px; top:330px;}
+.whroam{ position:absolute; left:322px; top:392px;}
+.bbroam{ position:absolute; left:240px; top:190px;}
+.hnroam{ position:absolute; left:195px; top:220px;}
+.masroam{ position:absolute; left:320px; top:342px;}
+.hbroam{ position:absolute; left:200px; top:110px;}
+.tlroam{ position:absolute; left:285px; top:425px;}
+.aqroam{ position:absolute; left:160px; top:455px;}/*修改安庆的值*/
+.hsroam{ position:absolute; left:290px; top:540px;}
+.chuzroam{ position:absolute; left:310px; top:260px;}
+.fyroam{ position:absolute; left:110px; top:195px;}
+.szroam{ position:absolute; left:250px; top:120px;}
+.laroam{ position:absolute; left:150px; top:340px;}
+.hzroam{ position:absolute; left:150px; top:130px;}
+.chizroam{ position:absolute; left:250px; top:470px;}
+.xcroam{ position:absolute; left:370px; top:465px;}

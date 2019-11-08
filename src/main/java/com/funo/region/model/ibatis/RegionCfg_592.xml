@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="RegionCfg">
+
+<typeAlias alias="RegionCfg" type="com.funo.region.model.RegionCfg" />
+
+<resultMap id="RegionCfgResult" class="RegionCfg">
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+   <result property="cellCfgList" column="{regionId=ID}" select="RegionCellCfg.selectCellList"/>
+</resultMap>
+
+<resultMap id="RegionCfgResultOnly" class="RegionCfg">
+  <result property="id" column="ID" />
+  <result property="regionName" column="REGION_NAME" />
+  <result property="notes" column="NOTES" />
+  <result property="updateuser" column="UPDATEUSER" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="typeid" column="TYPEID" />
+  <result property="isvalid" column="ISVALID" />
+  <result property="lat" column="LAT" />
+  <result property="lng" column="LNG" />
+  <result property="aradius" column="ARADIUS" />
+  <result property="expediteValue" column="EXPEDITE_VALUE" />
+  <result property="jamValue" column="JAM_VALUE" />
+  <result property="imgurl" column="IMGURL" />
+  <result property="minStaytime" column="MIN_STAYTIME" />
+  <result property="typename" column="TYPENAME" />
+</resultMap>
+
+<resultMap id="RegionCfgSeq" class="RegionCfg">
+  <result property="id" column="ID" />
+  </resultMap>
+<insert id="RegionCfg.create">
+<![CDATA[
+insert into REGION_CFG(ID,REGION_NAME,NOTES,UPDATEUSER,UPDATETIME,TYPEID,ISVALID,LAT,LNG,ARADIUS,EXPEDITE_VALUE,JAM_VALUE,IMGURL,MIN_STAYTIME)values(#id#,#regionName#,#notes#,#updateuser#,#updatetime#,#typeid#,#isvalid#,#lat#,#lng#,#aradius#,#expediteValue#,#jamValue#,#imgurl#,#minStaytime#)
+]]>
+</insert>
+
+<update id="RegionCfg.update">
+<![CDATA[
+update REGION_CFG set 
+ID=#id# 
+]]>
+			<isNotNull  property="regionName"  >
+	, REGION_NAME=#regionName#
+	</isNotNull> 
+			<isNotNull  property="notes"  >
+	, NOTES=#notes#
+	</isNotNull> 
+			<isNotNull  property="updateuser"  >
+	, UPDATEUSER=#updateuser#
+	</isNotNull> 
+			<isNotNull  property="updatetime"  >
+	, UPDATETIME=#updatetime#
+	</isNotNull> 
+			<isNotNull  property="typeid"  >
+	, TYPEID=#typeid#
+	</isNotNull> 
+			<isNotNull  property="isvalid"  >
+	, ISVALID=#isvalid#
+	</isNotNull> 
+			<isNotNull  property="lat"  >
+	, LAT=#lat#
+	</isNotNull> 
+			<isNotNull  property="lng"  >
+	, LNG=#lng#
+	</isNotNull> 
+			<isNotNull  property="aradius"  >
+	, ARADIUS=#aradius#
+	</isNotNull> 
+			<isNotNull  property="expediteValue"  >
+	, EXPEDITE_VALUE=#expediteValue#
+	</isNotNull> 
+			<isNotNull  property="jamValue"  >
+	, JAM_VALUE=#jamValue#
+	</isNotNull> 
+			<isNotNull  property="imgurl"  >
+	, IMGURL=#imgurl#
+	</isNotNull> 
+			<isNotNull  property="minStaytime"  >
+	, MIN_STAYTIME=#minStaytime#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id# 
+]]>  
+</update>
+
+<update id="RegionCfg.updateByRegionLnglat">
+update REGION_CFG set LAT=#lat#,LNG=#lng# where ID=#id#
+</update>
+
+<delete id="RegionCfg.delete">
+	<![CDATA[
+	delete from REGION_CFG where 
+	]]>
+	<isNotNull  property="id"  >
+		 ID=#id#
+	</isNotNull> 
+</delete>
+
+<select id="RegionCfg.getById" resultMap="RegionCfgResult">
+<![CDATA[
+select t.* ,(SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID=T.TYPEID) TYPENAME
+	from REGION_CFG t  
+where ID=#id#
+]]>
+</select>
+
+<select id="RegionCfg.getBySendareaId" resultMap="RegionCfgResultOnly">
+<![CDATA[
+select t.* ,(SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID=T.TYPEID) TYPENAME
+	from REGION_CFG t  
+where SENDAREA_ID=#sendareaId#
+]]>
+</select>
+
+<sql id="RegionCfg.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="regionName"  >
+		t.REGION_NAME like '%'||#regionName#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="notes"  >
+		t.NOTES=#notes#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updateuser"  >
+		t.UPDATEUSER like '%'||#updateuser#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="updatetime"  >
+		t.UPDATETIME=#updatetime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="typeid"  >
+		t.TYPEID=#typeid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="isvalid"  >
+		t.ISVALID=#isvalid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lat"  >
+		t.LAT=#lat#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lng"  >
+		t.LNG=#lng#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="aradius"  >
+		t.ARADIUS=#aradius#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="expediteValue"  >
+		t.EXPEDITE_VALUE=#expediteValue#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="jamValue"  >
+		t.JAM_VALUE=#jamValue#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="imgurl"  >
+		t.IMGURL=#imgurl#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="minStaytime"  >
+		t.MIN_STAYTIME=#minStaytime#
+	</isNotEmpty>
+	 <isNotEmpty  prepend="order by" property="orderNumber">
+    $orderNumber$
+   </isNotEmpty>
+</dynamic>
+</sql>
+<select id="RegionCfg.queryByArgs" resultMap="RegionCfgResult">
+<![CDATA[
+select t.* ,(SELECT TYPENAME FROM REGION_TYPE_CFG WHERE ID=T.TYPEID) TYPENAME
+	from REGION_CFG t 
+	where 1=1 
+]]>
+<include refid="RegionCfg.whereClause" />
+</select>
+<select id="RegionCfg.queryBySeq" resultMap="RegionCfgSeq">
+<![CDATA[
+ SELECT SEQ_RG_CFG.NEXTVAL ID FROM DUAL
+]]>
+</select>
+</sqlMap>

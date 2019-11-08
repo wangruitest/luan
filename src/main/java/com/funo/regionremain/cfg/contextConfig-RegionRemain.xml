@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="regionRemainDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.regionremain.dao.IRegionRemainDao" />
+		<property name="target">
+			<bean parent="abstractSysDaoTarget">
+				<constructor-arg value="com.funo.regionremain.model.RegionRemain" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="regionRemainAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.regionremain.adapt.impl.RegionRemainAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="regionRemainMgmt" parent="sysTranProxy">
+		<property name="target">
+			<bean class="com.funo.regionremain.mgmt.impl.RegionRemainMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="RegionRemainAction" class="com.funo.regionremain.action.RegionRemainAction">
+		<property name="regionRemainMgmt" ref="regionRemainMgmt"></property>
+		<dwr:remote javascript="RegionRemainAction" />
+	</bean>
+</beans>

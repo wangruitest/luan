@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="BusinessGw">
+
+<typeAlias alias="BusinessGw" type="com.funo.provincebusiness.model.BusinessGw" />
+
+<resultMap id="BusinessGwResult" class="BusinessGw">
+  <result property="id" column="ID" />
+  <result property="businessid" column="BUSINESSID" />
+  <result property="gwId" column="GW_ID" />
+  <result property="createDate" column="CREATE_DATE" />
+  <result property="createUser" column="CREATE_USER" />
+  <result property="gwName" column="GW_NAME" />
+  <result property="gwSingname" column="GW_SINGNAME" />
+  <result property="remark" column="REMARK" />
+</resultMap>
+
+<statement id="BusinessGw.selectGwCfgList" resultMap="BusinessGwResult">
+select t.*,
+(select t1.GW_NAME from GW_CFG t1 where t1.GW_ID=t.GW_ID) GW_NAME,
+(select t1.GW_SINGNAME from GW_CFG t1 where t1.GW_ID=t.GW_ID)GW_SINGNAME,
+(select t1.REMARK from GW_CFG t1 where t1.GW_ID=t.GW_ID) REMARK   
+from BUSINESS_GW t where t.BUSINESSID= #businessid# 
+</statement>
+
+<insert id="BusinessGw.create">
+<![CDATA[
+insert into BUSINESS_GW(ID,BUSINESSID,GW_ID,CREATE_DATE,CREATE_USER)values(SEQ_BUSINESS_GW.Nextval,#businessid#,#gwId#,#createDate#,#createUser#)
+]]>
+</insert>
+
+<update id="BusinessGw.update">
+<![CDATA[
+update BUSINESS_GW set 
+ID=#id#
+]]>
+			<isNotNull  property="businessid"  >
+	, BUSINESSID=#businessid#
+	</isNotNull> 
+			<isNotNull  property="gwId"  >
+	, GW_ID=#gwId#
+	</isNotNull> 
+			<isNotNull  property="createDate"  >
+	, CREATE_DATE=#createDate#
+	</isNotNull> 
+			<isNotNull  property="createUser"  >
+	, CREATE_USER=#createUser#
+	</isNotNull> 
+	<![CDATA[
+ where ID=#id#
+]]>  
+</update>
+
+<delete id="BusinessGw.delete">
+<![CDATA[
+delete from BUSINESS_GW 
+where BUSINESSID=#businessid#
+]]>
+</delete>
+
+<select id="BusinessGw.getById" resultMap="BusinessGwResult">
+<![CDATA[
+select t.* 
+	from BUSINESS_GW t  
+where ID=#id#
+]]>
+</select>
+
+<sql id="BusinessGw.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="id"  >
+		t.ID=#id#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businessid"  >
+		t.BUSINESSID=#businessid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="gwId"  >
+		t.GW_ID=#gwId#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="createDate"  >
+		t.CREATE_DATE=#createDate#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="createUser"  >
+		t.CREATE_USER=#createUser#
+	</isNotEmpty>
+</dynamic>
+</sql>
+<select id="BusinessGw.queryByArgs" resultMap="BusinessGwResult">
+<![CDATA[
+select t.* 
+	from BUSINESS_GW t 
+	where 1=1 
+]]>
+<include refid="BusinessGw.whereClause" />
+</select>
+
+</sqlMap>
