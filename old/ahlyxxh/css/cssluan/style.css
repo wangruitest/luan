@@ -1,0 +1,30 @@
+*{margin: 0;padding: 0;}
+body{font: 14px/1.8  "microsoft yahei","宋体",simsun,sans-serif;color: #666;}
+ul{list-style-type: none;}
+a{text-decoration: none;}
+.clear{clear: both;}
+
+/*��ҳ*/
+body{
+	/*background: #fff;*/
+	}
+.header_bg{width: 100%;}
+.header{width: 1000px;margin: 0 auto;padding: 12px 0 0 0;}
+.cont_bg{width: 100%;
+/*background: url(../../images/imgluan/pic.png) repeat-x;*/
+height: 480px;
+}
+.cont{width: 100%; height: 480px;margin: 0 auto;position: relative;
+/*background: url(../../images/imgluan/pic_c.png) no-repeat;*/
+}
+.dlk{width: 246px;height: 328px;background: #fff ;position: absolute;top: 53px;right: 294px;border-radius: 6px;padding:34px 39px 0 39px; font-size: 18px;}
+.yhm{width: 210px;height: 18px;border: 1px solid #a6d9f4;margin-top: 30px;background: #dcf2fe url(../../images/imgluan/yhm.png) no-repeat 9px center;padding: 8px 0 8px 34px;line-height: 18px;font-size: 14px;color: #669999;}
+.mm{background: #dcf2fe url(../../images/imgluan/mm.png) no-repeat 9px center;margin-top: 18px;}
+.yzm{background: #dcf2fe url(../../images/imgluan/yzm.png) no-repeat 9px center;margin-top: 18px;width: 108px;float: left;}
+.yzm_2{display: block;margin-top: 26px;float: left;margin-left: 20px;}
+a.dl{display:inline-block; text-align: center;background: url(../../images/imgluan/dl.png) no-repeat;width: 125px;height: 36px;line-height: 36px;color: #fff;font-size: 16px;margin-top: 30px;float: left;}
+a.qx{background: url(../../images/imgluan/qx.png) no-repeat;color: #fff;float: right;color: #666;width: 111px;}
+.footer{text-align: center;font-size: 12px;margin-top: 16px;}
+
+
+

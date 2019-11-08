@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="sysOperateRoleDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.system.dao.ISysOperateRoleDao" />
+		<property name="target">
+			<bean parent="abstractSysDaoTarget">
+				<constructor-arg value="com.funo.system.model.SysOperateRole" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="sysOperateRoleAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.system.adapt.impl.SysOperateRoleAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="sysOperateRoleMgmt" parent="sysTranProxy">
+		<property name="target">
+			<bean class="com.funo.system.mgmt.impl.SysOperateRoleMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="SysOperateRoleAction" class="com.funo.system.action.SysOperateRoleAction">
+		<property name="sysOperateRoleMgmt" ref="sysOperateRoleMgmt"></property>
+		<dwr:remote javascript="SysOperateRoleAction" />
+	</bean>
+</beans>

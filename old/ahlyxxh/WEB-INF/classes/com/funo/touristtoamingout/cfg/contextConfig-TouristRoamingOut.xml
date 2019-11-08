@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="touristRoamingOutDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.touristtoamingout.dao.ITouristRoamingOutDao" />
+		<property name="target">
+			<bean parent="abstractSysDaoTarget">
+				<constructor-arg value="com.funo.touristtoamingout.model.TouristRoamingOut" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="touristRoamingOutAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.touristtoamingout.adapt.impl.TouristRoamingOutAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="touristRoamingOutMgmt" parent="sysTranProxy">
+		<property name="target">
+			<bean class="com.funo.touristtoamingout.mgmt.impl.TouristRoamingOutMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="TouristRoamingOutAction" class="com.funo.touristtoamingout.action.TouristRoamingOutAction">
+		<property name="touristRoamingOutMgmt" ref="touristRoamingOutMgmt"></property>
+		<dwr:remote javascript="TouristRoamingOutAction" />
+	</bean>
+</beans>

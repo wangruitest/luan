@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TouristRoamingOvernightOut">
+
+<typeAlias alias="TouristRoamingOvernightOut" type="com.funo.touristtoamingovernightout.model.TouristRoamingOvernightOut" />
+
+<resultMap id="TouristRoamingOvernightOutResult" class="TouristRoamingOvernightOut">
+  <result property="sumroam" column="SUMROAM" />
+  <result property="hfroam" column="HFROAM" />
+  <result property="whroam" column="WHROAM" />
+  <result property="bbroam" column="BBROAM" />
+  <result property="hnroam" column="HNROAM" />
+  <result property="masroam" column="MASROAM" />
+  <result property="hbroam" column="HBROAM" />
+  <result property="tlroam" column="TLROAM" />
+  <result property="aqroam" column="AQROAM" />
+  <result property="hsroam" column="HSROAM" />
+  <result property="chuzroam" column="CHUZROAM" />
+  <result property="fyroam" column="FYROAM" />
+  <result property="szroam" column="SZROAM" />
+  <result property="laroam" column="LAROAM" />
+  <result property="hzroam" column="HZROAM" />
+  <result property="chizroam" column="CHIZROAM" />
+  <result property="xcroam" column="XCROAM" />
+  <result property="areaname" column="AREANAME" />
+</resultMap>
+
+ <select id="TouristRoamingOvernightOut.queryByProvincesMonthNight" resultMap="TouristRoamingOvernightOutResult">
+<![CDATA[          
+select s.provinces as areaname,s.touristcount as SUMROAM,g.HFROAM,
+       g.WHROAM,
+       g.BBROAM,
+       g.HNROAM,
+       g.MASROAM,
+       g.HBROAM,
+       g.TLROAM,
+       g.AQROAM,
+       g.HSROAM,
+       g.CHUZROAM,
+       g.FYROAM,
+       g.SZROAM,
+       g.LAROAM,
+       g.HZROAM,
+       g.CHIZROAM,
+       g.XCROAM  from
+ ( SELECT m.provinces,
+               trunc(SUM(tp.count)/(select value from common  where name = 'CHINA_MOBILE_PERCENT'),0) as touristcount 
+          FROM TOURIST_ROAMING_OVERNIGHT tp,
+               (SELECT distinct pc.provinceid,pc.provinces,pc.area_code FROM area_cfg pc WHERE pc.provinces!='安徽' and pc.provinceid in ($searchProvince$)) m
+         WHERE tp.area_code=m.area_code
+               AND tp.area_code!=-1 
+               and tp.updatetime is not null  
+               AND TO_CHAR(stat_month,'YYYY-MM')IN (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#statmonth#,'YYYY-MM'),(LEVEL-1)),'YYYY-MM') AS RQ FROM DUAL CONNECT BY LEVEL<=1)
+         GROUP BY TO_CHAR(stat_month,'YYYY-MM'),m.provinces) s
+         left join  (select a.provinces,          
+         sum(case when a.city_code = '340100' then dc else 0 end) as HFROAM,
+         sum(case when a.city_code = '340200' then dc else 0 end) as WHROAM,
+         sum(case when a.city_code = '340300' then dc else 0 end) as BBROAM,
+         sum(case when a.city_code = '340400' then dc else 0 end) as HNROAM,
+         sum(case when a.city_code = '340500' then dc else 0 end) as MASROAM,
+         sum(case when a.city_code = '340600' then dc else 0 end) as HBROAM,
+         sum(case when a.city_code = '340700' then dc else 0 end) as TLROAM,
+         sum(case when a.city_code = '340800' then dc else 0 end) as AQROAM,
+         sum(case when a.city_code = '341000' then dc else 0 end) as HSROAM,
+         sum(case when a.city_code = '341100' then dc else 0 end) as CHUZROAM,
+         sum(case when a.city_code = '341200' then dc else 0 end) as FYROAM,
+         sum(case when a.city_code = '341300' then dc else 0 end) as SZROAM,
+         sum(case when a.city_code = '341500' then dc else 0 end) as LAROAM,
+         sum(case when a.city_code = '341600' then dc else 0 end) as HZROAM,
+         sum(case when a.city_code = '341700' then dc else 0 end) as CHIZROAM,
+         sum(case when a.city_code = '341800' then dc else 0 end) as XCROAM         
+         from (select n.provinces,t.area_code,t.city_code,trunc(sum(t.count)/(select value from common  where name = 'CHINA_MOBILE_PERCENT'),0) as dc from TOURIST_ROAMING_OVERNIGHT t,
+         (SELECT distinct pc.provinceid,pc.provinces,pc.area_code FROM area_cfg pc WHERE pc.provinces!='安徽' and pc.provinceid in ($searchProvince$) ) n
+         where  TO_CHAR(stat_month,'YYYY-MM')IN (SELECT TO_CHAR(ADD_MONTHS(TO_DATE(#statmonth#,'YYYY-MM'),(LEVEL-1)),'YYYY-MM') AS RQ FROM DUAL CONNECT BY LEVEL<=1)
+         AND t.area_code!=-1 and n.area_code = t.area_code  
+         and t.updatetime is not null  
+         group by  TO_CHAR(stat_month,'YYYY-MM'), t.city_code,t.area_code,n.provinces) a group by a.provinces) g
+          on s.provinces = g.provinces  
+      order by g.provinces
+]]>
+</select>
+</sqlMap>

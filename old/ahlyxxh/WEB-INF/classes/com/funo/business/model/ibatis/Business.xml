@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Business">
+
+<typeAlias alias="Business" type="com.funo.business.model.Business" />
+
+<resultMap id="BusinessResult" class="Business">
+  <result property="businessid" column="BUSINESSID" />
+  <result property="industryid" column="INDUSTRYID" />
+  <result property="industryname" column="INDUSTRYNAME" />
+  <result property="isgroup" column="ISGROUP" />
+  <result property="businessname" column="BUSINESSNAME" />
+  <result property="address" column="ADDRESS" />
+  <result property="linkman" column="LINKMAN" />
+  <result property="phone" column="PHONE" />
+  <result property="businesscode" column="BUSINESSCODE" />
+  <result property="depositAmount" column="DEPOSIT_AMOUNT" />
+  <result property="usedAmount" column="USED_AMOUNT" />
+  <result property="lockedAmount" column="LOCKED_AMOUNT" />
+  <result property="totalLastAmount" column="TOTAL_LAST_AMOUNT" />
+  <result property="edittime" column="EDITTIME" />
+  <result property="edituser" column="EDITUSER" />
+  <result property="createtime" column="CREATETIME" />
+  <result property="createuser" column="CREATEUSER" />
+  <result property="status" column="STATUS" />
+  <result property="smslabel" column="SMSLABEL" />
+  <result property="adminuser" column="ADMINUSER" />
+  <result property="ecaccessport" column="ECACCESSPORT" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="logoSrc" column="LOGO_SRC" />
+  <result property="homepage" column="HOMEPAGE" />
+</resultMap>
+
+<resultMap id="BusinessResult2" class="Business">
+  <result property="businessid" column="BUSINESSID" />
+  <result property="industryid" column="INDUSTRYID" />
+  <result property="industryname" column="INDUSTRYNAME" />
+  <result property="isgroup" column="ISGROUP" />
+  <result property="businessname" column="BUSINESSNAME" />
+  <result property="address" column="ADDRESS" />
+  <result property="linkman" column="LINKMAN" />
+  <result property="phone" column="PHONE" />
+  <result property="businesscode" column="BUSINESSCODE" />
+  <result property="depositAmount" column="DEPOSIT_AMOUNT" />
+  <result property="usedAmount" column="USED_AMOUNT" />
+  <result property="lockedAmount" column="LOCKED_AMOUNT" />
+  <result property="totalLastAmount" column="TOTAL_LAST_AMOUNT" />
+  <result property="edittime" column="EDITTIME" />
+  <result property="edituser" column="EDITUSER" />
+  <result property="createtime" column="CREATETIME" />
+  <result property="createuser" column="CREATEUSER" />
+  <result property="status" column="STATUS" />
+  <result property="smslabel" column="SMSLABEL" />
+  <result property="adminuser" column="ADMINUSER" />
+  <result property="ecaccessport" column="ECACCESSPORT" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="logoSrc" column="LOGO_SRC" />
+  <result property="homepage" column="HOMEPAGE" />
+  <!-- 
+  <result property="businessSendareasList" column="{businessid=BUSINESSID}" select="BusinessSendarea.selectSendareaList"/>
+  <result property="businessMasList" column="{businessid=BUSINESSID}" select="BusinessMas.selectMasList"/>
+   -->
+  <result property="userBusinessCfgList" column="{businessid=BUSINESSID}" select="UserBusinessCfg.selectUserBusinessCfgList"/>
+</resultMap>
+
+<resultMap id="BusinessResult3" class="Business">
+  <result property="businessid" column="BUSINESSID" />
+  <result property="industryid" column="INDUSTRYID" />
+  <result property="isgroup" column="ISGROUP" />
+  <result property="businessname" column="BUSINESSNAME" />
+  <result property="address" column="ADDRESS" />
+  <result property="linkman" column="LINKMAN" />
+  <result property="phone" column="PHONE" />
+  <result property="businesscode" column="BUSINESSCODE" />
+  <result property="depositAmount" column="DEPOSIT_AMOUNT" />
+  <result property="usedAmount" column="USED_AMOUNT" />
+  <result property="lockedAmount" column="LOCKED_AMOUNT" />
+  <result property="edittime" column="EDITTIME" />
+  <result property="edituser" column="EDITUSER" />
+  <result property="createtime" column="CREATETIME" />
+  <result property="createuser" column="CREATEUSER" />
+  <result property="status" column="STATUS" />
+  <result property="smslabel" column="SMSLABEL" />
+  <result property="adminuser" column="ADMINUSER" />
+  <result property="ecaccessport" column="ECACCESSPORT" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="logoSrc" column="LOGO_SRC" />
+  <result property="homepage" column="HOMEPAGE" />
+</resultMap>
+
+<resultMap id="BusinessSeq" class="Business">
+  <result property="businessid" column="BUSINESSID" />
+</resultMap>
+
+<insert id="Business.create">
+<![CDATA[
+insert into BUSINESS(BUSINESSID,INDUSTRYID,ISGROUP,BUSINESSNAME,ADDRESS,LINKMAN,PHONE,BUSINESSCODE,DEPOSIT_AMOUNT,USED_AMOUNT,LOCKED_AMOUNT,EDITTIME,EDITUSER,CREATETIME,CREATEUSER,STATUS,SMSLABEL,ADMINUSER,ECACCESSPORT,CITY_CODE,LOGO_SRC,HOMEPAGE)values(#businessid#,#industryid#,#isgroup#,#businessname#,#address#,#linkman#,#phone#,#businesscode#,#depositAmount#,#usedAmount#,#lockedAmount#,#edittime#,#edituser#,#createtime#,#createuser#,#status#,#smslabel#,#adminuser#,#ecaccessport#,#cityCode#,#logoSrc#,#homepage#)
+]]>
+</insert>
+
+<update id="Business.update">
+<![CDATA[
+update BUSINESS set 
+ BUSINESSID=#businessid# 
+]]>
+			<isNotNull  property="industryid"  >
+	, INDUSTRYID=#industryid#
+	</isNotNull> 
+			<isNotNull  property="isgroup"  >
+	, ISGROUP=#isgroup#
+	</isNotNull> 
+			<isNotNull  property="businessname"  >
+	, BUSINESSNAME=#businessname#
+	</isNotNull> 
+			<isNotNull  property="address"  >
+	, ADDRESS=#address#
+	</isNotNull> 
+			<isNotNull  property="linkman"  >
+	, LINKMAN=#linkman#
+	</isNotNull> 
+			<isNotNull  property="phone"  >
+	, PHONE=#phone#
+	</isNotNull> 
+			<isNotNull  property="businesscode"  >
+	, BUSINESSCODE=#businesscode#
+	</isNotNull> 
+			<isNotNull  property="depositAmount"  >
+	, DEPOSIT_AMOUNT=#depositAmount#
+	</isNotNull> 
+			<isNotNull  property="usedAmount"  >
+	, USED_AMOUNT=#usedAmount#
+	</isNotNull> 
+			<isNotNull  property="lockedAmount"  >
+	, LOCKED_AMOUNT=#lockedAmount#
+	</isNotNull> 
+			<isNotNull  property="edittime"  >
+	, EDITTIME=#edittime#
+	</isNotNull> 
+			<isNotNull  property="edituser"  >
+	, EDITUSER=#edituser#
+	</isNotNull> 
+			<isNotNull  property="createtime"  >
+	, CREATETIME=#createtime#
+	</isNotNull> 
+			<isNotNull  property="createuser"  >
+	, CREATEUSER=#createuser#
+	</isNotNull> 
+	<isNotNull  property="status"  >
+	, STATUS=#status#
+	</isNotNull> 
+			<isNotNull  property="smslabel"  >
+	, SMSLABEL=#smslabel#
+	</isNotNull> 
+	<isNotNull  property="adminuser"  >
+	, ADMINUSER=#adminuser#
+	</isNotNull> 
+			<isNotNull  property="ecaccessport"  >
+	, ECACCESSPORT=#ecaccessport#
+	</isNotNull> 
+			<isNotNull  property="cityCode"  >
+	, CITY_CODE=#cityCode#
+	</isNotNull>
+			<isNotNull  property="logoSrc"  >
+	, LOGO_SRC=#logoSrc#
+	</isNotNull>
+			<isNotNull  property="homepage"  >
+	, HOMEPAGE=#homepage#
+	</isNotNull>
+	<![CDATA[
+ where BUSINESSID=#businessid# 
+]]>  
+</update>
+
+<delete id="Business.delete">
+<![CDATA[
+delete from BUSINESS 
+where BUSINESSID=#businessid#
+]]>
+</delete>
+
+<select id="Business.getById" resultMap="BusinessResult2">
+<![CDATA[
+select t.* 
+	from BUSINESS t  
+where BUSINESSID=#businessid#
+]]>
+</select>
+
+<sql id="Business.whereClause">
+<dynamic>
+	<isNotEmpty prepend="and" property="businessid"  >
+		t.BUSINESSID=#businessid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="industryid"  >
+		t.INDUSTRYID=#industryid#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="isgroup"  >
+		t.ISGROUP=#isgroup#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businessname"  >
+		t.BUSINESSNAME like '%'||#businessname#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="address"  >
+		t.ADDRESS=#address#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="linkman"  >
+		t.LINKMAN=#linkman#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="phone"  >
+		t.PHONE=#phone#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businesscode"  >
+		t.BUSINESSCODE like '%'||#businesscode#||'%'
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="depositAmount"  >
+		t.DEPOSIT_AMOUNT=#depositAmount#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="usedAmount"  >
+		t.USED_AMOUNT=#usedAmount#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="lockedAmount"  >
+		t.LOCKED_AMOUNT=#lockedAmount#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="edittime"  >
+		t.EDITTIME=#edittime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="edituser"  >
+		t.EDITUSER=#edituser#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="createtime"  >
+		t.CREATETIME=#createtime#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="createuser"  >
+		t.CREATEUSER=#createuser#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="status"  >
+		t.STATUS=#status#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="smslabel"  >
+		t.SMSLABEL=#smslabel#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="adminuser"  >
+		t.ADMINUSER=#adminuser#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="ecaccessport"  >
+		t.ECACCESSPORT=#ecaccessport#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="cityCode"  >
+		t.CITY_CODE=#cityCode#
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="logoSrc"  >
+		t.LOGO_SRC=#logoSrc#
+	</isNotEmpty>
+</dynamic>
+</sql>
+
+<select id="Business.queryByArgs" resultMap="BusinessResult2">
+<![CDATA[
+select t.* ,(SELECT M.TYPENAME FROM INDUSTRY M WHERE M.INDUSTRYID=T.INDUSTRYID) INDUSTRYNAME, T.DEPOSIT_AMOUNT-T.USED_AMOUNT TOTAL_LAST_AMOUNT
+	from BUSINESS t 
+	where 1=1 
+]]>
+<include refid="Business.whereClause" />
+</select>
+
+<sql id="Business.whereClauseIsExist">
+<dynamic>
+	<isNotEmpty prepend="and" property="businessname"  >
+		t.BUSINESSNAME =#businessname# 
+	</isNotEmpty>
+	<isNotEmpty prepend="and" property="businesscode"  >
+		t.BUSINESSCODE=#businesscode# 
+	</isNotEmpty>
+</dynamic>
+</sql>
+
+<select id="Business.queryByInsertIsExist" resultMap="BusinessResult3">
+<![CDATA[
+select t.* from BUSINESS t where 1=1 
+]]>
+<include refid="Business.whereClauseIsExist" />
+</select>
+<select id="Business.queryByUpdateIsExist" resultMap="BusinessResult3">
+<![CDATA[
+select t.* from BUSINESS t where 1=1
+]]>
+<include refid="Business.whereClauseIsExist" />
+<![CDATA[
+ and  t.BUSINESSID <> #businessid#
+]]>
+</select>
+ 
+ 
+<select id="Business.queryBySeq" resultMap="BusinessSeq">
+<![CDATA[
+ SELECT SEQ_BUSINESS.NEXTVAL BUSINESSID FROM DUAL
+]]>
+</select>
+<select id="Business.queryBySelectForWebS" resultMap="BusinessResult3">
+<![CDATA[
+select t.* from BUSINESS t where t.BUSINESSCODE = #businesscode#
+]]>
+</select>
+</sqlMap>

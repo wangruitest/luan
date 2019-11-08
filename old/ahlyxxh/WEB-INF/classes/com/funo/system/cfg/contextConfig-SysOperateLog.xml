@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-lazy-init="true" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- Dao -->
+	<bean id="sysOperateLogDao" parent="abstractDao">
+		<property name="proxyInterfaces" value="com.funo.sysoperatelog.dao.ISysOperateLogDao" />
+		<property name="target">
+			<bean parent="abstractSysDaoTarget">
+				<constructor-arg value="com.funo.sysoperatelog.model.SysOperateLog" />
+			</bean>
+		</property>
+	</bean>
+		
+	<!-- Adapt -->
+	<bean id="sysOperateLogAdapt" parent="adaptProxy">
+		<property name="target">
+			<bean class="com.funo.sysoperatelog.adapt.impl.SysOperateLogAdapt" parent="abstractAdapt" autowire="byName" />
+		</property>
+	</bean>	
+	
+	<!-- Mgmt -->	
+	<bean id="sysOperateLogMgmt" parent="sysTranProxy">
+		<property name="target">
+			<bean class="com.funo.sysoperatelog.mgmt.impl.SysOperateLogMgmt" parent="abstractMgmt" autowire="byName" />
+		</property>
+	</bean>
+	
+	<!-- LoggerUtils -->
+	<bean id="LoggerUtils" class="com.funo.base.utils.LoggerUtils">
+		<property name="sysOperateLogMgmt" ref="sysOperateLogMgmt"></property>
+	</bean>
+	
+	<!-- Action -->
+	<bean id="SysOperateLogAction" class="com.funo.system.action.SysOperateLogAction">
+		<property name="sysOperateLogMgmt" ref="sysOperateLogMgmt"></property>
+		<dwr:remote javascript="SysOperateLogAction" />
+	</bean>
+</beans>
