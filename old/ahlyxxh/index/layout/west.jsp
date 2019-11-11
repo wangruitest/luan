@@ -1,47 +1,73 @@
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html; charset=UTF-8"%>
 <style>
-ul {
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
+	ul {
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
 
-.leftMenu ul {
-	margin-right: 10px;
-	margin-left: 5px;
-	background-repeat: no-repeat;
-	margin-top: 0px;
-	clear: both;
-}
+	.leftMenu ul {
+		/* margin-right: 10px;
+		margin-left: 5px; */
+		background-repeat: no-repeat;
+		margin-top: 0px;
+		clear: both;
+	}
 
-.leftMenu li {
-	background: url(<%=request.getContextPath()%>/images/arrowbullet.jpg)
-		no-repeat !important;
-	background-position: 3px 7px !important;
-	display: block;
-	padding-left: 21px;
-	font-size: 13px;
-	line-height: 28px;
-	cursor: pointer;
-}
+	.leftMenu li {
+		/* background: url(<%=request.getContextPath()%>/images/arrowbullet.jpg) no-repeat !important;
+		background-position: 5px 12px !important; */
+		display: block;
+		/* padding-left: 21px; */
+		font-size: 18px;
+		line-height: 46px;
+		cursor: pointer;
+	}
 
-.leftMenu span {
-	background-image: url(<%=request.getContextPath()%>/images/titlebar_itemBg.jpg);
-	height: 100%;
-	width: 160px;
-}
+	.leftMenu span {
+		/* background-image: url(<%=request.getContextPath()%>/images/titlebar_itemBg.jpg); */
+		height: 100%;
+		width: 160px;
+	}
 
-.leftMenu div.selected {
-	background: url(<%=request.getContextPath()%>/images/titlebar_itemBg.jpg)
-		no-repeat !important;
-	background-position: -6px 3px !important;
-	width: 100%;
-}
+	/* .leftMenu div.selected { */
+		/* background: url(<%=request.getContextPath()%>/images/titlebar_itemBg.jpg) no-repeat !important;
+		background-position: -6px 8px !important; */
+		/* background-color: #DAEEFF;
+		width: 100%; */
+	/* } */
 
-.leftMenu ul li {
-	border-bottom: 1px solid #dadada;
-}
+	.leftMenu div {
+		padding-left: 50px;
+		background: url(<%=request.getContextPath()%>/images/arrowbullet.png) no-repeat !important;
+		background-position: 30px 14px !important;
+
+	}
+
+	.leftMenu li.selected {
+		/* background: url(<%=request.getContextPath()%>/images/titlebar_itemBg.jpg) no-repeat !important;
+		background-position: -6px 8px !important; */
+		background-color: #DAEEFF;
+		width: 100%;
+	}
+
+	.leftMenu ul li {
+		border-bottom: 1px solid #dadada;
+	}
+
+	.panel-title {
+		height: 48px;
+		line-height: 48px;
+		font-size: 18px;
+		padding-left: 40px;
+	}
+	.panel-header{
+		width:280px;
+	}
+	.panel-icon{
+		left:15px;
+	}
 </style>
 <script>
 	/**
@@ -67,7 +93,7 @@ ul {
 
 	//加载菜单数据
 	DWREngine.setAsync(false);
-	SysMenuAction.getSysMenusByCurUser(function(result) {
+	SysMenuAction.getSysMenusByCurUser(function (result) {
 		if (result.resultCode == "0") {
 			loadMenus(result.returnList);
 			//为菜单绑定事件
@@ -86,11 +112,11 @@ ul {
 			href += "?unid=" + obj.unid;
 		}
 		var menu = {
-			unid : obj.unid,
-			title : obj.displayName || obj.name,
-			icon : obj.menuIcon,
-			closable : true,
-			href : href
+			unid: obj.unid,
+			title: obj.displayName || obj.name,
+			icon: obj.menuIcon,
+			closable: true,
+			href: href
 		};
 
 		return menu;
@@ -130,13 +156,13 @@ ul {
 		 */
 		for (var z = 0; z < menus.length; z++) {
 			var obj = menus[z];
-			var menuHtml = "<div title=\""+obj.title+"\" data-options=\"iconCls:'"+obj.icon+"'\">";
+			var menuHtml = "<div title=\"" + obj.title + "\" data-options=\"iconCls:'" + obj.icon + "'\">";
 			menuHtml += "<div class=leftMenu>";
 			menuHtml += "<ul>";
 			if (null != obj.modules) {
 				for (var k = 0; k < obj.modules.length; k++) {
-					menuHtml += "<li id='"+obj.modules[k].unid+"'><div>"
-							+ obj.modules[k].title + "</div></li>";
+					menuHtml += "<li id='" + obj.modules[k].unid + "'><div>"
+						+ obj.modules[k].title + "</div></li>";
 				}
 			}
 			menuHtml += "</ul>";
@@ -185,25 +211,30 @@ ul {
 	}
 
 	function menuInit() {
-		$(".leftMenu li").bind("mouseover", function() {
-			$(this).find("div").addClass("selected");
+		$(".leftMenu li").bind("mouseover", function () {
+			// $(this).find("div").addClass("selected");
+			$(this).addClass("selected");
 		});
-		$(".leftMenu li").bind("mouseout", function() {
+		$(".leftMenu li").bind("mouseout", function () {
+			console.log($(this).attr("id"),curMenuId);
 			if (curMenuId != $(this).attr("id")) {
-				$(this).find("div").removeClass("selected");
+				// $(this).find("div").removeClass("selected");
+				$(this).removeClass("selected");
 			}
 		});
-		$(".leftMenu li").bind("click", function() {
+		$(".leftMenu li").bind("click", function () {
 			allUnSelected();
-			$(this).find("div").addClass("selected");
+			// $(this).find("div").addClass("selected");
+			$(this).addClass("selected");
 			curMenuId = $(this).attr("id");
 			menuClick(curMenuId);
 		});
 	}
 
 	function allUnSelected() {
-		$(".leftMenu li").each(function() {
-			$(this).find("div").removeClass("selected");
+		$(".leftMenu li").each(function () {
+			// $(this).find("div").removeClass("selected");
+			$(this).removeClass("selected");
 		});
 	}
 
@@ -225,9 +256,9 @@ ul {
 
 	function findModule(moduleId) {
 		var result = null;
-		$(menus).each(function() {
+		$(menus).each(function () {
 			if (this.modules) {
-				$(this.modules).each(function() {
+				$(this.modules).each(function () {
 					if (this.unid == moduleId) {
 						result = this;
 					}
@@ -237,8 +268,7 @@ ul {
 		return result;
 	}
 </script>
-<div class="easyui-accordion" data-options="fit:true,border:false"
-	id="menuBar">
+<div class="easyui-accordion" data-options="fit:true,border:false" id="menuBar">
 	<!-- 
 		<div title="XX管理模块1" data-options="iconCls:'icon-redo'">
 			 <div class=leftMenu>

@@ -32,6 +32,8 @@
 
 body {
 	background: url(../images/newLogin/login_bg.jpg) repeat-x top #fff;
+
+	text-decoration: none;
 }
 
 .loginbg{ background:url(../images/newLogin/loginmainbg.jpg) no-repeat center; width:950px; margin:auto; height:559px;}
@@ -93,11 +95,14 @@ body {
 	color: #a1a1a1;
 	padding-top: 25px;
 }
-.topbg{ background:url(../images/newLogin/top_02.jpg) repeat-x; height:81px; font-size:12px;}
-.top_logo{ float:left; margin-top:10px;}
+.topbg{     height: 68px;
+
+	font-size: 12px;
+	border-bottom: 10px solid #339CFB;}
+.top_logo{ float:left; margin-top:3px;}
 .top_city{ float:left; margin-top:30px; position:relative;}
 .top_city a{ color:#000; text-decoration:none;}
-.top_info{ float:right; right:20px;top:30px; line-height:18px; height:18px; color:#5a88ac; text-align:right;position: absolute;}
+.top_info{ font-size: 1.5em; float:right; right:20px;top:30px; line-height:18px; height:18px; color:#5a88ac; text-align:right;position: absolute;}
 .top_exit{ background:url(../images/newLogin/top_08.jpg) no-repeat left; padding-left:18px; height:18px; padding-top:5px; color:#5a88ac; text-decoration:none;}
 .top_editpw{ background:url(../images/icons/key.png) no-repeat left; padding-left:18px; height:18px; padding-top:5px; color:#5a88ac; text-decoration:none;}
 .cloth{ margin-top:15px;}

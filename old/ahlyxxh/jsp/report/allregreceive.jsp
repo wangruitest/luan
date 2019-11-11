@@ -193,7 +193,7 @@
 <div id="parameter">
     <div>
         <label>游客类型:</label>
-        <select id="touristtype" name="touristtype">
+        <select class="easyui-combobox" style="width:120px;" id="touristtype" name="touristtype">
             <option value="0" selected="selected"> 全部游客</option>
             <option value="1"> 外地游客</option>
             <option value="2">本地游客</option>
