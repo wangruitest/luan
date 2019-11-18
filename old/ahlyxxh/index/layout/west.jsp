@@ -216,7 +216,7 @@
 			$(this).addClass("selected");
 		});
 		$(".leftMenu li").bind("mouseout", function () {
-			console.log($(this).attr("id"),curMenuId);
+			// console.log($(this).attr("id"),curMenuId);
 			if (curMenuId != $(this).attr("id")) {
 				// $(this).find("div").removeClass("selected");
 				$(this).removeClass("selected");

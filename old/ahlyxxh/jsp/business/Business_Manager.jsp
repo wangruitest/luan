@@ -33,9 +33,9 @@
 </head>
 
 <body style="margin:0px">
-	<table id="BusinessQueryForm" class="form_query" style="height: 50px;margin:0px;">
-		<tr>
-			<td>商户名称：<input type="text" id="BusinessQueryForm:businessname"
+	<div id="BusinessQueryForm" class="form_query parameter">
+		<div>
+			商户名称：<input type="text" id="BusinessQueryForm:businessname"
 				style="width: 100px;"></input> 是否有建集团：<select
 				id="BusinessQueryForm:isgroup">
 					<option value="">--请选择--</option>
@@ -45,9 +45,8 @@
 				style="width: 100px;"></input> <a href="javascript:void(0);"
 				class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> <a
 				href="javascript:void(0);" class="easyui-linkbutton" id="btn_reset">重置</a>
-			</td>
-		</tr>
-	</table>
+		</div>
+	</div>
 	<div style="margin:0px">
 	<table id="BusinessList"></table></div>
 

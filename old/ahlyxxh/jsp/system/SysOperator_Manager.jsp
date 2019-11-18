@@ -19,18 +19,16 @@ request.setAttribute("home", request.getContextPath());
   </head>
   
   <body style="padding: 0px; margin: 0px;">
-		<table id="SysOperatorQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="SysOperatorQueryForm" class="form_query parameter">
+			<div>
 					&#160;&#160;姓名：<input type="text" id="SysOperatorQueryForm:name" style="width:150px;"></input>											
 					&#160;登录名：<input type="text" id="SysOperatorQueryForm:loginName" style="width:150px;"></input>											
 					&#160;状态：<select id="SysOperatorQueryForm:status" style="width:150px;"><option value="0">启用</option><option value="1">禁用</option></select>
 					&#160;备注：<input type="text" id="SysOperatorQueryForm:remark" style="width:150px;"></input>											
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 					<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="SysOperatorList"></table>
 
 	<div id="SysOperatorDialog" style="padding: 0px; width: 850px; height: 350px;margin:0px;">

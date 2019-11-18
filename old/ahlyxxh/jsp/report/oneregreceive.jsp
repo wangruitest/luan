@@ -207,7 +207,7 @@
 <input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.ONE_REG_RECEIVE_PROCEDURE%>"/>
 <input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.ONE_REG_RECEIVE_PROCEDURE_PARAMS%>"/>
 
-<div id="parameter">
+<div class="parameter">
     <div>
         <label>游客类型:</label>
         <select id="touristtype" name="touristtype">
@@ -217,6 +217,8 @@
         </select>
         <label>城市列表:</label>
         <select id="cityid" name="cityid" onchange="cityChange();"></select>
+    </div>
+    <div>
         <label>景区评级:</label>
         <select id="aLevel" name="aLevel" onchange="levelChange();">
             <option value="">--请选择--</option>
@@ -227,10 +229,9 @@
             <option value="5">AAAAA级</option>
         </select>
         <label>选择景区:</label>
-        <select id="regionId" name="regionId"></select>
+        <select id="regionId" name="regionId" style="width: 340px;"></select>
         <!--<input type="checkbox" id="isHolidayCk" name="isHolidayCk" style="font-size: 12px;" onclick="isHolidayCheck(this)" disabled/>是否节假日-->
         <input type="hidden" value="0" id="isHoliday" name="isHoliday"/>
-        <input type="checkbox" name="showTb" id="showTb" onclick="toCheck(this);"/> 显示同比
     </div>
     <div>
         <label>查询方式:</label>
@@ -252,8 +253,8 @@
 					<label>开始时间:</label>
 					<input type="text" id="qBeginTime" name="qBeginTime" class="Wdate" value="<%=today %>"
                            onclick="WdatePicker({dateFmt:'yyyy',minDate:'#F{$dp.$D(\'qEndTime\',{y:-1})}',maxDate:'#F{$dp.$D(\'qEndTime\')||\'%y\'}'});"/>
-					<select id="qQuarterBegin" name="qQuarterBegin" style="width: 75px;">
-                        <option selected="selected" value="1">第一季度</option>
+					<select id="qQuarterBegin" name="qQuarterBegin" style="width: 120px;">
+                        <option selected="selected" value="1" >第一季度</option>
                         <option value="2">第二季度</option>
                         <option value="3">第三季度</option>
                         <option value="4">第四季度</option>
@@ -261,7 +262,7 @@
 					<label>结束时间:</label>
 					<input type="text" id="qEndTime" name="qEndTime" class="Wdate" value="<%=today %>"
                            onclick="WdatePicker({dateFmt:'yyyy',maxDate:'#F{($dp.$D(\'qBeginTime\',{y:1}))}',minDate:'#F{$dp.$D(\'qBeginTime\')}'});"/>
-					<select id="qQuarterEnd" name="qQuarterEnd" style="width: 75px;">
+					<select id="qQuarterEnd" name="qQuarterEnd" style="width: 120px;">
                         <option selected="selected" value="1">第一季度</option>
                         <option value="2">第二季度</option>
                         <option value="3">第三季度</option>
@@ -278,12 +279,15 @@
 				</span>
 				<span id="dSearch">
 					<label>开始时间:</label>
-					<input type="text" id="dBeginTime" name="dBeginTime" class="Wdate" value="<%=day %>"
+					<input type="text" id="dBeginTime" name="dBeginTime" style="width:140px;" class="Wdate" value="<%=day %>"
                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'dEndTime\',{d:-15})}',maxDate:'#F{$dp.$D(\'dEndTime\')||\'%y-%M-%d\'}',onpicking:isSpecDate($dp.cal.newdate)});"/>
 					<label>结束时间:</label>
-					<input type="text" id="dEndTime" name="dEndTime" class="Wdate" value="<%=day %>"
+					<input type="text" id="dEndTime" name="dEndTime" style="width:140px;"  class="Wdate" value="<%=day %>"
                            onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'dBeginTime\',{d:15})}',minDate:'#F{$dp.$D(\'dBeginTime\')||\'%y-%M-%d\'}',onpicking:isSpecDate($dp.cal.newdate)});"/>
-				</span>
+				</span></div>
+                <div>
+                        <input type="checkbox" name="showTb" id="showTb" onclick="toCheck(this);"/> 显示同比
+
         <a class="easyui-linkbutton" icon="icon-search" name="searchbtn" id="searchbtn"
            onclick="searchValidate();">查询</a>
         <a class="easyui-linkbutton" name="searchbtn2" id="searchbtn2"

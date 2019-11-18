@@ -12,7 +12,7 @@
             singleSelect: false,
             pagination: true,
             rownumbers:true,
-            height:getViewportHeight()-80,
+            height:getViewportHeight()-100,
             pageSize: 30,
             border:false,
             fitColumns: true,

@@ -20,16 +20,14 @@ request.setAttribute("home", request.getContextPath());
   </head>
   
   <body style="margin:0px">	
-		<table id="NoticeCfgQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="NoticeCfgQueryForm" class="form_query parameter">
+			<div>
 					公告标题：<input type="text" id="NoticeCfgQueryForm:newsTitle" style="width:100px;"></input>											
 					公告内容：<input type="text" id="NoticeCfgQueryForm:newsContent" style="width:100px;"></input>											
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 				<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="NoticeCfgList"></table>
 
 	<div id="NoticeCfgDialog" style="padding:0px;width:530px;height:400px;">

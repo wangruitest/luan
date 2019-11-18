@@ -22,18 +22,16 @@ request.setAttribute("home", request.getContextPath());
 		<div id="type_tree"></div>
 	</div>
 	<div data-options="region:'center'">
-		<table id="SysMenuQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="SysMenuQueryForm" class="form_query parameter">
+			<div>
 					&#160;&#160;菜单标识：<input type="text" id="SysMenuQueryForm:menuid" style="width:100px;"></input>
 					&#160;名称：<input type="text" id="SysMenuQueryForm:name" style="width:100px;"></input>
 					&#160;地址：<input type="text" id="SysMenuQueryForm:url" style="width:100px;"></input>
 					&#160;状态：<select id="SysMenuQueryForm:status" style="width:80px;"><option value="0">启用</option><option value="1">禁用</option></select>
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 					<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="SysMenuList"></table>
 	
 		<div id="SysMenuDialog" style="padding: 0px; width: 650px; height: 250px;margin:0px;">

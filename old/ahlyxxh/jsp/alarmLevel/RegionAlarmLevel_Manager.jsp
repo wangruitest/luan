@@ -20,9 +20,8 @@
 </head>
 
 <body style="margin:0px">
-<table id="RegionAlarmLevelQueryForm" class="form_query" style="height: 50px">
-    <tr>
-        <td>
+<div id="RegionAlarmLevelQueryForm" class="form_query parameter" style="height: 50px">
+    <div>
             &nbsp;&nbsp;景区名称：<input type="text" id="RegionAlarmLevelQueryForm:regionName" style="width:100px;"/>
             &nbsp;&nbsp;当前预警级别：<select id="RegionAlarmLevelQueryForm:currentLevel" style="width:100px;">
             <option value="" >--请选择--</option>
@@ -34,9 +33,8 @@
         </select>
             <a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a>
             <a href="javascript:void(0);" class="easyui-linkbutton" id="btn_reset">重置</a>
-        </td>
-    </tr>
-</table>
+    </div>
+</div>
 <table id="RegionAlarmLevelList"></table>
 
 <div id="RegionAlarmLevelDialog" style="padding:0px;width:450px;height:270px;">

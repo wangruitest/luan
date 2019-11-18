@@ -30,10 +30,8 @@ request.setAttribute("home", request.getContextPath());
 		function loseFocus(time) {time.blur();}
 </script>
 <body style="margin: 0px;">
-<table id="ReceiverToursitForm" class="form_query" style="height: 60px;background-color: #E3EFFF;width:100%;">
-    <tr>
-        <td>
-       &nbsp;&nbsp;
+<div id="ReceiverToursitForm" class="form_query parameter">
+    <div>
             选择地市：<select id="ReceiverToursitFromQueryForm:cityCode" name="ReceiverToursitFromQueryForm:cityCode" style="width:150px;" onchange="initRegionList();"></select>
            选择景区： <select id="ReceiverToursitFromQueryForm:regionId" name="ReceiverToursitFromQueryForm:regionId" style="width:150px;"></select>
           
@@ -42,11 +40,12 @@ request.setAttribute("home", request.getContextPath());
            
            选择节假日：<select id="ReceiverToursitFromQueryForm:searchHolidy" style="width:100px;"></select>
             <a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query" >查询</a>
-            <input type="button" id="searchbtn2" name="searchbtn2" value="导出excel"  onclick="exportJc()" />
+            <!-- <input type="button" id="searchbtn2" name="searchbtn2" value="导出excel"  onclick="exportJc()" /> -->
+            <a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp" onclick="exportJc()">导出excel</a>
+
       		<input type="hidden" id="searchtype" value="y"/>
-        </td>
-    </tr>
-</table>
+    </div>
+</div>
 <div class="easyui-tabs" id="tabs" style="overflow:scroll;" >
 		<div id="<%=ReportConstants.COLUMN3D_CHART %>" title="柱状图">
 			</div>

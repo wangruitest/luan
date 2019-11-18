@@ -194,7 +194,7 @@
  <body style="margin: 0px;">
 		<input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.FOR_TOUR_RECEPTION_PROCEDURE%>"/>
 		<input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.FOR_TOUR_RECEPTION_PROCEDURE_PARAMS%>"/>
-		<div id="parameter">
+		<div class="parameter">
 			<div >
 			    <label>选择年份:</label>
 			   <input
@@ -204,9 +204,11 @@
 				<label>选择假日:</label>
 				<select  id="holidayNames" name="holidayNames" >
 				</select>
-				<input type="button" id="searchbtn" name="searchbtn" value="查 询 " onclick="searchValidate();"/>
-				<input type="button" id="searchbtn2" name="searchbtn2" value="导出excel " onclick="exportJc()"/>
+				<!-- <input type="button" id="searchbtn" name="searchbtn" value="查 询 " onclick="searchValidate();"/>
+				<input type="button" id="searchbtn2" name="searchbtn2" value="导出excel " onclick="exportJc()"/> -->
 		 	
+			<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query" onclick="searchValidate();">查询</a> 
+			<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp" onclick="exportJc()">导出excel</a>
 			</div>
 		</div>
 			

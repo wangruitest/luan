@@ -21,17 +21,15 @@ request.setAttribute("home", request.getContextPath());
   </head>
   
   <body style="margin:0px">	
-		<table id="TouristRoamingQueryForm" class="form_query" style="height: 50px">
-		<tr>
-			<td>
+		<div id="TouristRoamingQueryForm" class="form_query parameter" style="height: 50px">
+		<div>
 				统计月份：
 				<input type="text" style="width:100px" id="TouristRoamingQueryForm:statMonth" name="TouristRoamingQueryForm:statMonth" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM',maxDate:'%y-#{%M}',isShowClear:false,isShowToday:false});" readonly="readonly"/>										
 				<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 				<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
 				<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp">导出excel</a>
-				</td>
-			</tr>
-		</table>
+		</div>
+		</div>
 		<table id="TouristRoamingList"></table>
 </body>
 </html>

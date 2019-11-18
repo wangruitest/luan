@@ -13,6 +13,8 @@
 <meta http-equiv="Cache-Control" content="no-store" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
+
+<link rel="STYLESHEET" type="text/css" href="../../css/common/common.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/engine.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/dwr/util.js"></script>
 <script type='text/javascript'

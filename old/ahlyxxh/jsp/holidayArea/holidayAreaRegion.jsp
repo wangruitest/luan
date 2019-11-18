@@ -219,14 +219,17 @@
  <body style="margin: 0px;">
 		<input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.HOLIDAY_AREA%>"/>
 		<input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.HOLIADY_AREA_PARAMS%>"/>
-		<div id="parameter">
+		<div class="parameter">
 			<div>
 			<label>城市列表:</label> <select id="cityid" name="cityid"style="width: 100px"></select> 
 			<label>选择年份:</label> <input type="text" id="yBeginTime" name="yBeginTime" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy',onpicking:function(dp){initHolidayList(dp.cal.getNewDateStr())}});" />
 			<label>节日列表:</label> <select id="holidayLastDay" name="holidayLastDay" style="width: 100px"></select>
 
-			<input type="button" id="searchbtn" name="searchbtn" value="查 询 " onclick="searchValidate();" /> 
-			<input type="button" id="searchbtn2"name="searchbtn2" value="导出excel " onclick="exportValidate()" /> 
+			<!-- <input type="button" id="searchbtn" name="searchbtn" value="查 询 " onclick="searchValidate();" /> 
+			<input type="button" id="searchbtn2"name="searchbtn2" value="导出excel " onclick="exportValidate()" />  -->
+			<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query" onclick="searchValidate();">查询</a> 
+			<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp" onclick="exportValidate()">导出excel</a>
+
 			<input type="hidden" id="searchtype" value="y"/>
 		</div>
 		</div>

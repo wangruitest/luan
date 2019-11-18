@@ -36,7 +36,8 @@ function cityListInit() {
     			var city = allCityArr.cityList[arrIndex];
     			if(city.code == data.returnList[0].ext2){
     			//htmlTemp += '';
-    			htmlTemp += '<span class="tdSpan" style="margin-bottom: 3px;"><input name="ctiys" type="checkbox" value='+city.code+'/>'+city.name+'</span>';
+    			// htmlTemp += '<span class="tdSpan" style="margin-bottom: 3px;"><input name="ctiys" type="checkbox" value='+city.code+'/>'+city.name+'</span>';
+    			htmlTemp += '<span style=""><input name="ctiys" type="checkbox" style="margin-bottom: 8px;" value='+city.code+'/>'+city.name+'</span>';
     			break;
     			};			
     		}

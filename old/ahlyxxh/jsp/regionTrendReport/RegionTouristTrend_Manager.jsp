@@ -22,16 +22,19 @@ request.setAttribute("home", request.getContextPath());
 
   </head>
   
-  <body style="padding: 0px;margin: 0px;">
-		<table id="RegionTouristTrendQueryForm" class="form_query" style="height: 50px;background-color: #E3EFFF;">
+	<body style="padding: 0px;margin: 0px;">
+		<div id="RegionTouristTrendQueryForm" class="parameter">
+				景区：<select id="RegionTouristTrendQueryForm:regionid" style="width:320px;"></select>
+				<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a>
+				<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp">导出excel</a>
+		</div>
+		<!-- <table id="RegionTouristTrendQueryForm" class="form_query" style="height: 50px;background-color: #E3EFFF;">
 			<tr>
 				<td>
-					&nbsp;&nbsp;景区：<select id="RegionTouristTrendQueryForm:regionid" style="width:100px;"></select>
-					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a>
-					<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp">导出excel</a>
+				
 				</td>
 			</tr>
-		</table>
+		</table> -->
 		<div class="easyui-tabs" id="tabs">
 		<div id="RegionTouristTrendListLine" title="曲线图" style="padding:10px">
 			<div id="RegionTouristTrendListLine0"></div>

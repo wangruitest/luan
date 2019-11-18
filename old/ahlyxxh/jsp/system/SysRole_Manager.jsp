@@ -24,17 +24,15 @@ request.setAttribute("home", request.getContextPath());
   </head>
   
   <body style="margin: 0px;padding: 0px;">
-		<table id="SysRoleQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="SysRoleQueryForm" class="form_query parameter">
+			<div>
 					&#160;&#160;角色名称：<input type="text" id="SysRoleQueryForm:name" style="width:200px;"></input>											
 					&#160;状态：<select id="SysRoleQueryForm:status" style="width:150px;"><option value="0">启用</option><option value="1">禁用</option></select>
 					&#160;备注：<input type="text" id="SysRoleQueryForm:remark" style="width:200px;"></input>											
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 					<a href="javascript:void(0);" class="easyui-linkbutton" id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="SysRoleList"></table>
 
 	<div id="SysRoleDialog" style="padding: 0px; width: 520px; height: 330px;margin:0px;">

@@ -21,10 +21,10 @@ request.setAttribute("home", request.getContextPath());
 	
   </head>
   <body  style="margin:0px">	
-		<table id="TouristRoamingInQueryForm" class="form_query1" style="height: 50px">
-			<tr>
-				<th align="right" width="120px";>来源地：</th>
-				<td valign="middle">
+		<div id="TouristRoamingInQueryForm" class="form_query1 parameter" style="">
+			<div style="height:auto;">
+				<label align="right" width="120px";>来源地：</label>
+				<div valign="middle" style="display:inline-block;">
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="340100"/>合肥市</span>
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="340200"/>芜湖市</span>
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="340300"/>蚌埠市</span>
@@ -42,24 +42,20 @@ request.setAttribute("home", request.getContextPath());
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="341600"/>亳州市</span>
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="341700"/>池州市</span>
 					<span class="tdSpan" style="margin-bottom: 3px;"><input name="provinces" type="checkbox" value="341800"/>宣城市</span>			
-				</td>
-			</tr>
-			<tr>
-			<th align="right" width="120px";>目的地：</th>
-				<td valign="middle" id="mdd_bar_2">
-					</td>
-			</tr>
-			<tr>
-				<th align="right" width="120px";>统计月份：</th>
-				<td>
-						
+				</div>
+			</div>
+			<div>
+			<label align="right" width="120px";>目的地：</label>
+				<span valign="middle" id="mdd_bar_2">
+				</span>
+		
+				<label align="right" width="120px";>统计月份：</label>
 						<input type="text" style="width:100px" id="TouristRoamingInQueryForm:statMonth" name="TouristRoamingInQueryForm:statMonth" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM'});" readonly="readonly"/>											
 						<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 						<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
 						<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_exp">导出excel</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="TouristRoamingInList"></table>
 </body>
 </html>

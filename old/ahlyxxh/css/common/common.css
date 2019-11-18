@@ -79,21 +79,83 @@ input.text { margin-bottom:12px; width:95%; padding: .4em; }
 #parameter{
 	background-color: #E3EFFF;
 	width:100%;
-	padding: 3px 0px 5px 0px;
-	line-height: 24px;
+	padding: 3px 10px 5px 10px;
+	line-height: 42px;
+	font-size:18px;
 }
 #parameter div{
-	padding: 2px;
-	height: 24px;
+	height: 40px;
+	margin-top:5px;
 }
-#parameter label{
-	margin: 2px;
-}
+/* #parameter label{ */
+	/* margin: 2px; */
+/* } */
 #parameter input[type=text]{
 	width: 85px;
-	height: 20px;
+	height: 34px;
+	font-size:18px;
+	padding-left:10px;
+}
+#parameter input[class=Wdate]{
+	width: 85px;
+	height: 38px;
+	font-size:18px;
+	padding:0px;
+	padding-left:10px;
+	border:#ddd 1px solid;
 }
 #parameter select{
 	width: 89px;
-	height: 22px;
+	height: 40px;
+	font-size:18px;
+	width:200px;
+	border-radius: 0px;
+	padding-left:10px;
+}
+
+/* .Wdate input{
+	height: 36px;
+} */
+
+select{
+	border: 0px;
+    outline: 1px solid rgb(204,204,204);
+}
+
+.parameter{
+	background-color: #E3EFFF;
+	width:100%;
+	padding: 3px 10px 5px 10px;
+	/* line-height: 42px; */
+	font-size:18px;
+}
+.parameter div{
+	/* padding: 2px; */
+	height: 40px;
+	margin-top:5px;
+}
+/* .parameter label{ */
+	/* margin: 2px; */
+/* } */
+.parameter input[type=text]{
+	width: 85px;
+	height: 34px;
+	font-size:18px;
+	padding-left:10px;
+}
+.parameter input[class=Wdate]{
+	width: 85px;
+	height: 38px;
+	font-size:18px;
+	padding:0px 0px 0px 10px;
+	/* padding-left:10px; */
+	border:#ddd 1px solid;
+}
+.parameter select{
+	width: 89px;
+	height: 40px;
+	font-size:18px;
+	width:200px;
+	border-radius: 0px;
+	padding-left:10px;
 }

@@ -22,7 +22,7 @@
     <script type="text/javascript" src="${home}/js/jquery/date-functions.js"></script>
     <jsp:include flush='true' page='RegionRemain_Manager_js.jsp'/>
     <style type="text/css">
-        #RegionRemainQueryForm{
+        /* #RegionRemainQueryForm{
             background-color: #E3EFFF;
             width:100%;
             padding: 3px 0px 5px 0px;
@@ -43,12 +43,12 @@
         #RegionRemainQueryForm select{
             width: 104px;
             height: 22px;
-        }
+        } */
     </style>
 </head>
 
 <body style="margin: 0px;">
-<div id="RegionRemainQueryForm" class="form_query" >
+<div id="RegionRemainQueryForm" class="form_query parameter" >
     <div>
         <label>游客来源:</label>
         <select id="RegionRemainQueryForm:areaCode" >
@@ -69,7 +69,6 @@
         </select>
         <label>景区:</label>
         <select id="RegionRemainQueryForm:regionId" ></select>
-        <a class="easyui-linkbutton" icon="icon-search" id="btn_query" onclick="searchValidate();">查询</a>
         <!--<a href="javascript:void(0);" class="easyui-linkbutton" id="btn_reset">重置</a>-->
 
     </div>
@@ -114,6 +113,7 @@
             <input type="text" style="width:100px;" id="RegionRemainQueryForm:mendtime" name="RegionRemainQueryForm:mendtime" class="Wdate"
                         onclick="WdatePicker({dateFmt:'yyyy-MM',maxDate:'#F{($dp.$D(\'RegionRemainQueryForm:mbegintime\',{M:10}))}',minDate:'#F{$dp.$D(\'RegionRemainQueryForm:mbegintime\')||\'%y-%M\'}'});"/>
         </span>
+        <a class="easyui-linkbutton" icon="icon-search" id="btn_query" onclick="searchValidate();">查询</a>
 
     </div>
 </div>

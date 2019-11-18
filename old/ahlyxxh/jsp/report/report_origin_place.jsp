@@ -210,7 +210,7 @@
 <input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.ORGIN_PLACE_PROCEDURE_PARAMS%>"/>
 <input type="hidden" id="areaCodes" name="areaCodes"/>
 <input type="hidden" id="provinces_code" name="provinces_code" value="<%=request.getParameter("provinces_code")%>"/>
-<div id="parameter">
+<div class="parameter">
     <div >
         <label>城市列表:</label>
         <select id="cityid" name="cityid"  onchange="provinceCityChange();"></select>

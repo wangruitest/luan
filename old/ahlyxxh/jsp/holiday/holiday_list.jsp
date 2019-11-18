@@ -20,9 +20,8 @@ request.setAttribute("home", request.getContextPath());
   </head>
   
   <body style="margin:0px">	
-		<table id="HolidayQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="HolidayQueryForm" class="form_query parameter" >
+			<div>
 					节日名称：
 			<!-- 	<select  id="HolidayQueryForm:holidayName" name="HolidayForm:holidayName" class="easyui-combobox" style="width:150px;">
 			        <option value="">请选择</option>
@@ -39,9 +38,8 @@ request.setAttribute("home", request.getContextPath());
 					所属年份：<input  type="text" id="HolidayQueryForm:beloneYear"   style="width:150px;" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy'});" readonly="readonly"/>									
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 				    <a href="javascript:void(0);"class="easyui-linkbutton"  id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="HolidayList"></table>
 
 	<div id="HolidayDialog" style="padding:0px;width:400px;height:200px;">

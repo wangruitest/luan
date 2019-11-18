@@ -227,7 +227,7 @@
 
 <input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.TOURIST_STAT_DAYS_PROCEDURE%>"/>
 <input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.TOURIST_STAT_DAYS_PROCEDURE_PARAMS%>"/>
-<div id="parameter">
+<div class="parameter">
     <div>
         <label>城市列表:</label>
         <select id="cityid" name="cityid"></select>

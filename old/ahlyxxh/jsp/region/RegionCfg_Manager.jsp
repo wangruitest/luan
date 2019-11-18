@@ -20,16 +20,14 @@
   </head>
   
   <body style="margin:0px">	
-		<table id="RegionCfgQueryForm" class="form_query" style="height: 50px">
-			<tr>
-				<td>
+		<div id="RegionCfgQueryForm" class="form_query parameter">
+			<div>
 					景区名称：<input type="text" id="RegionCfgQueryForm:regionName" style="width:100px;"></input>											
 					更新人员：<input type="text" id="RegionCfgQueryForm:updateuser" style="width:100px;"></input>											
 					<a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a> 
 					<a href="javascript:void(0);"class="easyui-linkbutton" id="btn_reset">重置</a>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 		<table id="RegionCfgList"></table>
 
 		<div id="RegionCfgDialog" style="padding:0px;width:800px;height:250px;">

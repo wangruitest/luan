@@ -34,17 +34,15 @@
 </head>
 
 <body style="margin: 0px;">
-<table id="RegionAlarmPhoneQueryForm" class="form_query" style="height: 50px">
-    <tr>
-        <td>
+<div id="RegionAlarmPhoneQueryForm" class="form_query parameter">
+    <div>
             &nbsp;姓   名：<input type="text" id="RegionAlarmPhoneQueryForm:name" style="width:100px;"/>
             &nbsp;手机号码：<input type="text" id="RegionAlarmPhoneQueryForm:phone" style="width:100px;"/>
             &nbsp;景区名称：<select id="RegionAlarmPhoneQueryForm:regionId" style="width:100px;"></select>
             <a href="javascript:void(0);" class="easyui-linkbutton" icon="icon-search" id="btn_query">查询</a>
             <a href="javascript:void(0);" class="easyui-linkbutton" id="btn_reset">重置</a>
-        </td>
-    </tr>
-</table>
+    </div>
+</div>
 <table id="RegionAlarmPhoneList"></table>
 
 <div id="RegionAlarmPhoneDialog" style="padding:0px;width:380px;height:250px;">

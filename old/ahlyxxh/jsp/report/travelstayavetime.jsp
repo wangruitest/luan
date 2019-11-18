@@ -153,7 +153,7 @@
 <input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS"
        value="<%=ReportConstants.TRAVEL_STAY_AVETIME_PROCEDURE_PARAMS%>"/>
 <input id="touristtype" name="touristtype" value="0" type="hidden"/>
-<div id="parameter" style="background-color: #E3EFFF;width:100%">
+<div class="parameter" style="background-color: #E3EFFF;width:100%">
     <div >
         <label>城市列表:</label>
         <select id="cityid" name="cityid"></select>
@@ -176,8 +176,7 @@
         <!--<input type="checkbox" id="isHolidayCk" name="isHolidayCk" onclick="isHolidayCheck(this)"
                disabled/><span style="font-size: 12px;">是否节假日</span>-->
         <input type="hidden" value="0" id="isHoliday" name="isHoliday"/>
-        <a class="easyui-linkbutton" icon="icon-search" name="searchbtn" id="searchbtn" onclick="searchValidate();">查询</a>
-        <a class="easyui-linkbutton" name="searchbtn2" id="searchbtn2" onclick="exportValidate();">导出Excel</a>
+       
     </div>
     <div >
 
@@ -217,6 +216,8 @@
             <label>结束时间:</label>
             <input type="text"  id="dEndTime" name="dEndTime" class="Wdate" value="<%=day %>" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'dBeginTime\',{d:15})}',minDate:'#F{$dp.$D(\'dBeginTime\')||\'%y-%M-%d\'}'});" />
         </span>
+        <a class="easyui-linkbutton" icon="icon-search" name="searchbtn" id="searchbtn" onclick="searchValidate();">查询</a>
+        <a class="easyui-linkbutton" name="searchbtn2" id="searchbtn2" onclick="exportValidate();">导出Excel</a>
     </div>
 
 </div>

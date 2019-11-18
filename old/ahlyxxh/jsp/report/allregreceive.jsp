@@ -190,10 +190,10 @@
 <input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.ALL_REG_RECEIVE_PROCEDURE%>"/>
 <input type="hidden" id="PROC_PARAMS" name="PROC_PARAMS" value="<%=ReportConstants.ALL_REG_RECEIVE_PROCEDURE_PARAMS%>"/>
 
-<div id="parameter">
+<div class="parameter">
     <div>
         <label>游客类型:</label>
-        <select class="easyui-combobox" style="width:120px;" id="touristtype" name="touristtype">
+        <select style="width:140px;height:40px" id="touristtype" name="touristtype">
             <option value="0" selected="selected"> 全部游客</option>
             <option value="1"> 外地游客</option>
             <option value="2">本地游客</option>

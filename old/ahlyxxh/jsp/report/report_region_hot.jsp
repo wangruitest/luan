@@ -138,7 +138,7 @@
 <body style="margin: 0px;">
 <input type="hidden" id="procedureName" name="procedureName" value="<%=ReportConstants.REGION_HOT_PROCEDURE%>"/>
 
-<div id="parameter">
+<div class="parameter">
     <div>
         <label>城市列表:</label>
         <select id="cityid" name="cityid"></select>
