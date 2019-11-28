@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.regionrealtime.dao.RegionRealtimeDao">
+
+<resultMap id="RegionRealtimeSumResult" type="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum">
+  <result property="id" column="ID" />
+  <result property="regionId" column="REGION_ID" />
+  <result property="stayTourists" column="STAY_TOURISTS" />
+  <result property="inTourists" column="IN_TOURISTS" />
+  <result property="outTourists" column="OUT_TOURISTS" />
+  <result property="statHour" column="STAT_HOUR" />
+  <result property="startMonth" column="START_MONTH" />
+  <result property="stayMin" column="STAY_MIN" />
+  <result property="updatetime" column="UPDATETIME" />
+  <result property="cityCode" column="CITY_CODE" />
+  <result property="submitTime" column="SUBMIT_TIME" />
+  <result property="type" column="TYPE" />
+  <result property="regionname" column="REGIONNAME" />
+  <result property="searchdate" column="SEARCHDATE" />
+  <result property="rqtime" column="RQTIME" />
+  <result property="regionNum" column="REGION_NUM" />
+  <result property="redAlarm" column="REDALARM" />
+</resultMap>
+
+<!-- 景区人流曲线图 -->
+<select id="getRealtimeListForDaping" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+
+SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS,to_char(t.stat_hour, 'HH24:MI') RQTIME
+FROM REGION_REALTIME_SUM t  WHERE 
+t.stat_hour>=to_date(#{statHour,jdbcType=VARCHAR},'yyyy-mm-dd')
+and  t.region_id in( select s.id from REGION_CFG s)
+group by t.stat_hour 
+order BY RQTIME
+</select>  
+
+<!-- 景区实时人数： -->
+<select id="getRealtimeList" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+ SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+WHERE  
+t.stat_hour >= (select max(stat_hour) - interval '1' hour from region_realtime_sum) 
+and  t.region_id in(select s.id from REGION_CFG s) 
+group by t.stat_hour order by t.stat_hour desc
+</select> 
+
+<!-- 监控景区数 -->
+<select id="getAlarmRegion" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+ select  count(1) as REGION_NUM, count(case when tt.color!=0 then 1 end) as redAlarm from 
+ ( select  ss.region_name as scenicName,ss.id id,
+  case  
+    when a.num&lt;ral.level4_num then trunc(a.num/ral.level4_num*0.25,2)*100
+    when  a.num&lt;ral.level3_num then trunc((a.num-ral.level4_num)/(ral.level3_num-ral.level4_num)*0.25+0.25,2)*100
+    when  a.num&lt;ral.level2_num then trunc((a.num-ral.level3_num)/(ral.level2_num-ral.level3_num)*0.25+0.5,2)*100
+    when  a.num&lt;ral.level1_num then trunc((a.num-ral.level2_num)/(ral.level1_num-ral.level2_num)*0.25+0.75,2)*100
+    when  a.num&gt;=ral.level1_num then  trunc(a.num/ral.level1_num,2)*100 
+    else 0 end
+  as yuZhi,
+  nvl(a.num,0) as touristNum,
+  case  
+  when a.num&lt;ral.level4_num then '0'
+  when  a.num&lt;ral.level3_num then '1'
+  when  a.num&lt;ral.level2_num then '2'
+  when  a.num&lt;ral.level1_num then '3'
+  when  a.num&gt;=ral.level1_num then '4'
+  else '0' end  as color,ral.level1_num as max
+  from  region_alarm_level ral left join 
+    (select s.id  ,nvl(sum(stay_tourists),0) as num,s.region_name
+      from REGION_CFG s right join region_realtime_sum r on 
+      r.region_id=s.id
+      where r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+      group by s.id,s.region_name)a
+  on ral.region_id=a.id
+  right join REGION_CFG ss 
+  on ral.region_id=ss.id
+   order by yuzhi desc,num desc) tt 
+</select> 
+
+<!-- 景区今日游客累计： -->
+<select id="getRealtimeListByToday" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+ SELECT SUM(t.IN_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+WHERE   t.stat_hour >=to_date(#{statHour},'yyyy-mm-dd') 
+and  t.region_id in( select s.id from REGION_CFG s)
+</select> 
+
+<select id="getRealtimeListByYesDay" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+ SELECT nvl(SUM(t.IN_TOURISTS),0) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+WHERE  t.region_id in(select s.id from REGION_CFG s) and
+to_char(t.stat_hour,'yyyy-MM-dd HH24:mm:ss') between #{submitTime}  and #{updatetime}
+</select> 
+
+
+<!-- 本月累计游客数： -->
+<select id="getRealtimeSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+select nvl(sum(t.tourists),0) as STAY_TOURISTS from TOURIST_PHONES_BYMONTH_SUM t  where 
+to_char(t.stat_month,'yyyy-MM')=#{startMonth}
+ <if test="cityCode != null" >
+    	and t.city_code= #{cityCode,jdbcType=VARCHAR}
+    </if>
+    <if test="countyCode != null" >
+    	and t.roamingcounty= #{countyCode,jdbcType=VARCHAR}
+    </if>
+</select> 
+
+
+<!-- 本月日游客数峰值： -->
+<select id="getTouristPeak" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+  select nvl(max(c.tourists),0) as STAY_TOURISTS from(select sum(a.tourists) as tourists,a.stat_day from (select t.tourists,t.stat_day from TOURIST_PHONES_BYDAY_SUM t
+where to_char(t.stat_day,'yyyy-MM') =#{startMonth}
+<if test="cityCode != null" >
+    	and t.city_code= #{cityCode,jdbcType=VARCHAR}
+    </if>
+    <if test="countyCode != null" >
+    	and t.roamingcounty= #{countyCode,jdbcType=VARCHAR}
+    </if>
+) a
+group by a.stat_day )c
+</select> 
+
+
+<!-- 昨日一日游过夜客 -->
+<select id="getOvernightSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+select nvl(sum(s.dupovernightcitycount),0) as STAY_TOURISTS from TOURIST_ROAMING_OVERNIGHT_DAY s
+where to_char(s.stat_day, 'YYYY-MM-dd')=to_char((select max(stat_day) from TOURIST_ROAMING_OVERNIGHT_DAY ), 'yyyy-MM-dd')
+<if test="cityCode != null" >
+    	and s.roamingcity =#{cityCode}
+    </if>
+    <if test="countyCode != null" >
+    	and s.roamingcounty= #{countyCode,jdbcType=VARCHAR}
+    </if>
+</select> 
+
+<!-- 昨日城市旅客 -->
+<select id="getCityVisitorSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+select  nvl( sum(s.tourists),0) as STAY_TOURISTS,nvl(sum(s.citycount),0)as IN_TOURISTS
+from TOURIST_PHONES_BYDAY_SUM s  where  
+to_char(s.stat_day, 'YYYY-MM-dd')=#{statHour}
+<if test="cityCode != null" >
+    	and s.roamingcity =#{cityCode}
+    </if>
+    <if test="countyCode != null" >
+    	and s.roamingcounty= #{countyCode,jdbcType=VARCHAR}
+    </if>
+
+</select> 
+
+
+<!--游客景区停留时间 -->
+<select id="getScenicTime" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+select trunc(nvl(sum(t.totalminutes)/sum(t.tourists),0)/60,2) as STAY_MIN from REGION_STATS_BYMONTH t
+where 
+to_char(t.stat_month,'yyyy-MM')=to_char(sysdate - interval '1' month , 'yyyy-MM')
+</select> 
+</mapper>

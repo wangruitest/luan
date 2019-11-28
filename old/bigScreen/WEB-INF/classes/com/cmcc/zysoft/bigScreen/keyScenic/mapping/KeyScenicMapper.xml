@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.bigScreen.keyScenic.dao.KeyScenicDao">
+	<select id="getKeyScenicState" parameterType="string" resultType="com.cmcc.zysoft.scenicmonitor.model.ScenicState">
+select  ss.ordernumber,ss.region_name as scenicName,ss.id scenicId,
+  case  
+    when a.num&lt;ral.level4_num then trunc(a.num/ral.level4_num*0.25,2)*100
+    when  a.num&lt;ral.level3_num then trunc((a.num-ral.level4_num)/(ral.level3_num-ral.level4_num)*0.25+0.25,2)*100
+    when  a.num&lt;ral.level2_num then trunc((a.num-ral.level3_num)/(ral.level2_num-ral.level3_num)*0.25+0.5,2)*100
+    when  a.num&lt;ral.level1_num then trunc((a.num-ral.level2_num)/(ral.level1_num-ral.level2_num)*0.25+0.75,2)*100
+    when  a.num&gt;=ral.level1_num then  trunc(a.num/ral.level1_num,2)*100 
+    else 0 end
+  as yuZhi,
+  nvl(a.num,0) as touristNum,
+  case  
+  when a.num&lt;ral.level4_num then '0'
+  when  a.num&lt;ral.level3_num then '1'
+  when  a.num&lt;ral.level2_num then '2'
+  when  a.num&lt;ral.level1_num then '3'
+  when  a.num&gt;=ral.level1_num then '4'
+  else '0' end  as color,ral.level1_num as max
+  from  region_alarm_level ral right join 
+ 	 (select s.id  ,nvl(sum(stay_tourists),0) as num,s.region_name
+      from region_cfg s left join region_realtime_sum r on 
+      r.region_id=s.id
+      where r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+      group by s.id,s.region_name)a
+  on ral.region_id=a.id
+  right join region_cfg ss 
+  on ral.region_id=ss.id
+   order by ordernumber,yuzhi desc,num desc
+  
+	</select>
+	
+<select id="getScenicStateNum" parameterType="string" resultType="com.cmcc.zysoft.bigScreen.keyScenic.model.ScenicStateNum">
+ select tt.color,count(1) as num from 
+ ( select  ss.region_name as scenicName,ss.id scenicId,
+  case  
+    when a.num&lt;ral.level4_num then trunc(a.num/ral.level4_num*0.25,2)*100
+    when  a.num&lt;ral.level3_num then trunc((a.num-ral.level4_num)/(ral.level3_num-ral.level4_num)*0.25+0.25,2)*100
+    when  a.num&lt;ral.level2_num then trunc((a.num-ral.level3_num)/(ral.level2_num-ral.level3_num)*0.25+0.5,2)*100
+    when  a.num&lt;ral.level1_num then trunc((a.num-ral.level2_num)/(ral.level1_num-ral.level2_num)*0.25+0.75,2)*100
+    when  a.num&gt;=ral.level1_num then  trunc(a.num/ral.level1_num,2)*100 
+    else 0 end
+  as yuZhi,
+  nvl(a.num,0) as touristNum,
+  case  
+  when a.num&lt;ral.level4_num then '0'
+  when  a.num&lt;ral.level3_num then '1'
+  when  a.num&lt;ral.level2_num then '2'
+  when  a.num&lt;ral.level1_num then '3'
+  when  a.num&gt;=ral.level1_num then '4'
+  else '0' end  as color,ral.level1_num as max
+  from  region_alarm_level ral right join 
+    (select s.id  ,nvl(sum(stay_tourists),0) as num,s.region_name
+      from region_cfg s left join region_realtime_sum r on 
+      r.region_id=s.id
+      where r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+      group by s.id,s.region_name)a
+  on ral.region_id=a.id
+  right join region_cfg ss 
+  on ral.region_id=ss.id
+   order by yuzhi desc,num desc) tt 
+  group by tt.color order by tt.color
+	</select>
+	
+</mapper>

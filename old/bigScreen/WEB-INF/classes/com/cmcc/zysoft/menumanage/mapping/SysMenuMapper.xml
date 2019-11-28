@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.menumanage.dao.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.menumanage.model.SysMenu">
+    <id column="UNID" jdbcType="VARCHAR" property="unid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="SORT_NUM" jdbcType="DECIMAL" property="sortNum" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="PUNID" jdbcType="VARCHAR" property="punid" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UNID, NAME, URL, SORT_NUM, STATUS, PUNID, ICON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where UNID = #{unid,jdbcType=VARCHAR}
+    and
+    ( STATUS='0' or STATUS='1') 
+  </select>
+   <select id="selectByPunid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where PUNID = #{punid,jdbcType=VARCHAR}
+     and
+    ( STATUS=0 or STATUS=1) 
+     order by SORT_NUM asc
+  </select>
+   <select id="selectByPunidForEasyUI" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where PUNID = #{punid,jdbcType=VARCHAR}
+     and STATUS=0 
+     order by SORT_NUM asc
+  </select>
+   <select id="selectByPunidAndStatus" parameterType="hashmap" resultMap="BaseResultMap">
+			    select  *
+			    from SYS_MENU
+			    where PUNID = '${punid}'
+			    and STATUS!='2'<!-- 2暂定为被删除的 -->
+			     <if test="status != ''">
+			     	and STATUS=${status}	
+			    </if>
+			    order by SORT_NUM asc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_MENU
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cmcc.zysoft.menumanage.model.SysMenu">
+    insert into SYS_MENU (UNID, NAME, URL, 
+      SORT_NUM, STATUS, PUNID, 
+      ICON)
+    values (#{unid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{sortNum,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{punid,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.menumanage.model.SysMenu">
+    insert into SYS_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="unid != null">
+        UNID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="punid != null">
+        PUNID,
+      </if>
+      <if test="icon != null">
+        ICON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="unid != null">
+        #{unid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNum != null">
+        #{sortNum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null">
+        #{punid,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.menumanage.model.SysMenu">
+    update SYS_MENU
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNum != null">
+        SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="punid != null">
+        PUNID = #{punid,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.menumanage.model.SysMenu">
+    update SYS_MENU
+    set NAME = #{name,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      PUNID = #{punid,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR}
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+</mapper>

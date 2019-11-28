@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>砀山全域旅游大数据平台</title>
+		<meta name=”viewport” content=”width=device-width, initial-scale=1″ />
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.js"></script>
+		<script type="text/javascript" src="js/md5.js"></script>
+		<style type="text/css">
+			boy a {
+			    color: #fff;
+			    text-decoration: none;
+			    float: left;
+			    outline:none;
+			}
+			a:focus{outline:none;}
+			 
+	 		p{color: black;}
+	 		
+	 		 .head .btn {
+        	   display: none;
+	        }
+	        .head:hover .btn {
+	            display: block;
+	        }
+	        
+		</style>
+	</head>
+	<script type="text/javascript">
+		
+	$(function(){
+		$(document).ready(function(){
+			$(document.body).outerWidth(true);//浏览器当前窗口文档body的总宽度 包括border padding margin
+			
+		})
+		$(document).ready(function() {
+			  //模块尺寸
+			 $('#basic').css('height', $(window).height() - 146);        
+		});
+		 /* var explorer = window.navigator.userAgent.toLowerCase(); 
+		 if(explorer.indexOf('chrome')>0){//webkit 
+			 if (document.body.scrollHeight === window.screen.height && document.body.scrollWidth === window.screen.width) {
+			 	 alert("全屏"); 
+			 } else { 
+			 	alert("不全屏"); 
+			 } 
+		 }else{//IE 9+ fireFox 
+		 	if (window.outerHeight === window.screen.height && window.outerWidth === window.screen.width) { 
+		 		alert("全屏"); 
+		 	} 
+		 	else { 
+		 		alert("不全屏"); 
+		 	} 
+		 } */
+
+		var fulls = "screenX=0,top=0,left=0,screenY=0,scrollbars=1";    //定义弹出窗口的参数
+		  if (window.screen) {
+		     var ah = screen.availHeight - 30;
+		     var aw = screen.availWidth - 10;
+		     fulls += ",height=" + ah;
+		     fulls += ",innerHeight=" + ah;
+		     fulls += ",width=" + aw;
+		     fulls += ",innerWidth=" + aw;
+		     fulls += ",resizable"
+		 } else {
+		     fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually
+		}
+		
+        $(".btn").on("click",function(){
+         	//requestFullScreen(document.documentElement);
+         	//window.open('../home/index.html', 'newwindow',fulls);
+         	//window.open('../home/index.html','','top=0,left=0,toolbar=no, menubar=no,scrollbars=yes,location=no, status=no,titlebar=no');
+         	window.open ('../home/index.html', '', 'fullscreen=yes');
+  		})
+        
+        function requestFullScreen(element) {
+		    // 判断各种浏览器，找到正确的方法
+		    var requestMethod = element.requestFullScreen || //W3C
+		    element.webkitRequestFullScreen ||    //Chrome等
+		    element.mozRequestFullScreen || //FireFox
+		    element.msRequestFullScreen; //IE11
+		    if (requestMethod) {
+		        requestMethod.call(element);
+		    }
+		    else if (typeof window.ActiveXObject !== "undefined") {//for Internet Explorer
+		        var wscript = new ActiveXObject("WScript.Shell");
+		        if (wscript !== null) {
+		            wscript.SendKeys("{F11}");
+		        }
+		    }
+		    $(".btn").remove();
+		}
+		
+      });
+        
+	</script>
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<div class="head">
+				<input type="button" class="btn"  value="全屏" style="float: left;"/>
+				<h2 class="tit">砀山全域旅游大数据平台</h2>
+				<div class="sp"></div>
+				<!--<div class="line1"></div>
+				<div class="line2"></div>-->
+				<div class="line"></div>
+			</div>
+			<!--内容-->
+			<div class="cont">
+				<ul class="list clearfix">
+					<li class="li">
+						<a href="../home/Scenic.html">
+							<img src="img/list01.png" />
+							<p>旅游景区</p>
+						</a>
+					</li>
+					<li class="li">
+						<a href="../home/company.html">
+							<img src="img/list02.png" />
+							<p>旅游企业</p>
+					</li>
+					<li class="li">
+						<a href="../home/project.html">
+							<img src="img/list03.png" />
+							<p>旅游项目</p>
+						</a>
+					</li>
+					<li class="li">
+						<a href="../home/team.html">
+							<img src="img/list04.png" />
+							<p>人才队伍</p>
+						</a>
+					</li>
+					<li class="li">
+						<a href="../bigScreen/index.jsp#-en">
+							<img src="img/list05.png" />
+							<p>市场运行</p>
+						</a>
+					</li>
+					<li class="li">
+						<a href="#">
+							<img src="img/list06.png" />
+							<p>行业监管</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--底部-->
+			<div class="foot">
+				<h3>砀山县旅游局</h3>
+			</div>
+		</div>
+	</body>
+</html>

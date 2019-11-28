@@ -1,0 +1,37 @@
+body{background: rgba(12,19,38,1);}
+
+.head{height: 40px;background: rgba(29,50,84,1);}
+.head h2{text-align: center;font-size:15px; background-color:rgba(57,81,121,1); color: rgba(255,255,255,1); font-weight: 500;font-family:PingFangSC-Medium; line-height: 40px;width: 770px; margin: 0 auto;  }
+.head .sp{width: 770px; background: #00B5FC; height: 2px; margin: 0 auto; position: relative;}
+.head .sp:before{content: ""; position: absolute; left: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(60deg) ;-o-transform: rotate(60deg);-moz-transform: rotate(60deg);-webkit-transform: rotate(60deg);}
+.head .sp:after{content: ""; position: absolute; right: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(-60deg);-o-transform: rotate(-60deg);-moz-transform: rotate(-60deg);-webkit-transform: rotate(-60deg);}
+.head .line{width: 100%; background: #00B5FC url(../img/linebj2.png) no-repeat center center ; height: 2px;margin-top: -40px;}
+
+.main{margin-top: 30px; height: 700px; }
+.areamt{height: 1%;}
+.areaTitle { width: 98%;  height: 8%;  margin-left: 2%;}
+.areaDian { width: 10px;  height: 10px; border-radius: 10px;  background: #ffffff;}
+.areaText {color: #ffffff; font-size: 18px; margin-left: 5px;}
+
+/*上面*/
+.leftTop{height: 49.5%; width: 49%; margin-left: 0.5%; border: 1px solid #0298e4; box-shadow:0 0 10px #0298e4;}
+#mlefttop{width: 100%; min-height: 400px; _height:400px; margin: 0 auto !important;}
+
+.righttop{height: 49.5%; width: 49%; margin-right: 0.5%; border: 1px solid #0298e4; box-shadow:0 0 10px #0298e4;}
+#mrighttop{width: 100%; min-height: 400px; _height:400px; margin: 0  auto !important; }
+.pro{text-align:center; padding:2.2% 0 4%;}
+
+
+/*下面*/
+/*.mainbottom{width: 99%; margin: 20px 0.5% 0; border: 1px solid #0298e4; box-shadow:0 0 10px #0298e4; text-align: center;}*/
+.mainbottom{width: 99%; margin: 20px 0.5% 0; background-color:rgb(15, 25, 46); text-align: center;}
+
+.mainbottom .areaTitle{margin-left: 1%;}
+.list{margin: 20px 20px 40px; /*border: 1px solid #1448a0;*/}
+.list table{width: 100%;  color: #FFFFFF;}
+.list table td{ border: 1px solid #1448a0; height: 40px;color:rgb(72, 95, 137);}
+.td2{width: 15%;}
+.td3{width: 76%; text-align: left; padding: 0 1% !important; text-indent: 2em; }
+.tdd{text-align: center;}
+.foot{margin-top:; text-align: center; background-color:rgb(15, 25, 46);}
+.foot span{color: #FFFFFF; font-size: 16px; margin-left: 10px;}

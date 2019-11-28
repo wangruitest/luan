@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>砀山旅游行业监管</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/regula.css" />
+		
+	<style type="text/css">
+	   .left_menu {
+		    width: 80px;
+		    position: fixed;
+		    top: 190.5px;
+			left: -125px;
+		    background: #0066CC;
+		}
+		
+		.left_menu ul {
+		    float: left;
+		    list-style: none;
+		    padding: 0px;
+		    margin: 0px;
+		}
+        
+        .left_menu ul li span {
+		    width: 100%;
+		    height: 50px;
+		    float: left;
+		    font: 16px '微软雅黑';
+		    line-height: normal;
+		    text-align: center;
+		    line-height: 85px;
+		}
+		
+    	.left_menu ul li {
+		    width: 80px;
+		    height: 100px;
+		    float: left;
+		    color: #fff;
+		    border-left: solid 2px #3399CC;
+		}
+		
+	</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<div class="head">
+				<h2 class="tit">砀山旅游行业监管</h2>
+				<div class="sp"></div>
+				<div class="line"></div>
+			</div>
+			<!--内容-->
+			<div class="cont">
+				<div class="reg">
+					<div class="left">
+						<img src="img/pic1.png" />
+						<img src="img/pic2.png" />
+						<img src="img/pic3.png" />
+						<img src="img/pic4.png" />
+						<!--<img src="img/pic5.png" />-->
+					</div>
+					<div class="right">
+						<img src="img/vx.jpg" width="485" />
+						<p>砀山宣传部电话：8095265</p>
+					</div>
+				</div>
+			</div>
+			<!--结束-->
+		</div>
+		<div class="left_menu">
+			<ul>
+				<a href="../home/index.html"><li><span>首页</span></li></a>
+			</ul>
+		</div>
+	</body>
+	<script type='text/javascript'>
+		var ww = window.screen.width;
+		var wh = window.screen.height;
+		var h = $('.left_menu').height();
+		$('.left_menu').css({top:wh/2-h/2+'px'});
+			
+		$(function(){
+			$('body').mousemove(function(e) {
+					e = e || window.event;
+					__xx = e.pageX || e.clientX + document.body.scroolLeft;
+					__yy = e.pageY || e.clientY + document.body.scrollTop;
+					
+				  if ( __xx <= 125)
+					{
+						$('.left_menu').css({left:'0px'});
+					}
+					else 
+					{
+						$('.left_menu').css({left:'-125px'});
+					}
+			});
+			
+		}); 
+		</script>
+</html>

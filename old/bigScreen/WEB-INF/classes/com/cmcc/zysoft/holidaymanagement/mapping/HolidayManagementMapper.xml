@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.holidaymanagement.dao.HolidayManagementDao">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.holidaymanagement.model.HolidayManagement">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="HOLIDAY_NAME" jdbcType="VARCHAR" property="holidayName" />
+    <result column="FIRST_DAY" jdbcType="TIMESTAMP" property="firstDay" />
+    <result column="LAST_DAY" jdbcType="TIMESTAMP" property="lastDay" />
+    <result column="HOLIDAY_DAYS" jdbcType="DECIMAL" property="holidayDays" />
+    <result column="BELONE_YEAR" jdbcType="VARCHAR" property="beloneYear" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, HOLIDAY_NAME, FIRST_DAY, LAST_DAY, HOLIDAY_DAYS, BELONE_YEAR
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from HOLIDAY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findHolidayManagementByYearName" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from HOLIDAY
+    where BELONE_YEAR = #{beloneYear,jdbcType=VARCHAR} and HOLIDAY_NAME = #{holidayName,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="showHolidayManagementInforByHolidayYear" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from HOLIDAY
+    where BELONE_YEAR = #{beloneYear,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getHolidayYear" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select distinct(t.belone_year) from HOLIDAY t order by t.belone_year asc
+  </select>
+  
+  <delete id="deleteHolidayManagementByYearName" parameterType="java.util.Map">
+    delete from HOLIDAY
+    where BELONE_YEAR = #{beloneYear,jdbcType=VARCHAR} and HOLIDAY_NAME = #{holidayName,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from HOLIDAY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.cmcc.zysoft.holidaymanagement.model.HolidayManagement">
+    insert into HOLIDAY (ID, HOLIDAY_NAME, FIRST_DAY, 
+      LAST_DAY, HOLIDAY_DAYS, BELONE_YEAR
+      )
+    values (#{id,jdbcType=DECIMAL}, #{holidayName,jdbcType=VARCHAR}, #{firstDay,jdbcType=TIMESTAMP}, 
+      #{lastDay,jdbcType=TIMESTAMP}, #{holidayDays,jdbcType=DECIMAL}, #{beloneYear,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.holidaymanagement.model.HolidayManagement">
+    insert into HOLIDAY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="holidayName != null">
+        HOLIDAY_NAME,
+      </if>
+      <if test="firstDay != null">
+        FIRST_DAY,
+      </if>
+      <if test="lastDay != null">
+        LAST_DAY,
+      </if>
+      <if test="holidayDays != null">
+        HOLIDAY_DAYS,
+      </if>
+      <if test="beloneYear != null">
+        BELONE_YEAR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="holidayName != null">
+        #{holidayName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDay != null">
+        #{firstDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastDay != null">
+        #{lastDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidayDays != null">
+        #{holidayDays,jdbcType=DECIMAL},
+      </if>
+      <if test="beloneYear != null">
+        #{beloneYear,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.holidaymanagement.model.HolidayManagement">
+    update HOLIDAY
+    <set>
+      <if test="holidayName != null">
+        HOLIDAY_NAME = #{holidayName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDay != null">
+        FIRST_DAY = #{firstDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastDay != null">
+        LAST_DAY = #{lastDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="holidayDays != null">
+        HOLIDAY_DAYS = #{holidayDays,jdbcType=DECIMAL},
+      </if>
+      <if test="beloneYear != null">
+        BELONE_YEAR = #{beloneYear,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.holidaymanagement.model.HolidayManagement">
+    update HOLIDAY
+    set HOLIDAY_NAME = #{holidayName,jdbcType=VARCHAR},
+      FIRST_DAY = #{firstDay,jdbcType=TIMESTAMP},
+      LAST_DAY = #{lastDay,jdbcType=TIMESTAMP},
+      HOLIDAY_DAYS = #{holidayDays,jdbcType=DECIMAL},
+      BELONE_YEAR = #{beloneYear,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,3 @@
+<configuration debug="false" scan="true" scanPeriod="30 seconds" >
+  <include resource="cfg/logback/logback-production.xml"/>
+</configuration>

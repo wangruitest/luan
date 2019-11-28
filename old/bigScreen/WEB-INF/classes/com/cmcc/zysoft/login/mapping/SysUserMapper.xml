@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.login.dao.SysUserDao" >
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.login.model.SysUser" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="ROLE" property="role" jdbcType="VARCHAR" />
+    <result column="UNITNAME" jdbcType="VARCHAR" property="unitname" />
+    <result column="SCENICNAME" jdbcType="VARCHAR" property="scenicname" />
+    <result column="DELFLAG" jdbcType="VARCHAR" property="delflag" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UNID, UNITID, NAME, PHONE, USERNAME, PASSWORD, ROLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </select>
+  <select id="getUserByUnitid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,s.DELFLAG,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN ( select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE  s.UNITID = #{unitid,jdbcType=VARCHAR}
+  </select>
+  <select id="getUnitUserByUnitid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,s.DELFLAG,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN ( select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE  s.ROLE=1 AND s.UNITID = #{unitid,jdbcType=VARCHAR}
+  </select>
+  
+ <select id="getUserByUnit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,s.DELFLAG,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN ( select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE  s.UNITID = #{unitid,jdbcType=VARCHAR}
+    and s.ROLE=2
+  </select>
+  
+  <select id="getUserByUnitid2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,s.DELFLAG,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN ( select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE  s.UNITID = #{unitid,jdbcType=VARCHAR} and s.DELFLAG=0
+  </select>
+  
+  <select id="getUserList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,s.DELFLAG,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN ( select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE s.DELFLAG=0
+    and s.ROLE=2
+  </select>
+  
+  <select id="selectByUsername" resultMap="BaseResultMap" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+    select 
+     s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD, s.ROLE
+    from SYS_USER s
+    where PHONE = #{phone,jdbcType=VARCHAR} or USERNAME = #{username,jdbcType=VARCHAR}
+     <if test="password != null" >
+    	and PASSWORD= #{password,jdbcType=VARCHAR}
+    </if>
+    and s.DELFLAG !=1
+  </select>  
+  
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+  <![CDATA[
+    select 
+    s.UNID, s.UNITID, s.NAME, s.PHONE, s.USERNAME, s.PASSWORD,t.NAME as UNITNAME,c.SCENIC_NAME AS SCENICNAME
+    from SYS_USER s LEFT JOIN  SYS_UNIT t on s.UNITID=t.UNID 
+    LEFT JOIN (select SCENICID,SCENIC_NAME from SYS_SCENIC 
+    UNION ALL 
+    select '0','全部' from dual) c on t.SCENICID=c.SCENICID
+    WHERE s.DELFLAG= #{delflag,jdbcType=VARCHAR}
+    and s.ROLE=2
+   ]]>
+     <if test="username != null" >
+		and s.USERNAME  like '%${username}%'
+	</if>
+    <if test="unitid != null" >
+    	and s.UNITID= #{unitid,jdbcType=VARCHAR}
+    </if>
+  
+  </select>  
+  
+  <update id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    update  SYS_USER set DELFLAG=1
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="changeByPrimaryKey" parameterType="java.lang.String" >
+    update  SYS_USER set DELFLAG=0
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  <insert id="insert" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+    insert into SYS_USER (UNID, UNITID, NAME, 
+      PHONE, USERNAME, PASSWORD, 
+      ROLE)
+    values (#{unid,jdbcType=VARCHAR}, #{unitid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        UNID,
+      </if>
+      <if test="unitid != null" >
+        UNITID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        #{unid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="unitid != null" >
+        UNITID = #{unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+    update SYS_USER
+    set UNITID = #{unitid,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      ROLE = #{role,jdbcType=VARCHAR}
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 单位管理列表伪删除时关联到的用户一起做伪删除 -->
+  <update id="editByUnitid" parameterType="com.cmcc.zysoft.login.model.SysUser" >
+     update SYS_USER
+    set DELFLAG = '1'
+    where UNITID = #{unitid,jdbcType=VARCHAR}
+  </update>
+  
+  <!--单位用户启用状态的改变 -->
+  <update id="editStatusByUnitid" parameterType="java.util.Map" >
+     update SYS_USER
+    set DELFLAG = #{delflag,jdbcType=VARCHAR}
+    where UNITID = #{unitid,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取菜单权限 -->
+  <resultMap id="MenuResultMap" type="com.cmcc.zysoft.login.model.SysMenu" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PUNID" property="punid" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getParentMenu" resultMap="MenuResultMap" parameterType="java.lang.String" >
+    select 
+    UNID,NAME,ICON
+    from SYS_MENU WHERE PUNID='1' AND STATUS=0
+  </select>
+  <select id="getSubMenu" resultMap="MenuResultMap" parameterType="java.lang.String" >
+    select 
+    UNID,NAME,ICON
+    from SYS_MENU WHERE PUNID=#{punid} AND STATUS=0
+  </select>
+  
+  <select id="getParentMenuByUnitid" resultMap="MenuResultMap" parameterType="java.lang.String" >
+    select 
+    UNID,NAME,ICON
+    from SYS_MENU WHERE PUNID='1' AND STATUS=0
+    AND UNID IN (select t.MENUID from  SYS_MENU_UNIT t where t.UNITID=#{unitid})
+  </select>
+  
+  <select id="getSubMenuByUnitid" resultMap="MenuResultMap" parameterType="java.util.Map" >
+    select 
+    UNID,NAME,ICON
+    from SYS_MENU WHERE PUNID=#{punid} AND STATUS=0
+    AND UNID IN (select t.MENUID from  SYS_MENU_UNIT t where t.UNITID=#{unitid})
+  </select>
+  
+  <!-- 获取一级菜单权限 -->
+   <select id="getMenuByUser" resultMap="MenuResultMap" parameterType="java.lang.String" >
+    select 
+    UNID,NAME,URL,ICON
+    from SYS_MENU m WHERE STATUS=0 and PUNID='1'
+    AND UNID IN (select t.MENUID from  SYS_MENU_USER t where t.USERID=#{userid}
+    AND t.MENUID IN (select   s.MENUID from SYS_MENU_UNIT s where s.UNITID =#{unitid})
+    ) order by m.sort_num
+  </select>
+  
+  <!-- 获取系统设置的子菜单 -->
+   <select id="getSysMenuByUser" resultMap="MenuResultMap" parameterType="java.lang.String" >
+    select 
+    NAME
+    from SYS_MENU WHERE STATUS=0 and PUNID='500'
+    AND UNID IN (select t.MENUID from  SYS_MENU_USER t where t.USERID=#{userid}
+    AND t.MENUID IN (select   s.MENUID from SYS_MENU_UNIT s where s.UNITID =#{unitid})
+    )
+  </select>
+  
+  <!-- 添加用户菜单关系 -->
+  <resultMap id="SysMenuUserResultMap" type="com.cmcc.zysoft.login.model.SysMenuUser" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 添加单位菜单关系 -->
+  <resultMap id="SysMenuUnitResultMap" type="com.cmcc.zysoft.login.model.SysMenuUnit" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <insert id="addMenuUser" parameterType="com.cmcc.zysoft.login.model.SysMenuUser">
+    insert into SYS_MENU_USER (UNID, MENUID, USERID )
+    values (#{unid,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR})
+   </insert>
+   
+  <insert id="addMenuUnit" parameterType="com.cmcc.zysoft.login.model.SysMenuUnit">
+    insert into SYS_MENU_UNIT (UNID, MENUID, UNITID )
+    values (#{unid,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, #{unitid,jdbcType=VARCHAR})
+   </insert>
+   
+   <delete id="deleteByUser" parameterType="java.lang.String" >
+   delete from SYS_MENU_USER t 
+   where t.USERID=#{userid,jdbcType=VARCHAR}
+   </delete>
+   
+   <delete id="deleteByUnit" parameterType="java.lang.String" >
+   delete from SYS_MENU_UNIT t 
+   where t.UNITID=#{unitid,jdbcType=VARCHAR}
+   </delete>
+   
+   <select id="getSysMenuUserList" resultMap="SysMenuUserResultMap" parameterType="java.lang.String" >
+    select * from SYS_MENU_USER
+    where USERID=#{userid,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="getSysMenuUnitList" resultMap="SysMenuUnitResultMap" parameterType="java.lang.String" >
+    select * from SYS_MENU_UNIT
+    where UNITID=#{unitid,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 获取所有城市与景区的关联 -->
+  <resultMap id="cityResultMap" type="com.cmcc.zysoft.login.model.Cities" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+    <result column="CITIES" property="cities" jdbcType="VARCHAR" />
+    <result column="PROVINCEID" property="provinceid" jdbcType="VARCHAR" />
+    <result column="PROVINCES" property="provinces" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getCityList" resultMap="cityResultMap" parameterType="java.lang.String" >
+    select * from CITIES t   where t.CITYID in (select distinct(t.cityid)  from SYS_SCENIC t)
+  </select>
+  
+  <select id="getCityListById" resultMap="cityResultMap" parameterType="java.lang.String" >
+    select * from CITIES t   where t.CITYID =#{cityid}
+    
+  </select>
+  
+  
+  <!-- 添加景区用户关联 -->
+  <resultMap id="SysScenicUserMap" type="com.cmcc.zysoft.login.model.SysScenicUser" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="USERID" property="userid" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <insert id="addScenicUser" parameterType="com.cmcc.zysoft.login.model.SysScenicUser" >
+    insert into SYS_SCENIC_USER (UNID, SCENICID, USERID )
+    values (#{unid,jdbcType=VARCHAR}, #{scenicid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR})
+   </insert>
+   
+   <delete id="deleteScenicByUser" parameterType="java.lang.String" >
+   delete from SYS_SCENIC_USER t 
+   where t.USERID=#{userid,jdbcType=VARCHAR}
+   </delete>
+   
+   <select id="getSysScenicUserList" resultMap="SysScenicUserMap" parameterType="java.lang.String" >
+    select * from SYS_SCENIC_USER
+    where USERID=#{userid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from SYS_USER
+    where username=#{userName,jdbcType=VARCHAR}
+  </select>
+</mapper>

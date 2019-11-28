@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.common.provinces.dao.ProvincesMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.common.provinces.model.Provinces">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PROVINCEID" jdbcType="VARCHAR" property="provinceid" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PROVINCEID, PROVINCE, SHORT_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from PROVINCES
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from PROVINCES
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.cmcc.zysoft.common.provinces.model.Provinces">
+    insert into PROVINCES (ID, PROVINCEID, PROVINCE, 
+      SHORT_NAME)
+    values (#{id,jdbcType=DECIMAL}, #{provinceid,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{shortName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.common.provinces.model.Provinces">
+    insert into PROVINCES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="provinceid != null">
+        PROVINCEID,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.common.provinces.model.Provinces">
+    update PROVINCES
+    <set>
+      <if test="provinceid != null">
+        PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null">
+        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.common.provinces.model.Provinces">
+    update PROVINCES
+    set PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      PROVINCE = #{province,jdbcType=VARCHAR},
+      SHORT_NAME = #{shortName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,44 @@
+@charset "utf-8";
+body{background: rgba(15,25,46,1); }
+.head{height: 40px;background: rgba(29,50,84,1);}
+.head h2{text-align: center;font-size:15px; background-color:rgba(57,81,121,1); color: rgba(255,255,255,1); font-weight: 500;font-family:PingFangSC-Medium; line-height: 40px;width: 770px; margin: 0 auto;  }
+/*.head{height: 104px;}
+.head h2{text-align: center; color: #ffffff;font-size: 32px; font-weight: bold; line-height: 104px;width: 770px; margin: 0 auto;  }*/
+.head .sp{width: 770px; background: #00B5FC; height: 2px; margin: 0 auto; position: relative;}
+.head .sp:before{content: ""; position: absolute; left: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(60deg) ;-o-transform: rotate(60deg);-moz-transform: rotate(60deg);-webkit-transform: rotate(60deg);}
+.head .sp:after{content: ""; position: absolute; right: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(-60deg);-o-transform: rotate(-60deg);-moz-transform: rotate(-60deg);-webkit-transform: rotate(-60deg);}
+.head .line{width: 100%; background: #00B5FC url(../img/teambj.jpg) no-repeat center center ; height: 2px;margin-top: -40px;}
+
+.teamcont{margin-top: 20px;}
+.smallSpan{float:none}
+/*规模*/
+.size{padding:15px;}
+.size ul{width: 100%; }
+.size ul li {width: 18.8%; float: left; margin-left: 1.5%; height: 280px; font: 20px '微软雅黑'; background: rgb(20, 34, 60);}
+.size ul li:first-child{margin-left: 0;}
+.size ul li h1 {padding-top: 33px;text-align: center;width: 100%; height:12px;font-size:12px;font-family:PingFangSC-Regular; font-weight:400; line-height: 18px; margin: 0px;color: rgba(255,255,255,1);}
+.size ul li span { width: 100%;
+font-family:PingFangSC-Medium;
+font-weight:500;
+color:rgba(23,225,226,1);float: left; font-size:30px;height:24px;font: 30px '微软雅黑'; line-height: 120px;text-align: center;}
+/*概况*/
+.basic{ width: 100%; }
+.title { width: 98%;  height: 10%;  margin-left: 2%;}
+.Dian { width: 10px;  height: 10px; border-radius: 10px;  background: #ffffff;}
+.Text {width:150px;height:12px;font-size:12px;font-family:PingFangSC-Regular;font-weight:400;color:rgba(255,255,255,1);line-height:18px; margin-left: 12px;}
+/*.b_left,.b_center,.b_right{width: 32.5%; height: 100%; margin-left: 0.5%;border: 1px solid #0298e4; box-shadow:0 0 10px rgba(2,152,228,0.6); }*/
+.b_left,.b_center,.b_right{width: 32.5%; height: 100%; margin-left: 0.5%;background-color: rgb(20, 34, 60)}
+
+/*.b_left{margin-left: 0%;}*/
+#b_left_map{width: 100%;  _height:400px; min-height:400px; margin: 0 auto;} 
+
+
+#b_center_map{width: 100%;  _height:400px; min-height:400px; margin: 0 auto;}
+
+
+#b_right_map{width: 100%;  _height:400px; min-height:400px; margin: 0 auto;}
+
+.foott{margin-top: ; text-align: center;}
+.foott span{color: rgba(255,255,255,1); font-size:9px;font-family:PingFangSC-Light;font-weight:300;height:9px;line-height:18px;margin-left: 10px;}
+.foot{margin-top:; text-align: center;}
+.foot span{color: #FFFFFF; font-size: 16px; margin-left: 10px;}

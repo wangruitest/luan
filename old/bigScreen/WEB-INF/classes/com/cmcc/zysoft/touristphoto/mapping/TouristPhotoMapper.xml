@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.touristphoto.dao.TouristPhotoMapper">
+	<!-- 省内 -->
+	<resultMap id="BaseResultMap"
+		type="com.cmcc.zysoft.touristphoto.model.TouristPhoto">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="SUMTOURISTS" jdbcType="DECIMAL" property="sumtourists" />
+		<result column="CITY_CODE" jdbcType="VARCHAR" property="citycode" />
+		<result column="CITY_ID" jdbcType="VARCHAR" property="cityid" />
+		<result column="CITIES" jdbcType="VARCHAR" property="cities" />
+		<result column="PROVINCENID" jdbcType="VARCHAR" property="provincenid" />
+		<result column="PROVINCENS" jdbcType="VARCHAR" property="provincens" />
+		<result column="PILLARPROVINCESANDCITYSELECT" jdbcType="VARCHAR"
+			property="pillarProvincesAndCitySelect" />
+		<result column="PILLARBOTHSELECT" jdbcType="VARCHAR" property="pillarBothSelect" />
+		<result column="PILLARTIMESELECT" jdbcType="VARCHAR" property="pillarTimeSelect" />
+		<result column="PILLARSCENICSELECT" jdbcType="VARCHAR"
+			property="pillarScenicSelect" />
+		<result column="VISITOR_PROVINCE" jdbcType="VARCHAR" property="visitor_province" />
+		<result column="VISITOR_CITY" jdbcType="VARCHAR" property="visitor_city" />
+	</resultMap>
+
+	<!--省外 -->
+	<resultMap id="BaseResultMap1"
+		type="com.cmcc.zysoft.touristphoto.model.TouristPhotoProvince">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="SUMTOURISTS" jdbcType="DECIMAL" property="sumtourists" />
+		<result column="VISTORPROVINCE" jdbcType="VARCHAR" property="vistorprovince" />
+		<result column="PROVINCEID" jdbcType="VARCHAR" property="provinceid" />
+		<result column="PROVINCES" jdbcType="VARCHAR" property="provinces" />
+		<result column="SHORT_NAME" jdbcType="VARCHAR" property="short_name" />
+		<result column="PILLARPROVINCESANDCITYSELECT" jdbcType="VARCHAR"
+			property="pillarProvincesAndCitySelect" />
+		<result column="PILLARBOTHSELECT" jdbcType="VARCHAR" property="pillarBothSelect" />
+		<result column="PILLARTIMESELECT" jdbcType="VARCHAR" property="pillarTimeSelect" />
+		<result column="PILLARSCENICSELECT" jdbcType="VARCHAR"
+			property="pillarScenicSelect" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, SUMTOURISTS, CITY_CODE, CITY_ID, CITIES, PROVINCENID,
+		PROVINCENS,
+		PILLARPROVINCESANDCITYSELECT,PILLARBOTHSELECT,PILLARTIMESELECT,PILLARSCENICSELECT,VISITOR_PROVINCE,VISITOR_CITY
+	</sql>
+
+	<!-- 为柱状图获取省内各市游客数据SQL 0:省id，1：市id，2：县id-->
+	<select id="getPillarDatasByCity" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select nvl(b.sumtourists,0)as sumtourists,c.cities from cities c left join(
+		select a.visitor_city,sum(a.tourists) as sumtourists from(
+		select * from
+		<if test="pillarScenicSelect == ''">
+			<if test="pillarTimeSelect == ''">
+				REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+				where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				<if test="touristIdFlag == 0">
+					and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+			</if>
+			<if test="pillarTimeSelect == '近一个月'">
+				REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+				where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				<if test="touristIdFlag == 0">
+					and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+			</if>
+			<if test="pillarTimeSelect == '近一个季度'">
+				REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+				where t.stat_month >= (select add_months(max(m.stat_month),-2) from REGION_SUMMARY_BYMONTH m )
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				<if test="touristIdFlag == 0">
+					and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+			</if>
+			<if test="pillarTimeSelect == '近半年'">
+				REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+				where t.stat_month >= (select add_months(max(m.stat_month),-5) from REGION_SUMMARY_BYMONTH m )
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				<if test="touristIdFlag == 0">
+					and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+				</if>
+			</if>
+		</if>
+		<if test="pillarScenicSelect != ''">
+			<if test="pillarTimeSelect == ''">
+				REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+				where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+			</if>
+			<if test="pillarTimeSelect == '近一个月'">
+				REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+				where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+			</if>
+			<if test="pillarTimeSelect == '近一个季度'">
+				REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+				where t.stat_month >= (select add_months(max(m.stat_month),-2) from REGION_SUMMARY_BYMONTH m )
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+			</if>
+			<if test="pillarTimeSelect == '近半年'">
+				REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+				where t.stat_month >= (select add_months(max(m.stat_month),-5) from REGION_SUMMARY_BYMONTH m )
+				and s.userid = #{userId,jdbcType=VARCHAR}
+				and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+			</if>
+		</if>
+		and s.scenicid = t.region_id
+		and t.region_id= sc.scenicid
+		)a group by a.visitor_city)b
+		on c.cityid = b.visitor_city
+ 		where c.provinceid = '340000'
+		order by b.sumtourists desc nulls last
+	</select>
+
+
+	<!-- 为柱状图获取省省外游客数据（不包含安徽省）SQL -->
+	<select id="getPillarDatasByProvince" resultMap="BaseResultMap1"
+		parameterType="java.util.Map">
+  			select nvl(b.sumtourists,0)as sumtourists,p.short_name from provinces p left join(
+    			select a.visitor_province,sum(a.tourists) as sumtourists from(
+           			select * from 
+					<if test="pillarScenicSelect == ''">
+						<if test="pillarTimeSelect == ''">
+							REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+							where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							<if test="touristIdFlag == 0">
+								and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 1">
+								and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 2">
+								and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+						</if>
+						<if test="pillarTimeSelect == '近一个月'">
+							REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+							where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							<if test="touristIdFlag == 0">
+								and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 1">
+								and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 2">
+								and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+						</if>
+						<if test="pillarTimeSelect == '近一个季度'">
+							REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+							where t.stat_month >= (select add_months(max(m.stat_month),-2) from REGION_SUMMARY_BYMONTH m )
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							<if test="touristIdFlag == 0">
+								and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 1">
+								and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 2">
+								and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+						</if>
+						<if test="pillarTimeSelect == '近半年'">
+							REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+							where t.stat_month >= (select add_months(max(m.stat_month),-5) from REGION_SUMMARY_BYMONTH m )
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							<if test="touristIdFlag == 0">
+								and sc.provinceid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 1">
+								and sc.cityid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+							<if test="touristIdFlag == 2">
+								and sc.countyid = #{pillarProvincesAndCitySelect,jdbcType=VARCHAR}
+							</if>
+						</if>
+					</if>
+					<if test="pillarScenicSelect != ''">
+						<if test="pillarTimeSelect == ''">
+							REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+							where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							and sc.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+						</if>
+						<if test="pillarTimeSelect == '近一个月'">
+							REGION_SUMMARY_BYDAY t,sys_scenic_user s,sys_scenic sc
+							where t.stat_day >= (select max(d.stat_day)-30 from REGION_SUMMARY_BYDAY d)
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+						</if>
+						<if test="pillarTimeSelect == '近一个季度'">
+							REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+							where t.stat_month >= (select add_months(max(m.stat_month),-2) from REGION_SUMMARY_BYMONTH m )
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+						</if>
+						<if test="pillarTimeSelect == '近半年'">
+							REGION_SUMMARY_BYMONTH t,sys_scenic_user s,sys_scenic sc
+							where t.stat_month >= (select add_months(max(m.stat_month),-5) from REGION_SUMMARY_BYMONTH m )
+							and s.userid = #{userId,jdbcType=VARCHAR}
+							and s.scenicid = #{pillarScenicSelect,jdbcType=VARCHAR}
+						</if>
+					</if>
+					and s.scenicid = t.region_id
+					and sc.scenicid = t.region_id
+					and t.visitor_province != '340000'
+				)a
+           		 group by a.visitor_province
+ 			)b on 
+ 		p.provinceid = b.visitor_province
+ 		where p.provinceid != '340000'
+ 		order by b.sumtourists desc nulls last
+	</select>
+	
+	<select id="getTouristProperty" resultType="com.cmcc.zysoft.touristphoto.model.TouristPhotoProperty" parameterType="java.util.Map">
+		select t.property,t.propertyvalue,sum(count) as count from tourists_property t ,sys_scenic s,sys_scenic_user su
+	    where t.stat_date>=(select max(stat_date)-30 from tourists_property)
+	    and s.scenicid = t.sceniccode
+	    and su.scenicid=t.sceniccode
+	    and s.delflag='0'
+	    <if test="pieScenicSelect == ''">
+	    	<if test="pieTimeSelect == ''">
+	    		<if test="touristIdFlag == 0">
+					and s.provinceid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and s.cityid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and s.countyid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				and t.stat_date>=(select max(stat_date)-30 from tourists_property)
+			</if>
+		    <if test="pieTimeSelect == '近一个月'">
+		    	<if test="touristIdFlag == 0">
+					and s.provinceid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and s.cityid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and s.countyid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				and t.stat_date>=(select max(stat_date)-30 from tourists_property)
+			</if>
+			<if test="pieTimeSelect == '近半年'">
+				<if test="touristIdFlag == 0">
+					and s.provinceid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and s.cityid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and s.countyid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				and t.stat_date>=(select add_months(max(stat_date),-2) from tourists_property)
+			</if>
+			<if test="pieTimeSelect == '近一个季度'">
+				<if test="touristIdFlag == 0">
+					and s.provinceid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 1">
+					and s.cityid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				<if test="touristIdFlag == 2">
+					and s.countyid = #{touristId,jdbcType=VARCHAR}
+				</if>
+				and t.stat_date>=(select add_months(max(stat_date),-5) from tourists_property)
+			</if>
+	    </if>
+	    <if test="pieScenicSelect != ''">
+		    <if test="pieTimeSelect == ''">
+				and t.stat_date>=(select max(stat_date)-30 from tourists_property)
+				and t.sceniccode=#{pieScenicSelect,jdbcType=VARCHAR}
+			</if>
+		    <if test="pieTimeSelect == '近一个月'">
+				and t.stat_date>=(select max(stat_date)-30 from tourists_property)
+				and t.sceniccode=#{pieScenicSelect,jdbcType=VARCHAR}
+			</if>
+			<if test="pieTimeSelect == '近半年'">
+				and t.stat_date>=(select add_months(max(stat_date),-2) from tourists_property)
+				and t.sceniccode=#{pieScenicSelect,jdbcType=VARCHAR}
+			</if>
+			<if test="pieTimeSelect == '近一个季度'">
+				and t.stat_date>=(select add_months(max(stat_date),-5) from tourists_property)
+				and t.sceniccode=#{pieScenicSelect,jdbcType=VARCHAR}
+			</if>
+		</if>
+	    and su.userid = #{userId,jdbcType=VARCHAR}
+	    group by t.property,t.propertyvalue
+	    order by t.property,t.propertyvalue
+	</select>
+</mapper>

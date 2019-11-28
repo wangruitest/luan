@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.scenicmonitor.dao.ScenicStateDao">
+ 
+<select id="getScenicState" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.ScenicState">
+ select t.scenic_name as scenicName ,t.scenicid,
+  t.yuZhi,t.touristNum,t.color ,t.max
+  from(
+  select  s.scenic_name,s.scenicid,
+  case  
+    when a.num&lt;ral.level4_num then trunc(a.num/ral.level4_num*0.25,2)*100
+    when  a.num&lt;ral.level3_num then trunc((a.num-ral.level4_num)/(ral.level3_num-ral.level4_num)*0.25+0.25,2)*100
+    when  a.num&lt;ral.level2_num then trunc((a.num-ral.level3_num)/(ral.level2_num-ral.level3_num)*0.25+0.5,2)*100
+    when  a.num&lt;ral.level1_num then trunc((a.num-ral.level2_num)/(ral.level1_num-ral.level2_num)*0.25+0.75,2)*100
+    else trunc(a.num/ral.level1_num,2)*100 end
+  as yuZhi,
+  a.num as touristNum,
+  case  
+  when a.num&lt;ral.level4_num then '0'
+  when  a.num&lt;ral.level3_num then '1'
+  when  a.num&lt;ral.level2_num then '2'
+  when  a.num&lt;ral.level1_num then '3'
+  else '4' end  as color,ral.level1_num as max
+  from sys_scenic s ,region_alarm_level ral,
+ 	 ( select r.region_id ,sum(stay_tourists) as num
+    	from region_realtime_sum r,sys_scenic_user u ,sys_scenic s  where 
+    	r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+    	and u.userid=#{userid,jdbcType=VARCHAR}
+    	and u.scenicid=r.region_id 
+    	and r.region_id=s.scenicid
+    	<if test="regionType==0">
+		    <if test="cityId != null and cityId != '' "> 
+				 and s.provinceid=#{cityId,jdbcType=VARCHAR}
+			</if>
+		</if>
+	    <if test="regionType==1">
+	    	 <if test="cityId != null and cityId != '' "> 
+				 and s.cityid=#{cityId,jdbcType=VARCHAR}
+			 </if>
+	    </if>
+	    <if test="regionType==2">
+	     	<if test="cityId != null and cityId != '' "> 
+				 and s.countyid=#{cityId,jdbcType=VARCHAR}
+	 		</if>
+	    </if>
+    	group by r.region_id)a
+  where s.scenicid=a.region_id and ral.region_id=a.region_id order by yuzhi desc,num desc)t
+
+</select>
+
+<select  id="getCityState" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.CityState">
+select count(1) as value,t.color,t.cityName ,t.cityId
+  from(
+  select  c.cityid,c.cities as cityName,
+  case  
+  when a.num&lt;ral.level4_num then '0'
+  when  a.num&lt;ral.level3_num then '1'
+  when  a.num&lt;ral.level2_num then '2'
+  when  a.num&lt;ral.level1_num then '3'
+  else '4' end as color
+  from 
+ 	 ( select r.region_id ,sum(stay_tourists) as num
+    	from region_realtime_sum r,sys_scenic_user u ,sys_scenic s  where 
+    	r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+    	and u.userid=#{userid,jdbcType=VARCHAR}
+    	and u.scenicid=r.region_id 
+    	and r.region_id=s.scenicid
+    	<if test="regionType==0">
+		    <if test="cityId != null and cityId != '' "> 
+				 and s.provinceid=#{cityId,jdbcType=VARCHAR}
+			</if>
+		</if>
+	    <if test="regionType==1">
+	    	 <if test="cityId != null and cityId != '' "> 
+				 and s.cityid=#{cityId,jdbcType=VARCHAR}
+			 </if>
+	    </if>
+	    <if test="regionType==2">
+	     	<if test="cityId != null and cityId != '' "> 
+				 and s.countyid=#{cityId,jdbcType=VARCHAR}
+	 		</if>
+	    </if>
+    	group by r.region_id)a,cities c ,sys_scenic s ,region_alarm_level ral
+  		where s.scenicid=a.region_id	 and c.cityid=s.cityid and ral.region_id=a.region_id )t 
+  		group by  t.color,t.cityid,t.cityName
+</select>
+
+<select id="getCity" resultType="string">
+	select cities from cities where provinceid='340000'
+</select>
+</mapper>

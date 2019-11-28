@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.cityflow.dao.CityFlowMapper">
+	<resultMap id="BaseResultMap" type="com.cmcc.zysoft.cityflow.model.CityFlow">
+		<id column="ID" jdbcType="DECIMAL" property="id" />
+		<result column="SUMTOURISTS" jdbcType="DECIMAL" property="sumtourists" />
+		<result column="SUMCITYCOUNT" jdbcType="DECIMAL" property="sumcitycount" />
+		<result column="SUMTOURISTS1" jdbcType="DECIMAL" property="sumtourists1" />
+		<result column="SUMCITYCOUNT1" jdbcType="DECIMAL" property="sumcitycount1" />
+		<result column="CITY_CODE" jdbcType="VARCHAR" property="citycode" />
+		<result column="CITY_ID" jdbcType="VARCHAR" property="cityid" />
+		<result column="STAT_DAY" jdbcType="VARCHAR" property="statday" />
+		<result column="PROVINCENID" jdbcType="VARCHAR" property="provincenid" />
+		<result column="PROVINCENS" jdbcType="VARCHAR" property="provincens" />
+		<result column="PROANDCITYSELECT" jdbcType="VARCHAR" property="proAndCitySelect" />
+		<result column="BOTHSELECT" jdbcType="VARCHAR" property="bothSelect" />
+		<result column="TIMESELECT" jdbcType="VARCHAR" property="timeSelect" />
+		<result column="CHOOSE" jdbcType="VARCHAR" property="choose" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SUMTOURISTS, CITY_CODE, SUMCITYCOUNT, STAT_DAY, PROVINCENID,
+		PROVINCENS,SUMTOURISTS1,SUMCITYCOUNT1,
+		PROANDCITYSELECT,BOTHSELECT,TIMESELECT,CHOOSE
+	</sql>
+	
+	<!--旅客归属 -->
+	<resultMap id="BaseResultMap1"
+		type="com.cmcc.zysoft.cityflow.model.TravellerAttribution">
+		<result column="NUM" jdbcType="DECIMAL" property="num" />
+		<result column="PROVINCES" jdbcType="VARCHAR" property="provinces" />
+		<result column="PROVINCES_ID" jdbcType="VARCHAR" property="provincesid" />
+	</resultMap>
+
+	<!-- 为折线图获取省内各市数据SQL -->
+	<select id="getZheDatasByDay" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select SUM(case
+		when ts1.statday = ts2.dat then
+		ts1.sumtourists
+		else
+		0
+		end) as sumtourists,
+		SUM(case
+		when ts1.statday = ts2.dat then
+		ts1.sumcitycount
+		else
+		0
+		end) as sumcitycount,
+		substr( ts2.dat,6,10) as statday
+		from (select SUM(t.tourists) as sumtourists,
+		SUM(t.citycount) as sumcitycount,
+		to_char(stat_day, 'YYYY-MM-DD') as statday
+		from TOURIST_PHONES_BYDAY_SUM t
+		
+		where STAT_DAY &gt; (select max(stat_day) from TOURIST_PHONES_BYDAY_SUM) - 31 
+		<if test="touristIdFlag == 1">
+			and t.city_code = #{touristId,jdbcType=VARCHAR}
+		</if>
+		<if test="touristIdFlag == 2">
+			and t.roamingcounty = #{touristId,jdbcType=VARCHAR}
+		</if>
+		group by STAT_DAY
+		
+		) ts1,
+		(select level, to_char((select max(stat_day) from TOURIST_PHONES_BYDAY_SUM) - 30 + level - 1, 'yyyy-mm-dd') as dat
+		from dual
+		connect by level &lt;= (select max(stat_day) from TOURIST_PHONES_BYDAY_SUM) - ((select max(stat_day) from TOURIST_PHONES_BYDAY_SUM) - 30) + 1) ts2
+		
+		group by ts2.dat
+		order by ts2.dat
+	</select>
+	<select id="getDatasByProvince" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select sum(case
+		when t.vistor_province_id = 340000 then
+		t.tourists
+		else
+		0
+		end) as sumtourists1,
+		sum(case
+		when t.vistor_province_id &lt;&gt; 340000 then
+		t.tourists
+		else
+		0
+		end) as sumcitycount1,
+		t.stay_days as statday
+
+		from TOURIST_STAY_DAYS t
+		<if test="touristIdFlag == 1">
+			where t.city_code = #{touristId,jdbcType=VARCHAR}
+		</if>
+		<if test="touristIdFlag == 2">
+			where t.roamingcounty = #{touristId,jdbcType=VARCHAR}
+		</if>
+		<if test="touristIdFlag == 0">
+			where 1=1
+		</if>
+		
+		<if test="TimeSelect==''">
+			and t.stat_month >= add_months((select max(stat_month) from TOURIST_STAY_DAYS),-1)
+		</if> 
+
+		<if test="TimeSelect=='近一个月'">
+			and t.stat_month >= add_months((select max(stat_month) from TOURIST_STAY_DAYS),-1)
+		</if>
+
+		<if test="TimeSelect=='近一个季度'">
+			and t.stat_month >= add_months((select max(stat_month) from TOURIST_STAY_DAYS),-3)
+		</if>
+
+		<if test="TimeSelect=='近半年'">
+			and t.stat_month >= add_months((select max(stat_month) from TOURIST_STAY_DAYS),-6)
+		</if>
+
+		group by t.stay_days order by t.stay_days
+	</select>
+	
+	<select id="getProvinceVisitorAttributionByHoliday" parameterType="map" resultMap="BaseResultMap1">
+		select sum(h.count) as num,pc.provinces,pc.provinces_id from holiday_area_scenic h,
+		(select distinct c.provinces,nvl(c.provinces_code,c.area_code) as provinces_id from prefix_cfg c )pc
+		where
+ 		h.visitor_province =pc.provinces_id 
+		and h.area_scenic='0'
+		<if test="cityId !='' and cityId !=null">
+		 	and h.code=#{cityId,jdbcType=VARCHAR}
+		</if>
+		and h.holiday_date=to_date(#{stat_date,jdbcType=VARCHAR},'yyyy-mm-dd')
+		group by pc.provinces,pc.provinces_id order by  num desc
+	</select>
+	
+	<select id="getAreaVisitorAttributionByHoliday" parameterType="map" resultMap="BaseResultMap1">
+		select sum(h.count) as num ,ct.cityid,ct.cities from holiday_area_scenic h,
+		cities ct
+		where
+ 		h.visitor_city =ct.cityid 
+ 		and ct.provinceid='340000'
+		<if test="cityId !='' and cityId !=null">
+		 	and h.code=#{cityId,jdbcType=VARCHAR}
+		</if>
+		and h.holiday_date=to_date(#{stat_date,jdbcType=VARCHAR},'yyyy-mm-dd')
+		and h.area_scenic='0'
+		group by ct.cityid,ct.cities order by  num desc
+	</select>
+	
+	<select id="getProvinceVisitorAttributionByAMonth" parameterType="map" resultMap="BaseResultMap1">
+	select sum(t.tourists) as num ,pc.provinces,pc.provinces_id from  
+	(select city_code,tourists,nvl(
+                     nvl(visitorprovince,visitorcity),
+                     case  when vistorcountry='-1' then '-11' else '-104' end) as visitorprovince
+                      from tourist_phones_byday_sum 
+                      where stat_day>add_months((select max(stat_day) from tourist_phones_byday_sum),-1)
+                      <if test="cityId =='' or cityId ==null">
+						   and roamingprovince='340000'
+					  </if>
+					  <if test="cityId !='' and cityId !=null">
+						  <if test="regionType==1">
+					 		   and roamingcity=#{cityId,jdbcType=VARCHAR}
+						  </if>
+						  <if test="regionType==2">
+					 		   and roamingcounty=#{cityId,jdbcType=VARCHAR}
+						  </if>
+					  </if>
+                      )t,
+	(select distinct c.provinces,nvl(c.provinces_code,c.area_code) as provinces_id from prefix_cfg c )pc
+	where
+ 	t.visitorprovince=pc.provinces_id 
+	group by pc.provinces,pc.provinces_id order by num desc
+	</select>
+	
+	<select id="getProvinceVisitorAttributionBySomeMonth" parameterType="map" resultMap="BaseResultMap1">
+	select sum(t.tourists) as num ,pc.provinces,pc.provinces_id from  
+	(select city_code,tourists,nvl(
+                     nvl(visitorprovince,visitorcity),
+                     case  when vistorcountry='-1' then '-11' else '-104' end) as visitorprovince
+                      from tourist_phones_bymonth_sum 
+                      where stat_month>=add_months((select max(stat_month) from tourist_phones_bymonth_sum),#{addMonth,jdbcType=VARCHAR})
+					  <if test="cityId =='' or cityId ==null">
+							 and roamingprovince='340000'
+					  </if>
+					  <if test="cityId !='' and cityId !=null">
+						 <if test="regionType==1">
+						 	 and roamingcity=#{cityId,jdbcType=VARCHAR}
+						 </if>
+					     <if test="regionType==2">
+						     and roamingcounty=#{cityId,jdbcType=VARCHAR}
+					     </if>
+					  </if>
+                      )t,
+	(select distinct c.provinces,nvl(c.provinces_code,c.area_code) as provinces_id from prefix_cfg c )pc
+	where
+ 	t.visitorprovince=pc.provinces_id 
+	group by pc.provinces,pc.provinces_id order by num desc
+	</select>
+	
+	<select id="getAreaVisitorAttributionByAMonth" parameterType="map" resultMap="BaseResultMap1">
+	select sum(t.tourists) as num ,ct.cityid,ct.cities from  
+	(select city_code,nvl(tourists,0) as tourists,visitorcity
+                      from tourist_phones_byday_sum 
+                      where stat_day>add_months((select max(stat_day) from tourist_phones_byday_sum),-1)
+                      <if test="cityId =='' or cityId ==null">
+						   and roamingprovince='340000'
+					  </if>
+					  <if test="cityId !='' and cityId !=null">
+						  <if test="regionType==1">
+					 		   and roamingcity=#{cityId,jdbcType=VARCHAR}
+						  </if>
+						  <if test="regionType==2">
+					 		   and roamingcounty=#{cityId,jdbcType=VARCHAR}
+						  </if>
+					  </if>
+                      )t, cities ct
+	where
+ 	t.visitorcity=ct.cityid
+ 	and ct.provinceid='340000'
+	group by ct.cityid,ct.cities order by num desc
+	</select>
+	<select id="getAreaVisitorAttributionBySomeMonth" parameterType="map" resultMap="BaseResultMap1">
+	select nvl(sum(t.tourists),0) as num ,ct.cityid,ct.cities from  
+	(select city_code,nvl(tourists,0) as tourists,visitorcity
+                      from tourist_phones_bymonth_sum 
+                      where stat_month>=add_months((select max(stat_month) from tourist_phones_bymonth_sum),#{addMonth,jdbcType=VARCHAR})
+                      <if test="cityId =='' or cityId ==null">
+						   and roamingprovince='340000'
+					  </if>
+					  <if test="cityId !='' and cityId !=null">
+						  <if test="regionType==1">
+					 		   and roamingcity=#{cityId,jdbcType=VARCHAR}
+						  </if>
+						  <if test="regionType==2">
+					 		   and roamingcounty=#{cityId,jdbcType=VARCHAR}
+						  </if>
+					  </if>
+                      )t, cities ct
+	where
+ 	t.visitorcity=ct.cityid
+ 	and ct.provinceid='340000'
+	group by ct.cityid,ct.cities order by num desc
+	</select>
+</mapper>

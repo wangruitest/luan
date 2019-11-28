@@ -1,0 +1,36 @@
+body{background:url(../img/project.jpg) no-repeat; width: 100%; height: 100%; background-size: cover;  background-position:center; padding-top:56.25%;}
+
+/*.head{height: 104px;}
+.head h2{text-align: center; color: #ffffff;font-size: 32px; font-weight: bold; line-height: 104px;width: 770px; margin: 0 auto;  }
+.head .sp{width: 770px; background: #00B5FC; height: 2px; margin: 0 auto; position: relative;}
+.head .sp:before{content: ""; position: absolute; left: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(60deg) ;-o-transform: rotate(60deg);-moz-transform: rotate(60deg);-webkit-transform: rotate(60deg);}
+.head .sp:after{content: ""; position: absolute; right: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(-60deg);-o-transform: rotate(-60deg);-moz-transform: rotate(-60deg);-webkit-transform: rotate(-60deg);}
+.head .line1{float: left; display: inline-block; width: 30%; height: 2px; background: #00b5fc; margin-top: -40px;}
+.head .line2{float: right; display: inline-block; width: 30%; height: 2px; background: #00b5fc; margin-top: -40px;}
+.head .line{width: 100%; background: #00B5FC url(../img/scenicbj.jpg) no-repeat center center ; height: 2px;margin-top: -40px;}
+
+.main{margin-top: 30px; height: 700px; }
+.areamt{height: 1%;}
+.areaTitle { width: 99%;  height: 7%;  margin-left: 2%;}
+.areaDian { width: 10px;  height: 10px; border-radius: 10px;  background: #ffffff;}
+.areaText {color: #ffffff; font-size: 18px; margin-left: 5px;}*/
+
+/*左边*/
+/*.mainleft{width: 29.3%; height: 100%; margin-left: 0.5%;}
+.leftTop{height: 49.5%; width: 100%; border: 1px solid #1448a0; box-shadow:0 0 20px #143983;}
+.leftbottom{height: 49.2%; width: 100%; border: 1px solid #1448a0; box-shadow:0 0 20px #143983;}
+#mlefttop{width: 100%; height: 90%; margin: 0 auto !important;}
+#mleftbottom{width: 100%; height: 90%; margin: 0  auto !important;}*/
+
+/*中间*/
+/*.maincenter{width: 39.6%; height: 100%; margin-left: 0.2%; margin-left: 0.2%;}
+.maincent{width: 99%; height: 100%; margin-left: 0.5%; border: 1px solid #1448a0; box-shadow:0 0 20px #143983;}
+.maincent .areaTitle { height: 6%; }
+.map img{width: 96%; height: auto;margin: 2%;}*/
+
+/*右边*/
+/*.mainright{width: 29.3%; height: 100%; margin-right: 0.5%; }
+.righttop{height: 49.5%; width: 100%; border: 1px solid #1448a0; box-shadow:0 0 20px #143983;}
+.rightbottom{height: 49.2%; width: 100%; border: 1px solid #1448a0; box-shadow:0 0 20px #143983;}
+#mrighttop{width: 100%; height: 90%; margin: 0  auto !important; }
+#mrightbottom{width: 100%; height: 90%; margin: 0  auto !important; }*/

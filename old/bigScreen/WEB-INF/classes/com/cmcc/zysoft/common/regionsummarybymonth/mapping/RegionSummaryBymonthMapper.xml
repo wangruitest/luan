@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.common.regionsummarybymonth.dao.RegionSummaryBymonthMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.common.regionsummarybymonth.model.RegionSummaryBymonth">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="AREA_CODE" jdbcType="DECIMAL" property="areaCode" />
+    <result column="TOURISTS" jdbcType="DECIMAL" property="tourists" />
+    <result column="DISTINCT_COUNTS" jdbcType="DECIMAL" property="distinctCounts" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="REGION_ID" jdbcType="VARCHAR" property="regionId" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="SUBMIT_TIME" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="STAT_MONTH" jdbcType="TIMESTAMP" property="statMonth" />
+    <result column="VISITOR_COUNTRY" jdbcType="VARCHAR" property="visitorCountry" />
+    <result column="VISITOR_PROVINCE" jdbcType="VARCHAR" property="visitorProvince" />
+    <result column="VISITOR_CITY" jdbcType="VARCHAR" property="visitorCity" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  
+  <resultMap id="RankResult" type="com.cmcc.zysoft.common.model.ScenicRankStay">
+  	<result property="scenicCode" jdbcType="VARCHAR" column="scenicCode" />
+  	<result property="ScenicName" jdbcType="VARCHAR" column="ScenicName" />
+  	<result property="count" jdbcType="DECIMAL" column="count" />
+  </resultMap>
+
+	<select id="queryByRank"  parameterType="com.cmcc.zysoft.common.model.RequestParam" resultMap="RankResult">
+		<![CDATA[
+			select a.scenic_name as ScenicName,nvl(m.count,0) count,a.scenicid as scenicCode from
+			 (
+			 select sc.scenicid,sc.scenic_name from sys_scenic_user su
+			 left join sys_scenic sc on su.scenicid = sc.scenicid 
+			 where su.userid = #{userId}
+			]]>
+			<if test="regionType==0">
+	         	 <if test="cityId != null and cityId != '' "> 
+			 		 and sc.provinceid=#{cityId,jdbcType=VARCHAR}
+				 </if>
+	         </if>
+	         <if test="regionType==1">
+	         	 <if test="cityId != null and cityId != '' "> 
+			 		 and sc.cityid=#{cityId,jdbcType=VARCHAR}
+				 </if>
+	         </if>
+	         <if test="regionType==2">
+	         	 <if test="cityId != null and cityId != '' "> 
+			 		 and sc.countyid=#{cityId,jdbcType=VARCHAR}
+				 </if>
+	         </if>
+			<!-- <if test="cityId != '340000'">
+				and sc.cityid= #{cityId}
+			</if> -->
+			<![CDATA[
+			 ) a 
+			 left join 
+			(
+			select t.region_id,sum(t.tourists) as count from REGION_SUMMARY_BYMONTH t 
+			where t.stat_month <= (select max(a.stat_month) from REGION_SUMMARY_BYMONTH a ) 
+			 and t.stat_month >= (select add_months(max(a.stat_month),-#{timeGap}) from REGION_SUMMARY_BYMONTH a ) 
+			 group by t.region_id 
+			 ) m  on m.region_id=a.scenicid
+			 order by m.count desc
+		]]>
+	</select>
+  <sql id="Base_Column_List">
+    ID, AREA_CODE, TOURISTS, DISTINCT_COUNTS, UPDATETIME, REGION_ID, CITY_CODE, SUBMIT_TIME, 
+    STAT_MONTH, VISITOR_COUNTRY, VISITOR_PROVINCE, VISITOR_CITY, FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from REGION_SUMMARY_BYMONTH
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from REGION_SUMMARY_BYMONTH
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.cmcc.zysoft.common.regionsummarybymonth.model.RegionSummaryBymonth">
+    insert into REGION_SUMMARY_BYMONTH (ID, AREA_CODE, TOURISTS, 
+      DISTINCT_COUNTS, UPDATETIME, REGION_ID, 
+      CITY_CODE, SUBMIT_TIME, STAT_MONTH, 
+      VISITOR_COUNTRY, VISITOR_PROVINCE, VISITOR_CITY, 
+      FLAG)
+    values (#{id,jdbcType=DECIMAL}, #{areaCode,jdbcType=DECIMAL}, #{tourists,jdbcType=DECIMAL}, 
+      #{distinctCounts,jdbcType=DECIMAL}, #{updatetime,jdbcType=TIMESTAMP}, #{regionId,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, #{statMonth,jdbcType=TIMESTAMP}, 
+      #{visitorCountry,jdbcType=VARCHAR}, #{visitorProvince,jdbcType=VARCHAR}, #{visitorCity,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.common.regionsummarybymonth.model.RegionSummaryBymonth">
+    insert into REGION_SUMMARY_BYMONTH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="areaCode != null">
+        AREA_CODE,
+      </if>
+      <if test="tourists != null">
+        TOURISTS,
+      </if>
+      <if test="distinctCounts != null">
+        DISTINCT_COUNTS,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="regionId != null">
+        REGION_ID,
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE,
+      </if>
+      <if test="submitTime != null">
+        SUBMIT_TIME,
+      </if>
+      <if test="statMonth != null">
+        STAT_MONTH,
+      </if>
+      <if test="visitorCountry != null">
+        VISITOR_COUNTRY,
+      </if>
+      <if test="visitorProvince != null">
+        VISITOR_PROVINCE,
+      </if>
+      <if test="visitorCity != null">
+        VISITOR_CITY,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=DECIMAL},
+      </if>
+      <if test="tourists != null">
+        #{tourists,jdbcType=DECIMAL},
+      </if>
+      <if test="distinctCounts != null">
+        #{distinctCounts,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regionId != null">
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statMonth != null">
+        #{statMonth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorCountry != null">
+        #{visitorCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorProvince != null">
+        #{visitorProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCity != null">
+        #{visitorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.common.regionsummarybymonth.model.RegionSummaryBymonth">
+    update REGION_SUMMARY_BYMONTH
+    <set>
+      <if test="areaCode != null">
+        AREA_CODE = #{areaCode,jdbcType=DECIMAL},
+      </if>
+      <if test="tourists != null">
+        TOURISTS = #{tourists,jdbcType=DECIMAL},
+      </if>
+      <if test="distinctCounts != null">
+        DISTINCT_COUNTS = #{distinctCounts,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regionId != null">
+        REGION_ID = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        SUBMIT_TIME = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statMonth != null">
+        STAT_MONTH = #{statMonth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitorCountry != null">
+        VISITOR_COUNTRY = #{visitorCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorProvince != null">
+        VISITOR_PROVINCE = #{visitorProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorCity != null">
+        VISITOR_CITY = #{visitorCity,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.common.regionsummarybymonth.model.RegionSummaryBymonth">
+    update REGION_SUMMARY_BYMONTH
+    set AREA_CODE = #{areaCode,jdbcType=DECIMAL},
+      TOURISTS = #{tourists,jdbcType=DECIMAL},
+      DISTINCT_COUNTS = #{distinctCounts,jdbcType=DECIMAL},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      REGION_ID = #{regionId,jdbcType=VARCHAR},
+      CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      SUBMIT_TIME = #{submitTime,jdbcType=TIMESTAMP},
+      STAT_MONTH = #{statMonth,jdbcType=TIMESTAMP},
+      VISITOR_COUNTRY = #{visitorCountry,jdbcType=VARCHAR},
+      VISITOR_PROVINCE = #{visitorProvince,jdbcType=VARCHAR},
+      VISITOR_CITY = #{visitorCity,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

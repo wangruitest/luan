@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.bigScreen.touristProperty.dao.TouristPropertyDao">
+	<select id="getYesterdayTouristProperty" resultType="com.cmcc.zysoft.bigScreen.touristProperty.model.TouristProperty" parameterType="string">
+		select t.property,t.propertyvalue,sum(count) as count from tourists_property t ,region_cfg s 
+		where t.stat_date=(select max(stat_date) from tourists_property)
+		and s.id=t.sceniccode
+		<!-- and s.delflag='0' -->
+		group by t.property,t.propertyvalue 
+		order by t.property,t.propertyvalue
+	</select>
+</mapper>

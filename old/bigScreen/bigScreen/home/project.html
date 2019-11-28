@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>砀山旅游项目分析</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/pro.css" />
+		
+	<style type="text/css">
+	   .left_menu {
+		    width: 80px;
+		    position: fixed;
+		    top: 190.5px;
+			left: -125px;
+		    background: #0066CC;
+		}
+		
+		.left_menu ul {
+		    float: left;
+		    list-style: none;
+		    padding: 0px;
+		    margin: 0px;
+		}
+        
+        .left_menu ul li span {
+		    width: 100%;
+		    height: 50px;
+		    float: left;
+		    font: 16px '微软雅黑';
+		    line-height: normal;
+		    text-align: center;
+		    line-height: 85px;
+		}
+		
+    	.left_menu ul li {
+		    width: 80px;
+		    height: 100px;
+		    float: left;
+		    color: #fff;
+		    border-left: solid 2px #3399CC;
+		}
+		.leftTop {
+		    height: 45.5%;
+		    width: 49%;
+		    margin-left: 0.5%;
+		    border: 0px solid #0298e4;
+            box-shadow: 0 0 0px #0298e4;
+		    }
+		 .righttop {
+		    background-color: #0f192e;
+		    height: 45.5%;
+		    width: 49%;
+		    margin-right: 0.5%;
+		    border: 0px solid #0298e4;
+            box-shadow: 0 0 0px #0298e4;
+          }
+	</style>
+	
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<div class="head">
+				<h2 class="tit">砀山旅游项目分析</h2>
+				<!-- <div class="sp"></div>
+				<div class="line"></div> -->
+			</div>
+			<!--内容-->
+			<div class="main" id="main">
+				<!--左边-->
+				<div class="maintop clearfix">
+					<div class="leftTop fl" style="background-color: #0f192e">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;">砀山项目分类</div>
+						</div>
+						<div id="mlefttop"></div>
+					</div>
+
+					<div class="righttop fr">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;">项目完成情况</div>
+						</div>
+						<!--<div id="mrighttop"></div>-->
+                    <div class="pro"><img src="img/proUI.png"   style="background-color: red" width="735" height="341"/></div>
+ 					</div>
+
+				</div>
+
+				<!--右边-->
+				<div class="mainbottom">
+					<div class="areaTitle clearfix">
+<!-- 						<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->						<div class="areaText fl" style="line-height: 36px;">数据列表</div>
+					</div>
+					<div class="list">
+						<table>
+							<tr>
+								<td>序号</td>
+								<td>项目名称</td>
+								<td class="td3 tdd">项目简介</td>
+								<td>是否完成</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td class="td2">砀山黄河故道露营地建设项目</td>
+								<td class="td3">以“构建可持续的产业发展模式为基础，独特旅游品牌为重点，包装具有区域乃至国内影响的旅游产品为抓手”为核心思想，以砀山酥梨为特色的生态果乡为龙头，以水系、湖泊、湿地为辅助，发展生态林业产业经济和旅游休闲产业经济，策划多产业复合型的重点项目。总体发展成为承载生态产业开发、科技教育培训、旅游休闲观光、社会主义新农村建设等四大功能的以生态产业为特色、旅游业为重点的综合性特色产业发展集聚带。</td>
+								<td>已完成</td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td class="td2">砀山县文家河生态廊道景观带建设项目</td>
+								<td class="td3">沿文家河10.6公里，打造一条集生态、文化、休闲为一体的文化遗产景观廊道。将建设酥梨小镇客厅、电商运营中心、酥梨产业基地、文化广场、疗养中心、学校、商端社区等，打造以酥梨产业为主的生态廊道景观带</td>
+								<td>已完成</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td class="td2">酥梨小镇建设项目</td>
+								<td class="td3">酥梨小镇规划面积2.97平方公里，建设面积1平方公里，四至范围为，沿文家河梨花观赏带，北至崔庄中心村北、西至郭庄、东至崔庄中心村东、南至魏寨。</td>
+								<td>已完成</td>
+							</tr>
+						</table>
+					</div><!--mainbottom-->
+				</div>
+				   <div class="foot">
+				     <span>©2019 砀山旅游局 版权所有</span>
+			       </div>	
+				<!--结束-->
+			</div>
+		</div>
+		
+		<div class="left_menu">
+			<ul>
+				<a href="../home/index.html"><li><span>首页</span></li></a>
+			</ul>
+		</div>
+		
+	</body>
+	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script src="js/echarts.common.min.js"></script>
+	<script type="text/javascript">
+		//------------------左上角代码-------------------- 
+		var myChart_left = echarts.init(document.getElementById('mlefttop'));
+		var option1 = {
+			color: ['#FFDC63', '#38EBA8', '#17EFEF', '#FD5289', '#FF7E1F'],
+			tooltip: {
+				trigger: 'item',
+				formatter: "{a} <br/>{b} : {c} ({d}%)"
+			},
+			legend: {
+				icon:"circle",		
+				//orient: 'vertical',
+				itemWidth: 10,
+			    itemHeight: 10,
+			    itemGap: 10,
+					//orient: 'vertical',
+			    left: 'center',
+					//top: '10',
+			    bottom: 10,
+				data: ['景区景点项目', '游乐设施项', '旅游交通建设项目','饭店建设项目'  ],
+				textStyle: { //图例文字的样式
+					color: '#ffffff',
+					fontSize: 14
+				}
+			},
+			series: [{
+				name: '等级',
+				type: 'pie',
+				radius: '45%',
+				center: ['50%', '50%'],
+				labelLine: {
+					normal: {
+						length: 10, // 改变标示线的长度
+						lineStyle: {
+							color: "#ffffff" // 改变标示线的颜色
+						},
+						show: true //隐藏标示线
+					},
+				},
+				label: {
+					normal: {
+						textStyle: {
+							color: '#ffffff' // 改变标示文字的颜色
+						},
+						//position: 'inside',
+						show: true,
+					}
+				},
+				data: [{value: 40,name: '景区景点项目'},{value: 30,name: '游乐设施项'},{value: 15,name: '旅游交通建设项目'},{value: 15,name: '饭店建设项目'}],
+				itemStyle: {
+					emphasis: {
+						shadowBlur: 10,
+						shadowOffsetX: 0,
+						shadowColor: 'rgba(0, 0, 0, 0.5)'
+					}
+				}
+			}]
+		}; //初始化echarts实例
+		//使用制定的配置项和数据显示图表
+		myChart_left.setOption(option1);
+
+		//-------------------------右上角代码--------------------------
+		var myChart_right = echarts.init(document.getElementById('mrighttop'));
+		var option2 = {
+			tooltip: {},
+			xAxis: {
+				axisLine: {  // 控制x轴线的样式
+					lineStyle: {type: 'solid', color: '#ffffff', width: '1'},       
+				},
+//				axisLabel: {interval: 0,rotate: 40},
+				data: [ '已完成','未完成',],
+			},
+			yAxis: {
+				axisLine: {          
+					lineStyle: {type: 'solid', color: '#ffffff', width: '1' },     
+				},
+				//网格样式
+				splitLine: {
+					show: true,
+					lineStyle: {color: '#727272',width: 1,type: 'solid'}
+				}
+			},
+			series: [{
+				name: '项目完成情况',
+				itemStyle: {
+					normal: {color: '#ffc600'},
+				},
+				type: 'bar',
+				data: [30, 15, ],
+				barWidth: 60,
+			}]
+		};
+		//初始化echarts实例
+		//使用制定的配置项和数据显示图表
+		myChart_right.setOption(option2);
+	</script>
+
+	<script type='text/javascript'>
+		$(document).ready(function() {
+			//模块尺寸
+			$('#main').css('height', $(window).height() - 148);
+
+		});
+		
+		var ww = window.screen.width;
+		var wh = window.screen.height;
+		var h = $('.left_menu').height();
+		$('.left_menu').css({top:wh/2-h/2+'px'});
+			
+		$(function(){
+			$('body').mousemove(function(e) {
+					e = e || window.event;
+					__xx = e.pageX || e.clientX + document.body.scroolLeft;
+					__yy = e.pageY || e.clientY + document.body.scrollTop;
+					
+				  if ( __xx <= 125)
+					{
+						$('.left_menu').css({left:'0px'});
+					}
+					else 
+					{
+						$('.left_menu').css({left:'-125px'});
+					}
+			});
+			
+		}); 
+	</script>
+
+</html>

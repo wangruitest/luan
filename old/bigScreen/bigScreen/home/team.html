@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>砀山旅游人才队伍</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/team.css" />
+	<style type="text/css">
+	   .left_menu {
+		    width: 80px;
+		    position: fixed;
+		    top: 190.5px;
+			left: -125px;
+		    background: #0066CC;
+		}
+		
+		.left_menu ul {
+		    float: left;
+		    list-style: none;
+		    padding: 0px;
+		    margin: 0px;
+		}
+        
+        .left_menu ul li span {
+		    width: 100%;
+		    height: 50px;
+		    float: left;
+		    font: 16px '微软雅黑';
+		    line-height: normal;
+		    text-align: center;
+		    line-height: 85px;
+		}
+		
+    	.left_menu ul li {
+		    width: 80px;
+		    height: 100px;
+		    float: left;
+		    color: #fff;
+		    border-left: solid 2px #3399CC;
+		}
+		.clearfix:after {
+          height: 0px;
+          }
+	</style>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<div class="head">
+				<h2 class="tit">砀山旅游人才队伍</h2>
+		<!-- 		<div class="sp"></div>
+				<div class="line"></div> -->
+			</div>
+			<!--内容-->
+			<div class="teamcont">
+				<!--旅行社规模-->
+				<div class="size" id="size">
+					<ul class="clearfix">
+						<li>
+							<h1>从业人员</h1>
+							<span >678人</span>
+						</li>
+						<li>
+							<h1>导游人员</h1>
+							<span style="color: #FD5389">95人</span>
+						</li>
+						<li>
+							<h1>讲解人员</h1>
+							<span style="color: #FFDB64">2人</span>
+						</li>
+						<li>
+							<h1>旅游社数量</h1>
+							<span style="color: #38EBA8">25家</span>
+						</li>
+						<li>
+							<h1>网点数量</h1>
+							<span style="color: #2C91F2">32家</span>
+						</li>
+					</ul>
+				</div>
+				<!--旅行社概况-->
+				<div class="basic clearfix" id="basic">
+					<div class="b_left fl" id="b_left">
+						<div class="title clearfix">
+						<!-- 	<div class="Dian fl" style="margin-top: 14px;"></div> -->
+							<div class="Text fl" style="line-height: 18px;height:16px;">旅行社成立时间</div>
+						</div>
+						<div id="b_left_map"></div>
+					</div>
+
+					<div class="b_center fl" id="b_center">
+						<div class="title clearfix">
+<!-- 							<div class="Dian fl" style="margin-top: 14px;"></div>
+ -->							<div class="Text fl" style="line-height: 18px;">旅行社导游类型</div>
+						</div>
+						<div id="b_center_map"></div>
+						<!-- <div class="Dian fl" style="background:#40A0FD;margin-left: 26px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行社分支机构 104</div>
+						<div class="Dian fl" style="background:#17EFEF;margin-left: 38px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行商品生产企业 26</div> -->
+					</div>
+
+					<div class="b_right fl" id="b_right">
+						<div class="title clearfix">
+<!-- 							<div class="Dian fl" style="margin-top: 14px;"></div>
+ -->							<div class="Text fl" style="line-height: 18px;">旅行社导游语种</div>
+						</div>
+						<div id="b_right_map"></div>
+					</div>
+				</div>
+			</div>
+			<div class="foot">
+				<span>全县政务解说员2人：李惠子，女，15756113127;</span>
+                <span>邵旸晞，女，15755785855</span>
+			</div>
+		     <div class="foott">
+				<span>©2019 砀山旅游局 版权所有</span>
+			</div>	
+			<!--结束-->
+		</div>
+		<div class="left_menu">
+			<ul>
+				<a href="../home/index.html"><li><span>首页</span></li></a>
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+		<script type="text/javascript" src="js/echarts.common.min.js"></script>
+		<script type="text/javascript" src="js/highcharts.js" ></script>
+		<script type="text/javascript" src="js/exporting.js"></script>
+		<script type="text/javascript">
+			//------------------左边代码--------------------  
+			var myChart_left = echarts.init(document.getElementById('b_left_map'));
+			var option1 = {
+				color: ['#FFDC63', '#38EBA8', '#17EFEF', '#FD5289', '#FF7E1F'],
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+					orient: 'vertical',
+					left: '24',
+					top: '10',
+					data: ['2011年-2005年', '2006-2010年', '2011-2015年', '2015年以后',],
+					textStyle: { //图例文字的样式
+						color: '#ffffff',
+						fontSize: 14
+					}
+				},
+				series: [{
+					name: '成立时间',
+					type: 'pie',
+					radius: '50%',
+					center: ['50%', '60%'],
+					labelLine: {
+						normal: {
+							length: 10, // 改变标示线的长度
+							lineStyle: {
+								color: "#ffffff" // 改变标示线的颜色
+							},
+							show: true //隐藏标示线
+						},
+					},
+					label: {
+						normal: {
+							textStyle: {
+								color: '#ffffff' // 改变标示文字的颜色
+							},
+							position: 'inside',
+							show: false
+							
+						}
+					},
+					data: [{value: 11,name: '2011年-2005年'}, {value: 14,name: '2006-2010年'}, {value: 10,name: '2011-2015年'}, {value: 1,name: '2015年以后'}],
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			}; //初始化echarts实例
+			
+			//使用制定的配置项和数据显示图表
+			//myChart_left.setOption(option1);
+			//---------------------UI----------------highchats
+			var chart = Highcharts.chart('b_left_map', {
+				chart: {
+					spacing : [40, 0 , 40, 0],
+				    backgroundColor: 'rgb(20, 34, 60)'			
+				},
+				title: {
+					floating:true,
+					text: '',
+					show: false
+				},
+				credits: {
+                        enabled: false
+                    },
+				navigation: { 
+                     buttonOptions: {
+                     enabled: false
+                     }
+                    },
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+							style: {
+								//color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+							
+							}
+						},
+						point: {
+							events: {
+								mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+									// 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+									chart.setTitle({
+										text: e.target.name+ '\t'+ e.target.y + ' %'
+									});
+								}
+								//, 
+								// click: function(e) { // 同样的可以在点击事件里处理
+								//     chart.setTitle({
+								//         text: e.point.name+ '\t'+ e.point.y + ' %'
+								//     });
+								// }
+							}
+						},
+					}
+				},
+				series: [{
+					type: 'pie',
+					innerSize: '80%',
+					name: '成立时间',
+					data: [
+						{name:'2011年-2005年  11',   y: 11, url : 'http://bbs.hcharts.cn'},
+						['2006-2010年  14',       14],
+					/* 	{
+							name: 'Chrome',
+							y: 12.8,
+							sliced: true,
+							selected: true,
+							url: 'http://www.hcharts.cn'
+						}, */
+						['2011-2015年  10',    10],
+						['2015年以后   1',     1]
+					]
+				}]
+			}, function(c) { // 图表初始化完毕后的会掉函数
+				// 环形图圆心
+				var centerY = c.series[0].center[1],
+					titleHeight = parseInt(c.title.styles.fontSize);
+				// 动态设置标题位置
+				c.setTitle({
+					y:centerY + titleHeight/2
+				});
+			});
+			
+			
+			//------------------中间代码-------------------- 
+			var myChart_center = echarts.init(document.getElementById('b_center_map'));
+			var option2 = {
+				color: ['#FFDC63', '#38EBA8', '#17EFEF', '#feda5e', '#fe9e7f'],
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+				    icon:"circle",
+			        itemWidth: 20,
+			        itemHeight: 10,
+			        itemGap: 10,
+					//orient: 'vertical',
+					left: '14',
+					//top: '10',
+					 bottom: 10,
+                     left: 'center',
+					data: ['初级', '中级','高级'],
+					textStyle: { //图例文字的样式
+						color: '#ffffff',
+						fontSize: 14
+					}
+				},
+				series: [{
+					name: '导游类型',
+					type: 'pie',
+					radius: '50%',
+					center: ['50%', '60%'],
+					labelLine: {
+						normal: {
+							length: 10, // 改变标示线的长度
+							lineStyle: {
+								color: "#ffffff" // 改变标示线的颜色
+							},
+							show: false //隐藏标示线
+						},
+					},
+					label: {
+						normal: {
+							data: ['34级', '中级','高级'],
+							textStyle: {
+								color: '#ffffff' // 改变标示文字的颜色
+							},
+							//position: 'inside',
+							show: true
+						}
+					},
+				     labelLine:{
+                            show:true,
+                            lineStyle:{color:'#3c4858'}
+                        },
+					data: [{value: 300,name: '初级'}, {value: 6,name: '中级'}, {value: 0,name: '高级'}],
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			}; //初始化echarts实例
+			//使用制定的配置项和数据显示图表
+			myChart_center.setOption(option2);
+			
+			
+			
+			//------------------右边代码--------------------
+			var myChart_right = echarts.init(document.getElementById('b_right_map'));
+			var option3 = {
+				color: ['#df62ad', '#37a1d9', '#66dfe2', '#feda5e', '#fe9e7f'],
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+					orient: 'vertical',
+					left: '24',
+					top: '10',
+					data: ['英语', '普通话', ],
+					textStyle: { //图例文字的样式
+						color: '#ffffff',
+						fontSize: 14
+					}
+				},
+				series: [{
+					name: '导游语种',
+					type: 'pie',
+					radius: '50%',
+					center: ['50%', '60%'],
+					labelLine: {
+						normal: {
+							length: 10, // 改变标示线的长度
+							lineStyle: {
+								color: "#ffffff" // 改变标示线的颜色
+							},
+							show: false //隐藏标示线
+						},
+					},
+					label: {
+						normal: {
+							textStyle: {
+								color: '#ffffff' // 改变标示文字的颜色
+							},
+							position: 'inside',
+							show: false
+						}
+					},
+					data: [{value: 21,name: '英语'}, {value: 285,name: '普通话'}],
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			}; //初始化echarts实例
+			//使用制定的配置项和数据显示图表
+			myChart_right.setOption(option3);
+		</script>
+		
+		
+		<script type='text/javascript'>
+		var ww = window.screen.width;
+		var wh = window.screen.height;
+		var h = $('.left_menu').height();
+		$('.left_menu').css({top:wh/2-h/2+'px'});
+			
+		$(function(){
+			$('body').mousemove(function(e) {
+					e = e || window.event;
+					__xx = e.pageX || e.clientX + document.body.scroolLeft;
+					__yy = e.pageY || e.clientY + document.body.scrollTop;
+					
+				  if ( __xx <= 125)
+					{
+						$('.left_menu').css({left:'0px'});
+					}
+					else 
+					{
+						$('.left_menu').css({left:'-125px'});
+					
+					}
+			});
+			
+		}); 
+		</script>
+	</body>
+
+</html>

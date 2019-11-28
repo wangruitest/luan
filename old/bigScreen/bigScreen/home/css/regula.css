@@ -1,0 +1,17 @@
+@charset "utf-8";
+body{background: #192589;}
+
+.head{height: 104px;}
+.head h2{text-align: center; color: #ffffff;font-size: 32px; font-weight: bold; line-height: 104px;width: 770px; margin: 0 auto;  }
+.head .sp{width: 770px; background: #00B5FC; height: 2px; margin: 0 auto; position: relative;}
+.head .sp:before{content: ""; position: absolute; left: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(60deg) ;-o-transform: rotate(60deg);-moz-transform: rotate(60deg);-webkit-transform: rotate(60deg);}
+.head .sp:after{content: ""; position: absolute; right: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(-60deg);-o-transform: rotate(-60deg);-moz-transform: rotate(-60deg);-webkit-transform: rotate(-60deg);}
+.head .line{width: 100%; background: #00B5FC url(../img/teambj.jpg) no-repeat center center ; height: 2px;margin-top: -40px;}
+
+.cont{margin-top:50px;}
+ul{width: 100%;}
+.reg div{width: 49%; float: left;display: inline-block; /*border: 1px solid #00B5FC;*/ margin-left: 0.5%;}
+/*.reg {margin-left: 0;}*/
+.reg .left img{width: 24.6%;padding: 10% 0 0;}
+.reg .right{text-align: center; padding: 5% 0;}
+.reg .right p{color: #FFFFFF; font-size: 20px; margin-top: 5px;}

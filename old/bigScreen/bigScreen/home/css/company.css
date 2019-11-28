@@ -1,0 +1,37 @@
+@charset "utf-8";
+body{background:rgba(12,19,38,1);}
+
+.head{height: 40px;background: rgba(29,50,84,1);}
+.head h2{text-align: center;font-size:15px; background-color:rgba(57,81,121,1); color: rgba(255,255,255,1); font-weight: 500;font-family:PingFangSC-Medium; line-height: 40px;width: 770px; margin: 0 auto;  }
+.head .sp{width: 770px; background: #00B5FC; height: 2px; margin: 0 auto; position: relative;}
+.head .sp:before{content: ""; position: absolute; left: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(60deg) ;-o-transform: rotate(60deg);-moz-transform: rotate(60deg);-webkit-transform: rotate(60deg);}
+.head .sp:after{content: ""; position: absolute; right: -33px;top:-20px;width:44px; box-sizing:border-box; border-bottom:2px solid #00B5FC; transform-origin:bottom center; transform:rotateZ(-60deg);-o-transform: rotate(-60deg);-moz-transform: rotate(-60deg);-webkit-transform: rotate(-60deg);}
+.head .line{width: 100%; background: #00B5FC url(../img/companybj.jpg) no-repeat center center ; height: 2px;margin-top: -40px;}
+.foot{margin-top: 160px; text-align: center;background-color: rgb(15, 25, 46);}
+.foot span{color: rgba(255,255,255,1); font-size:9px;font-family:PingFangSC-Light;font-weight:300;height:9px;line-height:18px;margin-left: 10px;}
+
+.companycont{margin-top: 90px;}
+.comSpan{width:55px;height:8px;font-size:8px;font-family:PingFangSC-Regular;font-weight:400;color:rgba(95,123,173,1);line-height:18px;margin-left: 16px}
+.comSpanText{width:13px;height:12px;font-size:15px;font-family:PingFangSC-Regular;font-weight:400;color:rgba(255,255,255,1);line-height:18px;margin-left: 18px;}
+/*概况*/
+.basic{ width: 100%; }
+.title { width: 98%;  height: 10%;  margin-left: 2%;}
+.Dian { width: 10px;  height: 10px; border-radius: 10px;  background: #ffffff;}
+.DianDian { width:7px;background:rgba(242,169,59,1);height:7px; border-radius: 10px;margin-left: 20px}
+
+.Text {height:12px;
+font-size:12px;
+font-family:PingFangSC-Regular;
+font-weight:400;
+color:rgba(255,255,255,1);
+line-height:18px;margin-left: 28px;}
+.b_left,.b_center,.b_right{width: 32.5%; height: 100%; margin-left: 0.5%;border: 1px solid #0298e4; box-shadow:0 0 10px rgba(2,152,228,0.6); }
+
+/*.b_left{margin-left: 0%;}*/
+#b_left_map{width: 100%; _height:400px; min-height:400px;} 
+
+
+#b_center_map{width: 100%; _height:400px; min-height:400px; }
+
+
+#b_right_map{width: 100%; _height:400px; min-height:400px; }

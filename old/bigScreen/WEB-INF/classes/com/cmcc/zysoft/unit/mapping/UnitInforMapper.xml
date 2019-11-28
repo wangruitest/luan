@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.unit.dao.UnitInforDao" >
+  <resultMap id="BaseResultMap1" type="com.cmcc.zysoft.unit.model.UnitInfor" >
+   
+    <result column="unid" property="unid" jdbcType="VARCHAR" />
+    <result column="unitname" property="unitname" jdbcType="VARCHAR" />
+    <result column="username" property="uusername" jdbcType="VARCHAR" />
+    <result column="phone" property="uphone" jdbcType="VARCHAR" />
+    <result column="cityid" property="ucityid" jdbcType="VARCHAR" />
+    <result column="cityname" property="ucityname" jdbcType="VARCHAR" />
+    <result column="areaid" property="uareaid" jdbcType="VARCHAR" />
+    <result column="areaname" property="uareaname" jdbcType="VARCHAR" />
+    <result column="scenicid" property="uscenicid" jdbcType="VARCHAR" />
+    <result column="scenicname" property="uscenicname" jdbcType="VARCHAR" />
+    <result column="delflag" property="delflag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UNID, NAME, ADDRESS, LEADER, CITYID, AREAID, SCENICID, DELFLAG
+  </sql>
+  <!-- 单位用户信息查询所有 -->
+  <select id="selectAllUnitInfo" resultMap="BaseResultMap1" parameterType="java.lang.String" >
+  select  t.username as username,t.phone,u.unid,u.name as unitname,
+    case u.cityid  when '0' then '全部' else  c.cities end as cityname,
+      case  u.areaid when '0' then  '全部' else  a.areas end as areaname, 
+      case u.scenicid when '0'then  '全部' else s.scenic_name end as scenicname, 
+       u.cityid,u.areaid,u.scenicid,u.delflag
+  from SYS_USER t,sys_unit u left join cities c on u.cityid=c.cityid 
+  left join areas a on u.areaid=a.areaid 
+  left join sys_scenic s on u.scenicid=s.scenicid
+  where t.unitid=u.unid
+  and t.role='1'
+  </select>
+  
+  <!-- 单位用户信息模糊查询 -->
+  <select id="searchUnit" resultMap="BaseResultMap1" parameterType="java.util.Map" >
+   select  distinct t.username as username,t.phone,u.unid,u.name as unitname,
+		case u.cityid  when '0' then '全部' else  c.cities end as cityname,
+	  	case  u.areaid when '0' then  '全部' else  a.areas end as areaname, 
+	    case u.scenicid when '0'then  '全部' else s.scenic_name end as scenicname, 
+	   	u.cityid,u.areaid,u.scenicid,u.delflag
+  from SYS_USER t,sys_unit u,cities c,areas a,sys_scenic s
+  where 1=1 and
+	(1 != 1
+	<if test="delflag != 2">
+		  or u.delflag = #{delflag,jdbcType=VARCHAR}
+	</if>
+	<if test="delflag == 2">
+		  or 1 != 1
+	</if>
+	<if test="cityid != 0 and cityid != 340000">
+		  or u.cityid = #{cityid,jdbcType=VARCHAR}
+	</if>
+	<if test="cityid == 0 or cityid == 340000">
+		  or 1 != 1
+	</if>
+	<if test="areaid != 0">
+		  or u.areaid = #{areaid,jdbcType=VARCHAR}
+	</if>
+	<if test="areaid == 0">
+		  or 1 != 1
+	</if>
+	<if test="unitname != ''">
+		  or u.name LIKE '%${unitname}%'
+	</if>)
+   and t.unitid=u.unid
+   and t.role='1'
+   and (u.cityid=c.cityid or u.cityid='0')
+   and (u.areaid=a.areaid or u.areaid='0')
+   and (u.scenicid=s.scenicid or u.scenicid='0')
+   and s.delflag='0'
+  </select>
+  
+</mapper>

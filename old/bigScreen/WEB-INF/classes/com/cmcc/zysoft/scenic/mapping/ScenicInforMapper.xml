@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.scenic.dao.ScenicInforDao" >
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.scenic.model.ScenicInfor" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="SCENIC_NAME" property="scenicName" jdbcType="VARCHAR" />
+    <result column="PROVINCEID" property="provinceid" jdbcType="VARCHAR" />
+    <result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+    <result column="COUNTYID" property="countyid" jdbcType="VARCHAR" />
+    <result column="SORT_NUM" property="sortNum" jdbcType="DECIMAL" />
+    <result column="ISVALID" property="isvalid" jdbcType="DECIMAL" />
+    <result column="ALEVEL" property="alevel" jdbcType="DECIMAL" />
+    <result column="LAT" property="lat" jdbcType="VARCHAR" />
+    <result column="LNG" property="lng" jdbcType="VARCHAR" />
+    <result column="EXPEDITE_VALUE" property="expediteValue" jdbcType="VARCHAR" />
+    <result column="JAM_VALUE" property="jamValue" jdbcType="VARCHAR" />
+    <result column="PM" property="pm" jdbcType="VARCHAR" />
+    <result column="WD" property="wd" jdbcType="VARCHAR" />
+    <result column="PM_URL" property="pmUrl" jdbcType="VARCHAR" />
+    <result column="WD_URL" property="wdUrl" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="CITIESNAME" property="cityname" jdbcType="VARCHAR" />
+    <result column="AREASNAME" property="countyname" jdbcType="VARCHAR" />
+    <result column="LEVEL1_NUM" property="level1Num" jdbcType="VARCHAR" />
+    <result column="LEVEL2_NUM" property="level2Num" jdbcType="VARCHAR" />
+    <result column="LEVEL3_NUM" property="level3Num" jdbcType="VARCHAR" />
+    <result column="LEVEL4_NUM" property="level4Num" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UNID, SCENICID, SCENIC_NAME, PROVINCEID, CITYID, COUNTYID, SORT_NUM, ISVALID, ALEVEL, 
+    LAT, LNG, EXPEDITE_VALUE, JAM_VALUE, PM, WD, PM_URL, WD_URL, DELFLAG
+  </sql>
+  
+  <select id="selectAllScenicInfor" resultMap="BaseResultMap" parameterType="java.lang.String" >
+      select t.*,r.*,(SELECT CITIES FROM CITIES WHERE CITYID=T.CITYID) CITIESNAME,
+              (SELECT AREAS FROM AREAS WHERE T.COUNTYID=AREAID) AREASNAME,
+              nvl2(k.region_id,1,0) as key
+	  from Sys_Scenic t left join region_alarm_level r on r.region_id = t.scenicid
+	  left join key_region_alarm_level k on t.scenicid=k.region_id
+	  where 1=1 AND T.DELFLAG = 0
+	  ORDER BY key desc,SORT_NUM ASC
+  </select>
+  
+  <select id="searchScenic" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select t.*,r.*,(SELECT CITIES FROM CITIES WHERE CITYID=T.CITYID) CITIESNAME,
+              (SELECT AREAS FROM AREAS WHERE T.COUNTYID=AREAID) AREASNAME,
+              nvl2(k.region_id,1,0) as key
+	  from Sys_Scenic t left join region_alarm_level r on r.region_id = t.scenicid
+	   left join key_region_alarm_level k on t.scenicid=k.region_id
+	where (SCENIC_NAME LIKE  '%${scenicName}%' or CITYID=#{cityId,jdbcType=VARCHAR}) AND T.DELFLAG = 0 
+	ORDER BY key desc,SORT_NUM ASC
+  </select>
+  
+  <select id="searchScenic1" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select t.*,r.*,(SELECT CITIES FROM CITIES WHERE CITYID=T.CITYID) CITIESNAME,
+              (SELECT AREAS FROM AREAS WHERE T.COUNTYID=AREAID) AREASNAME,
+              nvl2(k.region_id,1,0) as key
+	  from Sys_Scenic t left join region_alarm_level r on r.region_id = t.scenicid
+	  left join key_region_alarm_level k on t.scenicid=k.region_id
+	where SCENIC_NAME LIKE  '%${scenicName}%' AND T.DELFLAG = 0 ORDER BY key desc,SORT_NUM ASC
+  </select>
+  
+  <select id="searchScenic2" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select t.*,r.*,(SELECT CITIES FROM CITIES WHERE CITYID=T.CITYID) CITIESNAME,
+              (SELECT AREAS FROM AREAS WHERE T.COUNTYID=AREAID) AREASNAME,
+              nvl2(k.region_id,1,0) as key
+	  from Sys_Scenic t left join region_alarm_level r on r.region_id = t.scenicid
+	  left join key_region_alarm_level k on t.scenicid=k.region_id
+	where CITYID=#{cityId,jdbcType=VARCHAR} AND T.DELFLAG = 0 ORDER BY key desc,SORT_NUM ASC
+  </select>
+  
+  
+</mapper>

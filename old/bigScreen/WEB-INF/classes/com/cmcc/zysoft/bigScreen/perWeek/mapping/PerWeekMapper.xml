@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.bigScreen.perWeek.dao.PerWeekDao">
+	<select id="getWeekReceptionTourist" resultType="com.cmcc.zysoft.bigScreen.perWeek.model.PerWeek" parameterType="string">
+		select  to_char(re.stat_day,'day','NLS_DATE_LANGUAGE=''SIMPLIFIED CHINESE''') as stat_day,sum(re.tourists) as num 
+		from REGION_SUMMARY_BYDAY re ,region_cfg s
+		where re.stat_day>(select max(stat_day) from REGION_SUMMARY_BYDAY)-7
+		and re.region_id=s.id
+		<!-- and s.delflag='0' -->
+		<!-- and s.cityid=#{cityId}  -->group by  re.stat_day
+		order by re.stat_day
+	</select>
+</mapper>

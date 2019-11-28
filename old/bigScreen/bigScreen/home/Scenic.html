@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>砀山旅游景区分析</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/scenic.css" />
+		<style type="text/css">
+	   .left_menu {
+		    width: 80px;
+		    position: fixed;
+		    top: 190.5px;
+			left: -125px;
+		    background: #0066CC;
+		}
+		
+		.left_menu ul {
+		    float: left;
+		    list-style: none;
+		    padding: 0px;
+		    margin: 0px;
+		}
+		
+		a:focus{outline:none;}
+		
+        a {
+		    color: #fff;
+		    text-decoration: none;
+		}
+        .left_menu ul li span {
+		    width: 100%;
+		    height: 50px;
+		    float: left;
+		    font: 16px '微软雅黑';
+		    line-height: normal;
+		    text-align: center;
+		    line-height: 85px;
+		}
+		
+		.left_menu ul li:last-child {
+		    border-right: solid 2px #3399CC;
+		}
+
+    	.left_menu ul li {
+		    width: 80px;
+		    height: 80px;
+		    float: left;
+		    color: #fff;
+		    border-bottom: solid 4px #0000CC;
+		    border-left: solid 2px #3399CC;
+		}
+		.left_menu a {
+		    float: left;
+		}
+	     .main {
+      /*  height: 1080px;  */ 
+    }
+	</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<!-- <a class="ind" href="/">视屏监控</a> -->
+			<div class="head">
+				<h2 class="tit">砀山旅游景区分析</h2>
+				<!-- <div class="sp"></div>
+				<div class="line"></div> -->
+			</div>
+			<!--内容-->
+			<div class="main clearfix" id="main">
+				<!--左边-->
+				<div class="mainleft fl">
+					<div class="leftTop">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;width:137px">砀山风景区等级分类</div>
+						</div>
+						<div id="mlefttop"></div>
+					</div>
+					<div class="areamt"></div>
+					<div class="leftbottom">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;width:124px">局内景区评估时间</div>
+						</div>
+						<div id="mleftbottom"></div>
+					</div>
+				</div>
+				<!--中间-->
+				<div class="maincenter fl">
+					<div class="maincent">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;">景区分析</div>
+						</div>
+						<div class="map" style="height: 100%;">
+						<!-- <img src="img/scenic_map3.png" /> -->
+						<iframe src="../home/ds_ditu.html" allowTransparency="true"   style="border: none;width: 100%;height: 94%;" frameborder="0" scrolling="no"></iframe>
+						</div>
+					</div>
+				</div>
+				<!--右边-->
+				<div class="mainright fr">
+					<div class="righttop">
+						<div class="areaTitle clearfix" >
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 18px;width:125px;">县内各地景区数量</div>
+						</div>
+						<div id="mrighttop"></div>
+					</div>
+					<div class="areamt"></div>
+					<div class="rightbottom">
+						<div class="areaTitle clearfix">
+<!-- 							<div class="areaDian fl" style="margin-top: 14px;"></div>
+ -->							<div class="areaText fl" style="line-height: 36px;width:130px">县内旅游景区类型</div>
+						</div>
+						<div id="mrightbottom"></div>
+					</div>
+				</div>
+		    <div class="foot">
+				<span>©2019 砀山旅游局 版权所有</span>
+			</div>	
+				<!--结束-->
+			</div>
+			
+		</div>
+		<div class="left_menu">
+			<ul>
+				<a href="../home/index.html">
+					<li><span>首页</span></li>
+				</a>
+				<a href="javascript:void(0);" class="shipin">
+					<li><span>视屏监控</span></li>
+				</a>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+	<script src="js/echarts.common.min.js"></script>
+	<script type="text/javascript" src="js/highcharts.js" ></script>
+    <script type="text/javascript" src="js/exporting.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.5.1/dist/g2.min.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.10.1/dist/data-set.min.js"></script>
+	<script type="text/javascript">
+        //------------------左上角代码-------------------- 
+        var myChart_left = echarts.init(document.getElementById('mrightbottom'));
+        var option1 = {
+         	tooltip:{},
+            xAxis:{
+                data:["AA","AAA","其他"],
+                    axisLine: {  // 控制x轴线的样式
+					lineStyle: {type: 'solid', color: 'rgb(131, 136, 147)',  width:'1' },
+                },
+                    splitLine: {
+		            show: false,
+		            lineStyle:{ color:'#727272', width: 1,type: 'solid'}
+		        }
+            },
+            yAxis:{
+				axisLine: {
+                   lineStyle: {type: 'solid', color: 'rgb(131, 136, 147)', width:'1' },
+                },
+				//网格样式
+		        splitLine: {
+		            show: false,
+		            lineStyle:{ color:'#727272', width: 1,type: 'solid'}
+		        }
+            },
+            series:[{
+                name:'景区类型',
+                itemStyle:{
+                    normal:{color:'#28bf7e'}, 
+                },
+                type:'bar',
+                data:[23,6,4,],
+                barWidth:20,
+            }]
+         };//初始化echarts实例
+        //使用制定的配置项和数据显示图表
+        myChart_left.setOption(option1);
+        
+        
+        //----------------------左下角代码-------------------------
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_left2 = echarts.init(document.getElementById('mleftbottom'));
+        // 指定图表的配置项和数据
+        var option2 = {
+		    color:['#66dfe2','#feda5e','#fe9e7f'],
+         	tooltip: {
+         		trigger: 'item',
+         		formatter: "{a} <br/>{b} : {c} ({d}%)"
+         	},
+         	legend: {
+         		orient: 'vertical',
+         		left: '24',
+         		top:'10',
+         		data: ['1995-2000年', '2001-2005年', '2005-2010年', ],
+         		textStyle:{//图例文字的样式
+		            color:'#ffffff',
+		            fontSize:14
+		        }
+         	},
+         	series: [{
+         		name: '时间',
+         		type: 'pie',
+         		radius: '55%',
+         		center: ['60%', '60%'],
+         		labelLine:{  
+					normal:{  
+				        length:10,  // 改变标示线的长度
+				        lineStyle: {
+				        	color: "#ffffff"  // 改变标示线的颜色
+				        },
+				        show:false   //隐藏标示线
+					},
+				},
+				label: {
+				    normal: {
+				        textStyle: { 
+				        	color: '#ffffff'  // 改变标示文字的颜色
+				        },
+				        position:'inside',
+				        show:false,
+				    }
+				},
+         		data: [{value: 26,name: '1995-2000年'},{value: 4,name: '2001-2005年'},{value: 2,name: '2005-2010年'},],
+         		itemStyle: {
+         			emphasis: {
+         				shadowBlur: 10,
+         				shadowOffsetX: 0,
+         				shadowColor: 'rgba(0, 0, 0, 0.5)'
+         			}
+         		}
+         	}]
+        };
+        // 使用刚指定的配置项和数据显示图表。
+       // myChart_left2.setOption(option2);
+           //---------------------UI----------------highchats
+			var chart = Highcharts.chart('mleftbottom', {
+				chart: {
+					spacing : [40, 0 , 40, 0],
+				    backgroundColor: 'rgb(20, 34, 60)'			
+				},
+				title: {
+					floating:true,
+					text: '',
+					show: false
+				},
+				credits: {
+                        enabled: false
+                    },
+				navigation: { 
+                     buttonOptions: {
+                     enabled: false
+                     }
+                    },
+				tooltip: {
+					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+							style: {
+								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+							}
+						},
+						point: {
+							events: {
+								mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+									// 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
+									chart.setTitle({
+										text: e.target.name+ '\t'+ e.target.y + ' %'
+									});
+								}
+								//, 
+								// click: function(e) { // 同样的可以在点击事件里处理
+								//     chart.setTitle({
+								//         text: e.point.name+ '\t'+ e.point.y + ' %'
+								//     });
+								// }
+							}
+						},
+					}
+				},
+				series: [{
+					type: 'pie',
+					innerSize: '80%',
+					name: '',
+					data: [
+						{name:'1995-2000年  26',   y: 26, url : 'http://bbs.hcharts.cn',color:'#674BFF'},
+						{name:'2001-2005年  4',   y: 4, url : 'http://bbs.hcharts.cn',color:'#00E400'},
+						{name:'2005-2010年  2',   y: 2, url : 'http://bbs.hcharts.cn',color:'#FF7E00'},
+					
+					/* 	{
+							name: 'Chrome',
+							y: 12.8,
+							sliced: true,
+							selected: true,
+							url: 'http://www.hcharts.cn'
+						}, */
+					]
+				}]
+			}, function(c) { // 图表初始化完毕后的会掉函数
+				// 环形图圆心
+				var centerY = c.series[0].center[1],
+					titleHeight = parseInt(c.title.styles.fontSize);
+				// 动态设置标题位置
+				c.setTitle({
+					y:centerY + titleHeight/2
+				});
+			});       
+       
+        
+
+        
+        //-------------------------右上角代码--------------------------
+        var myChart_right = echarts.init(document.getElementById('mrighttop'));
+        var option3 = {
+            tooltip:{},
+            xAxis:{
+            	axisLine: {  // 控制x轴线的样式
+					lineStyle: {type: 'solid', color: '#ffffff',  width:'1' },
+                },
+				axisLabel: { interval:0, rotate:40 },
+                data:["砀山县城","官庄坝镇","曹庄镇","砀城镇","良梨镇","城关镇","程庄镇","葛集镇","唐寨镇","文庄镇","玄庙镇"],
+            },
+            yAxis:{
+				axisLine: {
+                   lineStyle: {type: 'solid', color: '#ffffff', width:'1' },
+                },
+				//网格样式
+		        splitLine: {
+		            show: true,
+		            lineStyle:{ color:'#727272', width: 1,type: 'solid'}
+		        }
+            },
+            series:[{
+                name:'景区数量',
+                itemStyle:{
+                    normal:{color:'#ffc600'}, 
+                },
+                type:'bar',
+                data:[13,5,2,2,2,1,1,1,1,1,1],
+                barWidth:20,
+            }]
+        };
+			var option3UI = {
+				  title: {
+				      text: '',
+				      subtext: ''
+				  },
+				  tooltip: {
+				      trigger: 'axis',
+				      axisPointer: {
+				          type: 'shadow'
+				      }
+				  },
+				  legend: {
+			        data: ['2011年'],
+			        show:false
+			    },
+			    grid: {
+			        left: '3%',
+			        right: '4%',
+			        bottom: '3%',
+			        containLabel: true
+			    },
+			    xAxis: {
+			        type: 'value',
+			        boundaryGap: [0, 0.01],
+			        axisLine: {  // 控制x轴线的样式
+					lineStyle: {type: 'solid', color: 'rgb(131, 136, 147)',  width:'1' },
+                },
+                    splitLine: {
+		            show: false,
+		            lineStyle:{ color:'#727272', width: 1,type: 'solid'}
+		        }
+			        
+			    },
+			    yAxis: {
+			        type: 'category',
+			        data: ["砀山县城","官庄坝镇","曹庄镇","砀城镇","良梨镇","城关镇","程庄镇","葛集镇","唐寨镇","文庄镇","玄庙镇"],
+			        axisLine: {
+                   lineStyle: {type: 'solid', color: 'rgb(131, 136, 147)', width:'0' },
+                   },
+                   
+			        
+			      
+			    },
+			    series: [
+			        {
+			            name: '2011年',
+			            type: 'bar',
+			            data: [13,5,2,2,2,1,1,1,1,1,1],
+			               itemStyle:{
+                    normal:{color:'#28bf7e'}, 
+                        },
+			        }
+			    ]
+			};
+        //初始化echarts实例
+        //使用制定的配置项和数据显示图表
+        myChart_right.setOption(option3UI);
+        
+         
+        //---------------------右下角代码--------------------
+        var myChart_right2 = echarts.init(document.getElementById('mlefttop'));
+        var option4 = { 
+         	color:['#df62ad', '#37a1d9','#66dfe2','#feda5e','#fe9e7f','#15beb7','#66dfe2','#2290f8'],
+         	tooltip: {
+         		trigger: 'item',
+         		formatter: "{a} <br/>{b} : {c} ({d}%)"
+         	},
+         	legend: {
+       	      icon:"circle",
+	          itemWidth: 20,
+	          itemHeight: 10,
+	          itemGap: 10,
+			//orient: 'vertical',
+			//left: '24',
+			//top: '10',
+			    bottom: 1,
+                left: 'center',
+         		//orient: 'vertical',
+     /*     		x : '46%',
+                y : '28%', */
+         		//top:'middle',
+         		data: ['名胜古迹', '自然风景区','公园', '文化聚集地', '自然保护区', '植物园', '农家乐' ,'教堂', ],
+         		textStyle:{//图例文字的样式
+		            color:'#ffffff',
+		            fontSize:14
+		        }
+         	},
+            series:[{
+                name:'类型',
+                type:'pie',    
+                radius:'50%',
+                center: ['50%', '50%'],
+                labelLine:{  
+					normal:{  
+				        length:10,  // 改变标示线的长度
+				        lineStyle: {
+				        	color: "#ffffff"  // 改变标示线的颜色
+				        },
+				        show : true   //隐藏标示线
+					},
+				},
+				label: {
+				    normal: {
+				    	data: ['名胜古迹', '自然风景区','公园','文化聚集地','自然保护区','植物园','农家乐','教堂'],
+				        textStyle: { 
+				        	color: '#ffffff'  // 改变标示文字的颜色
+				        },
+				      //  position:'inside',
+				        show:true,
+				    }
+				},
+			   labelLine:{
+                       show:true,
+                       lineStyle:{color:'#3c4858'}
+                      },
+                data:[
+                    {value:9,name:'名胜古迹'},
+                    {value:7,name:'自然风景区'},
+                    {value:4,name:'公园'},
+                    {value:3,name:'文化聚集地'},
+                    {value:2,name:'自然保护区'},
+                    {value:2,name:'植物园'},
+                    {value:2,name:'农家乐'},
+                    {value:1,name:'教堂'},
+                ]
+    
+            }]
+        };
+        //初始化echarts实例
+        //使用制定的配置项和数据显示图表
+        myChart_right2.setOption(option4);
+      
+      // Build the chart
+			Highcharts.chart('mlefttop1', {
+			    //color:'red',
+				chart: {		
+                    backgroundColor: '#0f192e',
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false,
+					type: 'pie'
+				},
+				title: {
+					text: '2018 年浏览器市场份额'
+				},
+				tooltip: {
+					pointFormat: '<b style="color:red">{series.name}: {point.percentage:.1f}%</b>'
+				},
+				plotOptions: {
+					pie: {
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<span style="color:#f3f7fd;fontSize:0.8em">{point.name}: {point.percentage:.1f} %</span>',
+					       	style: {
+					       	fontSize:'12px',
+					       	fontFamily:'SimSun',
+					       	fontWeight:'bold',
+					       	//color:rgba(255,255,255,1),
+					       	lineHeight:'18px',
+							color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+						},
+						style:{
+					    fontSize:'14px',
+						},
+						showInLegend: true
+					}
+				},
+				series: [{
+					name: 'Brands',
+					colorByPoint: true,
+					data: [{
+						name: 'Chrome',
+						y: 61.41,
+						sliced: true,
+						selected: true,
+						color:'red'
+					}, {
+						name: 'Internet Explorer',
+						y: 11.84
+					}, {
+						name: 'Firefox',
+						y: 10.85
+					}, {
+						name: 'Edge',
+						y: 4.67
+					}, {
+						name: 'Safari',
+						y: 4.18
+					}, {
+						name: 'Other',
+						y: 7.05
+					}]
+				}]
+			}); 
+			
+		/* 	var data = [{
+					    item: '事例一',
+					    count: 40,
+					    percent: 0.4
+					  }, {
+					    item: '事例二',
+					    count: 21,
+					    percent: 0.21
+					  }, {
+					    item: '事例三',
+					    count: 17,
+					    percent: 0.17
+					  }, {
+					    color:'red',
+					    item: '事例四',
+					    count: 13,
+					    percent: 0.13
+					  }, {
+					    item: '事例五',
+					    count: 9,
+					    percent: 0.09
+					  }];
+					  var chart = new G2.Chart({
+					    container: 'mlefttop',
+					    forceFit: true,
+					    height: window.innerHeight
+					  });
+					  chart.source(data, {
+					    percent: {
+					      formatter: function formatter(val) {
+					        val = val * 100 + '%';
+					        return val;
+					      }
+					    }
+					  });
+					  chart.coord('theta', {
+					    radius: 0.75
+					  });
+					  chart.tooltip({
+					    showTitle: false,
+					    itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+					  });
+					  chart.intervalStack().position('percent').color('item').label('percent', {
+					    formatter: function formatter(val, item) {
+					      return item.point.item + ': ' + val;
+					    }
+					  }).tooltip('item*percent', function(item, percent) {
+					    percent = percent * 100 + '%';
+					    return {
+					      name: item,
+					      value: percent
+					    };
+					  }).style({
+					    lineWidth: 1,
+					    stroke: '#fff'
+					  });
+					  chart.render(); */
+			
+    </script>
+    
+    <script type='text/javascript'>
+    	
+		var ww = window.screen.width;
+		var wh = window.screen.height;
+		var h = $('.left_menu').height();
+		$('.left_menu').css({top:wh/2-h/2+'px'});
+			
+		$(function(){
+			$('body').mousemove(function(e) {
+					e = e || window.event;
+					__xx = e.pageX || e.clientX + document.body.scroolLeft;
+					__yy = e.pageY || e.clientY + document.body.scrollTop;
+					
+				  if ( __xx <= 125)
+					{
+						$('.left_menu').css({left:'0px'});
+					}
+					else 
+					{
+						$('.left_menu').css({left:'-125px'});
+					
+					}
+			});
+			
+		
+			$(".shipin").on("click",function(){
+	         	window.open("http://192.168.1.10/Page/Login/mainIndex.php");
+	  		})
+  		
+		}); 
+		</script>
+
+</html>

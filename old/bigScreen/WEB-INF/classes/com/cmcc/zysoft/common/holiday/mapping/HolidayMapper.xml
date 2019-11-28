@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.common.holiday.dao.HolidayMapper">
+	<resultMap id="BaseResultMap" type="com.cmcc.zysoft.common.holiday.model.Holiday">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="HOLIDAY_NAME" jdbcType="VARCHAR" property="holidayName" />
+    <result column="FIRST_DAY" jdbcType="TIMESTAMP" property="firstDay" />
+    <result column="LAST_DAY" jdbcType="TIMESTAMP" property="lastDay" />
+    <result column="HOLIDAY_DAYS" jdbcType="DECIMAL" property="holidayDays" />
+    <result column="BELONE_YEAR" jdbcType="VARCHAR" property="beloneYear" />
+  </resultMap>
+ 	<select id="getBeforeHoliday" parameterType="string" resultMap="BaseResultMap">
+ 		select * from holiday hl 
+ 		<if test="endDate !=null and endDate !=''">
+ 			where hl.last_day &lt; to_date('endDate','yyyy-mm-dd') 
+ 		</if>
+ 		order by hl.last_day
+ 	</select>
+</mapper>

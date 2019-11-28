@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.common.regionalarmlevel.dao.RegionAlarmLevelMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    <id column="REGION_ID" jdbcType="DECIMAL" property="regionId" />
+    <result column="LEVEL1_NUM" jdbcType="DECIMAL" property="level1Num" />
+    <result column="LEVEL2_NUM" jdbcType="DECIMAL" property="level2Num" />
+    <result column="LEVEL3_NUM" jdbcType="DECIMAL" property="level3Num" />
+    <result column="LEVEL4_NUM" jdbcType="DECIMAL" property="level4Num" />
+    <result column="EDIT_TIME" jdbcType="TIMESTAMP" property="editTime" />
+    <result column="KEY" jdbcType="VARCHAR" property="key" />
+    <result column="CURRENT_LEVEL" jdbcType="DECIMAL" property="currentLevel" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    REGION_ID, LEVEL1_NUM, LEVEL2_NUM, LEVEL3_NUM, LEVEL4_NUM, EDIT_TIME, CURRENT_LEVEL, 
+    ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from REGION_ALARM_LEVEL
+    where REGION_ID = #{regionId,jdbcType=DECIMAL}
+  </select>
+  <select id="findByScenicId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select t.* ,nvl2(k.region_id,1,0) as key from REGION_ALARM_LEVEL t 
+	left join key_region_alarm_level k on t.region_id=k.region_id 
+    where t.region_id = #{regionId}
+  </select>
+  <select id="findKeyScenicById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select k.*,'1' as key from key_region_alarm_level k
+    <if test="regionId != null and regionId != ''">
+   	 where k.region_id = #{regionId}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    insert into REGION_ALARM_LEVEL (REGION_ID, LEVEL1_NUM, LEVEL2_NUM, 
+      LEVEL3_NUM, LEVEL4_NUM, EDIT_TIME, 
+      CURRENT_LEVEL, ID)
+    values (#{regionId,jdbcType=DECIMAL}, #{level1Num,jdbcType=DECIMAL}, #{level2Num,jdbcType=DECIMAL}, 
+      #{level3Num,jdbcType=DECIMAL}, #{level4Num,jdbcType=DECIMAL}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{currentLevel,jdbcType=DECIMAL}, #{id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertKeyScenic" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    insert into KEY_REGION_ALARM_LEVEL (REGION_ID, LEVEL1_NUM, LEVEL2_NUM, 
+      LEVEL3_NUM, LEVEL4_NUM, EDIT_TIME, 
+      CURRENT_LEVEL, ID)
+    values (#{regionId,jdbcType=DECIMAL}, #{level1Num,jdbcType=DECIMAL}, #{level2Num,jdbcType=DECIMAL}, 
+      #{level3Num,jdbcType=DECIMAL}, #{level4Num,jdbcType=DECIMAL}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{currentLevel,jdbcType=DECIMAL}, #{id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="deleteKeyScenic" parameterType="string">
+  	delete from KEY_REGION_ALARM_LEVEL where region_id = #{regionId}
+  </insert>
+   <insert id="deleteAlarmScenicById" parameterType="string">
+  	delete from REGION_ALARM_LEVEL where region_id = #{regionId}
+  	</insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    insert into REGION_ALARM_LEVEL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="regionId != null">
+        REGION_ID,
+      </if>
+      <if test="level1Num != null">
+        LEVEL1_NUM,
+      </if>
+      <if test="level2Num != null">
+        LEVEL2_NUM,
+      </if>
+      <if test="level3Num != null">
+        LEVEL3_NUM,
+      </if>
+      <if test="level4Num != null">
+        LEVEL4_NUM,
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME,
+      </if>
+      <if test="currentLevel != null">
+        CURRENT_LEVEL,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="regionId != null">
+        #{regionId,jdbcType=DECIMAL},
+      </if>
+      <if test="level1Num != null">
+        #{level1Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level2Num != null">
+        #{level2Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level3Num != null">
+        #{level3Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level4Num != null">
+        #{level4Num,jdbcType=DECIMAL},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLevel != null">
+        #{currentLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    update REGION_ALARM_LEVEL
+    <set>
+      <if test="level1Num != null">
+        LEVEL1_NUM = #{level1Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level2Num != null">
+        LEVEL2_NUM = #{level2Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level3Num != null">
+        LEVEL3_NUM = #{level3Num,jdbcType=DECIMAL},
+      </if>
+      <if test="level4Num != null">
+        LEVEL4_NUM = #{level4Num,jdbcType=DECIMAL},
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLevel != null">
+        CURRENT_LEVEL = #{currentLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="id != null">
+        ID = #{id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REGION_ID = #{regionId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    update REGION_ALARM_LEVEL
+    set LEVEL1_NUM = #{level1Num,jdbcType=DECIMAL},
+      LEVEL2_NUM = #{level2Num,jdbcType=DECIMAL},
+      LEVEL3_NUM = #{level3Num,jdbcType=DECIMAL},
+      LEVEL4_NUM = #{level4Num,jdbcType=DECIMAL},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      CURRENT_LEVEL = #{currentLevel,jdbcType=DECIMAL},
+      ID = #{id,jdbcType=VARCHAR}
+    where REGION_ID = #{regionId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateKeyScenicById" parameterType="com.cmcc.zysoft.common.regionalarmlevel.model.RegionAlarmLevel">
+    update KEY_REGION_ALARM_LEVEL
+    set LEVEL1_NUM = #{level1Num,jdbcType=DECIMAL},
+      LEVEL2_NUM = #{level2Num,jdbcType=DECIMAL},
+      LEVEL3_NUM = #{level3Num,jdbcType=DECIMAL},
+      LEVEL4_NUM = #{level4Num,jdbcType=DECIMAL},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      CURRENT_LEVEL = #{currentLevel,jdbcType=DECIMAL},
+      ID = #{id,jdbcType=VARCHAR}
+    where REGION_ID = #{regionId,jdbcType=DECIMAL}
+  </update>
+</mapper>

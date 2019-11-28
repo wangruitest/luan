@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.bigScreen.touriststaytime.dao.TouristStayTimeMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.bigScreen.touriststaytime.model.TouristStayTime">
+    <result column="ONETOTWOH_COUNT" jdbcType="VARCHAR" property="onetotwoh_count"/>
+    <result column="TWOTOSIX_COUNT" jdbcType="VARCHAR" property="twotosixh_count"/>
+    <result column="SIXTODAY_COUNT" jdbcType="VARCHAR" property="sixhtoday_count"/>
+    <result column="DAYTOTWO_COUNT" jdbcType="VARCHAR" property="daytotwod_count"/>
+    <result column="MORETWOD_COUNT" jdbcType="VARCHAR" property="moretwod_count"/>
+    <result column="ALLTOURIST" jdbcType="VARCHAR" property="alltourist"/>
+  </resultMap>
+  
+  <!-- 各时间段游客驻留时间统计 -->
+  <select id="getTouristStayTime" parameterType="java.util.Map" resultMap="BaseResultMap">
+   
+     SELECT nvl(SUM(case when linger_type=1 then  t.tourists end),0) onetotwoh_count,
+                    nvl(SUM(case when linger_type=2 then  t.tourists end),0) twotosixh_count,
+                    nvl(SUM(case when linger_type=3 then  t.tourists end),0) sixhtoday_count,
+                    nvl(SUM(case when linger_type=4 then  t.tourists end),0) daytotwod_count,
+                    nvl(SUM(case when linger_type=5 then  t.tourists end),0) moretwod_count
+               FROM REGION_LINGER t,region_cfg s
+              WHERE s.id = t.region_id
+              and t.stat_day = (select max(stat_day) from REGION_LINGER)
+  </select>
+  
+</mapper>

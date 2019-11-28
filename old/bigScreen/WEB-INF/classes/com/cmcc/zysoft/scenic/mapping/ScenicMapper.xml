@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.scenic.dao.ScenicDao">
+	<resultMap id="BaseResultMap" type="com.cmcc.zysoft.scenic.model.Scenic">
+		<id column="UNID" property="unid" jdbcType="VARCHAR" />
+		<result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+		<result column="SCENIC_NAME" property="scenicName" jdbcType="VARCHAR" />
+		<result column="PROVINCEID" property="provinceid" jdbcType="VARCHAR" />
+		<result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+		<result column="COUNTYID" property="countyid" jdbcType="VARCHAR" />
+		<result column="SORT_NUM" property="sortNum" jdbcType="DECIMAL" />
+		<result column="ISVALID" property="isvalid" jdbcType="DECIMAL" />
+		<result column="ALEVEL" property="alevel" jdbcType="DECIMAL" />
+		<result column="LAT" property="lat" jdbcType="VARCHAR" />
+		<result column="LNG" property="lng" jdbcType="VARCHAR" />
+		<result column="EXPEDITE_VALUE" property="expediteValue"
+			jdbcType="VARCHAR" />
+		<result column="JAM_VALUE" property="jamValue" jdbcType="VARCHAR" />
+		<result column="PM" property="pm" jdbcType="VARCHAR" />
+		<result column="WD" property="wd" jdbcType="VARCHAR" />
+		<result column="PM_URL" property="pmUrl" jdbcType="VARCHAR" />
+		<result column="WD_URL" property="wdUrl" jdbcType="VARCHAR" />
+		<result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		UNID, SCENICID, SCENIC_NAME, PROVINCEID, CITYID, COUNTYID, SORT_NUM,
+		ISVALID, ALEVEL,
+		LAT, LNG, EXPEDITE_VALUE, JAM_VALUE, PM, WD, PM_URL, WD_URL, DELFLAG
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_SCENIC
+		where UNID = #{unid,jdbcType=VARCHAR} ORDER BY SORT_NUM ASC
+	</select>
+	<select id="getScenceByareaId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_SCENIC
+		where COUNTYID = #{areaid,jdbcType=VARCHAR} ORDER BY SORT_NUM ASC
+	</select>
+
+	<select id="selectAllScenic" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_SCENIC t
+		where 1=1 and t.DELFLAG = 0 
+		<if test="regionType==1">
+			and t.cityid=#{cityId}
+		</if>
+		<if test="regionType==2">
+			and t.countyid=#{cityId}
+		</if>
+		ORDER BY SORT_NUM ASC
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from SYS_SCENIC
+		where UNID = #{unid,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.cmcc.zysoft.scenic.model.Scenic">
+		insert into SYS_SCENIC (UNID, SCENICID, SCENIC_NAME,
+		PROVINCEID, CITYID, COUNTYID,
+		SORT_NUM, ISVALID, ALEVEL,
+		LAT, LNG, EXPEDITE_VALUE,
+		JAM_VALUE, PM, WD, PM_URL,
+		WD_URL, DELFLAG)
+		values (#{unid,jdbcType=VARCHAR}, #{scenicid,jdbcType=VARCHAR},
+		#{scenicName,jdbcType=VARCHAR},
+		#{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, #{countyid,jdbcType=VARCHAR},
+		#{sortNum,jdbcType=DECIMAL}, #{isvalid,jdbcType=DECIMAL},
+		#{alevel,jdbcType=DECIMAL},
+		#{lat,jdbcType=VARCHAR}, #{lng,jdbcType=VARCHAR}, #{expediteValue,jdbcType=VARCHAR},
+		#{jamValue,jdbcType=VARCHAR}, #{pm,jdbcType=VARCHAR},
+		#{wd,jdbcType=VARCHAR}, #{pmUrl,jdbcType=VARCHAR},
+		#{wdUrl,jdbcType=VARCHAR}), #{delflag,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.cmcc.zysoft.scenic.model.Scenic">
+		insert into SYS_SCENIC
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="unid != null">
+				UNID,
+			</if>
+			<if test="scenicid != null">
+				SCENICID,
+			</if>
+			<if test="scenicName != null">
+				SCENIC_NAME,
+			</if>
+			<if test="provinceid != null">
+				PROVINCEID,
+			</if>
+			<if test="cityid != null">
+				CITYID,
+			</if>
+			<if test="countyid != null">
+				COUNTYID,
+			</if>
+			<if test="sortNum != null">
+				SORT_NUM,
+			</if>
+			<if test="isvalid != null">
+				ISVALID,
+			</if>
+			<if test="alevel != null">
+				ALEVEL,
+			</if>
+			<if test="lat != null">
+				LAT,
+			</if>
+			<if test="lng != null">
+				LNG,
+			</if>
+			<if test="expediteValue != null">
+				EXPEDITE_VALUE,
+			</if>
+			<if test="jamValue != null">
+				JAM_VALUE,
+			</if>
+			<if test="pm != null">
+				PM,
+			</if>
+			<if test="wd != null">
+				WD,
+			</if>
+			<if test="pmUrl != null">
+				PM_URL,
+			</if>
+			<if test="wdUrl != null">
+				WD_URL,
+			</if>
+			<if test="delflag != null">
+				DELFLAG,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="unid != null">
+				#{unid,jdbcType=VARCHAR},
+			</if>
+			<if test="scenicid != null">
+				#{scenicid,jdbcType=VARCHAR},
+			</if>
+			<if test="scenicName != null">
+				#{scenicName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				#{provinceid,jdbcType=VARCHAR},
+			</if>
+			<if test="cityid != null">
+				#{cityid,jdbcType=VARCHAR},
+			</if>
+			<if test="countyid != null">
+				#{countyid,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNum != null">
+				#{sortNum,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid != null">
+				#{isvalid,jdbcType=DECIMAL},
+			</if>
+			<if test="alevel != null">
+				#{alevel,jdbcType=DECIMAL},
+			</if>
+			<if test="lat != null">
+				#{lat,jdbcType=VARCHAR},
+			</if>
+			<if test="lng != null">
+				#{lng,jdbcType=VARCHAR},
+			</if>
+			<if test="expediteValue != null">
+				#{expediteValue,jdbcType=VARCHAR},
+			</if>
+			<if test="jamValue != null">
+				#{jamValue,jdbcType=VARCHAR},
+			</if>
+			<if test="pm != null">
+				#{pm,jdbcType=VARCHAR},
+			</if>
+			<if test="wd != null">
+				#{wd,jdbcType=VARCHAR},
+			</if>
+			<if test="pmUrl != null">
+				#{pmUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="wdUrl != null">
+				#{wdUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="delflag != null">
+				#{delflag,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.scenic.model.Scenic">
+		update SYS_SCENIC
+		<set>
+			<if test="scenicid != null">
+				SCENICID = #{scenicid,jdbcType=VARCHAR},
+			</if>
+			<if test="scenicName != null">
+				SCENIC_NAME = #{scenicName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceid != null">
+				PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+			</if>
+			<if test="cityid != null">
+				CITYID = #{cityid,jdbcType=VARCHAR},
+			</if>
+			<if test="countyid != null">
+				COUNTYID = #{countyid,jdbcType=VARCHAR},
+			</if>
+			<if test="sortNum != null">
+				SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+			</if>
+			<if test="isvalid != null">
+				ISVALID = #{isvalid,jdbcType=DECIMAL},
+			</if>
+			<if test="alevel != null">
+				ALEVEL = #{alevel,jdbcType=DECIMAL},
+			</if>
+			<if test="lat != null">
+				LAT = #{lat,jdbcType=VARCHAR},
+			</if>
+			<if test="lng != null">
+				LNG = #{lng,jdbcType=VARCHAR},
+			</if>
+			<if test="expediteValue != null">
+				EXPEDITE_VALUE = #{expediteValue,jdbcType=VARCHAR},
+			</if>
+			<if test="jamValue != null">
+				JAM_VALUE = #{jamValue,jdbcType=VARCHAR},
+			</if>
+			<if test="pm != null">
+				PM = #{pm,jdbcType=VARCHAR},
+			</if>
+			<if test="wd != null">
+				WD = #{wd,jdbcType=VARCHAR},
+			</if>
+			<if test="pmUrl != null">
+				PM_URL = #{pmUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="wdUrl != null">
+				WD_URL = #{wdUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="delflag != null">
+				DELFLAG = #{delflag,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where UNID = #{unid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.scenic.model.Scenic">
+		update SYS_SCENIC
+		set SCENICID = #{scenicid,jdbcType=VARCHAR},
+		SCENIC_NAME = #{scenicName,jdbcType=VARCHAR},
+		PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+		CITYID = #{cityid,jdbcType=VARCHAR},
+		COUNTYID = #{countyid,jdbcType=VARCHAR},
+		SORT_NUM = #{sortNum,jdbcType=DECIMAL},
+		ISVALID = #{isvalid,jdbcType=DECIMAL},
+		ALEVEL = #{alevel,jdbcType=DECIMAL},
+		LAT = #{lat,jdbcType=VARCHAR},
+		LNG = #{lng,jdbcType=VARCHAR},
+		EXPEDITE_VALUE = #{expediteValue,jdbcType=VARCHAR},
+		JAM_VALUE = #{jamValue,jdbcType=VARCHAR},
+		PM = #{pm,jdbcType=VARCHAR},
+		WD = #{wd,jdbcType=VARCHAR},
+		PM_URL = #{pmUrl,jdbcType=VARCHAR},
+		WD_URL = #{wdUrl,jdbcType=VARCHAR},
+		DELFLAG = #{delflag,jdbcType=VARCHAR}
+		where UNID = #{unid,jdbcType=VARCHAR}
+	</update>
+
+
+	<resultMap id="ScenicMap" type="com.cmcc.zysoft.scenic.model.Scenic">
+		<id column="UNID" property="unid" jdbcType="VARCHAR" />
+		<result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+		<result column="SCENIC_NAME" property="scenicName" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="getScenicByScenicId" resultMap="ScenicMap"
+		parameterType="java.lang.String">
+		select
+		UNID,SCENICID,SCENIC_NAME
+		from SYS_SCENIC
+		where SCENICID = #{scenicid,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getScenicByCityId" resultMap="ScenicMap"
+		parameterType="java.lang.String">
+		select
+		UNID,SCENICID,SCENIC_NAME
+		from SYS_SCENIC
+		where CITYID = #{cityid,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getScenicByProvinceId" resultMap="ScenicMap"
+		parameterType="java.lang.String">
+		select
+		UNID,SCENICID,SCENIC_NAME
+		from SYS_SCENIC
+		where PROVINCEID = #{provinceId,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getScenceByUser" resultMap="ScenicMap"
+		parameterType="java.util.Map">
+		select
+		t.UNID,t.SCENICID,t.SCENIC_NAME
+		from SYS_SCENIC t
+		where t.SCENICID IN (SELECT a.SCENICID FROM  SYS_SCENIC_USER a WHERE a.USERID=#{userid})
+		<if test="regionType==1">
+			and t.cityid=#{cityId}
+		</if>
+		<if test="regionType==2">
+			and t.countyid=#{cityId}
+		</if>
+	</select>
+	
+</mapper>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.unit.dao.UnitDao" >
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.unit.model.Unit" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="LEADER" property="leader" jdbcType="VARCHAR" />
+    <result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+    <result column="AREAID" property="areaid" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  
+  <sql id="Base_Column_List" >
+    UNID, NAME, ADDRESS, LEADER, CITYID, AREAID, SCENICID, DELFLAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_UNIT
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <resultMap id="getUnitMap" type="com.cmcc.zysoft.unit.model.Unit" >
+    <result column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DELFLAG" property="delflag" jdbcType="VARCHAR" />
+    <result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getUnitList" resultMap="getUnitMap" parameterType="java.lang.String" >
+    select 
+    t.UNID,t.NAME
+    from SYS_UNIT t
+    where t.DELFLAG=0
+  </select>
+  
+  <select id="getUnitListById" resultMap="getUnitMap" parameterType="java.lang.String" >
+    select 
+    t.UNID,t.NAME,t.CITYID,t.AREAID,t.SCENICID
+    from SYS_UNIT t
+    where t.DELFLAG=0 and t.UNID=#{unitid}
+  </select>
+  
+   <select id="selectAllUnit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+  	<include refid="Base_Column_List" />
+    from SYS_UNIT
+    where 1=1
+  </select>
+  <select id="getUnitByUnitName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_UNIT
+    where 1=1
+    and NAME=#{unitname,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_UNIT
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </delete>
+  
+   <update id="changeByPrimaryKey" parameterType="java.lang.String" >
+    update  SYS_UNIT set DELFLAG=0
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  
+  <insert id="insert" parameterType="com.cmcc.zysoft.unit.model.Unit" >
+    insert into SYS_UNIT (UNID, NAME, ADDRESS, 
+      LEADER, CITYID, AREAID, 
+      SCENICID, DELFLAG)
+    values (#{unid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{leader,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, 
+      #{scenicid,jdbcType=VARCHAR}, #{delflag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.unit.model.Unit" >
+    insert into SYS_UNIT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        UNID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="leader != null" >
+        LEADER,
+      </if>
+      <if test="cityid != null" >
+        CITYID,
+      </if>
+      <if test="areaid != null" >
+        AREAID,
+      </if>
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="delflag != null" >
+        DELFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        #{unid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        #{delflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.unit.model.Unit" >
+    update SYS_UNIT
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null" >
+        LEADER = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        CITYID = #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null" >
+        AREAID = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        SCENICID = #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="delflag != null" >
+        DELFLAG = #{delflag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.unit.model.Unit" >
+    update SYS_UNIT
+    set NAME = #{name,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LEADER = #{leader,jdbcType=VARCHAR},
+      CITYID = #{cityid,jdbcType=VARCHAR},
+      AREAID = #{areaid,jdbcType=VARCHAR},
+      SCENICID = #{scenicid,jdbcType=VARCHAR},
+      DELFLAG = #{delflag,jdbcType=VARCHAR}
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+</mapper>

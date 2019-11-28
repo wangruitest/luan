@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.bigScreenYesterdayVisitors.dao.YesterdayVisitorsMapper">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.bigScreenYesterdayVisitors.model.YesterdayVisitors">
+    <result column="TOURIST" jdbcType="VARCHAR" property="tourist"/>
+    <result column="PROVINCES" jdbcType="VARCHAR" property="provinces"/>
+    <result column="PROVINCES_CODE" jdbcType="VARCHAR" property="provincescode"/>
+    <result column="CITIES" jdbcType="VARCHAR" property="cities"/>
+    <result column="CITYID" jdbcType="VARCHAR" property="cityid"/>
+    <result column="ALLTOURIST" jdbcType="VARCHAR" property="alltourist"/>
+  </resultMap>
+  
+  <!-- 本省游客前十城市游客数量 -->
+  <select id="getProvinceYesterdayVisitors" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select * from(
+      select nvl(sum(a.tourists),0) as tourist,a.area_name as cities from
+        (select * from TOURIST_PHONES_BYDAY_SUM t,area_cfg c where 
+        t.visitorcity = c.area_code
+        and t.visitorprovince = '340000'
+        <if test="flag == 1">
+        	and t.city_code = #{areacode,jdbcType=VARCHAR}
+        	and t.visitorcity != #{areacode,jdbcType=VARCHAR}
+      	</if>
+      	<if test="flag == 2">
+        	and t.roamingcounty = #{areacode,jdbcType=VARCHAR}
+      	</if>
+        and t.stat_day = to_date(#{yesterdaydate,jdbcType=VARCHAR},'yyyy-mm-dd'))a
+      group by a.area_name
+      order by tourist desc)
+	where rownum <![CDATA[ <= ]]> 10
+  </select>
+  
+  <!-- 本省游客全部城市游客数量 -->
+  <select id="getProvinceYesterdayVisitorsAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select nvl(sum(a.tourists),0) as tourist,a.area_name as cities from
+	    (select * from TOURIST_PHONES_BYDAY_SUM t,area_cfg c where 
+	    t.visitorcity = c.area_code
+	    and t.visitorprovince = '340000'
+	    <if test="flag == 1">
+        	and t.city_code = #{areacode,jdbcType=VARCHAR}
+        	and t.visitorcity != #{areacode,jdbcType=VARCHAR}
+      	</if>
+      	<if test="flag == 2">
+        	and t.roamingcounty = #{areacode,jdbcType=VARCHAR}
+        	and t.vistorcountry != #{areacode,jdbcType=VARCHAR}
+      	</if>
+	    and t.stat_day = to_date(#{yesterdaydate,jdbcType=VARCHAR},'yyyy-mm-dd'))a
+  	group by a.area_name
+  	order by tourist desc
+  </select>
+  
+  <!-- 外省游客前十省份游客数量 -->
+  <select id="getOtherProvinceYesterdayVisitors" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select*from(
+	  	select nvl(sum(a.tourists),0) as tourist,a.provinces,a.provinces_code from
+		    (select * from TOURIST_PHONES_BYDAY_SUM t,prefix_cfg pc where 
+		    pc.area_code = t.visitorcity
+		    and t.visitorprovince != '340000'
+		    and t.visitorprovince != '-11'
+		    <if test="flag == 1">
+        	and t.city_code = #{areacode,jdbcType=VARCHAR}
+	      	</if>
+	      	<if test="flag == 2">
+	        	and t.roamingcounty = #{areacode,jdbcType=VARCHAR}
+	      	</if>
+		    and t.stat_day = to_date(#{yesterdaydate,jdbcType=VARCHAR},'yyyy-mm-dd')
+		    )a
+	  	group by a.provinces,a.provinces_code
+	  	order by tourist desc)
+	where rownum <![CDATA[ <= ]]> 10
+  </select>
+  
+  <!-- 外省游客总游客数量 -->
+  <select id="getAllOtherProvinceYesterdayVisitors" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select nvl(sum(a.tourists),0) as alltourist from
+        (select * from tourist_phones_byday_sum t,prefix_cfg pc where 
+        pc.area_code = t.visitorcity
+        and t.visitorprovince != '340000'
+        and t.visitorprovince != '-11'
+        <if test="flag == 1">
+        	and t.city_code = #{areacode,jdbcType=VARCHAR}
+      	</if>
+      	<if test="flag == 2">
+        	and t.roamingcounty = #{areacode,jdbcType=VARCHAR}
+      	</if>
+        and t.stat_day = to_date(#{yesterdaydate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        )a
+  </select>
+  
+  <!-- 本省游客总游客数量 -->
+  <select id="getAllProvinceYesterdayVisitors" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select nvl(sum(a.tourists),0) as alltourist from
+        (select * from tourist_phones_byday_sum t,prefix_cfg pc where 
+	        pc.area_code = t.visitorcity
+	        and t.visitorprovince = '340000'
+	        <if test="flag == 1">
+        	and t.city_code = #{areacode,jdbcType=VARCHAR}
+	      	</if>
+	      	<if test="flag == 2">
+	        	and t.roamingcounty = #{areacode,jdbcType=VARCHAR}
+	      	</if>
+		    and t.stat_day = to_date(#{yesterdaydate,jdbcType=VARCHAR},'yyyy-mm-dd')
+        )a
+  </select>
+</mapper>

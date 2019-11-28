@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.menuunit.dao.MenuUnitMapper" >
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.menuunit.model.MenuUnit" >
+    <id column="UNID" property="unid" jdbcType="VARCHAR" />
+    <result column="MENUID" property="menuid" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UNID, MENUID, UNITID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU_UNIT
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </select>
+  <select id="getSelectedMenuByUnid" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU_UNIT
+    where UNITID = #{unitid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_MENU_UNIT
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByUnitid" parameterType="java.lang.String" >
+    delete from SYS_MENU_UNIT
+    where UNITID = #{unitid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cmcc.zysoft.menuunit.model.MenuUnit" >
+    insert into SYS_MENU_UNIT (UNID, MENUID, UNITID
+      )
+    values (#{unid,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, #{unitid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cmcc.zysoft.menuunit.model.MenuUnit" >
+    insert into SYS_MENU_UNIT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        UNID,
+      </if>
+      <if test="menuid != null" >
+        MENUID,
+      </if>
+      <if test="unitid != null" >
+        UNITID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unid != null" >
+        #{unid,jdbcType=VARCHAR},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cmcc.zysoft.menuunit.model.MenuUnit" >
+    update SYS_MENU_UNIT
+    <set >
+      <if test="menuid != null" >
+        MENUID = #{menuid,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        UNITID = #{unitid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cmcc.zysoft.menuunit.model.MenuUnit" >
+    update SYS_MENU_UNIT
+    set MENUID = #{menuid,jdbcType=VARCHAR},
+      UNITID = #{unitid,jdbcType=VARCHAR}
+    where UNID = #{unid,jdbcType=VARCHAR}
+  </update>
+</mapper>

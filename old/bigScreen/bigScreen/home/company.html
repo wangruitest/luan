@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>砀山旅游涉旅企业</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/company.css" />
+	<style type="text/css">
+	   .left_menu {
+		    width: 80px;
+		    position: fixed;
+		    top: 190.5px;
+			left: -125px;
+		    background: #0066CC;
+		}
+		
+		.left_menu ul {
+		    float: left;
+		    list-style: none;
+		    padding: 0px;
+		    margin: 0px;
+		}
+        
+        .left_menu ul li span {
+		    width: 100%;
+		    height: 50px;
+		    float: left;
+		    font: 16px '微软雅黑';
+		    line-height: normal;
+		    text-align: center;
+		    line-height: 85px;
+		}
+		
+    	.left_menu ul li {
+		    width: 80px;
+		    height: 100px;
+		    float: left;
+		    color: #fff;
+		    border-left: solid 2px #3399CC;
+		}
+		.b_left, .b_center, .b_right {
+		    background-color: #14223C;
+		    width: 32.5%;
+		    height: 100%;
+		    margin-left: 0.5%;
+		    border: 0px solid #0298e4; 
+		    box-shadow: 0 0 0px rgba(2,152,228,0.6); 
+		  }
+		  .clearfix:after {
+		    height: 0px; 
+          }
+	</style>
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<!--头部-->
+			<div class="head">
+			   				<h2 class="tit">砀山旅游涉旅企业</h2>
+			<!-- 	<div class="sp"></div>
+				<div class="line"></div> -->
+			</div>
+			<!--内容-->
+			<div class="companycont">
+				
+				<div class="basic clearfix" id="basic">
+					<div class="b_left fl" id="b_left">
+						<div class="title clearfix">
+<!-- 							<div class="Dian fl" style="margin-top: 14px;"></div>
+ -->							<div class="Text fl" style="line-height: 18px;">涉旅企业类别统计</div>
+						</div>
+					    <div style="margin-top: 103px">
+						<div class="DianDian fl" style="background:#40A0FD;margin-left: 26px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行社分支机构 104</div>
+						<div class="DianDian fl" style="background:#17EFEF;margin-left: 38px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行商品生产企业 26</div><br/>
+						<div class="DianDian fl" style="background:#FF7E1F;margin-left: 26px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行社 45</div>
+						<div class="DianDian fl" style="background:#FFDC63;margin-left: 108px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">乡村旅游(农家乐) 10</div><br/>
+						<div class="DianDian fl" style="background:#FD5289;margin-left: 26px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">旅行景区、景点 26</div>
+						<div class="DianDian fl" style="background:#38EBA8;margin-left: 48px"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">住宿场所 8</div>
+						</div>
+						<div id="b_left_map"></div>
+					</div>
+
+					<div class="b_center fl" id="b_center">
+						<div class="title clearfix">
+<!-- 							<div class="Dian fl" style="margin-top: 14px;"></div>
+ -->							<div class="Text fl" style="line-height: 18px;">涉旅企业工商注册性质</div>
+                                <br/>
+                              <div style="margin-top: 30px"> <div style="float:left;width:124px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 26px;"><span class="comSpan">自然投资或控股</span><br/><span class="comSpanText">31</span></div> 
+                                    <div style="float:left;width:144px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 14px;"><span class="comSpan">一人有限责任公司</span><br/><span class="comSpanText">5</span></div>
+                              </div> 
+                              <br/><br/>
+                              <div style="margin-top: 20px">
+                                <div style="float:left;width:120px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 26px;"><span class="comSpan">有限责任公司</span><br/><span class="comSpanText">5</span></div>
+                                <div style="float:left;width:144px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 14px;"><span class="comSpan">其他责任有限公司</span><br/><span class="comSpanText">117</span></div>
+                              </div>
+						</div>
+						<div id="b_center_map"></div>
+					</div>
+
+					<div class="b_right fl" id="b_right">
+						<div class="title clearfix">
+<!-- 							<div class="Dian fl" style="margin-top: 14px;"></div>
+ --> 							<div class="Text fl" style="line-height: 18px;">涉旅企业注册资金</div>
+                                 <br/>
+                              <div style="margin-top: 30px"> <div style="float:left;width:120px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 26px;"><span class="comSpan">100万以下</span><br/><span class="comSpanText">149</span></div> 
+                                    <div style="float:left;width:120px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 14px;"><span class="comSpan">100-500万</span><br/><span class="comSpanText">2</span></div>
+                              </div> 
+                              <br/><br/>
+                              <div style="margin-top: 20px">
+                                <div style="float:left;width:120px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 26px;"><span class="comSpan">500-100万</span><br/><span class="comSpanText">4</span></div>
+                                <div style="float:left;width:120px;height:50px;background:rgba(23,41,72,1);border-radius:3px;margin-left: 14px;"><span class="comSpan">1000万以上</span><br/><span class="comSpanText">3</span></div>
+                              </div>
+ 
+						</div>
+						<div id="b_right_map"></div>
+				<!-- 		<div style="margin-bottom: px;padding-left:16%;">
+						<div class="DianDian fl" style="background:#FFDC63"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">100万以下</div>
+						<div class="DianDian fl" style="background:#38EBA8;"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">100-500万</div>
+						<div class="DianDian fl" style="background:#17EFEF;"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">500-1000万</div>
+						<div class="DianDian fl" style="background:#FD5289;"></div>
+						<div class="Text fl" style="line-height: 4px;margin-left: 3px">1000万以上</div>
+						</div> -->
+						
+					</div>
+				</div>
+			</div>
+			<div class="foot">
+				<span>©2019 砀山旅游局 版权所有</span>
+			</div>	
+			<!--结束-->
+		</div>
+		<div class="left_menu">
+			<ul>
+				<a href="../home/index.html"><li><span>首页</span></li></a>
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
+		<script type="text/javascript" src="js/echarts.common.min.js"></script>
+		<script type="text/javascript">
+			//------------------左边代码--------------------  
+			var myChart_left = echarts.init(document.getElementById('b_left_map'));
+			var option1 = {
+				color: ['#FFDC63', '#38EBA8', '#17EFEF', '#FD5289', '#FF7E1F','#40A0FD'],
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+				    show: false,
+					orient: 'vertical',
+					left: '24',
+					top: '0',
+					data: ['乡村旅游（农家乐）', '住宿场所', '旅游商品生产企业', '旅游景区、景点', '旅行社','旅行社分支机构'],
+					textStyle: { //图例文字的样式
+						color: '#ffffff',
+						fontSize: 14
+					}
+				},
+				series: [{
+					name: '类别统计',
+					type: 'pie',
+					radius: '50%',
+					center: ['50%', '60%'],
+					labelLine: {
+						normal: {
+							length: 10, // 改变标示线的长度
+							lineStyle: {
+								color: "#ffffff" // 改变标示线的颜色
+							},
+							show: true //隐藏标示线
+						},
+					},
+					label: {
+						normal: {
+							data: ['乡村旅游（农家乐）', '住宿场所', '旅游商品生产企业', '旅游景区、景点', '旅行社','旅行社分支机构'],
+							textStyle: {
+								color: '#ffffff' // 改变标示文字的颜色
+							},
+							//position: 'inside',
+							show: true
+							
+						}
+					},
+				   labelLine:{
+                       show:true,
+                       lineStyle:{color:'#3c4858'}
+                      },
+					data:[{value:10,name:'乡村旅游（农家乐）'}, {value:8,name:'住宿场所'},{value:26,name:'旅游商品生产企业'}, {value:26,name:'旅游景区、景点'}, {value:45,name:'旅行社'}, {value:104,name:'旅行社分支机构'}],
+					itemStyle: {
+						emphasis: {
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			}; //初始化echarts实例
+			
+			//使用制定的配置项和数据显示图表
+			myChart_left.setOption(option1);
+			
+			
+
+			//------------------中间代码-------------------- 
+			var myChart_center = echarts.init(document.getElementById('b_center_map'));
+			var option2 = {
+				tooltip:{},
+				gird:{left:'1%',right:'2%', bottom:'10%',containlabel:true},
+	            xAxis:{
+	            	axisLine: {  // 控制x轴线的样式
+						lineStyle: {type: 'solid', color: '#ffffff',  width:'1' },
+	                },
+					axisLabel: { interval:0, show: true,
+						formatter:function(params) {
+                            var newParamsName = "";
+                            var paramsNameNumber = params.length;
+                            var provideNumber = 6;  //一行显示几个字
+                            var rowNumber = Math.ceil(paramsNameNumber / provideNumber);
+                            if (paramsNameNumber > provideNumber) {
+                                for (var p = 0; p < rowNumber; p++) {
+                                    var tempStr = "";
+                                    var start = p * provideNumber;
+                                    var end = start + provideNumber;
+                                    if (p == rowNumber - 1) {
+                                        tempStr = params.substring(start, paramsNameNumber);
+                                    } else {
+                                        tempStr = params.substring(start, end) + "\n";
+                                    }
+                                    newParamsName += tempStr;
+                                }
+
+                            } else {
+                                newParamsName = params;
+                            }
+                            return newParamsName
+                        },
+					},
+	                data:["有限责任公司（自然人投资或控股）","一人有限责任公司","有限责任公司","其他有限责任公司"],
+	            },
+	            yAxis:{
+					axisLine: {
+	                   lineStyle: {type: 'solid', color: '#ffffff', width:'1' },
+	                },
+					//网格样式
+			        splitLine: {
+			            show: true,
+			            lineStyle:{ color:'#727272', width: 1,type: 'solid'}
+			        }
+	            },
+	            series:[{
+	                name:'注册性质',
+	                itemStyle:{
+	                    normal:{color:'rgba(22,238,238,1)'}, 
+	                },
+	                type:'bar',
+	                data:[31,5,5,117],
+	                barWidth:20,
+	            }]
+			}; //初始化echarts实例
+			//使用制定的配置项和数据显示图表
+			myChart_center.setOption(option2);
+			
+			
+			
+			//------------------右边代码--------------------
+			var myChart_right = echarts.init(document.getElementById('b_right_map'));
+			var option3 = {
+				color: ['#FFDC63', '#38EBA8', '#17EFEF', '#FD5289'],
+				tooltip: {
+					trigger: 'item',
+					formatter: "{a} <br/>{b} : {c} ({d}%)"
+				},
+				legend: {
+				    icon:"circle",
+			        itemWidth: 20,
+			        itemHeight: 10,
+			        itemGap: 10,
+					//orient: 'vertical',
+					//left: '14',
+					//top: '10',
+				    bottom: 10,
+			        left: 'center',
+					//orient: 'vertical',
+					//left: '24',
+					show: true,
+					//top: '0',
+					data: ['100万以下', '100-500万','500-1000万','1000万以上'],
+					textStyle: { //图例文字的样式
+						color: '#ffffff',
+						fontSize: 14
+					}
+				},
+				series: [{
+					name: '注册资金',
+					type: 'pie',
+					radius: '50%',
+					center: ['50%', '60%'],
+					labelLine: {
+						normal: {
+							length: 10, // 改变标示线的长度
+							lineStyle: {
+								color: "#ffffff" // 改变标示线的颜色
+							},
+							show: true //隐藏标示线
+						},
+					},
+					label: {
+						normal: {
+						data: ['100万以下', '100-500万','500-1000万','1000万以上'],						
+							textStyle: {
+								color: '#ffffff' // 改变标示文字的颜色
+							},	
+						//	position: 'inside',
+							show: true
+						}
+					},
+					labelLine:{
+                       show:true,
+                       lineStyle:{color:'#3c4858'}
+                      },
+					data: [{value: 149,name: '100万以下'}, {value: 2,name: '100-500万'}, {value: 4,name: '500-1000万'}, {value: 3,name: '1000万以上'}],
+					itemStyle: {
+						emphasis: {
+						    show:false,
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}]
+			}; //初始化echarts实例
+			//使用制定的配置项和数据显示图表
+			myChart_right.setOption(option3);
+		</script>
+		
+		
+		<script type='text/javascript'>
+		
+		var ww = window.screen.width;
+		var wh = window.screen.height;
+		var h = $('.left_menu').height();
+		$('.left_menu').css({top:wh/2-h/2+'px'});
+			
+		$(function(){
+			$('body').mousemove(function(e) {
+					e = e || window.event;
+					__xx = e.pageX || e.clientX + document.body.scroolLeft;
+					__yy = e.pageY || e.clientY + document.body.scrollTop;
+					
+				  if ( __xx <= 125)
+					{
+						$('.left_menu').css({left:'0px'});
+					}
+					else 
+					{
+						$('.left_menu').css({left:'-125px'});
+					
+					}
+			});
+			
+			
+		}); 
+			
+		</script>
+
+	</body>
+
+</html>

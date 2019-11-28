@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmcc.zysoft.notice.dao.NoticeCfgDao">
+<resultMap id="NoticeCfgResult" type="com.cmcc.zysoft.notice.model.NoticeCfg">
+  <result property="id" column="ID" />
+  <result property="newsTitle" column="NEWS_TITLE" />
+  <result property="newsTime" column="NEWS_TIME" />
+  <result property="newsContent" column="NEWS_CONTENT" />
+  <result property="editUser" column="EDITUSER" />
+  <result property="userId" column="USERID" />
+  <result property="updateTime" column="UPDATETIME" />
+</resultMap>
+
+ <select id="getNoticeList" parameterType="java.lang.String" resultMap="NoticeCfgResult">
+    select 
+    s.NEWS_TITLE,s.ID,s.NEWS_CONTENT,s.NEWS_TIME
+    from  NOTICE_CFG s where 1=1 order by s.NEWS_TIME desc
+  </select>
+  
+  <select id="getNoticeById"  resultMap="NoticeCfgResult">
+    select 
+    s.NEWS_TITLE,s.ID,s.NEWS_CONTENT,s.NEWS_TIME
+    from  NOTICE_CFG s where s.ID=#{id} order by s.NEWS_TIME desc
+  </select>
+  
+  <select id="getNoticeListByUnit" parameterType="java.lang.String" resultMap="NoticeCfgResult">
+    select 
+    s.NEWS_TITLE,s.ID,s.NEWS_CONTENT,s.NEWS_TIME
+    from  NOTICE_CFG s where s.UNITID=#{unitid} order by s.ID desc
+  </select>
+  
+<insert id="insertNotice" parameterType="com.cmcc.zysoft.notice.model.NoticeCfg">
+insert into NOTICE_CFG(ID,NEWS_TITLE,NEWS_TIME,NEWS_CONTENT,EDITUSER,USERID,UPDATETIME,UNITID)
+values(SEQ_NOTICE_CFG.Nextval,#{newsTitle},#{newsTime},#{newsContent},#{editUser},#{userId},#{updateTime},#{unitId})
+</insert>
+
+ <update id="updateById" parameterType="com.cmcc.zysoft.notice.model.NoticeCfg" >
+    update NOTICE_CFG
+    set NEWS_TITLE = #{newsTitle},
+      NEWS_CONTENT = #{newsContent},
+      EDITUSER = #{editUser},
+      USERID = #{userId},
+      UPDATETIME = #{updateTime}
+    where ID = #{id}
+  </update>
+  
+ <delete id="deleteById">
+<![CDATA[
+delete from NOTICE_CFG 
+where ID=#{id}
+]]>
+</delete>
+
+
+  <select id="selectByNotice" resultMap="NoticeCfgResult" parameterType="com.cmcc.zysoft.notice.model.NoticeCfg" >
+  <![CDATA[
+   select 
+    s.NEWS_TITLE,s.ID,s.NEWS_CONTENT,s.NEWS_TIME
+    from  NOTICE_CFG s where 1=1
+   ]]>
+     <if test="newsTitle != null" >
+	  and  s.NEWS_TITLE  like '%${newsTitle}%'
+	</if>
+  order by s.UPDATETIME DESC
+  </select>  
+
+</mapper>

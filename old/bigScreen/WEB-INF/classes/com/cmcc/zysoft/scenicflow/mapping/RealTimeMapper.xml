@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.scenicflow.dao.RealTimeDao">
+  <resultMap id="BaseResultMap" type="com.cmcc.zysoft.scenicflow.model.RealTime">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="REGION_ID" jdbcType="DECIMAL" property="regionId" />
+    <result column="STAY_TOURISTS" jdbcType="DECIMAL" property="stayTourists" />
+    <result column="IN_TOURISTS" jdbcType="DECIMAL" property="inTourists" />
+    <result column="OUT_TOURISTS" jdbcType="DECIMAL" property="outTourists" />
+    <result column="STAT_HOUR" jdbcType="TIMESTAMP" property="statHour" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+    <result column="SUBMIT_TIME" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+    <result column="VISITOR_COUNTRY" jdbcType="VARCHAR" property="visitorCountry" />
+    <result column="VISITOR_PROVINCE" jdbcType="VARCHAR" property="visitorProvince" />
+    <result column="VISITOR_CITY" jdbcType="VARCHAR" property="visitorCity" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, REGION_ID, STAY_TOURISTS, IN_TOURISTS, OUT_TOURISTS, STAT_HOUR, UPDATETIME, CITY_CODE, 
+    SUBMIT_TIME, TYPE, FLAG, VISITOR_COUNTRY, VISITOR_PROVINCE, VISITOR_CITY
+  </sql>
+  <select id="getRealTime" parameterType="map" resultType="com.cmcc.zysoft.scenicflow.model.ScenicFlow">
+	  	select to_char(a.stat_hour,'hh24') as time,a.diqu,
+	  	<if test="type !='新增'">
+	  		sum(stay_tourists) as renshu 
+	  	</if>
+	  	<if test="type=='新增'">
+	  		sum(in_tourists) as renshu 
+	  	</if>
+	  	   from sys_scenic_user b ,
+	       (select t.*,
+	               case when t.type=1 or t.type=2 then '本省' 
+				   else '外省' end as diqu 
+	               from region_realtime_sum t) a 
+	      	  	   left join sys_scenic c 
+	      	  	   on a.region_id=c.scenicid
+	       		   where   a.stat_hour >= to_date(to_char((select max(stat_hour) from region_realtime_sum),'YY/MM/DD'),'YY/MM/DD')
+	               and b.userid=#{userid,jdbcType=VARCHAR}
+	               and b.scenicid=a.region_id 
+			 <if test="cityType==0">
+	         	 <if test="cityid != null and cityid != '' "> 
+			 		 and c.provinceid=#{cityid,jdbcType=VARCHAR}
+				 </if>
+	         </if>   
+	         <if test="cityType==1">
+	         	 <if test="cityid != null and cityid != '' "> 
+			 		 and c.cityid=#{cityid,jdbcType=VARCHAR}
+				 </if>
+	         </if>
+	         <if test="cityType==2">
+	         	 <if test="cityid != null and cityid != '' "> 
+			 		 and c.countyid=#{cityid,jdbcType=VARCHAR}
+				 </if>
+	         </if>
+			 <if test="scenicid != null and scenicid != '' ">
+			  and c.scenicid=#{scenicid,jdbcType=VARCHAR}
+			 </if>
+		  	group by a.stat_hour,a.diqu  
+		  	order by a.stat_hour,a.diqu
+  </select>
+ 
+</mapper>

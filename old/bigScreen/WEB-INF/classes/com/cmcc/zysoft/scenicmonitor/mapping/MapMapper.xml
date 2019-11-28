@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.scenicmonitor.dao.MapDao">
+ <select id="getCountyNum" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.CityNum">
+ 	select a.areas||'：'||sum(r.stay_tourists) ||'人' as num,s.countyid as areaid from
+   region_realtime_sum r,sys_scenic s,areas a,sys_scenic_user u
+   where  r.stat_hour=(select max(stat_hour) from region_realtime_sum ) 
+        and s.cityid=#{cityid,jdbcType=VARCHAR}
+        and a.areaid=s.countyid
+        and r.region_id = s.scenicid
+        and u.scenicid=s.scenicid
+        and u.userid=#{userid,jdbcType=VARCHAR}
+        group by s.countyid,a.areas
+ </select>
+ <select id="getMap" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.ChildrenMap"><!-- 省市前台小地图拼接 -->
+ 	select  c.areaid,c.imgstyle,c.img,c.datastyle,c.coords,
+ 	<if test="regionType==0">
+ 		a.cities as areaname
+	</if>
+ 	<if test="regionType==1">
+		a.areas as areaname
+	</if>
+	<if test="regionType==2">
+		a.scenic_name as areaname
+	</if>
+     from  parentmap p,childrenmap c 
+     left join 
+     <if test="regionType==0">
+		cities a on  a.cityid=c.areaid
+	</if>
+ 	<if test="regionType==1">
+		areas a on  a.areaid=c.areaid
+	</if>
+	<if test="regionType==2">
+		sys_scenic a on  a.scenicid=c.areaid
+	</if>
+     where c.parentid=p.areaid and p.areaid=#{cityid,jdbcType=VARCHAR}
+ </select>
+ <select id="getAreaMap" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.ChildrenMap"><!-- 区县前台景区拼接 -->
+ 	select c.namestyle,c.areaid,c.imgstyle,c.img,c.datastyle,c.coords,c.mark1,c.mark2,s.scenic_name as areaName from childrenmap c ,sys_scenic s ,sys_scenic_user u 
+ 	 where c.areaid=s.scenicid and c.parentid=#{cityid,jdbcType=VARCHAR} and u.userid=#{userid,jdbcType=VARCHAR} and s.scenicid=u.scenicid
+ </select>
+ <select id="getCityState" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.CityState2" >
+ select max(v.color) as color,v.areaid from  
+ 	(select
+       case  
+        when t.num&lt;ral.level4_num then '0'
+        when t.num&lt;ral.level3_num then '1'
+        when t.num&lt;ral.level2_num then '2'
+        when t.num&lt;ral.level1_num then '3'
+        else '4' end as color,
+        t.areaid,t.scenicid from 
+       (select sum(r.stay_tourists) as num,s.scenicid,
+       <if test="regionType==0">
+   			a.cityid as areaid 
+  	   </if>
+ 	   <if test="regionType!=0">
+        	a.areaid as areaid 
+   	   </if>
+   	   from region_realtime_sum r,sys_scenic s,
+       <if test="regionType==0">
+   			cities a,
+  	   </if>
+   	   <if test="regionType!=0">
+        	areas a,
+   	   </if>
+   	   sys_scenic_user u
+        where  r.stat_hour=(select max(stat_hour) from region_realtime_sum ) 
+       <if test="regionType==0">
+   			and s.provinceid=#{cityid,jdbcType=VARCHAR}
+   			and a.cityid=s.cityid
+   		</if>
+   		<if test="regionType==1">
+        	and s.cityid=#{cityid,jdbcType=VARCHAR}
+        	and a.areaid=s.countyid
+   		</if>
+   		<if test="regionType==2">
+        	and s.countyid=#{cityid,jdbcType=VARCHAR}
+        	and a.areaid=s.countyid
+   		</if>
+        and r.region_id = s.scenicid
+        and u.scenicid=s.scenicid
+        and u.userid=#{userid,jdbcType=VARCHAR}
+        group by 
+        <if test="regionType==0">
+   			s.scenicid,a.cityid
+   		</if>
+   		<if test="regionType!=0">
+        	s.scenicid,a.areaid
+   		</if>
+   		)t,region_alarm_level ral
+        where  ral.region_id=t.scenicid)v 
+        group by v.areaid
+ </select>
+ <select  id="getStateNum" parameterType="map" resultType="com.cmcc.zysoft.scenicmonitor.model.CityNum">
+select t.color||'：'||count(1)||'个' as num,t.cityid as areaId
+  from(
+  select  
+   <if test="regionType==0">
+		s.cityid,
+ </if>
+ <if test="regionType!=0  ">
+		s.countyid as cityid,
+ </if>
+  c.cities as cityName,
+  case  
+  when a.num&lt;ral.level4_num then '灰色警告'
+  when  a.num&lt;ral.level3_num then '蓝色警告'
+  when  a.num&lt;ral.level2_num then '黄色警告'
+  when  a.num&lt;ral.level1_num then '橙色警告'
+  else '红色警告' end as color
+  from 
+ 	 ( select r.region_id ,sum(stay_tourists) as num
+    	from region_realtime_sum r,sys_scenic_user u ,sys_scenic s  where 
+    	r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+    	and u.userid=#{userid,jdbcType=VARCHAR}
+    	and u.scenicid=r.region_id 
+    	and r.region_id=s.scenicid
+ <if test="regionType==0">
+		and s.provinceid=#{cityid,jdbcType=VARCHAR}
+ </if>
+ <if test="regionType==1">
+		and s.cityid=#{cityid,jdbcType=VARCHAR}
+ </if>
+ <if test="regionType==2">
+		and s.countyid=#{cityid,jdbcType=VARCHAR}
+ </if>
+    	group by r.region_id)a,cities c ,sys_scenic s ,region_alarm_level ral
+  		where s.scenicid=a.region_id	
+  		and c.cityid=s.cityid and ral.region_id=a.region_id )t 
+  		group by  t.color,t.cityid,t.cityName
+</select>
+  <select id="getParentMap" parameterType="string" resultType="com.cmcc.zysoft.scenicmonitor.model.ParentMap">
+  	select * from parentmap t where  t.areaid=#{areaid,jdbcType=VARCHAR}
+  </select>
+ <select id="getParentId" parameterType="map" resultType="map">
+ 	<if test="regionType==2">
+ 		select a.cityid ,'1' as regionType from areas a where a.areaid=#{cityid,jdbcType=VARCHAR}
+ 	</if>
+ 	<if test="regionType==1">
+ 		select c.provinceid as cityid ,'0' as regionType from cities c where c.cityid=#{cityid,jdbcType=VARCHAR}
+ 	</if>
+ </select>
+</mapper>

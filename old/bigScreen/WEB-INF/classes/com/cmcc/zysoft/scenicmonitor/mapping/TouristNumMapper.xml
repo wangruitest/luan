@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cmcc.zysoft.scenicmonitor.dao.ScenicMonitorDao">
+ 
+<select id="getTouristNum" parameterType="map" resultType="string">
+	select 
+	<if test="timeType==0">  <!-- 景区实时人数 -->
+		sum(stay_tourists) as num
+	</if>
+	<if test="timeType!=0">	<!-- 景区 全部累计 或者 省外累计 人数 -->
+		sum(in_tourists) as num
+	</if>
+	from region_realtime_sum r,sys_scenic_user u,sys_scenic s where 
+	<if test="timeType==0">
+		r.stat_hour=(select max(stat_hour) from region_realtime_sum )
+	</if>
+	<if test="timeType!=0">
+		r.stat_hour >= to_date(to_char((select max(stat_hour) from region_realtime_sum),'YY/MM/DD'),'YY/MM/DD')
+	</if>
+	<if test="timeType==2">
+		 and type='3'
+	</if>
+	<if test="regionType==0">
+	    <if test="cityId != null and cityId != '' "> 
+			 and s.provinceid=#{cityId,jdbcType=VARCHAR}
+		 </if>
+	</if>
+    <if test="regionType==1">
+    	 <if test="cityId != null and cityId != '' "> 
+			 and s.cityid=#{cityId,jdbcType=VARCHAR}
+		 </if>
+    </if>
+     <if test="regionType==2">
+     	<if test="cityId != null and cityId != '' "> 
+			 and s.countyid=#{cityId,jdbcType=VARCHAR}
+ 		</if>
+     </if>
+	  and r.region_id=s.scenicid and u.userid=#{userid,jdbcType=VARCHAR} and u.scenicid=s.scenicid 
+</select>
+
+<select id="getTime" resultType="string">
+	select to_char(max(stat_hour),'hh24')||':'||to_char(max(stat_hour),'mi') from region_realtime_sum
+</select>
+</mapper>

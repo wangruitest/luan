@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<title>地市景区区域</title>
+	<style>
+		body, html, #allmap {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			margin: 0;
+		}
+	</style>
+</head>
+<body onLoad="initialize()">
+    <script type="text/javascript" src="http://developer.baidu.com/map/custom/stylelist.js"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/api?v=2.0&ak=vsemGPTjudgYoDhNs0kwE8mk"></script>
+	<script type="text/javascript"
+		src="http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js"></script>
+
+	<script type="text/javascript">
+	
+var aRegionInfo=[
+				{"regionName":"砀山县鳌头观海景区","lng":"34.4668140000","lat":"116.5397330000"},{"regionName":"砀山县梨树王景区","lng":"34.4314190000","lat":"116.5409990000"},
+				{"regionName":"砀山县天鹅洲景区","lng":"34.3808330000","lat":"116.4906490000"},{"regionName":"砀山县突山风景区","lng":"34.5210790000","lat":"116.2686870000"},
+				{"regionName":"砀山县圣德书院","lng":"34.4874680000","lat":"116.4554110000"},{"regionName":"砀山国际赛马场","lng":"34.4836040000","lat":"116.4539390000"},
+				{"regionName":"文化河生态观光带","lng":"34.395567448","lat":"116.5936570394"},{"regionName":"湿地自然保护区","lng":"34.5528610000","lat":"116.2932640000"},
+				{"regionName":"回族民庄特殊少数民族寨","lng":"34.4942272806","lat":"116.3920930442"},{"regionName":"蟠龙湖","lng":"34.5093257945","lat":"116.5751688463"},
+				{"regionName":"碧清庄园","lng":"34.4871520000","lat":"116.4568010000"},{"regionName":"砀山黄河故道","lng":"34.5394570000","lat":"116.3024070000"},
+				{"regionName":"砀山黑龙潭","lng":"34.5209090000","lat":"116.2765520000"},{"regionName":"乾隆御植园","lng":"34.4492590000","lat":"116.5842360000"},
+				{"regionName":"葛集白蜡园银杏林风景区","lng":"34.4247280000","lat":"116.3594620000"},{"regionName":"翡翠公园","lng":"34.4141990000","lat":"116.3557650000"},
+				{"regionName":"府西公园","lng":"34.4471170000","lat":"116.3711040000"},{"regionName":"砀郡公园","lng":"34.445785000","lat":"116.3858990000"},
+				{"regionName":"砀山县书城家庭农场","lng":"34.4542030000","lat":"116.3108710000"},{"regionName":"大崛寺","lng":"34.4881520000","lat":"116.4530290000"},
+				{"regionName":"清真寺","lng":"34.4273120000","lat":"116.3594650000"},{"regionName":"普陀寺","lng":"34.3504090000","lat":"116.3411810000"},
+				{"regionName":"砀山县基督教锡安堂","lng":"34.4317490000","lat":"116.3288520000"},{"regionName":"砀山狐父陈氏宗祠","lng":"34.3378500000","lat":"116.4542940000"},
+				{"regionName":"龙泉古寺","lng":"34.3040120000","lat":"116.6023510000"},{"regionName":"砀山天主教堂","lng":"34.4308210000","lat":"116.3541190000"},
+				{"regionName":"玉皇庙","lng":"34.3157740000","lat":"116.3759070000"},{"regionName":"蒋祠堂","lng":"34.4892920000","lat":"116.2060240000"},
+				{"regionName":"玄帝庙","lng":"34.5683220000","lat":"116.3693900000"},{"regionName":"梨花广场","lng":"34.4443630000","lat":"116.3719750000"}];
+				
+var mapcitycode = "341321";
+
+var cityName={341321:"砀山县"};
+var  aCenterPoint = {
+		341321 : new BMap.Point(116.3725891599,34.4468978876)
+    };
+
+var imgIcons=['img/blue.png','img/orange.png'];   
+    
+var map;
+var heatmapOverlay= new BMapLib.HeatmapOverlay({"radius":40});
+var gsheatmapOverlay= new BMapLib.HeatmapOverlay({"radius":20});
+var datas =[];
+var runId;
+var runs=0;
+
+function initialize() {
+  // 百度地图API功能
+  map = new BMap.Map("map_canvas");
+  map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+  map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+  map.addControl(new BMap.OverviewMapControl());              //添加缩略地图控件
+  map.enableScrollWheelZoom();                           //启用滚轮放大缩小
+  var point = aCenterPoint[mapcitycode];   // 创建点坐标
+  map.centerAndZoom(point,13);  
+   var mapStyle ={
+        features: ["road","building","water","land"],//隐藏地图上的"poi",
+        style : 'dark',
+    };
+    map.setMapStyle(mapStyle);
+    setRegions();
+}
+
+
+function setRegions(){
+
+	map.clearOverlays(); 
+	var myRegionIds="";
+	//getBoundary(map,cityName[mapcitycode]);
+		data = aRegionInfo;
+		for(var i=0;i<data.length;i++){
+  			var sContent = "<div>" 
+                + "<p>"  
+                + data[i].regionName + "</p></div>"; 
+  			addMark(data[i],sContent);
+  		}
+	
+}
+
+function addMark(regionInfo,info_html){
+	if(regionInfo.lat != null) {
+		var lnglat = new BMap.Point(regionInfo.lat, regionInfo.lng);
+		var _marker;
+		var myIcon =new BMap.Icon(imgIcons[0], new BMap.Size(23, 25), {
+								// 指定定位位置。   
+								// 当标注显示在地图上时，其所指向的地理位置距离图标左上    
+								// 角各偏移10像素和25像素。您可以看到在本例中该位置即是   
+								// 图标中央下端的尖角位置。    
+								offset : new BMap.Size(0, 0),
+							// 设置图片偏移。   
+							// 当您需要从一幅较大的图片中截取某部分作为标注图标时，您   
+							// 需要指定大图的偏移位置，此做法与css sprites技术类似。    
+								imageOffset: new BMap.Size(0,0)   // 设置图片偏移    
+							});
+					_marker = new BMap.Marker(lnglat, {icon : myIcon});
+				
+				map.addOverlay(_marker);
+				_marker.addEventListener("mouseover", function(e) {
+					this.openInfoWindow(new BMap.InfoWindow(info_html));
+				});
+			}
+		}
+		
+//绘制行政quyu
+function getBoundary(map,cityName){    
+	
+	var bdary = new BMap.Boundary();
+	bdary.get(cityName, function(rs){       //获取行政区域
+		//alert(rs);
+		//map.clearOverlays();        //清除地图覆盖物       
+		var count = rs.boundaries.length; //行政区域的点有多少个
+		if (count === 0) {
+			alert('未能获取当前输入行政区域');
+			return ;
+		}
+      	var pointArray = [];
+		for (var i = 0; i < count; i++) {
+			var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "blue", 
+				strokeOpacity:0.0, fillOpacity: 0.0, fillColor: "none"}); //建立多边形覆盖物
+			map.addOverlay(ply);  //添加覆盖物
+			pointArray = pointArray.concat(ply.getPath());
+		}    
+		map.setViewport(pointArray);    //调整视野                 
+	});   
+}
+
+	</script>
+	
+		<div id="map_canvas" style="width: 100%; height: 100%;"></div>
+	</body>
+</html>
