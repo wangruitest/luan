@@ -188,7 +188,7 @@
          width: 100%;
          height: 100%;
          min-width: 1120px;
-         min-height: 768px;
+         min-height: 700px;
       }
 
       .header-title {
@@ -203,9 +203,9 @@
       }
 
       .dlk {
-         margin: 100px auto;
+         margin: 60px auto;
          width: 1026px;
-         height: 404px;
+         height: 390px;
          background: inherit;
          padding: 34px 39px 0 39px;
          /* background-color: rgba(255, 255, 255, 1);*/
