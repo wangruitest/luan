@@ -128,7 +128,7 @@
 		                    center: ['50%', '45%'],
 		                    radius: '50%',
 		                    data:[
-		                        {value: perTime1,  name:'0-2小时',itemStyle : { normal : {color:'#02f1ab',
+		                        {value: perTime1,  name:'0-2小时',itemStyle : { normal : {color:'#98D87D',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -145,7 +145,7 @@
 											                    }
 											                },
 												         }},
-		                        {value: perTime2,  name:'2-6小时',itemStyle : { normal : {color:'#00da9a',
+		                        {value: perTime2,  name:'2-6小时',itemStyle : { normal : {color:'#FFD562',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -162,7 +162,7 @@
 											                    }
 											                },
 												        }},
-		                        {value: perTime3,  name:'6-24小时',itemStyle : { normal : {color:'#01c088',
+		                        {value: perTime3,  name:'6-24小时',itemStyle : { normal : {color:'#F27B71',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -179,7 +179,7 @@
 											                    }
 											                },
 												        }},
-							    {value: perTime4,  name:'24-48小时',itemStyle : { normal : {color:'#01ab79',
+							    {value: perTime4,  name:'24-48小时',itemStyle : { normal : {color:'#8996E7',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -196,7 +196,7 @@
 											                    }
 											                },
 												      }},
-								{value: perTime5,  name:'48小时以上',itemStyle : { normal : {color:'#029368',
+								{value: perTime5,  name:'48小时以上',itemStyle : { normal : {color:'#98C0FF',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

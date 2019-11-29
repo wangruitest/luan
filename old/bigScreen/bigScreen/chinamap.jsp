@@ -51,7 +51,7 @@
 	</style>
 </head>
 
-<body>
+<body style="height: 100%;">
 	<div class="well " style="display: none;">
 		<div class="nav-header"><a href="#" onclick="autoResize()" class="glyphicon glyphicon-resize-full"
 				id="icon-resize"></a>option</div>
@@ -59,7 +59,7 @@
         </textarea>
 	</div>
 	<!--/.well -->
-	<div id="main" class="main" style="height: 530px;background: none;"></div>
+	<div id="main" class="main" style="height: 100%;background: none;"></div>
 	<ul class="ten" id="tenProvince" style="display:none;">
 
 	</ul>
@@ -67,8 +67,8 @@
 	<script src="<%=path %>/js/jquery.min.js"></script>
 	<script type="text/javascript">
 		//图表在iframe中自适应显示
-		var mh = $(".main").height();
-		var hh = parent.window.$(".ahmapArea").height();
+		// var mh = $(".main").height();
+		var hh = parent.window.$("#chinamap").height();
 		$(".main").height(hh);
 
 		getAhmapTouristInfor();
@@ -359,16 +359,55 @@
 							+ "                }\n"
 							+ "            },\n"
 							+ "            data : [\n"
-							+ "                [{name:'" + arrCities[0] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[1] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[2] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[3] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[4] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[5] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[6] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[7] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[8] + "'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'" + arrCities[9] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[0] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[1] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[2] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[3] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[4] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[5] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[6] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[7] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[8] + "'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'" + arrCities[9] + "'}, {name:'" + simple_name + "'}],\n"
+
+
+
+							+ "                [{name:'" +'甘肃' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'青海' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'四川' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'河北' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'云南' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'贵州' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'湖北' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'河南' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'山东' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'江苏' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'安徽' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'浙江' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'江西' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'福建' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'广东' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'湖南' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'海南' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'辽宁' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'吉林' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'黑龙江' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'山西' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'陕西' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'台湾' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'北京' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'上海' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'重庆' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'天津' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'内蒙古' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'广西' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'西藏' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'宁夏' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'新疆' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'香港' + "'}, {name:'" + simple_name + "'}],\n"
+							+ "                [{name:'" +'澳门' + "'}, {name:'" + simple_name + "'}],\n"
+
+
 							+ "            ]\n"
 							+ "        },\n"
 							+ "        markPoint : {\n"
@@ -399,6 +438,8 @@
 							+ "              {name:'" + arrCities[7] + "',value:" + touristPercent[7] + "},\n"
 							+ "              {name:'" + arrCities[8] + "',value:" + touristPercent[8] + "},\n"
 							+ "              {name:'" + arrCities[9] + "',value:" + touristPercent[9] + "},\n"
+
+							
 							+ "            ]\n"
 							+ "        }\n"
 							+ "    },\n"

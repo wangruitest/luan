@@ -133,7 +133,7 @@
 		                    center: ['50%', '45%'],
 		                    radius: '50%',
 		                    data:[
-		                        {value: perLevel1,  name:'20元以下',itemStyle : { normal : {color:'#02d2fe',
+		                        {value: perLevel1,  name:'20元以下',itemStyle : { normal : {color:'#98D87D',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -150,7 +150,7 @@
 											                    }
 											                },
 												         }},
-		                        {value: perLevel2,  name:'20-50元',itemStyle : { normal : {color:'#00bee7',
+		                        {value: perLevel2,  name:'20-50元',itemStyle : { normal : {color:'#FFD562',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -167,7 +167,7 @@
 											                    }
 											                },
 												        }},
-		                        {value: perLevel3,  name:'51-100元',itemStyle : { normal : {color:'#01aace',
+		                        {value: perLevel3,  name:'51-100元',itemStyle : { normal : {color:'#F27B71',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -184,7 +184,7 @@
 											                    }
 											                },
 												        }},
-							    {value: perLevel4,  name:'100元以上',itemStyle : { normal : {color:'#028eac',
+							    {value: perLevel4,  name:'100元以上',itemStyle : { normal : {color:'#8996E7',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

@@ -164,17 +164,17 @@ function getWeather () {
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[1].weather_icon.substring(37, weatherDatas[1].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
         + "</li>");
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[2].weather_icon.substring(37, weatherDatas[2].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
         + "</li>");
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[3].weather_icon.substring(37, weatherDatas[3].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
         + "</li>");
 
 
@@ -502,6 +502,8 @@ function format_number (n) {
   return r > 0 ? b.slice(0, r) + "," + b.slice(r, len).match(/\d{3}/g).join(",") : b.slice(r, len).match(/\d{3}/g).join(",");
 }
 var provinceStatus=1;
+
+
 function changeProvince () {
   if (provinceStatus === 1) {
     $("#province0").removeClass("switchButton1_1");
@@ -509,16 +511,24 @@ function changeProvince () {
     $("#province1").removeClass("switchButton2_1");
     $("#province1").addClass("switchButton2_2");
     provinceStatus=2;
+    
     $("#ben_sheng_body").hide();
     $("#wai_sheng_body").show();
+    if(!$('#chinamap').attr('src')){
+      $('#chinamap').attr('src',basePath+'/bigScreen/chinamap.jsp');
+    }
+    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/ahmap.jsp'); 
   } else {
     $("#province0").removeClass("switchButton1_2");
     $("#province0").addClass("switchButton1_1");
     $("#province1").removeClass("switchButton2_2");
     $("#province1").addClass("switchButton2_1");
     provinceStatus=1;
+    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/chinamap.jsp'); 
+
     $("#ben_sheng_body").show();
     $("#wai_sheng_body").hide();
+
   }
 
 }

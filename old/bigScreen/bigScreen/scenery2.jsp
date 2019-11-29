@@ -97,8 +97,16 @@ function setScenery(){
 		async:false,
 		url:"<%=path%>/keyScenic/getKeyScenicMonitor.html",
 		success:function(data){
-			for ( var i = 0; i < data.length; i++) {
-				scenicYuzhi.push(data[i].yuZhi>=100?100:data[i].yuZhi);
+			var loopCount=data.length>4?4:data.length;
+			for ( var i = 0; i < loopCount; i++) {
+				var oYz= parseFloat(data[i].yuZhi);
+				var yz=parseInt(oYz);
+				if(oYz>=100){
+					yz=100;
+				}else if(oYz<1&& oYz>=0){
+					yz=1;
+				}
+				scenicYuzhi.push(yz);
 				scenicName.push(data[i].scenicName);
 				var color;
 				if(data[i].color==0){	

@@ -334,7 +334,7 @@
               </ul>
             </div>
             <div id="wai_sheng_body">
-                <iframe class="ahmapArea" src="<%=path %>/bigScreen/chinamap.jsp"
+                <iframe id='chinamap' class="ahmapArea" msrc="<%=path %>/bigScreen/chinamap.jsp"
                     style="border: none;width:100%;height:100%;" allowTransparency="true" frameborder="3" scrolling="no"
                     marginwidth="0" marginheight="0"></iframe>
             </div>
@@ -526,20 +526,22 @@
             </div>
             <div style="height:calc(100% - 0px); font-size:0;    padding-top: 20px;">
               <div style="display: inline-block;width:50%;height:100%;">
-                <!--驻留时间饼图表-->
-                <iframe class="natureArea fr" src="<%=path %>/bigScreen/time.jsp" allowTransparency="true"
-                  frameborder="0" style="border: none;width:100%;height:100%;" scrolling="no" marginwidth="0"
-                  marginheight="0">
+               
 
-                </iframe>
+                 <!--消费水平饼图表-->
+                 <iframe class="natureArea fl" src="<%=path %>/bigScreen/level.jsp" allowTransparency="true"
+                    frameborder="0" style="border: none;width:100%;height:100%;" scrolling="no" marginwidth="0"
+                    marginheight="0">
+  
+                  </iframe>
               </div>
               <div style="display: inline-block;width:50%;height:100%;">
-                <!--消费水平饼图表-->
-                <iframe class="natureArea fl" src="<%=path %>/bigScreen/level.jsp" allowTransparency="true"
-                  frameborder="0" style="border: none;width:100%;height:100%;" scrolling="no" marginwidth="0"
-                  marginheight="0">
-
-                </iframe>
+                <!--驻留时间饼图表-->
+                <iframe class="natureArea fr" src="<%=path %>/bigScreen/time.jsp" allowTransparency="true"
+                    frameborder="0" style="border: none;width:100%;height:100%;" scrolling="no" marginwidth="0"
+                    marginheight="0">
+  
+                  </iframe>
               </div>
             </div>
             <ul class="natureBottom">

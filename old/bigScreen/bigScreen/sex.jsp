@@ -117,7 +117,7 @@ function getSex(){
 		                    center: ['50%', '45%'],
 		                    radius: '50%',
 		                    data:[
-		                        {value: menPer,  name:'男', itemStyle : { normal : {color:'#45e7b4',
+		                        {value: menPer,  name:'男', itemStyle : { normal : {color:'#98D87D',
 																		                    label : {
 																		                        position : 'inner',
 																		                        formatter : function (params) {                         
@@ -134,7 +134,7 @@ function getSex(){
 																	                    }
 																	                },
 																		         }},
-		                        {value: 100-menPer,  name:'女',itemStyle : { normal : {color:'#2095f2',
+		                        {value: 100-menPer,  name:'女',itemStyle : { normal : {color:'#F27B71',
 																		                    label : {
 																		                       position : 'inner',
 																		                        formatter : function (params) {                         

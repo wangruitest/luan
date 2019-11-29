@@ -138,7 +138,7 @@ function getAge(){
 		                    center: ['50%', '45%'],
 		                    radius: '50%',
 		                    data:[
-		                        {value: a20Per,  name:'0-20',itemStyle : { normal : {color:'#3b9ffc',
+		                        {value: a20Per,  name:'0-20',itemStyle : { normal : {color:'#98D87D',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -155,7 +155,7 @@ function getAge(){
 											                    }
 											                },
 												         }},
-		                        {value: a30Per,  name:'20-30',itemStyle : { normal : {color:'#2192fc',
+		                        {value: a30Per,  name:'20-30',itemStyle : { normal : {color:'#FFD562',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -172,7 +172,7 @@ function getAge(){
 											                    }
 											                },
 												         }},
-		                        {value: a40Per,  name:'30-40',itemStyle : { normal : {color:'#0477e2',
+		                        {value: a40Per,  name:'30-40',itemStyle : { normal : {color:'#F27B71',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -189,7 +189,7 @@ function getAge(){
 											                    }
 											                },
 												         }},
-		                        {value: a50Per,  name:'40-50',itemStyle : { normal : {color:'#0167c7',
+		                        {value: a50Per,  name:'40-50',itemStyle : { normal : {color:'#8996E7',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

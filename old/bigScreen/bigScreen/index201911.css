@@ -383,14 +383,15 @@ li{
   display: inline-block;
 }
 .nvArea {
-  background: #2095f2;
+  background: #F27B71;
 }
 .nanArea {
-  background: #0ecf92;
+  background: #98D87D;
 }
-.age1{background:#3b9ffc}.age2{background:#2192fc}.age3{background:#0477e2}.age4{background:#0167c7}
+.age1{background:#98D87D}.age2{background:#FFD562}.age3{background:#F27B71}.age4{background:#8996E7}
 
-.level1{background:#02d2fe}.level2{background:#00bee7}.level3{background:#01aace}.level4{background:#028eac}.time1{background:#02f1ab}.time2{background:#00da9a}.time3{background:#01c088}.time4{background:#01ab79}.time5{background:#029368}
+.level1{background:#98D87D}.level2{background:#FFD562}.level3{background:#F27B71}.level4{background:#8996E7}
+.time1{background:#98D87D}.time2{background:#FFD562}.time3{background:#F27B71}.time4{background:#8996E7}.time5{background:#98C0FF}
 
 .natureBottom {
   width: calc(100% - 20px);
