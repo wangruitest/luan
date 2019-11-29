@@ -412,7 +412,7 @@
               </ul>
             </div>
             </div>
-            <div style="height:calc(100% - 60px);font-size:0;padding-top: 20px;">
+            <div style="height:calc(100% - 0px);font-size:0;padding-top: 20px;">
 
               <div style="display: inline-block;width:50%;height:100%;">
                 <iframe class="natureArea fl" id="sex" src="<%=path %>/bigScreen/sex.jsp" allowTransparency="true"
@@ -524,7 +524,7 @@
               </ul>
               </div>
             </div>
-            <div style="height:calc(100% - 60px); font-size:0;    padding-top: 20px;">
+            <div style="height:calc(100% - 0px); font-size:0;    padding-top: 20px;">
               <div style="display: inline-block;width:50%;height:100%;">
                 <!--驻留时间饼图表-->
                 <iframe class="natureArea fr" src="<%=path %>/bigScreen/time.jsp" allowTransparency="true"

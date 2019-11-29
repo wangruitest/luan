@@ -392,11 +392,14 @@ li{
 .level1{background:#02d2fe}.level2{background:#00bee7}.level3{background:#01aace}.level4{background:#028eac}.time1{background:#02f1ab}.time2{background:#00da9a}.time3{background:#01c088}.time4{background:#01ab79}.time5{background:#029368}
 
 .natureBottom {
-  width: 100%;
+  width: calc(100% - 20px);
   overflow: auto;
   height: 30px;
   margin: 0;
   padding: 0;
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
 }
 
 .natureBottom li {
@@ -407,9 +410,10 @@ li{
 }
 #tenCityPercentArea{
     position: absolute;
-    right: 0;
-    top: 30px;
+    right: 0px;
+    top: 25px;
     color: #eee;
+    /* width:220px; */
 }
 .areaHide {
   display: none;
@@ -446,10 +450,10 @@ li{
   position: absolute;
   top: 0;
   right: 0;
-  padding: 15px;
+  padding: 5px;
 }
 .tenList {
-  padding: 5px 2px 5px 2px;
+  padding: 2px;
   color: #fff;
   font-family: "微软雅黑";
   font-size: 14px;
