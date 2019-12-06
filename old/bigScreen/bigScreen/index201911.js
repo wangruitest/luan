@@ -1,3 +1,4 @@
+var basePath2='http://localhost:8088/';
 $(function () {
   getCfg();
   getScrollTip();
@@ -29,7 +30,6 @@ function getCfg () {
     async: false,
     dataType: "json",
     success: function (data) {
-      console.log('data' + data);
       for (var i = 0; i < data.length; i++) {
         titleName = data[i].area_name + "旅游景区监控中心";
         areacode = data[i].areaCode;
@@ -82,6 +82,20 @@ function getScrollTip () {
           $("#stayMin").html(value.scenicSpot + "分钟");
         });
       });
+    },
+    error: function (err) {
+      console.log(err);
+    }
+
+  });
+  $.ajax({
+    url: basePath2 + "/bigScreen/getYesterdayTouristCount.do",
+    dataType: "json",
+    type: "POST",
+    async: false,
+    success: function (data) {
+          var cnt=(data/10000).toFixed(2);
+          $("#yesterdayVisitor").html(cnt + "万人");
     },
     error: function (err) {
       console.log(err);
@@ -501,34 +515,60 @@ function format_number (n) {
   var r = len % 3;
   return r > 0 ? b.slice(0, r) + "," + b.slice(r, len).match(/\d{3}/g).join(",") : b.slice(r, len).match(/\d{3}/g).join(",");
 }
-var provinceStatus=1;
+// var provinceStatus=1;
 
 
-function changeProvince () {
-  if (provinceStatus === 1) {
+function changeProvince (val) {
+  if (val === 0) {
+    $("#province0").removeClass("switchButton1_2");
+    $("#province0").addClass("switchButton1_1");
+    $("#province1").removeClass("switchButton2_1");
+    $("#province1").addClass("switchButton2_2");
+    $("#province2").removeClass("switchButton3_1");
+    $("#province2").addClass("switchButton3_2");
+    
+    $("#ben_sheng_body").show();
+    $("#wai_sheng_body").hide();
+    $("#quan_guo_body").hide();
+    $('#ahmap').attr('src',basePath+'/bigScreen/ahmap.jsp');
+
+    $('#chinamap2').attr('src','');
+
+    $('#chinamap3').attr('src','');
+    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/ahmap.jsp'); 
+  } else if(val === 1){
+    $("#province0").removeClass("switchButton1_1");
+    $("#province0").addClass("switchButton1_2");
+    $("#province1").removeClass("switchButton2_2");
+    $("#province1").addClass("switchButton2_1");
+    $("#province2").removeClass("switchButton3_1");
+    $("#province2").addClass("switchButton3_2");
+    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/chinamap.jsp'); 
+    if(!$('#chinamap').attr('src')){
+      $('#chinamap').attr('src',basePath+'/bigScreen/chinamap.jsp');
+    }
+    $('#ahmap').attr('src','');
+    $('#chinamap2').attr('src','');
+    $("#ben_sheng_body").hide();
+    $("#wai_sheng_body").show();
+    $("#quan_guo_body").hide();
+
+  }else {
     $("#province0").removeClass("switchButton1_1");
     $("#province0").addClass("switchButton1_2");
     $("#province1").removeClass("switchButton2_1");
     $("#province1").addClass("switchButton2_2");
-    provinceStatus=2;
-    
+    $("#province2").removeClass("switchButton3_2");
+    $("#province2").addClass("switchButton3_1");
+    // // $("#ben_sheng_body").attr("src",basePath +'bigScreen/chinamap.jsp'); 
+    if(!$('#chinamap2').attr('src')){
+      $('#chinamap2').attr('src',basePath+'/bigScreen/toptencity_map.jsp');
+    }``
+    $('#chinamap').attr('src','');
+    $('#ahmap').attr('src','');
+    $("#quan_guo_body").show();
     $("#ben_sheng_body").hide();
-    $("#wai_sheng_body").show();
-    if(!$('#chinamap').attr('src')){
-      $('#chinamap').attr('src',basePath+'/bigScreen/chinamap.jsp');
-    }
-    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/ahmap.jsp'); 
-  } else {
-    $("#province0").removeClass("switchButton1_2");
-    $("#province0").addClass("switchButton1_1");
-    $("#province1").removeClass("switchButton2_2");
-    $("#province1").addClass("switchButton2_1");
-    provinceStatus=1;
-    // $("#ben_sheng_body").attr("src",basePath +'bigScreen/chinamap.jsp'); 
-
-    $("#ben_sheng_body").show();
     $("#wai_sheng_body").hide();
-
   }
 
 }

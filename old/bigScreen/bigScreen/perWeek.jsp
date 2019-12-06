@@ -31,7 +31,7 @@
 
     <link href="<%=path %>/css/monokai.css" rel="stylesheet">
     <script src="<%=path %>/js/echarts/echarts.min.js"></script>
-	<script src="<%=path %>/js/demo-skin-changer.js"></script>
+	<!-- <script src="<%=path %>/js/demo-skin-changer.js"></script> -->
 	<script src="<%=path %>/js/jquery.js"></script>
 	<script src="<%=path %>/js/bootstrap.js"></script>
 	<script src="<%=path %>/js/bootstrap-treeview.js"></script>

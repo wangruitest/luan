@@ -25,6 +25,7 @@
     </style>
 </head>
 <body>
+		<div id="wrong-message" style="display: none;"></div>
     <div class="well " style="display: none;">
     	<div class="nav-header"><a href="#" onclick="autoResize()" class="glyphicon glyphicon-resize-full" id ="icon-resize" ></a>option</div>
         <textarea id="code" name="code">

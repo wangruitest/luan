@@ -34,7 +34,7 @@
     
     <link href="<%=path %>/css/monokai.css" rel="stylesheet">
      <script src="<%=path %>/js/echarts/echarts.min.js"></script>
-	<script src="<%=path %>/js/demo-skin-changer.js"></script>
+	<!-- <script src="<%=path %>/js/demo-skin-changer.js"></script> -->
 	<script src="<%=path %>/js/jquery.js"></script>
 	<script src="<%=path %>/js/bootstrap.js"></script>
 	<script src="<%=path %>/js/bootstrap-treeview.js"></script>
@@ -150,7 +150,7 @@
 											                    }
 											                },
 												         }},
-		                        {value: perLevel2,  name:'20-50元',itemStyle : { normal : {color:'#FFD562',
+		                        {value: perLevel2,  name:'20-50元',itemStyle : { normal : {color:'#336633',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

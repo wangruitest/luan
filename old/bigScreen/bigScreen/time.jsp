@@ -34,7 +34,7 @@
     
     <link href="<%=path %>/css/monokai.css" rel="stylesheet">
      <script src="<%=path %>/js/echarts/echarts.min.js"></script>
-	<script src="<%=path %>/js/demo-skin-changer.js"></script>
+	<!-- <script src="<%=path %>/js/demo-skin-changer.js"></script> -->
 	<script src="<%=path %>/js/jquery.js"></script>
 	<script src="<%=path %>/js/bootstrap.js"></script>
 	<script src="<%=path %>/js/bootstrap-treeview.js"></script>
@@ -145,7 +145,7 @@
 											                    }
 											                },
 												         }},
-		                        {value: perTime2,  name:'2-6小时',itemStyle : { normal : {color:'#FFD562',
+		                        {value: perTime2,  name:'2-6小时',itemStyle : { normal : {color:'#336633',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         
@@ -196,7 +196,7 @@
 											                    }
 											                },
 												      }},
-								{value: perTime5,  name:'48小时以上',itemStyle : { normal : {color:'#98C0FF',
+								{value: perTime5,  name:'48小时以上',itemStyle : { normal : {color:'#993333',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

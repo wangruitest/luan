@@ -96,7 +96,7 @@
 
 	function layout_center_addTabFun(opts) {
 		if(!opts.content){
-			var height = document.documentElement.clientHeight-138;
+			var height = document.documentElement.clientHeight-158;
 			var href="<%=request.getContextPath() %>"+opts.href;
 			var content="<iframe align=\"center\" style=\"width:100%;height:"+height+"px;\" frameborder=\"0\" id=\"module\" name=\"module\" scrolling=\"auto\" src=\""+href+"\"></iframe>";
 			opts.href="";
