@@ -206,7 +206,7 @@ function getAge(){
 											                    }
 											                },
 												         }},
-								{value: ma50Per,  name:'>50',itemStyle : { normal : {color:'blue',
+								{value: ma50Per,  name:'>50',itemStyle : { normal : {color:'#CC3333',
 												                    label : {
 												                        position : 'inner',
 												                        formatter : function (params) {                         

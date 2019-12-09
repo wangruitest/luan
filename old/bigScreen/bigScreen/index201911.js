@@ -178,17 +178,17 @@ function getWeather () {
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[1].weather_icon.substring(37, weatherDatas[1].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[1].week + " " + weatherDatas[1].temperature.substring(0,weatherDatas[1].temperature.indexOf('/')) + "</div>"
         + "</li>");
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[2].weather_icon.substring(37, weatherDatas[2].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[2].week + " " + weatherDatas[2].temperature.substring(0,weatherDatas[2].temperature.indexOf('/')) + "</div>"
         + "</li>");
       $("#weatherul").append("<li class=fr>"
         + "<div class='wearther'><img src='" + basePath + "/img/wearther/" + weatherDatas[3].weather_icon.substring(37, weatherDatas[3].weather_icon.length - 4) + ".png'/></div>"
         // + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0, 3) + "</div>"
-        + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0,weatherDatas[0].temperature.indexOf('/')-1) + "</div>"
+        + "<div class='weartherText'>" + weatherDatas[3].week + " " + weatherDatas[3].temperature.substring(0,weatherDatas[3].temperature.indexOf('/')) + "</div>"
         + "</li>");
 
 
@@ -493,7 +493,7 @@ function getProvinceYesterdayVisitors () {
           for (var i = 0; i < touristPercent.length; i++) {
             $("#tenCityPercentArea").append("<li class='tenList clearfix'>"
               + "<div class='tenNum fl'>" + (i + 1) + " </div>"
-              + "<div class='tenName fl'>" + arrCities[i].substring(0, arrCities[i].length - 1) + " " + touristPercent[i] + "%</div>"
+              + "<div class='tenName fl'>" + arrCities[i].substring(0, arrCities[i].length - 1) + " " + touristPercent[i] + "% "+ayyCitiesNum[i] +"</div>"
               + "</li>");
           }
         } else {

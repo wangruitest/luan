@@ -72,7 +72,7 @@
 	<!--图表显示区域-->
 	<div class="mainArea">
 		<div id="main" class="main marquee" style="padding: 0;margin: 0;"></div>
-		<div class="sceneryBottom marquee">
+		<div class="sceneryBottom marquee" id="sceneryBottom">
 			<div class="nameText fl " id="scenic1" style="overflow:hidden; white-space:nowrap">待定</div>
 			<div class="nameText fl " id="scenic2" style="overflow:hidden; white-space:nowrap">待定</div>
 			<div class="nameText fl " id="scenic3" style="overflow:hidden; white-space:nowrap">待定</div>
@@ -97,19 +97,29 @@
 		$(".main").height(hh); */
 
 		var mh = $(".mainArea").height();
+		var mw = $(".mainArea").width();
 		var hh = parent.window.$(".sceneryArea").height();
 		var mhn = hh * 0.75;
 		var mbh = hh * 0.23;
 		$(".mainArea").height(hh);
 		$(".main").height(mhn);
-		$('.nameText').width(mhn-5);
-		$('.sceneryBottom').width(mhn*10);
-		$('.main').width(mhn*10);
+		// $('.nameText').width(mhn - 5);
+		$('.nameText').width(mw/5-5);
+		$('.sceneryBottom').width(mw*2);
+		$('.main').width(mw * 2);
+
+		var r= 0;
+		if(mhn/2>mw/10){
+			r=mw/10;
+		}else{
+			r=mhn/2;
+		}
+
 		setScenery();
 		window.setInterval("setScenery()", 60000);
 		function setScenery() {
-			$('.marquee').marquee('destroy');
-			$(".main").empty();
+			// $('.marquee').marquee('destroy');
+			// $(".main").empty();
 			var scenicYuzhi = [];
 			var scenicName = [];
 			var scenicColor = [];
@@ -154,18 +164,18 @@
 							$("#scenic4").html(data[i].scenicName.replace("景区", ""));
 						} else if (i == 4) {
 							$("#scenic5").html(data[i].scenicName.replace("景区", ""));
-						}else if (i == 5) {
+						} else if (i == 5) {
 							$("#scenic6").html(data[i].scenicName.replace("景区", ""));
-						}else if (i == 6) {
+						} else if (i == 6) {
 							$("#scenic7").html(data[i].scenicName.replace("景区", ""));
-						}else if (i == 7) {
+						} else if (i == 7) {
 							$("#scenic8").html(data[i].scenicName.replace("景区", ""));
-						}else if (i == 8) {
+						} else if (i == 8) {
 							$("#scenic9").html(data[i].scenicName.replace("景区", ""));
-						}else if (i == 9) {
+						} else if (i == 9) {
 							$("#scenic10").html(data[i].scenicName.replace("景区", ""));
 						}
-						
+
 						scenicColor.push(color);
 						// document.getElementById("scenicFive").style.textOverflow="d"
 					}
@@ -245,7 +255,8 @@
 					color: '#ffffff'
 				}
 			};
-			var radius = ['60%', '70%'];
+			// var radius = ['60%', '70%'];
+			var radius = [r-10, r];
 			option = {
 				legend: {
 					x: 'center',
@@ -288,13 +299,13 @@
 				series: [
 					{
 						type: 'pie',
-						center: [mhn/2, '50%', '10%', 0],
+						center: [r, '50%'],
 						radius: radius,
 						x: '0%', // for funnel
 						itemStyle: labelFromatter,
 						data: [
 							{
-								name: scenicName[0], value: scenicYuzhi[0], jqName: scenicName[0], itemStyle: 
+								name: scenicName[0], value: scenicYuzhi[0], jqName: scenicName[0], itemStyle:
 								{
 									normal: {
 										color: scenicColor[0],
@@ -323,7 +334,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*3, '50%', '10%', 0],
+						center: [r * 3, '50%', '10%', 0],
 						radius: radius,
 						x: '25%', // for funnel
 						itemStyle: labelFromatter,
@@ -346,7 +357,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*5, '50%', '20%', 0],
+						center: [r * 5, '50%', '20%', 0],
 						radius: radius,
 						x: '50%', // for funnel
 						itemStyle: labelFromatter,
@@ -370,7 +381,7 @@
 					,
 					{
 						type: 'pie',
-						center: [mhn/2*7, '50%', '20%', 0],
+						center: [r * 7, '50%', '20%', 0],
 						radius: radius,
 						x: '75%', // for funnel
 						itemStyle: labelFromatter,
@@ -394,7 +405,7 @@
 					,
 					{
 						type: 'pie',
-						center: [mhn/2*9, '50%', '20%', 0],
+						center: [r * 9, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -417,7 +428,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*11, '50%', '20%', 0],
+						center: [r * 11, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -440,7 +451,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*13, '50%', '20%', 0],
+						center: [r * 13, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -463,7 +474,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*15, '50%', '20%', 0],
+						center: [r * 15, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -486,7 +497,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*17, '50%', '20%', 0],
+						center: [r * 17, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -509,7 +520,7 @@
 					},
 					{
 						type: 'pie',
-						center: [mhn/2*19, '50%', '20%', 0],
+						center: [r * 19, '50%', '20%', 0],
 						radius: radius,
 						x: '80%', // for funnel
 						itemStyle: labelFromatter,
@@ -538,14 +549,27 @@
 				]
 			};
 			echart.setOption(option);
-		$mq =	$('.marquee').marquee({
-				duration: 20000
-			});
+			// $mq =	$('.marquee').marquee({
+			// 		duration: 20000
+			// 	});
 		}
-var $mq;
+		// var $mq;
 		$(function () {
-		
+
 		});
+		window.setInterval("move()",5000);
+		var moveFlag=0;
+		function move(){
+			if(moveFlag===0){
+				$('#main').css("margin-left",-1*mw+'px');
+				$('#sceneryBottom').css("margin-left",-1*mw+'px');
+				moveFlag=1;
+			}else{
+				$('#main').css("margin-left",'0px');
+				$('#sceneryBottom').css("margin-left",'0px');
+				moveFlag=0;
+			}
+		}
 	</script>
 
 </body>

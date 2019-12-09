@@ -217,7 +217,7 @@
             </div>
             <div class="main2S main2_3">
               <div class="part_container">
-                <div style="position: absolute;top:40px;right:20px;width:210px;height:35px;z-index:99999;">
+                <div style="position: absolute;top:20px;right:20px;width:210px;height:35px;z-index:99999;">
                   <div id="province0" class="switchButton switchButton1_1" onclick="changeProvince(0)">
                     本省
                   </div>
@@ -418,7 +418,7 @@
                           <div class="natureListText">40-50</div>
                         </li>
                         <li>
-                          <div class="natureListIcon age5" style="background:blue"></div>
+                          <div class="natureListIcon age5" style="background:#CC3333"></div>
                           <div class="natureListText">>50</div>
                         </li>
                       </ul>

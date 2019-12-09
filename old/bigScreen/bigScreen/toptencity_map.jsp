@@ -473,8 +473,9 @@
 							for (var i = 0; i < touristPercent.length; i++) {
 								$("#tenProvince").append("<li class='tenList clearfix'>"
 									+ "<div class='tenNum fl'>" + (i + 1) + " </div>"
-									+ "<div class='tenName fl'>" + arrCities[i] + " " + touristPercent[i] + "%</div>"
+									+ "<div class='tenName fl'>" + arrCities[i] + " " + touristPercent[i] + "% "+ ayyCitiesNum[i]  +"</div>"
 									+ "</li>");
+									//ayyCitiesNum
 							}
 						} else {
 							$("#tenProvince").append("<li class='tenList clearfix'>"
@@ -485,6 +486,8 @@
 						$(".ten").fadeIn(1500);
 
 					} else {//显示无迁徙的空地图
+						$("#tenProvince").html('数据待更新……');
+						$(".ten").fadeIn(1500);
 						$("#code").html("option = {\n"
 							+ "color: ['gold','aqua','lime'],\n"
 							+ "tooltip : {\n"

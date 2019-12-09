@@ -456,7 +456,7 @@
 							for (var i = 0; i < touristPercent.length; i++) {
 								$("#tenProvince").append("<li class='tenList clearfix'>"
 									+ "<div class='tenNum fl'>" + (i + 1) + " </div>"
-									+ "<div class='tenName fl'>" + arrCities[i] + " " + touristPercent[i] + "%</div>"
+									+ "<div class='tenName fl'>" + arrCities[i] + " " + touristPercent[i] + "% "+ ayyCitiesNum[i]  +"</div>"
 									+ "</li>");
 							}
 						} else {
@@ -468,6 +468,8 @@
 						$(".ten").fadeIn(1500);
 
 					} else {//显示无迁徙的空地图
+						$("#tenProvince").html('数据待更新……');
+						$(".ten").fadeIn(1500);
 						$("#code").html("option = {\n"
 							+ "color: ['gold','aqua','lime'],\n"
 							+ "tooltip : {\n"
@@ -568,22 +570,22 @@
 							+ "                }\n"
 							+ "            },\n"
 							+ "            data : [\n"
-							+ "                [{name:'阜阳'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'安庆'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'亳州'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'芜湖'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'淮北'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'蚌埠'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'淮南'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'滁州'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'合肥'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'铜陵'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'马鞍山'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'池州'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'宣城'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'黄山'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'宿州'}, {name:'" + simple_name + "'}],\n"
-							+ "                [{name:'六安'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'阜阳'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'安庆'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'亳州'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'芜湖'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'淮北'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'蚌埠'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'淮南'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'滁州'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'合肥'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'铜陵'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'马鞍山'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'池州'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'宣城'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'黄山'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'宿州'}, {name:'" + simple_name + "'}],\n"
+							// + "                [{name:'六安'}, {name:'" + simple_name + "'}],\n"
 							+ "            ]\n"
 							+ "        },\n"
 							+ "        markPoint : {\n"
