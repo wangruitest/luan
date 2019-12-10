@@ -96,10 +96,6 @@
                 <div class="listLiNum fr" id="peakDay">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">昨日过夜游客：</div>
-                <div class="listLiNum fr" id="overnight">0</div>
-              </li>
-              <li class="listLi clearfix">
                 <div class="listLiText fl">昨日城市旅客：</div>
                 <div class="listLiNum fr" id="cityVisitor">0</div>
               </li>
@@ -110,6 +106,10 @@
               <li class="listLi clearfix">
                 <div class="listLiText fl">昨日游客统计数据：</div>
                 <div class="listLiNum fr" id="yesterdayVisitor"">0</div>
+              </li>
+              <li class="listLi clearfix">
+                <div class="listLiText fl">昨日过夜游客：</div>
+                <div class="listLiNum fr" id="overnight">0</div>
               </li>
             </ul>
           </div>

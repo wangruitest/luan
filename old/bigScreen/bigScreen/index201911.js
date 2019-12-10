@@ -79,7 +79,7 @@ function getScrollTip () {
           $("#peakDay").html(formatWan(value.touristPeak) + "万人");
           $("#overnight").html(formatWan(value.overnightGuest) + "万人");
           $("#cityVisitor").html(formatWan(value.cityVisitor) + "万人");
-          $("#stayMin").html(value.scenicSpot + "分钟");
+          $("#stayMin").html(parseFloat(value.scenicSpot) + "分钟");
         });
       });
     },

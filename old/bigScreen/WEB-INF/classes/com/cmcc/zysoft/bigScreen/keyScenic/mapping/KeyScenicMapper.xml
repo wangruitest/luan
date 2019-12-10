@@ -22,7 +22,7 @@ select  ss.ordernumber,ss.region_name as scenicName,ss.id scenicId,
   on ral.region_id=a.id
   right join region_cfg ss 
   on ral.region_id=ss.id
-   order by ordernumber,yuzhi desc,num desc
+   order by touristNum desc,num desc
   
 	</select>
 	
