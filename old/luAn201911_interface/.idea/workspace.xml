@@ -1,0 +1,1816 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="zhibing_mybatis:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4e5cde7e-dc51-4cb3-be17-6aa3e2583404" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/rml/dao/BigScreenMapper.java" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rml/controller/MUserController.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rml/dao/MUserMapper.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rml/mapping/MUserMapper.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rml/service/MUserServiceI.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rml/service/MUserServiceImpl.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" afterPath="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMybatis.java" afterPath="$PROJECT_DIR$/src/test/java/TestMybatis.java" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.properties" afterPath="$PROJECT_DIR$/target/classes/config.properties" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rml/controller/MUserController.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rml/dao/MUserMapper.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rml/mapping/MUserMapper.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rml/service/MUserServiceI.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rml/service/MUserServiceImpl.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring-mvc.xml" afterPath="$PROJECT_DIR$/target/classes/spring-mvc.xml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/spring-mybatis.xml" afterPath="$PROJECT_DIR$/target/classes/spring-mybatis.xml" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/TestMybatis.class" afterPath="$PROJECT_DIR$/target/test-classes/TestMybatis.class" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BigScreenController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rml/controller/BigScreenController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="915">
+              <caret line="134" column="37" lean-forward="false" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listUser.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/listUser.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CORSFilter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rml/CORSFilter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BigScreenService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rml/service/BigScreenService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="22" column="36" lean-forward="false" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#371#372#0" expanded="true" />
+                <element signature="e#418#419#0" expanded="true" />
+                <element signature="e#463#464#0" expanded="true" />
+                <element signature="e#528#529#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BigScreenMapper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rml/dao/BigScreenMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spring-mvc.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mvc.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BigScreenMapper.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/BigScreenMapper.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="439">
+              <caret line="39" column="25" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+              <folding>
+                <element signature="e#950#954#0" expanded="true" />
+                <element signature="e#1762#1766#0" expanded="true" />
+                <marker date="1575957989576" expanded="true" signature="696:818" ph="select from MUSER" />
+                <marker date="1575957989576" expanded="true" signature="897:935" ph="select ID, N... muser" />
+                <marker date="1575957989576" expanded="true" signature="897:957" ph="select * fro... tourist_phones_byday_sum" />
+                <marker date="1575957989576" expanded="true" signature="1037:1182" ph="select sum(t... REGION_SUMMARY_BYDAY" />
+                <marker date="1575957989576" expanded="true" signature="1281:1769" ph="select * fro... nvl" />
+                <marker date="1575957989576" expanded="true" signature="1301:1744" ph="select nvl(s... AREA_NAME" />
+                <marker date="1575957989576" expanded="true" signature="1387:1676" ph="select c.ARE... TOURIST_PHONES_BYDAY_SUM" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>controller</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../../mgadmin/backend" value="PREVIEW" />
+        <entry key="$USER_HOME$/project/讯飞/code/XFVideoCapture" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/rml/service/MUserServiceI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/dao/MUserMapper.java" />
+        <option value="$PROJECT_DIR$/src/test/java/TestMybatis.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/mapping/BigScreenMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/MyMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/spring.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/spring-mvc.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/CORSFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/dao/BigScreenMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/service/BigScreenService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rml/controller/BigScreenController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapping/BigScreenMapper.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="luAn201911" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="luAn201911" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="luAn201911" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="luAn201911" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="war" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1920" />
+    <option name="height" value="1126" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapping" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="luAn201911" type="b2602c69:ProjectViewProjectNode" />
+              <item name="luAn201911" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/rml/mapping" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration name="Unnamed" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.84" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="zhibing_mybatis:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_SpringMVC-Spring-MyBatis" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55764" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="55767" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="zhibing_mybatis:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_SpringMVC-Spring-MyBatis" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55764" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="55767" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="zhibing_mybatis:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e5cde7e-dc51-4cb3-be17-6aa3e2583404" name="Default" comment="" />
+      <created>1575440207169</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575440207169</updated>
+      <workItem from="1575440210833" duration="11427000" />
+      <workItem from="1575510368468" duration="9362000" />
+      <workItem from="1575611477615" duration="18961000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="39750000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1920" height="1126" extended-state="0" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24334398" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4990099" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="MyBatis Sql Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32970297" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30830672" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/controller/BigScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/CORSFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/service/BigScreenService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/dao/BigScreenMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="32" lean-forward="false" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/BigScreenMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="4" lean-forward="false" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding>
+            <element signature="e#950#954#0" expanded="true" />
+            <element signature="e#1762#1766#0" expanded="true" />
+            <marker date="1575957989576" expanded="true" signature="696:818" ph="select from MUSER" />
+            <marker date="1575957989576" expanded="true" signature="897:935" ph="select ID, N... muser" />
+            <marker date="1575957989576" expanded="true" signature="897:957" ph="select * fro... tourist_phones_byday_sum" />
+            <marker date="1575957989576" expanded="true" signature="1037:1182" ph="select sum(t... REGION_SUMMARY_BYDAY" />
+            <marker date="1575957989576" expanded="true" signature="1281:1769" ph="select * fro... nvl" />
+            <marker date="1575957989576" expanded="true" signature="1301:1744" ph="select nvl(s... AREA_NAME" />
+            <marker date="1575957989576" expanded="true" signature="1387:1676" ph="select c.ARE... TOURIST_PHONES_BYDAY_SUM" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="134" column="37" lean-forward="false" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/controller/MUserController.java" />
+    <entry file="uml://MAVEN/zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</OriginalElement>
+          <nodes>
+            <node x="1153.6837009803921" y="653.0">zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</node>
+            <node x="247.3930147058826" y="79.0">org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="227.3930147058826" y="0.0">org.springframework:spring-core:jar:3.2.9.RELEASE/commons-logging:commons-logging:jar:1.1.3</node>
+            <node x="139.0" y="504.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE</node>
+            <node x="340.4337009803921" y="178.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE</node>
+            <node x="166.4453125000001" y="336.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE</node>
+            <node x="220.43370098039202" y="257.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE</node>
+            <node x="220.43370098039202" y="178.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE/aopalliance:aopalliance:jar:1.0</node>
+            <node x="44.43370098039202" y="257.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE</node>
+            <node x="302.5587009803921" y="415.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE</node>
+            <node x="1384.5166666666669" y="178.0">org.springframework:spring-test:jar:3.2.9.RELEASE</node>
+            <node x="1161.5166666666669" y="415.0">org.mybatis:mybatis:jar:3.1.1</node>
+            <node x="854.9337009803921" y="504.0">org.mybatis:mybatis-spring:jar:1.1.1</node>
+            <node x="893.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-core:jar:3.1.1.RELEASE</node>
+            <node x="632.2680147058825" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE</node>
+            <node x="486.4337009803921" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.1.1.RELEASE</node>
+            <node x="822.1833333333334" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-context:jar:3.1.1.RELEASE</node>
+            <node x="620.4337009803921" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="770.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE</node>
+            <node x="741.2680147058825" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE</node>
+            <node x="899.0166666666668" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="1017.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-context:jar:3.2.9.RELEASE</node>
+            <node x="1445.5166666666669" y="504.0">com.oracle:ojdbc14:jar:10.2.0.4.0</node>
+            <node x="1334.0166666666669" y="504.0">junit:junit:jar:4.11</node>
+            <node x="1302.5166666666669" y="415.0">junit:junit:jar:4.11/org.hamcrest:hamcrest-core:jar:1.3</node>
+            <node x="524.9337009803921" y="504.0">com.alibaba:druid:jar:0.2.26</node>
+            <node x="0.0" y="504.0">org.aspectj:aspectjweaver:jar:1.8.1</node>
+            <node x="1898.5166666666669" y="504.0">javax.servlet:jstl:jar:1.2</node>
+            <node x="1042.9337009803921" y="504.0">javax.servlet:servlet-api:jar:3.0-alpha-1</node>
+            <node x="430.9337009803921" y="504.0">javax.servlet.jsp:jsp-api:jar:2.2.1-b03</node>
+            <node x="1545.5166666666669" y="504.0">commons-fileupload:commons-fileupload:jar:1.3.1</node>
+            <node x="1570.0166666666669" y="415.0">commons-fileupload:commons-fileupload:jar:1.3.1/commons-io:commons-io:jar:2.2</node>
+            <node x="608.9337009803921" y="504.0">log4j:log4j:jar:1.2.17</node>
+            <node x="1232.0166666666669" y="504.0">com.alibaba:fastjson:jar:1.1.41</node>
+            <node x="1724.5166666666669" y="504.0">org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13</node>
+            <node x="1734.0166666666669" y="415.0">org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13/org.codehaus.jackson:jackson-core-asl:jar:1.9.13</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="33.33333333333326" y="-14.5" />
+              <point x="303.7670343137253" y="232.0" />
+              <point x="354.6837009803921" y="232.0" />
+              <point x="-42.75" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="25.0" y="-14.5" />
+              <point x="942.4337009803921" y="474.0" />
+              <point x="1079.5166666666669" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE">
+              <point x="-34.33333333333337" y="-14.5" />
+              <point x="787.6833333333334" y="395.0" />
+              <point x="699.0180147058825" y="395.0" />
+              <point x="22.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="116.43370098039202" y="138.0" />
+              <point x="266.8930147058826" y="138.0" />
+              <point x="-32.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.alibaba:fastjson:jar:1.1.41">
+              <point x="4.09375" y="-14.5" />
+              <point x="1223.2774509803921" y="563.0" />
+              <point x="1273.0166666666669" y="563.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13">
+              <point x="53.21875" y="-14.5" />
+              <point x="1272.4024509803921" y="623.0" />
+              <point x="1801.5166666666669" y="623.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="34.33333333333337" y="-14.5" />
+              <point x="856.3500000000001" y="395.0" />
+              <point x="951.0166666666668" y="395.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE">
+              <point x="-50.0" y="-14.5" />
+              <point x="867.4337009803921" y="484.0" />
+              <point x="654.5180147058825" y="484.0" />
+              <point x="-22.25" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.1.1.RELEASE">
+              <point x="-29.666666666666686" y="-14.5" />
+              <point x="647.1013480392158" y="316.0" />
+              <point x="543.4337009803921" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13" target="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13/org.codehaus.jackson:jackson-core-asl:jar:1.9.13">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE">
+              <point x="-46.5" y="-14.5" />
+              <point x="181.9453125000001" y="316.0" />
+              <point x="152.43370098039202" y="316.0" />
+              <point x="36.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="676.7680147058825" y="316.0" />
+              <point x="672.4337009803921" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.mybatis:mybatis-spring:jar:1.1.1">
+              <point x="-20.46875" y="-14.5" />
+              <point x="1198.7149509803921" y="583.0" />
+              <point x="917.4337009803921" y="583.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-15.5" y="-14.5" />
+              <point x="212.9453125000001" y="316.0" />
+              <point x="198.93370098039202" y="316.0" />
+              <point x="198.93370098039202" y="148.0" />
+              <point x="279.8930147058826" y="148.0" />
+              <point x="-19.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="commons-fileupload:commons-fileupload:jar:1.3.1">
+              <point x="36.84375" y="-14.5" />
+              <point x="1256.0274509803921" y="603.0" />
+              <point x="1624.5166666666669" y="603.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-test:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1435.0166666666669" y="138.0" />
+              <point x="331.8930147058826" y="138.0" />
+              <point x="32.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-33.33333333333326" y="-14.5" />
+              <point x="237.10036764705876" y="232.0" />
+              <point x="209.93370098039202" y="232.0" />
+              <point x="209.93370098039202" y="158.0" />
+              <point x="292.8930147058826" y="158.0" />
+              <point x="-6.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="50.799999999999955" y="-14.5" />
+              <point x="253.29999999999995" y="484.0" />
+              <point x="475.9337009803921" y="484.0" />
+              <point x="475.9337009803921" y="232.0" />
+              <point x="440.1837009803921" y="232.0" />
+              <point x="42.75" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-context:jar:3.1.1.RELEASE">
+              <point x="29.666666666666686" y="-14.5" />
+              <point x="706.4346813725492" y="316.0" />
+              <point x="884.1833333333334" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="202.5" y="484.0" />
+              <point x="197.4453125000001" y="484.0" />
+              <point x="-31.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet:jstl:jar:1.2">
+              <point x="61.40625" y="-14.5" />
+              <point x="1280.5899509803921" y="633.0" />
+              <point x="1923.5166666666669" y="633.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-test:jar:3.2.9.RELEASE">
+              <point x="20.46875" y="-14.5" />
+              <point x="1239.6524509803921" y="583.0" />
+              <point x="1435.0166666666669" y="583.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="38.25" y="-14.5" />
+              <point x="391.8087009803921" y="395.0" />
+              <point x="464.9337009803921" y="395.0" />
+              <point x="464.9337009803921" y="148.0" />
+              <point x="318.8930147058826" y="148.0" />
+              <point x="19.5" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="822.0166666666668" y="395.0" />
+              <point x="798.2680147058825" y="395.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE">
+              <point x="25.40000000000009" y="-14.5" />
+              <point x="227.9000000000001" y="474.0" />
+              <point x="353.5587009803921" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis:jar:3.1.1">
+              <point x="50.0" y="-14.5" />
+              <point x="967.4337009803921" y="484.0" />
+              <point x="1181.5166666666669" y="484.0" />
+              <point x="-20.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="46.5" y="-14.5" />
+              <point x="274.9453125000001" y="316.0" />
+              <point x="391.9337009803921" y="316.0" />
+              <point x="391.9337009803921" y="232.0" />
+              <point x="383.1837009803921" y="232.0" />
+              <point x="-14.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="-38.25" y="-14.5" />
+              <point x="315.3087009803921" y="395.0" />
+              <point x="259.4453125000001" y="395.0" />
+              <point x="31.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="12.75" y="-14.5" />
+              <point x="366.3087009803921" y="385.0" />
+              <point x="402.9337009803921" y="385.0" />
+              <point x="402.9337009803921" y="232.0" />
+              <point x="411.6837009803921" y="232.0" />
+              <point x="14.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-50.799999999999955" y="-14.5" />
+              <point x="151.70000000000005" y="484.0" />
+              <point x="33.93370098039202" y="484.0" />
+              <point x="33.93370098039202" y="128.0" />
+              <point x="253.8930147058826" y="128.0" />
+              <point x="-45.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-core:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE/commons-logging:commons-logging:jar:1.1.3">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="junit:junit:jar:4.11" target="junit:junit:jar:4.11/org.hamcrest:hamcrest-core:jar:1.3">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="commons-fileupload:commons-fileupload:jar:1.3.1" target="commons-fileupload:commons-fileupload:jar:1.3.1/commons-io:commons-io:jar:2.2">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.aspectj:aspectjweaver:jar:1.8.1">
+              <point x="-61.40625" y="-14.5" />
+              <point x="1157.7774509803921" y="633.0" />
+              <point x="59.5" y="633.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE">
+              <point x="-12.75" y="-14.5" />
+              <point x="340.8087009803921" y="385.0" />
+              <point x="305.19531250000006" y="385.0" />
+              <point x="305.19531250000006" y="306.0" />
+              <point x="295.433700980392" y="306.0" />
+              <point x="25.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.oracle:ojdbc14:jar:10.2.0.4.0">
+              <point x="28.65625" y="-14.5" />
+              <point x="1247.8399509803921" y="593.0" />
+              <point x="1485.5166666666669" y="593.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="log4j:log4j:jar:1.2.17">
+              <point x="-28.65625" y="-14.5" />
+              <point x="1190.5274509803921" y="593.0" />
+              <point x="639.9337009803921" y="593.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="397.4337009803921" y="158.0" />
+              <point x="305.8930147058826" y="158.0" />
+              <point x="6.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE">
+              <point x="-53.21875" y="-14.5" />
+              <point x="1165.9649509803921" y="623.0" />
+              <point x="202.5" y="623.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE/aopalliance:aopalliance:jar:1.0">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet.jsp:jsp-api:jar:2.2.1-b03">
+              <point x="-45.03125" y="-14.5" />
+              <point x="1174.1524509803921" y="613.0" />
+              <point x="467.9337009803921" y="613.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE">
+              <point x="-25.0" y="-14.5" />
+              <point x="892.4337009803921" y="474.0" />
+              <point x="822.0166666666668" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-core:jar:3.1.1.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="917.4337009803921" y="464.0" />
+              <point x="945.5166666666668" y="464.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="junit:junit:jar:4.11">
+              <point x="12.28125" y="-14.5" />
+              <point x="1231.4649509803921" y="573.0" />
+              <point x="1363.5166666666669" y="573.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="45.03125" y="-14.5" />
+              <point x="1264.2149509803921" y="613.0" />
+              <point x="1714.0166666666669" y="613.0" />
+              <point x="1714.0166666666669" y="128.0" />
+              <point x="344.8930147058826" y="128.0" />
+              <point x="45.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet:servlet-api:jar:3.0-alpha-1">
+              <point x="-12.28125" y="-14.5" />
+              <point x="1206.9024509803921" y="573.0" />
+              <point x="1091.4337009803921" y="573.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE">
+              <point x="15.5" y="-14.5" />
+              <point x="243.9453125000001" y="316.0" />
+              <point x="245.43370098039202" y="316.0" />
+              <point x="-25.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE">
+              <point x="-25.40000000000009" y="-14.5" />
+              <point x="177.0999999999999" y="474.0" />
+              <point x="80.43370098039202" y="474.0" />
+              <point x="-36.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.mybatis:mybatis:jar:3.1.1">
+              <point x="-4.09375" y="-14.5" />
+              <point x="1215.0899509803921" y="553.0" />
+              <point x="1221.5166666666669" y="553.0" />
+              <point x="20.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.alibaba:druid:jar:0.2.26">
+              <point x="-36.84375" y="-14.5" />
+              <point x="1182.3399509803921" y="603.0" />
+              <point x="556.9337009803921" y="603.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.24377856780091417" x="975.0" y="341.0" />
+          <SelectedNodes>
+            <node>zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MAVEN/zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MAVEN</ID>
+          <OriginalElement>zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</OriginalElement>
+          <nodes>
+            <node x="1153.6837009803921" y="653.0">zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</node>
+            <node x="247.3930147058826" y="79.0">org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="227.3930147058826" y="0.0">org.springframework:spring-core:jar:3.2.9.RELEASE/commons-logging:commons-logging:jar:1.1.3</node>
+            <node x="139.0" y="504.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE</node>
+            <node x="340.4337009803921" y="178.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE</node>
+            <node x="166.4453125000001" y="336.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE</node>
+            <node x="220.43370098039202" y="257.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE</node>
+            <node x="220.43370098039202" y="178.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE/aopalliance:aopalliance:jar:1.0</node>
+            <node x="44.43370098039202" y="257.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE</node>
+            <node x="302.5587009803921" y="415.0">org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE</node>
+            <node x="1384.5166666666669" y="178.0">org.springframework:spring-test:jar:3.2.9.RELEASE</node>
+            <node x="1161.5166666666669" y="415.0">org.mybatis:mybatis:jar:3.1.1</node>
+            <node x="854.9337009803921" y="504.0">org.mybatis:mybatis-spring:jar:1.1.1</node>
+            <node x="893.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-core:jar:3.1.1.RELEASE</node>
+            <node x="632.2680147058825" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE</node>
+            <node x="486.4337009803921" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.1.1.RELEASE</node>
+            <node x="822.1833333333334" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-context:jar:3.1.1.RELEASE</node>
+            <node x="620.4337009803921" y="257.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="770.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE</node>
+            <node x="741.2680147058825" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE</node>
+            <node x="899.0166666666668" y="336.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE</node>
+            <node x="1017.5166666666668" y="415.0">org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-context:jar:3.2.9.RELEASE</node>
+            <node x="1445.5166666666669" y="504.0">com.oracle:ojdbc14:jar:10.2.0.4.0</node>
+            <node x="1334.0166666666669" y="504.0">junit:junit:jar:4.11</node>
+            <node x="1302.5166666666669" y="415.0">junit:junit:jar:4.11/org.hamcrest:hamcrest-core:jar:1.3</node>
+            <node x="524.9337009803921" y="504.0">com.alibaba:druid:jar:0.2.26</node>
+            <node x="0.0" y="504.0">org.aspectj:aspectjweaver:jar:1.8.1</node>
+            <node x="1898.5166666666669" y="504.0">javax.servlet:jstl:jar:1.2</node>
+            <node x="1042.9337009803921" y="504.0">javax.servlet:servlet-api:jar:3.0-alpha-1</node>
+            <node x="430.9337009803921" y="504.0">javax.servlet.jsp:jsp-api:jar:2.2.1-b03</node>
+            <node x="1545.5166666666669" y="504.0">commons-fileupload:commons-fileupload:jar:1.3.1</node>
+            <node x="1570.0166666666669" y="415.0">commons-fileupload:commons-fileupload:jar:1.3.1/commons-io:commons-io:jar:2.2</node>
+            <node x="608.9337009803921" y="504.0">log4j:log4j:jar:1.2.17</node>
+            <node x="1232.0166666666669" y="504.0">com.alibaba:fastjson:jar:1.1.41</node>
+            <node x="1724.5166666666669" y="504.0">org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13</node>
+            <node x="1734.0166666666669" y="415.0">org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13/org.codehaus.jackson:jackson-core-asl:jar:1.9.13</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="33.33333333333326" y="-14.5" />
+              <point x="303.7670343137253" y="232.0" />
+              <point x="354.6837009803921" y="232.0" />
+              <point x="-42.75" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="25.0" y="-14.5" />
+              <point x="942.4337009803921" y="474.0" />
+              <point x="1079.5166666666669" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE">
+              <point x="-34.33333333333337" y="-14.5" />
+              <point x="787.6833333333334" y="395.0" />
+              <point x="699.0180147058825" y="395.0" />
+              <point x="22.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="116.43370098039202" y="138.0" />
+              <point x="266.8930147058826" y="138.0" />
+              <point x="-32.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.alibaba:fastjson:jar:1.1.41">
+              <point x="4.09375" y="-14.5" />
+              <point x="1223.2774509803921" y="563.0" />
+              <point x="1273.0166666666669" y="563.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13">
+              <point x="53.21875" y="-14.5" />
+              <point x="1272.4024509803921" y="623.0" />
+              <point x="1801.5166666666669" y="623.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="34.33333333333337" y="-14.5" />
+              <point x="856.3500000000001" y="395.0" />
+              <point x="951.0166666666668" y="395.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE">
+              <point x="-50.0" y="-14.5" />
+              <point x="867.4337009803921" y="484.0" />
+              <point x="654.5180147058825" y="484.0" />
+              <point x="-22.25" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.1.1.RELEASE">
+              <point x="-29.666666666666686" y="-14.5" />
+              <point x="647.1013480392158" y="316.0" />
+              <point x="543.4337009803921" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13" target="org.codehaus.jackson:jackson-mapper-asl:jar:1.9.13/org.codehaus.jackson:jackson-core-asl:jar:1.9.13">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE">
+              <point x="-46.5" y="-14.5" />
+              <point x="181.9453125000001" y="316.0" />
+              <point x="152.43370098039202" y="316.0" />
+              <point x="36.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="676.7680147058825" y="316.0" />
+              <point x="672.4337009803921" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.mybatis:mybatis-spring:jar:1.1.1">
+              <point x="-20.46875" y="-14.5" />
+              <point x="1198.7149509803921" y="583.0" />
+              <point x="917.4337009803921" y="583.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-15.5" y="-14.5" />
+              <point x="212.9453125000001" y="316.0" />
+              <point x="198.93370098039202" y="316.0" />
+              <point x="198.93370098039202" y="148.0" />
+              <point x="279.8930147058826" y="148.0" />
+              <point x="-19.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="commons-fileupload:commons-fileupload:jar:1.3.1">
+              <point x="36.84375" y="-14.5" />
+              <point x="1256.0274509803921" y="603.0" />
+              <point x="1624.5166666666669" y="603.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-test:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="1435.0166666666669" y="138.0" />
+              <point x="331.8930147058826" y="138.0" />
+              <point x="32.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-33.33333333333326" y="-14.5" />
+              <point x="237.10036764705876" y="232.0" />
+              <point x="209.93370098039202" y="232.0" />
+              <point x="209.93370098039202" y="158.0" />
+              <point x="292.8930147058826" y="158.0" />
+              <point x="-6.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="50.799999999999955" y="-14.5" />
+              <point x="253.29999999999995" y="484.0" />
+              <point x="475.9337009803921" y="484.0" />
+              <point x="475.9337009803921" y="232.0" />
+              <point x="440.1837009803921" y="232.0" />
+              <point x="42.75" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-tx:jar:3.1.1.RELEASE/org.springframework:spring-context:jar:3.1.1.RELEASE">
+              <point x="29.666666666666686" y="-14.5" />
+              <point x="706.4346813725492" y="316.0" />
+              <point x="884.1833333333334" y="316.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="202.5" y="484.0" />
+              <point x="197.4453125000001" y="484.0" />
+              <point x="-31.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet:jstl:jar:1.2">
+              <point x="61.40625" y="-14.5" />
+              <point x="1280.5899509803921" y="633.0" />
+              <point x="1923.5166666666669" y="633.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-test:jar:3.2.9.RELEASE">
+              <point x="20.46875" y="-14.5" />
+              <point x="1239.6524509803921" y="583.0" />
+              <point x="1435.0166666666669" y="583.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="38.25" y="-14.5" />
+              <point x="391.8087009803921" y="395.0" />
+              <point x="464.9337009803921" y="395.0" />
+              <point x="464.9337009803921" y="148.0" />
+              <point x="318.8930147058826" y="148.0" />
+              <point x="19.5" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="822.0166666666668" y="395.0" />
+              <point x="798.2680147058825" y="395.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE">
+              <point x="25.40000000000009" y="-14.5" />
+              <point x="227.9000000000001" y="474.0" />
+              <point x="353.5587009803921" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis:jar:3.1.1">
+              <point x="50.0" y="-14.5" />
+              <point x="967.4337009803921" y="484.0" />
+              <point x="1181.5166666666669" y="484.0" />
+              <point x="-20.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="46.5" y="-14.5" />
+              <point x="274.9453125000001" y="316.0" />
+              <point x="391.9337009803921" y="316.0" />
+              <point x="391.9337009803921" y="232.0" />
+              <point x="383.1837009803921" y="232.0" />
+              <point x="-14.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE">
+              <point x="-38.25" y="-14.5" />
+              <point x="315.3087009803921" y="395.0" />
+              <point x="259.4453125000001" y="395.0" />
+              <point x="31.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE">
+              <point x="12.75" y="-14.5" />
+              <point x="366.3087009803921" y="385.0" />
+              <point x="402.9337009803921" y="385.0" />
+              <point x="402.9337009803921" y="232.0" />
+              <point x="411.6837009803921" y="232.0" />
+              <point x="14.25" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="-50.799999999999955" y="-14.5" />
+              <point x="151.70000000000005" y="484.0" />
+              <point x="33.93370098039202" y="484.0" />
+              <point x="33.93370098039202" y="128.0" />
+              <point x="253.8930147058826" y="128.0" />
+              <point x="-45.5" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-core:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE/commons-logging:commons-logging:jar:1.1.3">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="junit:junit:jar:4.11" target="junit:junit:jar:4.11/org.hamcrest:hamcrest-core:jar:1.3">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="commons-fileupload:commons-fileupload:jar:1.3.1" target="commons-fileupload:commons-fileupload:jar:1.3.1/commons-io:commons-io:jar:2.2">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.aspectj:aspectjweaver:jar:1.8.1">
+              <point x="-61.40625" y="-14.5" />
+              <point x="1157.7774509803921" y="633.0" />
+              <point x="59.5" y="633.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-web:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE">
+              <point x="-12.75" y="-14.5" />
+              <point x="340.8087009803921" y="385.0" />
+              <point x="305.19531250000006" y="385.0" />
+              <point x="305.19531250000006" y="306.0" />
+              <point x="295.433700980392" y="306.0" />
+              <point x="25.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.oracle:ojdbc14:jar:10.2.0.4.0">
+              <point x="28.65625" y="-14.5" />
+              <point x="1247.8399509803921" y="593.0" />
+              <point x="1485.5166666666669" y="593.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="log4j:log4j:jar:1.2.17">
+              <point x="-28.65625" y="-14.5" />
+              <point x="1190.5274509803921" y="593.0" />
+              <point x="639.9337009803921" y="593.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-beans:jar:3.2.9.RELEASE" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="397.4337009803921" y="158.0" />
+              <point x="305.8930147058826" y="158.0" />
+              <point x="6.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE">
+              <point x="-53.21875" y="-14.5" />
+              <point x="1165.9649509803921" y="623.0" />
+              <point x="202.5" y="623.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE/aopalliance:aopalliance:jar:1.0">
+              <point x="0.0" y="-14.5" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet.jsp:jsp-api:jar:2.2.1-b03">
+              <point x="-45.03125" y="-14.5" />
+              <point x="1174.1524509803921" y="613.0" />
+              <point x="467.9337009803921" y="613.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-jdbc:jar:3.1.1.RELEASE">
+              <point x="-25.0" y="-14.5" />
+              <point x="892.4337009803921" y="474.0" />
+              <point x="822.0166666666668" y="474.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.mybatis:mybatis-spring:jar:1.1.1" target="org.mybatis:mybatis-spring:jar:1.1.1/org.springframework:spring-core:jar:3.1.1.RELEASE">
+              <point x="0.0" y="-14.5" />
+              <point x="917.4337009803921" y="464.0" />
+              <point x="945.5166666666668" y="464.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="junit:junit:jar:4.11">
+              <point x="12.28125" y="-14.5" />
+              <point x="1231.4649509803921" y="573.0" />
+              <point x="1363.5166666666669" y="573.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.springframework:spring-core:jar:3.2.9.RELEASE">
+              <point x="45.03125" y="-14.5" />
+              <point x="1264.2149509803921" y="613.0" />
+              <point x="1714.0166666666669" y="613.0" />
+              <point x="1714.0166666666669" y="128.0" />
+              <point x="344.8930147058826" y="128.0" />
+              <point x="45.5" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="javax.servlet:servlet-api:jar:3.0-alpha-1">
+              <point x="-12.28125" y="-14.5" />
+              <point x="1206.9024509803921" y="573.0" />
+              <point x="1091.4337009803921" y="573.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-context:jar:3.2.9.RELEASE/org.springframework:spring-aop:jar:3.2.9.RELEASE">
+              <point x="15.5" y="-14.5" />
+              <point x="243.9453125000001" y="316.0" />
+              <point x="245.43370098039202" y="316.0" />
+              <point x="-25.0" y="14.5" />
+            </edge>
+            <edge source="org.springframework:spring-webmvc:jar:3.2.9.RELEASE" target="org.springframework:spring-webmvc:jar:3.2.9.RELEASE/org.springframework:spring-expression:jar:3.2.9.RELEASE">
+              <point x="-25.40000000000009" y="-14.5" />
+              <point x="177.0999999999999" y="474.0" />
+              <point x="80.43370098039202" y="474.0" />
+              <point x="-36.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="org.mybatis:mybatis:jar:3.1.1">
+              <point x="-4.09375" y="-14.5" />
+              <point x="1215.0899509803921" y="553.0" />
+              <point x="1221.5166666666669" y="553.0" />
+              <point x="20.0" y="14.5" />
+            </edge>
+            <edge source="zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT" target="com.alibaba:druid:jar:0.2.26">
+              <point x="-36.84375" y="-14.5" />
+              <point x="1182.3399509803921" y="603.0" />
+              <point x="556.9337009803921" y="603.0" />
+              <point x="0.0" y="14.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.24377856780091417" x="975.0" y="341.0" />
+          <SelectedNodes>
+            <node>zhibing_mybatis:zhibing_mybatis:0.0.1-SNAPSHOT</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>All</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/model/MUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/service/MUserServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/controller/MUserController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/mapping/MUserMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/service/MUserServiceI.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/JSONMapperFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="30" lean-forward="false" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/main.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/TestMybatis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="13" column="33" lean-forward="false" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="46" lean-forward="true" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/MyMapper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="54" lean-forward="false" selection-start-line="6" selection-start-column="54" selection-end-line="6" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/CORSFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="134" column="37" lean-forward="false" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/listUser.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/dao/BigScreenMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/controller/BigScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="20" selection-end-line="44" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rml/service/BigScreenService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="36" lean-forward="false" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#371#372#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#463#464#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/0.2.26/druid-0.2.26.jar!/com/alibaba/druid/filter/stat/StatFilter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="179" column="0" lean-forward="false" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/BigScreenMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="39" column="25" lean-forward="false" selection-start-line="39" selection-start-column="25" selection-end-line="39" selection-end-column="25" />
+          <folding>
+            <element signature="e#950#954#0" expanded="true" />
+            <element signature="e#1762#1766#0" expanded="true" />
+            <marker date="1575957989576" expanded="true" signature="696:818" ph="select from MUSER" />
+            <marker date="1575957989576" expanded="true" signature="897:935" ph="select ID, N... muser" />
+            <marker date="1575957989576" expanded="true" signature="897:957" ph="select * fro... tourist_phones_byday_sum" />
+            <marker date="1575957989576" expanded="true" signature="1037:1182" ph="select sum(t... REGION_SUMMARY_BYDAY" />
+            <marker date="1575957989576" expanded="true" signature="1281:1769" ph="select * fro... nvl" />
+            <marker date="1575957989576" expanded="true" signature="1301:1744" ph="select nvl(s... AREA_NAME" />
+            <marker date="1575957989576" expanded="true" signature="1387:1676" ph="select c.ARE... TOURIST_PHONES_BYDAY_SUM" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>zhibing_mybatis:war</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>main</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.19846596" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: aopalliance:aopalliance:1.0</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

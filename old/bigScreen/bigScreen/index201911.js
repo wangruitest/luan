@@ -100,7 +100,6 @@ function getScrollTip () {
     error: function (err) {
       console.log(err);
     }
-
   });
 }
 function formatWan (n) {
