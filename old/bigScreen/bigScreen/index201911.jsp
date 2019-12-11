@@ -11,6 +11,7 @@
   <meta charset="utf-8">
   <link href="<%=path %>/bigScreen/index201911.css" rel="stylesheet" />
 
+  <script src="<%=path %>/js/const.js"></script>
   <script type="text/javascript" src="<%=path %>/	js/jquery.min.js"></script>
   <script src="<%=path %>/bigScreen/index201911.js"></script>
   <script src="<%=path %>/js/echarts.js"></script>
@@ -88,27 +89,27 @@
           <div class="part_body">
             <ul class="listGroup" style="height: 90%;">
               <li class="listLi clearfix">
-                <div class="listLiText fl">本月累计游客数：</div>
+                <div class="listLiText fl">本月景区累计游客数：</div>
                 <div class="listLiNum fr" id="regionSumByMonth">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">本月日游客数峰值：</div>
+                <div class="listLiText fl">本月景区日游客峰值：</div>
                 <div class="listLiNum fr" id="peakDay">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">昨日城市旅客：</div>
+                <div class="listLiText fl">昨日景区游客统计值：</div>
                 <div class="listLiNum fr" id="cityVisitor">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">游客景区停留时间：</div>
+                <div class="listLiText fl">景区游客驻留时长：</div>
                 <div class="listLiNum fr" id="stayMin">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">昨日游客统计数据：</div>
+                <div class="listLiText fl">昨日城市旅客：</div>
                 <div class="listLiNum fr" id="yesterdayVisitor"">0</div>
               </li>
               <li class="listLi clearfix">
-                <div class="listLiText fl">昨日过夜游客：</div>
+                <div class="listLiText fl">昨日城市过夜游客：</div>
                 <div class="listLiNum fr" id="overnight">0</div>
               </li>
             </ul>
@@ -142,7 +143,7 @@
               <div class="part_container">
 
                 <div class="part_container_half">
-                  <div class="part_title">景区实时人次</div>
+                  <div class="part_title">今日景区实时</div>
                   <div class="part_body">
                     <div id="shishi" class="part_num_container">
                       <div class="part_num">0</div>
@@ -158,7 +159,7 @@
                   </div>
                 </div>
                 <div class="part_container_half">
-                  <div class="part_title">景区今日累计人次</div>
+                  <div class="part_title">今日景区累计</div>
                   <div class="part_body">
 
 
@@ -174,7 +175,7 @@
               </div> -->
 
                     <div style="font-size:16px;">
-                      <span style="color:#5478B3;">同前昨日此时</span>
+                      <span style="color:#5478B3;">同比昨日此时</span>
                       <span id="zhanbi" style="color:#F75555;margin-left:10px;">0</span>
                       <img id="zhanImg" class="" src="./img/icon_减.png" style="width:10px;height:20px;" />
                     </div>

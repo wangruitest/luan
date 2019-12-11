@@ -35,11 +35,12 @@ order BY RQTIME
 
 <!-- 景区实时人数： -->
 <select id="getRealtimeList" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
- SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
-WHERE  
-t.stat_hour >= (select max(stat_hour) - interval '1' hour from region_realtime_sum) 
-and  t.region_id in(select s.id from REGION_CFG s) 
-group by t.stat_hour order by t.stat_hour desc
+SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+WHERE
+t.stat_hour >= (select max(stat_hour) - interval '1' hour from region_realtime_sum)
+and  t.region_id in(select s.id from REGION_CFG s)
+group by t.stat_hour order by t.STAT_HOUR desc
+
 </select> 
 
 <!-- 监控景区数 -->
@@ -76,13 +77,13 @@ group by t.stat_hour order by t.stat_hour desc
 
 <!-- 景区今日游客累计： -->
 <select id="getRealtimeListByToday" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
- SELECT SUM(t.IN_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+ SELECT SUM(t.STAY_TOURISTS) STAY_TOURISTS FROM REGION_REALTIME_SUM t
 WHERE   t.stat_hour >=to_date(#{statHour},'yyyy-mm-dd') 
 and  t.region_id in( select s.id from REGION_CFG s)
 </select> 
 
 <select id="getRealtimeListByYesDay" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
- SELECT nvl(SUM(t.IN_TOURISTS),0) STAY_TOURISTS FROM REGION_REALTIME_SUM t
+ SELECT nvl(SUM(t.STAY_TOURISTS),0) STAY_TOURISTS FROM REGION_REALTIME_SUM t
 WHERE  t.region_id in(select s.id from REGION_CFG s) and
 to_char(t.stat_hour,'yyyy-MM-dd HH24:mm:ss') between #{submitTime}  and #{updatetime}
 </select> 
@@ -98,10 +99,10 @@ to_char(t.stat_month,'yyyy-MM')=#{startMonth}
     <if test="countyCode != null" >
     	and t.roamingcounty= #{countyCode,jdbcType=VARCHAR}
     </if>
-</select> 
+</select>
 <select id="getRealtimeSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
-  select sum(t.tourists) as STAY_TOURISTS from REGION_SUMMARY_BYmonth t
-  where t.stat_month = to_date((to_char(sysdate,'yyyy-mm')),'yyyy-mm') and t.AREA_CODE='341500'
+  select sum(t.tourists) as STAY_TOURISTS from REGION_SUMMARY_BYday t
+where t.stat_day &gt;= to_date((to_char(sysdate,'yyyy-mm')),'yyyy-mm') 
 </select> 
 
 
@@ -118,10 +119,15 @@ where to_char(t.stat_day,'yyyy-MM') =#{startMonth}
 ) a
 group by a.stat_day )c
 </select> 
-<select id="getTouristPeak" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+<!--select id="getTouristPeak2" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
 select max(t1.tourists) as STAY_TOURISTS  from (select t.stat_day,sum(t.tourists) as tourists from REGION_SUMMARY_BYday t
 where 
 to_char(t.stat_day,'yyyy-MM') =  #{startMonth} and t.AREA_CODE='341500'
+group by t.stat_day) t1
+</select--> 
+<select id="getTouristPeak" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+select max(t1.tourists) as STAY_TOURISTS  from (select t.stat_day,sum(t.tourists) as tourists from REGION_SUMMARY_BYday t
+where to_char(t.stat_day,'yyyy-MM') =  #{startMonth} 
 group by t.stat_day) t1
 </select> 
 
@@ -148,7 +154,7 @@ where to_char(s.stat_day, 'YYYY-MM-dd')=to_char((select max(stat_day) from TOURI
 </select> 
 
 <!-- 昨日城市旅客 -->
-<select id="getCityVisitorSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+<select id="getCityVisitorSum2" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
 select  nvl( sum(s.tourists),0) as STAY_TOURISTS,nvl(sum(s.citycount),0)as IN_TOURISTS
 from TOURIST_PHONES_BYDAY_SUM s  where  
 to_char(s.stat_day, 'YYYY-MM-dd')=#{statHour}
@@ -158,13 +164,20 @@ to_char(s.stat_day, 'YYYY-MM-dd')=#{statHour}
     <if test="countyCode != null" >
     	and s.roamingcounty= #{countyCode,jdbcType=VARCHAR}
     </if>
+</select> 
 
+<select id="getCityVisitorSum" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
+ select sum(a.DISTINCT_COUNTS) as STAY_TOURISTS ,0 as IN_TOURISTS
+   from (select t.DISTINCT_COUNTS,t.stat_day from REGION_SUMMARY_BYDAY t
+ where to_char(t.stat_day,'yyyy-MM-dd') =#{statHour}
+ ) a
+ group by a.stat_day
 </select> 
 
 
 <!--游客景区停留时间 -->
 <select id="getScenicTime" resultMap="RegionRealtimeSumResult" parameterType="com.cmcc.zysoft.regionrealtime.model.RegionRealtimeSum" >
-select trunc(nvl(sum(t.totalminutes)/sum(t.tourists),0)/60,2) as STAY_MIN from REGION_STATS_BYMONTH t
+select trunc(nvl(sum(t.totalminutes)/sum(t.tourists),0)*60,2) as STAY_MIN from REGION_STATS_BYMONTH t
 where 
 to_char(t.stat_month,'yyyy-MM')=to_char(sysdate - interval '1' month , 'yyyy-MM')
 </select> 

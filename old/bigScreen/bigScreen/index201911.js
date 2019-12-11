@@ -1,4 +1,4 @@
-var basePath2='http://localhost:8088/';
+
 $(function () {
   getCfg();
   getScrollTip();
@@ -7,7 +7,7 @@ $(function () {
   getRegionSum();
   getRegionSumByDay();
   getWeather();
-
+  // $("#yesterdayVisitor").html('196.20' + "万人");
   //定时执行
   window.setInterval("getRegionSum()", 60000); //一分钟执行一次
   window.setInterval("getScrollTip();getRegionSumByDay()", 300000); //五分钟执行一次
@@ -96,6 +96,7 @@ function getScrollTip () {
     success: function (data) {
           var cnt=(data/10000).toFixed(2);
           $("#yesterdayVisitor").html(cnt + "万人");
+          // $("#yesterdayVisitor").html('196.20' + "万人");
     },
     error: function (err) {
       console.log(err);

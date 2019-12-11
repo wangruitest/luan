@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="rml.dao.BigScreenMapper" >
-  <resultMap id="BaseResultMap" type="rml.model.MUser" >
-    <id column="ID" property="id" jdbcType="VARCHAR" />
-    <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="AGE" property="age" jdbcType="DECIMAL" />
-    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="rml.dao.BigScreenMapper">
+    <resultMap id="BaseResultMap" type="rml.model.MUser">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="AGE" property="age" jdbcType="DECIMAL"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     ID, NAME, AGE, ADDRESS
   </sql>
-  <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
+    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >-->
     <!--select -->
     <!--<include refid="Base_Column_List" />-->
     <!--from MUSER-->
     <!--where ID = #{id,jdbcType=VARCHAR}-->
-  <!--</select>-->
+    <!--</select>-->
 
 
-  <select id="getAll" resultType="java.util.Map">
+    <select id="getAll" resultType="java.util.Map">
     select * from tourist_phones_byday_sum  WHERE ROWNUM &lt;= 5
   </select>
 
-  <select id="getYesterdayTouristCount" resultType="Integer">
-    select sum(t.TOURISTS) as sumCount  from REGION_SUMMARY_BYDAY t
-    where  
-    t.stat_day = to_date( to_char(sysdate-1,'yyyy-mm-dd'),'yyyy-mm-dd')
-  </select>
+    <!--select sum(t.TOURISTS) as sumCount  from REGION_SUMMARY_BYDAY t-->
+    <!--where-->
+    <!--t.stat_day = to_date( to_char(sysdate-1,'yyyy-mm-dd'),'yyyy-mm-dd')-->
+    <select id="getYesterdayTouristCount" resultType="Integer">
+        select  nvl( sum(s.tourists),0) as STAY_TOURISTS,nvl(sum(s.citycount),0)as IN_TOURISTS
+        from TOURIST_PHONES_BYDAY_SUM s  where
+        s.stat_day = to_date( to_char(sysdate-1,'yyyy-mm-dd'),'yyyy-mm-dd')
+        and s.AREA_CODE='341500'
+    </select>
 
-  <select id="getYesterdayTopTenCityTouristCountEntireCountry" resultType="map">
+    <select id="getYesterdayTopTenCityTouristCountEntireCountry" resultType="map">
     select * from (
     select nvl(sum(a.tourists),0) as tourist,a.area_name as cities,a.AREA_CODE from (
     select c.AREA_NAME, t1.*
